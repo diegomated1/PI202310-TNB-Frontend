@@ -1,30 +1,39 @@
-
-
-export default function AdminCardsNavBar(){
-    return(
-        <div className="w-full h-[70px] bg-gray-200 grid grid-cols-3">
-            <div className="col-span-1 flex items-center">
-                <div className="h-full">
-                    
-                </div>
+import Icons from "./Icons"
+import Button from "./Button"
+export default function AdminCardsNavBar() {
+    return (
+        <div className="w-full h-[60px] bg-black grid grid-cols-3 px-8">
+            <div className="col-span-1 flex items-center justify-center text-yellow-300 text-xl font-semibold italic">
+                <span>THE NEXUS BATTLE</span>
             </div>
-            <div className="col-span-2 grid grid-cols-6">
-                <NavBarBtn text="Tienda"/>
-                <NavBarBtn text="Subasta"/>
-                <NavBarBtn text="Inventario"/>
-                <NavBarBtn text="Lista deseados"/>
-                <NavBarBtn text="Carrito"/>
-                <NavBarBtn text="Admin carta"/>
+            <div className="col-span-1 flex justify-end grid-cols-3 text-white gap-6 text-xs">
+                <NavBarBtn text="TIENDA" />
+                <NavBarBtn text="SUBASTA" />
+                <NavBarBtn text="INVENTARIO" />
+
+            </div>
+            <div className="col-span-1 flex grid-cols-3 text-white justify-end items-center gap-5">
+                <NavBarBtn icon="shoppingCart"/>
+                <NavBarBtn icon="favorites" />
+                <NavBarBtn icon="profile"/>
+                <Button text="Battle" type = "navbar"/>
             </div>
         </div>
     )
 }
 
-function NavBarBtn({text}:{text:string}){
-    return(
+type NavBarBtnProps = {
+    text?: string;
+    icon?: string;
+  }
+  
+
+  const NavBarBtn = ({ text, icon } : NavBarBtnProps ) => {
+    return (
         <div className="flex justify-center items-center">
             <span>
-                {text}
+                {text && text}
+                {icon && <Icons icon={icon}/>}
             </span>
         </div>
     )
