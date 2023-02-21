@@ -8,10 +8,14 @@ export default function Login() {
             <AdminCardsNavBar />
             <div className="h-[calc(100%-60px)]">
                 <figure className="h-full relative">
-                    <img className="h-full w-full object-fit m-0" src="https://images.unsplash.com/photo-1675929970731-11970d723740?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80" alt=" asd " />
+                    <img className="h-full w-full object-fit m-0" src="" alt=" asd " />
                 </figure>
-                <div className="w-[418px] h-[616px] bg-grisesito absolute top-24 left-24 flex-col">
-                    papita
+                <div className="w-[418px] h-[616px] bg-grisesito absolute top-28 left-32 flex-col p-6 bg-gradient-to-b from-gradientFrom to-gradientTo">
+                    <div className="flex-colum justify-evenly " >
+                        <h1 className="font-extrabold text-4xl text-center text-yellow-300 mt-14 italic" >
+                            THE NEXUS BATTLE
+                        </h1>
+                    </div>
                 </div>
             </div>
         </div>

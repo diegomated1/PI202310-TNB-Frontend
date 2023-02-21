@@ -2,7 +2,7 @@ import Icons from "./Icons"
 import Button from "./Button"
 export default function AdminCardsNavBar() {
     return (
-        <div className="w-full h-[60px] bg-black grid grid-cols-3 px-8">
+        <div className="w-full h-[60px] bg-black grid grid-cols-3 px-8 shadow-xl">
             <div className="col-span-1 flex items-center justify-center text-yellow-300 text-xl font-semibold italic">
                 <span>THE NEXUS BATTLE</span>
             </div>
@@ -13,10 +13,10 @@ export default function AdminCardsNavBar() {
 
             </div>
             <div className="col-span-1 flex grid-cols-3 text-white justify-end items-center gap-5">
-                <NavBarBtn icon="shoppingCart"/>
+                <NavBarBtn icon="shoppingCart" />
                 <NavBarBtn icon="favorites" />
-                <NavBarBtn icon="profile"/>
-                <Button text="Battle" type = "navbar"/>
+                <NavBarBtn icon="profile" />
+                <Button text="Battle" type="navbar" />
             </div>
         </div>
     )
@@ -25,15 +25,15 @@ export default function AdminCardsNavBar() {
 type NavBarBtnProps = {
     text?: string;
     icon?: string;
-  }
-  
+}
 
-  const NavBarBtn = ({ text, icon } : NavBarBtnProps ) => {
+
+const NavBarBtn = ({ text, icon }: NavBarBtnProps) => {
     return (
         <div className="flex justify-center items-center">
             <span>
                 {text && text}
-                {icon && <Icons icon={icon}/>}
+                {icon && <Icons icon={icon} />}
             </span>
         </div>
     )
