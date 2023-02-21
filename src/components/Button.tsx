@@ -2,12 +2,13 @@
 type BtnProps = {
     text?: string;
     type?: string;
+    onClick?: ()=>void;
   }
   
-export default function Button({ text, type } : BtnProps ) {
+export default function Button({ text, type, onClick } : BtnProps ) {
     switch (type) {
         case "navbar": return (
-            <button className="w-auto p-2 h-10 rounded-lg border-2 border-white justify-center items-center" >
+            <button onClick={onClick} className="w-auto p-2 h-10 rounded-lg border-2 border-white justify-center items-center" >
                 <strong>{text}</strong>
             </button>
         )

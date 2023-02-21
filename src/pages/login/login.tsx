@@ -10,7 +10,7 @@ export default function Login() {
                 <figure className="h-full relative">
                     <img className="h-full w-full object-fit m-0" src="https://images.unsplash.com/photo-1675929970731-11970d723740?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80" alt=" asd " />
                 </figure>
-                <div className="w-1/4 h-3/4 bg-grisesito absolute top-32 left-32 flex-col">
+                <div className="w-[418px] h-[616px] bg-grisesito absolute top-24 left-24 flex-col">
                     papita
                 </div>
             </div>
