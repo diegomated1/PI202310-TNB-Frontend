@@ -11,7 +11,7 @@ export default function Login() {
                     <img className="h-full w-full object-fit m-0" src="" alt="imagen de fondo" />
                 </figure>
                 <div className="w-[418px] h-[500px] bg-grisesito absolute top-28 left-32 flex-col p-6 bg-gradient-to-b from-gradientFrom to-gradientTo">
-                    <div className="flex-colum justify-evenly " >
+                    <div className="flex-colum justify-evenly" >
                         <h1 className="font-extrabold text-4xl text-center text-yellow-300 mt-4 italic" >
                             NEXUS BATTLE
                         </h1>
