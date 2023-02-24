@@ -152,28 +152,28 @@ export default function Icons({ icon }: { icon: string }) {
             </div>
         )
         case "6-yellow": return (
-            <div className="w-6 h-6 bg-iconYellow bg-black flex justify-center rounded-full">
+            <div className="w-6 h-6 bg-iconYellow flex justify-center rounded-full">
                 <span >
                     6
                 </span>
             </div>
         )
         case "12-yellow": return (
-            <div className="w-6 h-6 bg-iconYellow bg-black flex justify-center rounded-full">
+            <div className="w-6 h-6 bg-iconYellow flex justify-center rounded-full">
                 <span >
                     12
                 </span>
             </div>
         )
         case "24-yellow": return (
-            <div className="w-6 h-6 bg-iconYellow bg-black flex justify-center rounded-full">
+            <div className="w-6 h-6 bg-iconYellow  flex justify-center rounded-full">
                 <span >
                     24
                 </span>
             </div>
         )
         case "1-yellow": return (
-            <div className="w-6 h-6 bg-iconYellow bg-black flex justify-center rounded-full">
+            <div className="w-6 h-6 bg-iconYellowflex justify-center rounded-full">
                 <span >
                     1
                 </span>
