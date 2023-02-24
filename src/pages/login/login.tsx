@@ -8,7 +8,7 @@ export default function Login() {
             <AdminCardsNavBar />
             <div className="h-[calc(100%-60px)]">
                 <figure className="h-full relative">
-                    <img className="h-full w-full object-fit m-0" src="" alt=" asd " />
+                    <img className="h-full w-full object-fit m-0" src="" alt="imagen de fondo" />
                 </figure>
                 <div className="w-[418px] h-[616px] bg-grisesito absolute top-28 left-32 flex-col p-6 bg-gradient-to-b from-gradientFrom to-gradientTo">
                     <div className="flex-colum justify-evenly " >
