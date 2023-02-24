@@ -2,6 +2,7 @@ import AdminCardsNavBar from "../../components/AdminCardsNavBar"
 import Button from "../../components/Button"
 import Input from "../../components/Input"
 import Icons from "../../components/Icons"
+import Pager from "../../components/pager"
 
 export default function AdminHeroes(){
     return(
