@@ -29,7 +29,7 @@ export default function AdminCards(){
     return(
         <div className="w-screen h-screen flex flex-wrap flex-col">
             <AdminCardsNavBar/>
-            <div className="w-full h-[calc(100%-70px)] bg-gray-300 flex justify-center items-center">
+            <div className="w-full h-[calc(100%-50px)] bg-gray-300 flex justify-center items-center">
                 <div className="w-full h-full bg-gray-300">
                     <div className="w-full h-20 flex items-center pl-10">
                         <h1 className="text-4xl md:text-5xl">Creacion de cartas</h1>
