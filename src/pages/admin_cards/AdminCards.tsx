@@ -68,7 +68,7 @@ export default function AdminCards(){
                                 <strong>Heroe al que pertenece:</strong>  <br/>
                                 <Input onChange={setDescription}/>
                             </label>
-                            <Button text="Crear"/>
+                            <Button text="Crear" type="buttonYellow"/>
                         </form>
                         <div className="col-span-1 flex flex-col">
                             <div><span className="text-xl"><strong>Reporte de cambios</strong></span></div>
