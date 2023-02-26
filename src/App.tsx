@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import AdminCards from "./pages/admin_cards/AdminCards"
 import AdminHeroes from "./pages/admin_heroes/AdminHeroes"
 import Login from "./pages/login/login"
+import Register from "./pages/register/register"
+
 function App() {
   return (
     <BrowserRouter>
