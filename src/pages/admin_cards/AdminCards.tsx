@@ -3,28 +3,38 @@ import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
 import Input from "../../components/Input"
 import cardApi from "../../services/card.api";
+import IHeroe from "../../interfaces/IHeroe";
+import heroeApi from "../../services/heroe.api";
 
 export default function AdminCards(){
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [cardType, setCardType] = useState('');
+    const [heroType, setheroType] = useState('');
     const [image, setImage] = useState<File>();
+    const [heroes, setHeroes] = useState<IHeroe[]>([]);
 
     const handleCreateCard = async (e:FormEvent)=>{
         try{
             e.preventDefault();
             console.log(name);
             console.log(description);
-            var data = await cardApi.insert({name, description, type: 0}, image!);
-            //console.log(data);
+            var data = await cardApi.insert({name, description, card_type: parseInt(cardType), id_hero: heroType, effects: []}, image!);
+            console.log(data);
         }catch(error){
             console.log(error);
         }
     }
 
+    const handleGetHeroes = async ()=>{
+        var data = await heroeApi.get();
+        setHeroes(data);
+    }  
+
     useEffect(()=>{
-        console.log(image);
-    }, [image]);
+        handleGetHeroes();
+    }, []);
 
     return(
         <div className="w-screen h-screen flex flex-wrap flex-col">
@@ -62,17 +72,36 @@ export default function AdminCards(){
                             </label>
                             <label className="w-[90%] h-10 mb-14">
                                 <strong>Tipo de carta:</strong>  <br/>
-                                <Input onChange={setDescription}/>
+                                <select onChange={(e)=>{setCardType(e.target.value)}} className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl">
+                                    <option value="0"> - </option>
+                                    <option value="1"> Arma </option>
+                                    <option value="2"> Armadura </option>
+                                    <option value="2"> Item </option>
+                                    <option value="2"> Epica </option>
+                                </select>
                             </label>
                             <label className="w-[90%] h-10 mb-14">
                                 <strong>Heroe al que pertenece:</strong>  <br/>
-                                <Input onChange={setDescription}/>
+                                <div className="w-full h-full shadow-xl relative">
+                                    <select onChange={(e)=>{setheroType(e.target.value)}} className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl">
+                                        <option value="-1"> - </option>
+                                        {heroes.map((hero,id)=>(
+                                            <option key={id} value={id}>
+                                                {hero.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                             </label>
                             <Button text="Crear" type="buttonYellow"/>
                         </form>
                         <div className="col-span-1 flex flex-col">
                             <div><span className="text-xl"><strong>Reporte de cambios</strong></span></div>
-                            <div><span className="text-gray-500 text-sm" >14/02/2023</span></div>
+                            <div>
+                                <span className="text-gray-500 text-sm" >
+                                    {`${new Date().getUTCMonth()+1}/${new Date().getUTCDate()}/${new Date().getUTCFullYear()}`}
+                                </span>
+                            </div>
                             <div>
                                 <p className="leading-5">
                                     Ingrese un lenguaje natural a la lista de cambios realizados a esta carta 300 caracteres
