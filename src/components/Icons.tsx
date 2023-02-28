@@ -21,8 +21,8 @@ export default function Icons({ icon, onClick }: IconProps) {
             </svg>
         )
         case "glass": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
         )
         case "shoppingCartYellow": return (
@@ -31,80 +31,80 @@ export default function Icons({ icon, onClick }: IconProps) {
             </svg>
         )
         case "lockOpen": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#21B727" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#21B727" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
             </svg>
         )
         case "lockClose": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FF0000" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#FF0000" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
             </svg>
         )
         case "check": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         )
         case "checkGreen": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke='#21B727'
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke='#21B727'
                 className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
+                <path strokeLinecap="round" strokeLinejoin="round"
                     d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         )
         case "favoritesRed": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="#FF0000" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FF0000" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="#FF0000" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#FF0000" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
         )
         case "clip": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
             </svg>
         )
         case "trash": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
             </svg>
         )
         case "star": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="#FCD144" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FCD144" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="#FCD144" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#FCD144" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
             </svg>
         )
         case "wishlist": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FCD144" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#FCD144" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
             </svg>
         )
         case "right": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
         )
         case "left": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
         )
         case "edit": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="#4275F3" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0049FF" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="#4275F3" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#0049FF" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
             </svg>
         )
         case "x": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
         )
         case "time": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         )
         case "currency": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         )
         case "auction": return (
@@ -193,7 +193,7 @@ export default function Icons({ icon, onClick }: IconProps) {
 
         case "tank": return (
             <svg onClick={onClick} viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 si-glyph si-glyph-shield">
-                <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                <g stroke="none" strokeWidth="1" fill-rule="evenodd">
                     <path d="M3.068,1.976 L3.073,8.018 C3.073,13.006 9.021,15.979 9.021,15.979 C9.021,15.979 14.971,13.172 14.971,8.002 C14.971,2.832 14.972,1.976 14.972,1.976 C14.972,1.976 12.308,0.036 9.021,0.036 C5.732,0.036 3.068,1.976 3.068,1.976 Z M14.047,8.231 C14.047,12.175 9.324,14.913 9.002,15.068 L9.002,15.083 L8.987,15.076 L8.972,15.083 L8.972,15.068 C8.65,14.913 3.927,12.175 3.927,8.231 L3.923,2.567 C3.923,2.567 6.181,0.992 8.972,0.979 L8.972,0.978 C8.972,0.978 8.982,0.979 8.987,0.979 L9.002,0.978 L9.002,0.979 C11.793,0.992 14.051,2.567 14.051,2.567 L14.047,8.231 L14.047,8.231 Z M12.939,8.391 C12.939,11.826 9.268,13.853 9.017,13.988 L9.017,14 C9.017,14 9.007,13.996 9.006,13.994 L8.994,14 L8.994,13.987 C8.743,13.852 5.073,11.825 5.073,8.39 L5.069,3.461 C5.069,3.461 6.825,2.091 8.994,2.079 L8.994,2.079 L9.006,2.079 L9.017,2.079 C11.187,2.091 12.941,3.461 12.941,3.461 L12.939,8.391 L12.939,8.391 Z" fill="#8D5B2D" className="si-glyph-fill">
                     </path>
                 </g>
@@ -261,8 +261,8 @@ export default function Icons({ icon, onClick }: IconProps) {
         case "hero": return (
             <svg onClick={onClick} className="w-6 h-6" stroke="currentColor" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
                     <path
                         d="m 5.4501598,11.753877 c -0.129791,0.2622 -0.231671,0.4786 -0.226531,0.4863 0.0076,0.01 0.845022,0.1349 1.865755,0.2902 1.020723,0.1527 2.148237,0.3232 2.504678,0.3768 0.356331,0.053 0.6515522,0.097 0.6515522,0.094 0.01016,-0.01 -0.4225722,-0.8806 -0.4353022,-0.8806 -0.01017,0 -0.936732,-0.1884 -2.059216,-0.42 -1.122493,-0.2317 -2.046486,-0.42 -2.051626,-0.42 -0.0075,0 -0.11951,0.2137 -0.24931,0.4732 z m 2.858438,-4.7139999 c -0.272321,0.079 -0.280041,0.084 -0.272321,0.1503 0.0026,0.038 -0.01017,0.097 -0.03306,0.1298 -0.04078,0.061 -0.04078,0.061 0.208771,0.2392 l 0.24943,0.1808 0.084,-0.1451 c 0.13236,-0.2343 0.14767,-0.3055 0.09159,-0.4837 l -0.04837,-0.1501 -0.280041,0.079 z m 0.895953,-0.257 c -0.246851,0.071 -0.274891,0.084 -0.264731,0.1298 0.0051,0.03 0.03821,0.1527 0.07127,0.2723 l 0.05853,0.219 -0.09674,0.1883 c -0.05351,0.1043 -0.11963,0.2239 -0.145101,0.2673 l -0.04837,0.079 0.09674,0.064 c 0.05094,0.036 0.17057,0.1043 0.26216,0.1553 l 0.165431,0.094 0.19604,-0.3664 c 0.112041,-0.2062 0.196041,-0.3946 0.196041,-0.4353 0,-0.079 -0.183311,-0.7535 -0.203631,-0.7484 -0.0076,0 -0.13751,0.038 -0.28764,0.082 z m 0.8985322,-0.2571 c -0.1476702,0.043 -0.2697512,0.079 -0.2723312,0.081 -0.0026,0 0.05596,0.2138 0.132371,0.4658 0.07641,0.2546 0.1399602,0.4759 0.1399602,0.4938 0,0.015 -0.09416,0.2087 -0.2087802,0.4276 -0.117061,0.2189 -0.213791,0.4047 -0.218931,0.4149 -0.01017,0.02 0.12465,0.084 0.3945312,0.1857 l 0.157831,0.061 0.254571,-0.4811 c 0.15269,-0.2825 0.25702,-0.509 0.25702,-0.5523 0,-0.038 -0.07384,-0.3182 -0.16543,-0.6185 -0.09159,-0.3004 -0.165431,-0.5473 -0.165431,-0.5524 0,-0.013 -0.03306,0 -0.305381,0.074 z m 0.954483,-0.2902 c -0.13996,0.048 -0.257021,0.091 -0.259591,0.091 -0.0026,0 0.08657,0.2978 0.196041,0.6593 l 0.198491,0.6567 -0.290201,0.5396 c -0.160411,0.2978 -0.290201,0.5473 -0.290201,0.555 0,0.028 0.590562,0.1298 0.610892,0.1069 0.01273,-0.01 0.14767,-0.2571 0.302941,-0.5447 0.19861,-0.3716 0.28261,-0.5523 0.28261,-0.6109 0,-0.1196 -0.435311,-1.5502 -0.468371,-1.5476 -0.0153,0 -0.14253,0.043 -0.282611,0.094 z m -3.5507602,-1.8149 c -1.242114,0.2063 -2.171257,0.9698 -2.481788,2.0389 -0.13751,0.4736 -0.13751,0.9979 0.0026,1.4814 0.08915,0.3105 0.310531,0.7509 0.511592,1.0156 0.18576,0.2469 0.20106,0.2902 0.277471,0.7891 0.03049,0.196 0.0458,0.4504999 0.0458,0.7380999 l 0.0026,0.4377 0.12722,0.028 c 0.07127,0.015 0.895953,0.1883 1.832686,0.3843 0.939302,0.1961 1.733385,0.3641 1.769015,0.3717 0.05596,0.015 0.05094,0 -0.05094,-0.1121 -0.155261,-0.173 -0.297791,-0.4225 -0.333431,-0.5854 -0.0611,-0.2647 0.04837,-0.4377 0.338571,-0.5422 0.08915,-0.031 0.22653,-0.079 0.30796,-0.1069 0.07898,-0.028 0.1451012,-0.058 0.1451012,-0.069 -0.0026,-0.01 -0.1934712,-0.1094 -0.4275912,-0.2239 -0.659262,-0.3232999 -1.313384,-0.7406999 -2.051496,-1.3133999 -0.450492,-0.3488 -0.549792,-0.4479 -0.549792,-0.5447 0,-0.1043 0.10175,-0.2112 0.201061,-0.2112 0.05853,0 0.15269,0.061 0.402111,0.2596 0.997833,0.8018 2.092286,1.4636 2.7795882,1.685 0.155261,0.051 0.290201,0.092 0.297791,0.092 0.01016,0 0.01016,-0.1297999 0.0026,-0.2875999 l -0.0153,-0.2902 0.15012,-0.112 c 0.084,-0.061 0.150241,-0.117 0.152691,-0.1247 0,-0.01 -0.0993,-0.033 -0.221511,-0.059 -1.0537932,-0.2138 -2.2781572,-0.8425 -3.1765592,-1.6264 l -0.0993,-0.089 0.07885,-0.092 c 0.12233,-0.1374 0.15294,-0.2647 0.102,-0.4174 -0.02289,-0.066 -0.03306,-0.1298 -0.02289,-0.14 0.01016,-0.01 0.794192,-0.2316 1.743535,-0.4938 1.1352242,-0.3157 1.7232252,-0.4887 1.7232252,-0.5116 0,-0.056 -0.486121,-0.5217 -0.705062,-0.677 -0.4251412,-0.3029 -0.9773832,-0.5422 -1.5042742,-0.6567 -0.325841,-0.069 -1.041063,-0.089 -1.354164,-0.036 z m -0.361471,2.4717 c 0.03062,0.036 0.05596,0.097 0.05596,0.1399 0,0.1069 -0.122201,0.2266 -0.229101,0.2266 -0.09673,0 -0.229101,-0.1197 -0.229101,-0.2088 0.0052,-0.2163 0.259711,-0.3181 0.402242,-0.1577 z m 0.717802,-5.8543996 c -0.0916,0.02 -0.280041,0.092 -0.422572,0.1628 -0.13996,0.069 -0.2749,0.1273 -0.2978,0.1273 -0.02289,0 -0.142531,-0.051 -0.264731,-0.1145 -0.386941,-0.1985 -0.671992,-0.23409998 -0.936733,-0.1171 -0.11449,0.051 -0.290201,0.1961 -0.366491,0.3054 l -0.04836,0.066 0.246851,0 c 0.30294,0 0.384371,0.038 0.384371,0.1782 0,0.1222 -0.05596,0.1399 -0.420002,0.1399 -1.254853,0 -1.944605,0.3717 -2.252686,1.2167 -0.117061,0.3233 -0.155261,0.5422 -0.170571,1.0232996 -0.01775,0.5727 0.02804,0.9774 0.201061,1.8199 0.12723,0.6237 0.1298,0.6466 0.13237,1.0946 0.0026,0.3691 -0.0051,0.4861 -0.04078,0.6007 -0.05853,0.1884 -0.18575,0.3717 -0.320691,0.4684 -0.10432,0.071 -0.12477,0.076 -0.356321,0.076 -0.21637,0 -0.262161,-0.01 -0.376771,-0.069 -0.11682,-0.061 -0.249191,-0.1857 -0.335761,-0.3155 -0.05351,-0.079 -0.01788,0.3003 0.0458,0.5115 0.178161,0.5651 0.503992,0.9724 0.911263,1.1378 0.12722,0.051 0.18832,0.059 0.501421,0.059 0.402122,0 0.572692,-0.036 0.865473,-0.1756 0.0993,-0.046 0.229101,-0.1298 0.292771,-0.1859 l 0.11204,-0.1018 -0.10433,-0.2265 c -0.134931,-0.2928 -0.252001,-0.6618 -0.302931,-0.9596 -0.06368,-0.3589 -0.03821,-0.9927 0.05093,-1.316 0.147681,-0.5243 0.427591,-1.013 0.822122,-1.4254 0.239271,-0.252 0.432732,-0.4073 0.705063,-0.5651 0.0993,-0.059 0.18587,-0.1095 0.19347,-0.1145 0.0076,-0.01 -0.02033,-0.041 -0.06368,-0.074 -0.213791,-0.1732 -0.671992,-0.1833 -1.142813,-0.025 -0.287631,0.097 -0.422562,0.1121 -0.516732,0.059 -0.05853,-0.033 -0.17314,-0.1654 -0.15526,-0.1833 0.0051,-0.01 0.05596,0.01 0.10947,0.025 0.05596,0.02 0.1222,0.036 0.1451,0.038 0.02547,0 0.139961,-0.087 0.254571,-0.1908996 0.11706,-0.1069 0.272321,-0.2342 0.348731,-0.285 0.155261,-0.1044 0.391961,-0.1858 0.534492,-0.1858 0.24942,0 0.557381,0.168 0.837422,0.4556 l 0.170321,0.1730996 0.17315,-0.041 0.173141,-0.041 -0.01531,-0.1399996 c -0.03061,-0.2723 -0.124771,-0.4811 -0.280041,-0.6184 -0.183301,-0.1629 -0.626202,-0.2903 -0.913833,-0.2596 l -0.12979,0.013 0.10175,-0.038 c 0.05596,-0.023 0.206201,-0.059 0.330861,-0.079 0.419991,-0.074 0.748282,0 0.987543,0.219 0.16543,0.1501 0.267311,0.3487 0.318121,0.6236 l 0.03821,0.2036 0.473501,0 c 0.465792,0 0.865473,0.043 1.249714,0.1272996 l 0.16542,0.036 0.142531,-0.1526996 c 0.257151,-0.2723 0.3716312,-0.56 0.3971012,-0.98 0.01788,-0.3029 -0.01787,-0.5573 -0.1170602,-0.8475 -0.101871,-0.2953 -0.213791,-0.471 -0.448032,-0.7051 -0.2291,-0.2317 -0.460651,-0.3691 -0.727962,-0.4327 -0.20081,-0.046 -0.661592,-0.046 -0.888112,0 z">
@@ -272,8 +272,8 @@ export default function Icons({ icon, onClick }: IconProps) {
         )
         case "habilidad": return (
             <svg onClick={onClick} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#000000" className="w-6 h-6">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
                     <path fill="#791313"
                         d="M214.02 19.115l-.02.06c38.033 14.387 73.867 34.09 106.393 58.446L368.02 158.4C292.254 72.063 181.72 20.678 64.66 20.604c-14.96-.01-30.027.834-45.14 2.535v18.8c108.174-12.774 213.91 21.292 293.527 88.554l42.314 97.416C290.887 132.486 182.425 73.885 66.395 73.21c-2.45-.013-4.9-.002-7.357.036-13.106.2-26.297 1.157-39.522 2.87v18.85c98.998-13.552 196.12 18.532 267.11 82.264l30.708 87.82C263.412 179.47 168.852 126.394 67.348 125.36c-15.818-.162-31.804.958-47.83 3.398v18.914c93.33-15.18 185.38 18.05 247.677 83.27l20.694 83.917C246.555 230.42 160.67 176.716 67.7 175.423c-1.256-.018-2.514-.025-3.774-.024-14.688.02-29.54 1.36-44.408 4.084v19.036c89.513-17.794 178.655 19.16 230.357 89.468l4.62 73.348c-28.973-83.013-107.888-136.692-193.257-135.87-13.8.132-27.768 1.693-41.72 4.78v19.188c77.22-18.904 155.333 13.983 197.095 77.14l5.873 57.49c23.33-6.283 47.534-13.218 68.727-20.873 19.194-6.93 35.884-14.525 46.596-22.038 5.354-3.756 9.142-7.478 11.174-10.574 2.033-3.096 2.47-5.184 2.098-7.59l-1.252-8.123 137.074-39.556C446.897 159.92 363.67 69.964 260.654 19.114H214.02zm278.86 273.922l-40.196 11.6c1.63 18.66-4.666 36.567-16.397 52.043-14.18 18.707-35.934 34.627-62.363 48.257-45.23 23.33-104.45 39.877-164.397 47.97l4.38 16.35c68.63-7.66 143.34-22.038 198.17-48.538 30.517-14.75 54.633-33.123 68.722-55.33 12.74-20.084 17.775-43.384 12.08-72.353zm-58.513 16.885l-65.027 18.765c-.736 4.345-2.345 8.51-4.733 12.147-3.925 5.98-9.462 10.986-16.068 15.62-13.213 9.266-30.996 17.098-50.978 24.316-31.927 11.53-68.41 20.998-99.558 29.134l6.644 24.79c59.027-7.79 117.64-24.153 160.71-46.366 24.828-12.805 44.388-27.573 56.037-42.94 8.804-11.614 13.283-23.135 12.972-35.466zm-261.754 77.43l-33.033 8.85 8.197 30.59c10.812 3.95 18.623 14.38 18.623 26.485 0 6.87-2.52 13.2-6.673 18.114l4.716 17.6 33.034-8.85-24.864-92.788zM138.22 443.79c-1.49 0-2.88.33-4.12.91l-75.6 20.255c2.926 4.706 4.625 10.24 4.625 16.14 0 .67-.03 1.33-.072 1.987l75.96-20.352c4.96-.386 8.698-4.37 8.698-9.453 0-5.35-4.138-9.488-9.49-9.488zM32.327 468.985c-6.798 0-12.11 5.312-12.11 12.11 0 6.798 5.312 12.11 12.11 12.11 6.798 0 12.111-5.312 12.111-12.11 0-6.798-5.313-12.11-12.11-12.11z">
@@ -282,30 +282,30 @@ export default function Icons({ icon, onClick }: IconProps) {
             </svg>
         )
         case "reverse": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
             </svg>
         )
         case "upload": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
             </svg>
         )
         case "eye": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 absolute right-1 bottom-1">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 absolute right-1 bottom-1">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
 
         )
         case "up": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
             </svg>
         )
         case "down": return (
-            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            <svg onClick={onClick} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
         )
         default: return (
