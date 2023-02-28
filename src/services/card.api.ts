@@ -5,7 +5,7 @@ class CardsApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = 'http://192.168.0.2:3000';
+        this.baseUrl = 'http://10.153.50.25:3000';
     }
 
     insert(card:ICard){
