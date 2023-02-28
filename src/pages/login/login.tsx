@@ -65,7 +65,7 @@ export default function Login() {
                         </div>
                         <div className="text-sm text-zinc-700 mt-6">
                             <p>
-                                No tienes una cuenta? <a href="" className="border-b border-buttonYellow">Registrarse</a>
+                                No tienes una cuenta? <a onClick={()=>{navigate('/register')}} href="" className="border-b border-buttonYellow">Registrarse</a>
                             </p>
                             <p>
                                 Has olvidado tu contraseña? <a className="border-b border-buttonYellow" href="">Recuperar contraseña</a>
