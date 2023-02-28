@@ -68,7 +68,7 @@ export default function Register() {
                         </div>
                         <div className="text-sm text-zinc-700 mt-3">
                             <p>
-                                Ya tienes una cuenta? <a href="" className="border-b border-buttonYellow">Login</a>
+                                Ya tienes una cuenta? <a onClick={()=>{navigate('/login')}} href="" className="border-b border-buttonYellow">Login</a>
                             </p>
                             <p>
                                 Has olvidado tu contraseña? <a className="border-b border-buttonYellow" href="">Recuperar contraseña</a>
