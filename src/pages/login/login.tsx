@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AdminCardsNavBar from "../../components/AdminCardsNavBar"
+import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
-import Icons from "../../components/Icons"
 import Input from "../../components/Input"
 import userApi from "../../services/user.api";
 

@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AdminCardsNavBar from "../../components/AdminCardsNavBar"
+import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
-import Icons from "../../components/Icons"
 import Input from "../../components/Input"
 import userApi from "../../services/user.api";
 
-export default function Login() {
+export default function Register() {
     const navigate = useNavigate()
 
     const [typeInput, setType] = useState<string>("password");
@@ -53,7 +52,7 @@ export default function Login() {
                         </h2>
                         <div className="w-[80%] justify-center flex flex-col mt-5">
                             <p className="mb-2">Username:</p>
-                            <Input placeholder="Username" inputType="text" onChange={setEmail}/>
+                            <Input placeholder="Username" inputType="text" onChange={setUsername}/>
                         </div>
                         <div className="w-[80%] justify-center flex flex-col mt-3">
                             <p className="mb-2">Correo Electronico:</p>
@@ -69,7 +68,7 @@ export default function Login() {
                         </div>
                         <div className="text-sm text-zinc-700 mt-3">
                             <p>
-                                No tienes una cuenta? <a href="" className="border-b border-buttonYellow">Registrarse</a>
+                                Ya tienes una cuenta? <a href="" className="border-b border-buttonYellow">Login</a>
                             </p>
                             <p>
                                 Has olvidado tu contraseña? <a className="border-b border-buttonYellow" href="">Recuperar contraseña</a>

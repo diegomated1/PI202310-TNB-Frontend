@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react"
-import AdminCardsNavBar from "../../components/AdminCardsNavBar"
+import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
 import Input from "../../components/Input"
 import cardApi from "../../services/card.api";
