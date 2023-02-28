@@ -4,6 +4,7 @@ import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
 import Input from "../../components/Input"
 import userApi from "../../services/user.api";
+import Pager from "../../components/Pager";
 
 export default function Login() {
     const navigate = useNavigate()
