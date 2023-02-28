@@ -5,7 +5,7 @@ class HeroesApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = 'http://192.168.1.8:3000';
+        this.baseUrl = 'http://192.168.0.6:3000';
     }
 
     insert(heroe:IHeroe, image:File){
@@ -23,6 +23,17 @@ class HeroesApi{
                 formData.append('damage_range', heroe.damage_range.toString());
                 const {data} = await axios.post(`${this.baseUrl}/heroes`, formData);
                 res(data.data);
+            }catch(error){
+                rej(error);
+            }
+        });
+    }
+
+    get():Promise<IHeroe[]>{
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.get(`${this.baseUrl}/heroes`);
+                res(data.data as unknown as IHeroe[]);
             }catch(error){
                 rej(error);
             }
