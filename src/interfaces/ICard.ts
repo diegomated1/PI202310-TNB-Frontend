@@ -1,7 +1,8 @@
-
 export default interface ICard{
     _id?: string,
-    type: number,
     name: string,
-    description: string
+    description: string,
+    id_hero: string,
+    card_type: Number,
+    effects: []
 }
