@@ -6,38 +6,38 @@ function Card(props: any) {
     const handleclick = () => {
         setIsFlipped(!isFlipped)
     }
-  return (
-<ReactCardFlip isFlipped={isFlipped} containerClassName='card' flipDirection="horizontal" >
+    return (
+        <ReactCardFlip isFlipped={isFlipped} containerClassName='card' flipDirection="horizontal" >
             <div className="front">
                 <div className="clash-card barbarian pattern2">
                     <div className="bookmark"></div>
                     <div className="clash-card__image">
                         <img className="clash-card__barbarian" src={'../../public/img/barbaro.jpg'} alt="Barbarian" />
                     </div>
-                    <div className='content'>
-                        <div className="clash-card__unit-name ">Tank warrior</div>
+                    <div className='content justify-around flex flex-col'>
+                        <div className="clash-card__unit-name text-3xl ">Tank warrior</div>
 
                         <div className='clash-card__stats grid grid-cols-3 gap-2'>
                             <div className='flex justify-center align-middle'>
-                                <img className='h-5 mt-1' src='../../public/img/crown.png' />
-                                <p className='font-bold text-base'>11</p>
+                                <img className='h-9 mr-2' src='../../public/img/crown.png' />
+                                <p className='font-bold text-3xl'>11</p>
+                            </div>
+                            <div className='flex justify-center align-middle '>
+                                <img className='h-9 mr-2 ' src='../../public/img/green-love.png' />
+                                <p className='font-bold text-3xl'>11</p>
                             </div>
                             <div className='flex justify-center align-middle'>
-                                <img className='h-5 mt-1' src='../../public/img/green-love.png' />
-                                <p className='font-bold text-base'>11</p>
+                                <img className='h-9 mr-2' src='../../public/img/wooden.png' />
+                                <p className='font-bold text-3xl'>11</p>
                             </div>
-                            <div className='flex justify-center align-middle'>
-                                <img className='h-5 mt-1' src='../../public/img/wooden.png' />
-                                <p className='font-bold text-base'>11</p>
-                            </div>
-                            <div className='flex justify-around align-middle col-span-3 flex-row'>
-                                <div className='flex-row flex'>
-                                    <img className='h-5 mt-1' src='../../public/img/sword.png' />
-                                    <p className='font-bold text-base'>(1d6)</p>
+                            <div className='grid grid-cols-2 justify-around  align-middle col-span-3 flex-row'>
+                                <div className='flex justify-center'>
+                                    <img className='h-9 mr-2' src='../../public/img/sword.png' />
+                                    <p className='font-bold text-3xl'>(1d6)</p>
                                 </div>
-                                <div className='flex justify-around align-middle col-span-3 flex-row'>
-                                    <img className='h-5 mt-1' src='../../public/img/swords.png' />
-                                    <p className='font-bold text-base'>110+(1d6)</p>
+                                <div className='flex justify-center'>
+                                    <img className='h-9 mr-2' src='../../public/img/swords.png' />
+                                    <p className='font-bold text-3xl'>110+(1d6)</p>
                                 </div>
                             </div>
                         </div>
@@ -45,10 +45,10 @@ function Card(props: any) {
                             <div className='pattern1 cuerda absolute' />
                             <div className='placa '>
                                 <div className='flex flex-row items-center'>
-                                    <p className='font-bold text-base line-through pl-1 pr-1'>
+                                    <p className='font-bold text-3xl line-through pl-1 pr-1'>
                                         $50.000
                                     </p>
-                                    <p className='text-xs align-middle pr-1 font-bold'>
+                                    <p className='text-xl align-middle pr-1 font-bold'>
                                         40.000
                                     </p>
                                 </div>
@@ -99,7 +99,7 @@ function Card(props: any) {
             </div>
 
         </ReactCardFlip>
-  )
+    )
 }
 
 export default Card
