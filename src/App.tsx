@@ -12,7 +12,8 @@ function App() {
         <Route path="/admin/cards" element={<AdminCards/>}/>
         <Route path="/admin/heroes" element={<AdminHeroes/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/card" element={<CardDetails/>}/>
+        <Route path="/card/:id_card" element={<CardDetails/>}/>
+        
       </Routes>
     </BrowserRouter>
   )
