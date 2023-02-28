@@ -54,7 +54,7 @@ export default function Login() {
                         </h2>
                         <div className="w-[80%] justify-center flex flex-col mt-10">
                             <p className="mb-2">Correo Electronico:</p>
-                            <Input placeholder="Nombre de usuario" inputType="email" onChange={setEmail}/>
+                            <Input placeholder="Correo electronico" inputType="email" onChange={setEmail}/>
                         </div>
                         <div className="w-[80%] justify-center flex flex-col mt-4">
                             <p className="mb-2">Contraseña:</p>
