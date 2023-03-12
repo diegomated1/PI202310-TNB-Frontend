@@ -40,7 +40,7 @@ export default function Button({ text, type, onClick } : BtnProps ) {
             </button>
         )
         default: return (
-            <button onClick={onClick} className="w-24 h-10 rounded-md border-2 border-gray-500 bg-gray-300 hover:bg-gray-50" >
+            <button onClick={onClick} className="w-full h-10 rounded-md border-2 border-gray-500 bg-gray-300 hover:bg-gray-50" >
                 <strong>{text}</strong>
             </button>
         )
