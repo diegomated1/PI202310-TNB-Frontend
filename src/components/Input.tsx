@@ -21,7 +21,7 @@ type InputProps = {
     /**
      * recibe una funcion de estado con tipo string
      */
-    onChange?:Dispatch<SetStateAction<string>>;
+    onChange?: (value:string) => void;
 }
 
 export default function Input({ placeholder, inputType, icon, onClick, onChange }: InputProps) {
