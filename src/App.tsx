@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import AdminCards from "./pages/admin_create_cards/AdminCards"
 import AdminHeroes from "./pages/admin_create_heroes/AdminHeroes"
 import AdminViewGrid from "./pages/admin_view_item/AdminViewItems"
+import CreateGame from "./pages/create_game/CreateGame"
 import Login from "./pages/login/login"
 import Register from "./pages/register/register"
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/admin/grilla" element={<AdminViewGrid/>}/>
+        <Route path="/game/create" element={<CreateGame/>}/>
       </Routes>
     </BrowserRouter>
   )
