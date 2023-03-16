@@ -4,22 +4,20 @@ import Input from "../../components/Input";
 import AdminCardsNavBar from "../../components/NavBar";
 import AddPlayerSquare from "./components/AddPlayerSquare";
 import useMatches from "../../hooks/useMatches";
+import { useNavigate } from "react-router";
 
 /**
  * Component for creating a new game match.
  */
 export default function CreateGame(){
 
+    const navigate = useNavigate();
     const matches = useMatches();
     const [bet, setBet] = useState(0);
     const [numberPlayers, setNumberPlayers] = useState(2);
     const [ias, setIas] = useState(0);
 
     const [creatingMatch, setCreatingMatch] = useState(0);
-
-    useEffect(()=>{
-        console.log(ias);
-    }, [ias]);
 
     /**
      * Handler function for creating a new match
@@ -31,9 +29,12 @@ export default function CreateGame(){
         }
     }
 
+    /**
+     * If the match is create redirect to lobby page
+     */
     useEffect(()=>{
         if(matches.match){
-            setCreatingMatch(0);
+            navigate('/game/lobby');
         }
     }, [matches.match]);
 

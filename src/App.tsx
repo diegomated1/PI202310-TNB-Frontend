@@ -17,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/admin/grilla" element={<AdminViewGrid/>}/>
         <Route path="/game/create" element={<CreateGame/>}/>
+        <Route path="/game/lobby" element={<div>Lobby</div>}/>
       </Routes>
     </BrowserRouter>
   )
