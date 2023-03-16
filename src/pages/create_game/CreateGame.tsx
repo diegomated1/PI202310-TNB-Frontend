@@ -11,23 +11,6 @@ export default function CreateGame(){
     const [numberPlayers, setNumberPlayers] = useState(2);
 
 
-    const numberPlayersHandler = (value:string)=>{
-        if(value=='' || isNaN(Number(value))){
-            setNumberPlayers(2);
-            return;
-        }
-        let newNumber = parseInt(value);
-        if(newNumber>4){
-            setNumberPlayers(4);
-        }
-        else if(newNumber<2){
-            setNumberPlayers(2);
-        }
-        else{
-            setNumberPlayers(newNumber);
-        }
-        console.log(newNumber);
-    }
 
     return(
         <div className="w-screen h-screen flex flex-col">
@@ -46,8 +29,16 @@ export default function CreateGame(){
                         </div>
                         <div className="w-full h-24 flex flex-col justify-evenly">
                             <label><strong>Numero de jugadores:</strong></label>
-                            <div className="w-28">
-                                <Input placeholder={numberPlayers.toString()} onChange={(e)=>{numberPlayersHandler(e)}}/>
+                            <div className="w-full flex">
+                                <div className="w-8 h-8 mr-2">
+                                    <Button text="2" type={(numberPlayers==2)?'buttonYellow':''}/>
+                                </div>
+                                <div className="w-8 h-8 mr-2">
+                                    <Button text="3" type={(numberPlayers==3)?'buttonYellow':''}/>
+                                </div>
+                                <div className="w-8 h-8">
+                                    <Button text="4" type={(numberPlayers==4)?'buttonYellow':''}/>
+                                </div>
                             </div>
                         </div>
                         <div className="w-full h-56 grid grid-cols-4">
