@@ -41,11 +41,12 @@ export default function useMatches(){
      * Function to create a new match.
      * 
      * @param {number} number_players The maximum number of players in the match.
+     * @param {number} ias The amount of ias in the match
      * @param {number} bet The minimum amount of credits for the bet.
      */
-    function createMatch(number_players:number, bet:number){
+    function createMatch(number_players:number, ias:number, bet:number){
         if(socket && user){
-            socket.emit("room:create", user.id_user, number_players, bet);
+            socket.emit("room:create", user.id_user, number_players, ias, bet);
         }
     }
 

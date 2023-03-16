@@ -13,8 +13,13 @@ export default function CreateGame(){
     const matches = useMatches();
     const [bet, setBet] = useState(0);
     const [numberPlayers, setNumberPlayers] = useState(2);
-    
+    const [ias, setIas] = useState(0);
+
     const [creatingMatch, setCreatingMatch] = useState(0);
+
+    useEffect(()=>{
+        console.log(ias);
+    }, [ias]);
 
     /**
      * Handler function for creating a new match
@@ -22,7 +27,7 @@ export default function CreateGame(){
     const handleCreateMatch = ()=>{
         if(true){
             setCreatingMatch(1);
-            matches.createMatch(numberPlayers, bet);
+            matches.createMatch(numberPlayers, ias, bet);
         }
     }
 
@@ -62,8 +67,9 @@ export default function CreateGame(){
                             </div>
                         </div>
                         <div className="flex-1 grid grid-cols-4">
-                            {[...Array(numberPlayers)].map((x,i)=>(
-                                <AddPlayerSquare key={i}/>
+                            <AddPlayerSquare isUser={true}/>
+                            {[...Array(numberPlayers-1)].map((x,i)=>(
+                                <AddPlayerSquare key={i} setIas={setIas}/>
                             ))}
                         </div>
                         <div className="flex-[2] flex justify-end items-center pr-5">
