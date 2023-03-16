@@ -42,7 +42,7 @@ export default function Register() {
                 <figure className="h-full relative">
                     <img className="h-full w-full object-fit m-0" src="https://support-leagueoflegends.riotgames.com/hc/article_attachments/4826003140499/battle-cat-jinx-prestige.png" alt="imagen de fondo" />
                 </figure>
-                <div className="rounded-md w-[380px] h-[560px] bg-smallgray absolute top-[calc(18%)] left-[calc(5%)] flex-col p-2 bg-opacity-70">
+                <div className="rounded-md w-[380px] h-[530px] bg-smallgray absolute top-[calc(18%)] left-[calc(5%)] flex-col p-2 bg-opacity-70">
                     <form className="flex-col flex justify-center items-center" onSubmit={handleRegister} >
                         <h1 className="font-extrabold text-4xl text-center text-yellow-300 mt-12 italic" >
                             NEXUS BATTLE
