@@ -6,7 +6,7 @@ import useSocket from "./useSocket";
 /**
  *  Custom hook for managing lobby.
  */
-export default function useLobby(id_match?:string){
+export default function useLobby(id_match?:string):[IMatch|null|undefined, ()=>void]{
 
     const socket = useSocket("ws://localhost:3000");
     const {user} = useAuth();
@@ -63,7 +63,13 @@ export default function useLobby(id_match?:string){
         }
     }, [socket, user]);
 
-    return [match]
+    function matchLeave(){
+        if(socket && user && id_match){
+            socket.emit('match:user:leave', user.id_user, id_match);
+        }
+    }
+
+    return [match, matchLeave]
 }
 
 
