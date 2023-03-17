@@ -28,11 +28,11 @@ export default function useMatches(){
                 }
             }
 
-            socket.on('room:create', matchCreate);
+            socket.on('match:create', matchCreate);
 
             // Clean up function to remove the event listener when the component unmounts.
             return () => {
-                socket.off('room:create', matchCreate);
+                socket.off('match:create', matchCreate);
             }
         }
     }, [socket, user]);
@@ -46,7 +46,7 @@ export default function useMatches(){
      */
     function createMatch(number_players:number, ias:number, bet:number){
         if(socket && user){
-            socket.emit("room:create", user.id_user, number_players, ias, bet);
+            socket.emit("match:create", user.id_user, number_players, ias, bet);
         }
     }
 
