@@ -1,4 +1,4 @@
-import { MouseEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import AdminCardsNavBar from "../../components/NavBar";
@@ -34,7 +34,7 @@ export default function CreateGame(){
      */
     useEffect(()=>{
         if(matches.match){
-            navigate('/game/lobby');
+            navigate(`/game/lobby/${matches.match._id}`);
         }
     }, [matches.match]);
 
