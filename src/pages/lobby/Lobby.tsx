@@ -11,13 +11,18 @@ export default function Lobby(){
 
     const navigate = useNavigate();
     const {id_match} = useParams();
-    const [match] = useLobby(id_match);
-
+    const [match, matchLeave] = useLobby(id_match);
+    
     useEffect(()=>{
         if(match===null){
             navigate('/game/create');
         }
     }, [match]);
+
+    const handleLeave = ()=>{
+        matchLeave();
+        navigate('/game/create');
+    }
 
     return(
         <div className="w-screen h-screen flex flex-col">
@@ -25,8 +30,11 @@ export default function Lobby(){
             <div className="flex-1 flex">
                 <div className="flex-1 p-12 ">
                 <div className="p-5 w-full h-full flex flex-col bg-gray-100">
-                        <div className="flex-1">
+                        <div className="flex-1 flex justify-between">
                             <h1 className="text-3xl font-black">Lobby</h1>
+                            <div className="h-10 w-20">
+                                <Button onClick={handleLeave} text="Salir" type="buttonYellow"/>
+                            </div>
                         </div>
                         <div className="flex-1">
                             <h1 className="text-3xl font-black">ID de partida: {(match)?match._id:''}</h1>
