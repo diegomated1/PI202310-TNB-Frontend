@@ -5,7 +5,7 @@ class CardsApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = process.env.REACT_APP_API_CARDS_URL!;
+        this.baseUrl = 'http://192.168.0.11:3001';
     }
 
     insert(card:ICard, image:File){

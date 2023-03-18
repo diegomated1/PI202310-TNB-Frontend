@@ -5,7 +5,7 @@ class HeroesApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = process.env.REACT_APP_API_CARDS_URL!;
+        this.baseUrl = 'http://192.168.0.11:3001';
     }
 
     insert(heroe:IHeroe, image:File){
