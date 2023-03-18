@@ -22,13 +22,17 @@ type InputProps = {
      * recibe una funcion de estado con tipo string
      */
     onChange?:Dispatch<SetStateAction<string>>;
+    /**
+     * recibe un valor para el input
+     */
+    value?:string
 }
 
 export default function Input({ placeholder, inputType, icon, onClick, onChange }: InputProps) {
     if(onChange){
         return (
             <div className="w-full h-full shadow-xl relative">
-                <input className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" placeholder={placeholder} type={inputType} required onChange={(e)=>{onChange(e.target.value)}} />
+                <input className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" placeholder={placeholder} type={inputType}  required onChange={(e)=>{onChange(e.target.value)}} />
                 {icon && <Icons icon={icon} onClick={onClick}  />}
             </div>
         )
