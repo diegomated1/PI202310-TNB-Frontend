@@ -28,8 +28,7 @@ export default function EditCards() {
             if (cardID != '' || null) {
                 e.preventDefault();
                 await cardApi.modifyCard({ name, description, card_type: parseInt(cardType), id_hero: heroType, effects: [] }, image!, cardID);
-                handleGetHeroes();
-                handlerGetCards();
+                location.reload()
             }
         } catch (error) {
             console.log(error);
@@ -58,6 +57,7 @@ export default function EditCards() {
         card.name != undefined ? setName(card.name) : null
         card.card_type != undefined ? setCardType(card.card_type.toString()) : null
         card.id_hero != undefined ? setheroType(card.id_hero.toString()) : null
+        card.description != undefined? setDescription(card.description):null
     }
 
         useEffect(() => {
@@ -76,7 +76,7 @@ export default function EditCards() {
                     <div className="w-full h-[calc(100%-5rem)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 gap-10">
                         <div className="col-span-1 flex justify-center items-center">
                             <div className="border border-black rounded-md w-[300px] h-[440px] flex flex-col items-center">
-                                <img src={(image) ? URL.createObjectURL(image!) : ''}></img>
+                                <img src={(image) ? URL.createObjectURL(image!) : `http://localhost:3000/images/cards/${cardID}`}></img>
                                 <div className="mt-auto relative w-[50px] h-[50px] rounded-[25px]">
                                     <input
                                         className="cursor-pointer opacity-0 absolute top-0 left-0 w-full h-full z-20"
@@ -111,17 +111,11 @@ export default function EditCards() {
                             </label>
                             <label className="w-[90%] h-10 mb-10">
                                 <strong>Nombre:</strong> <br />
-                                <Input onChange={setName} inputType="text" />
+                                <Input onChange={(e) => { setName(e.target.value) }} value={name} inputType="text" />
                             </label>
-                            <label className="w-[90%] h-10 mb-14">
-                                <strong>Effects:</strong>  <br />
-                                <select className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" id="tipo" onChange={(e) => { setCardEfects(e.target.value) }}>
-                                    <option value="0"> Selecciona un efecto </option>
-                                    <option value="1"> option 1 </option>
-                                    <option value="2"> option 2 </option>
-                                    <option value="3"> option 3 </option>
-                                    <option value="4"> option 4 </option>
-                                </select>
+                            <label className="w-[90%] h-10 mb-10">
+                                <strong>Descripcion:</strong> <br />
+                                <Input onChange={(e) => { setDescription(e.target.value) }} value={description} inputType="text" />
                             </label>
                             <label className="w-[90%] h-10 mb-14">
                                 <strong>Tipo de carta:</strong>  <br />
@@ -149,9 +143,24 @@ export default function EditCards() {
                             <Button text="Actualizar" type="buttonYellow" />
                         </form>
                         <div className="col-span-1 flex flex-col">
+                            <div><span className="text-xl"><strong>Reporte de cambios</strong></span></div>
+                            <div>
+                                <span className="text-gray-500 text-sm" >
+                                    {`${new Date().getUTCMonth() + 1}/${new Date().getUTCDate()}/${new Date().getUTCFullYear()}`}
+                                </span>
+                            </div>
+                            <div>
+                                <p className="leading-5">
+                                    Ingrese un lenguaje natural a la lista de cambios realizados a esta carta 300 caracteres
+                                </p>
+                            </div><br />
+                            <label className="w-full h-10">
+                                Asunto: <br />
+                                <Input />
+                            </label><br /><br />
                             <label className="w-full h-52">
                                 Descripcion: <br />
-                                <Input inputType="TextBox" onChange={setDescription} />
+                                <Input />
                             </label><br />
                         </div>
                     </div>

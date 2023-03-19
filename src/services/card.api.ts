@@ -12,6 +12,7 @@ class CardsApi {
     insert(card: ICard, image: File) {
         return new Promise(async (res, rej) => {
             try {
+                
                 const formData = new FormData();
                 formData.append('card_image', image);
                 formData.append('name', card.name);
@@ -35,6 +36,7 @@ class CardsApi {
             if(image != undefined){
                 formData.append('card_image', image);
             }
+            console.log(card.description)
             formData.append('name', card.name);
             formData.append('description', card.description);
             formData.append('card_type', card.card_type.toString());

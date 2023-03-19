@@ -1,4 +1,5 @@
 import axios from 'axios';
+import IUser from '../interfaces/IUser';
 
 
 interface errorResponse{
@@ -9,7 +10,7 @@ class UserApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = 'http://10.152.164.187:3001';
+        this.baseUrl = 'http://192.168.0.11:3002';
     }
 
     auth(){
@@ -50,6 +51,17 @@ class UserApi{
                     withCredentials: true,
                 });
                 res(data)
+            }catch(error){
+                rej(error);
+            }
+        });
+    }
+
+    getById(id_user:string):Promise<IUser>{
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.get(`${this.baseUrl}/user/${id_user}`);
+                res(data.data)
             }catch(error){
                 rej(error);
             }
