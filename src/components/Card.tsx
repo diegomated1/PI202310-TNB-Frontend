@@ -6,115 +6,84 @@ type CardProps = {
     name?: string;
     description?: string;
     id_hero?: string;
-    card_type?: number;
+    card_type?: string;
 
     obtained?: string;
     price?: number;
     discount?: number;
 
-    details?:() => void;
-    favorites?: () => void;
-    shopingCart?: () => void;
-    pick?: () => void;
-    offert?: () => void;
-    auction?: () => void;
+
+    onClick1?: () => void;
+    onClick2?: () => void;
+    onClick3?: () => void;
 }
 
-export default function Card({ _id, name, description, id_hero, card_type, price, discount, obtained}: CardProps) {
+export default function Card({ _id, name, description, id_hero, card_type, price, discount, obtained, onClick1, onClick2, onClick3 }: CardProps) {
 
-    //aca se llama la api para cargar la imagen
-
-    /*const [imageUrl, setImageUrl] = useState<string>('');
-
-    const url = `http://192.168.1.8:3000/images/cards/${_id}`
-
-    useEffect(() => {
-        fetch(url)
-          .then(response => response.json())
-          .then(data => setImageUrl(data.url))
-          .catch(error => console.error(error));
-      }, []);*/
-      
-      const [image, setImage] = useState<File>();
-      
-
-    //aca se cambia el card_type, por un string para cargar un icono
-
-    let iconCard_type: string;
-
-    switch(card_type){
-        case(1):{
-            iconCard_type = "arma"
-        }
-        case(2):{
-            iconCard_type = "armadura"
-        }
-        case(3):{
-            iconCard_type = "epica"
-        }
-        case(4):{
-            iconCard_type = "item"
-        }
-        default:{
-            iconCard_type = "arma"
-        }
-    }
-
-    //aca se cambia el id_hero, por un string para cargar un icono
+    const [image, setImage] = useState<File>();
 
     let iconId_hero: string;
 
-    switch(id_hero){
-        case("A"):{
+    //aca agregar una tabla de seleccion de tipo de heroe, despues hacer un get de ese tipo/nombre
+    //busca el icono directamente con el nombre de la tabla :C
+
+    switch (id_hero) {
+        case ("a74lffy4cu5"): {
             iconId_hero = "armas"
+            break
         }
-        case("B"):{
+        case ("a74lffy4zm8"): {
             iconId_hero = "tank"
+            break
         }
-        case("C"):{
+        case ("a74lffy5xhm"): {
             iconId_hero = "fire"
+            break
         }
-        case("D"):{
+        case ("a74lffy4cu5"): {
             iconId_hero = "frost"
+            break
         }
-        case("E"):{
+        case ("a74lffy4zm8"): {
             iconId_hero = "veneno"
+            break
         }
-        case("F"):{
+        case ("a74lffy5xhm"): {
             iconId_hero = "machete"
+            break
         }
-        default:{
+        default: {
             iconId_hero = "arma"
         }
     }
 
-
     return (
         <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md overflow-hidden border-solid border-red-500 border-2">
             <figure className="relative h-[40%] w-full overflow-hidden shadow-md">
-                <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `http://localhost:3000/images/cards/${_id}`} alt="aqui va una imagen" />
+                <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `http://192.168.1.8:3000/images/cards/${_id}`} />
                 <div className="absolute top-0 left-0">
-                    <Icons icon={iconCard_type}></Icons>
+                    <Icons icon={card_type}></Icons>
                 </div>
                 <div className="absolute top-0 right-0">
-                    {price && <Icons icon={iconId_hero} />}
+                    {/* aca deben poner las cosas que quieren que se carguen con el precio*/}
+                    {price && <div className="flex text-white"><h1>{price}</h1><Icons icon={"currency"} /></div>}
                 </div>
                 <div className="absolute top-[80%] left-0">
-                    <Icons icon="armas"></Icons>
+                    <Icons icon={iconId_hero}></Icons>
                 </div>
                 <div className="absolute top-[80%] right-0">
-                    <Icons icon="armas"></Icons>
+                    {/* aca deben poner las cosas que quieren que se carguen con el descuento*/}
+                    {discount && <div className="flex text-white"><h1>{discount}</h1><Icons icon={"discount"} /></div>}
                 </div>
             </figure>
             <div className="h-[50%]  w-full pt-2 px-2">
                 <div className="flex flex-col justify-evenly h-full bg-teal-900 px-2 rounded-md overflow-hidden border-2 border-red-500 shadow-xl text-lime-700">
                     <h1 className="font-bold text-xl border-b-2 border-red-500">{name}</h1>
                     <h1 className="text-sm font-semibold italic">{description}</h1>
-                    <h1 className="text-base font-extrabold">Si el ataque del oponente es menor que la defensa del guerrero. El oponente recibe +1 de daño</h1>
                 </div>
             </div>
             <div className="h-[10%] w-full flex justify-evenly items-center">
-                {price && <Icons icon={"precio"} />}
+                {obtained && <div className="flex text-white"><Icons icon={"wishlist"} /></div>}
                 <Icons icon="armas"></Icons>
                 <Icons icon="armas"></Icons>
                 <Icons icon="armas"></Icons>

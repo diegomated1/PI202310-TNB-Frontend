@@ -20,7 +20,7 @@ export default function AdminCards() {
             e.preventDefault();
             console.log(name);
             console.log(description);
-            var data = await cardApi.insert({ name, description, card_type: parseInt(cardType), id_hero: heroType, effects: [] }, image!);
+            var data = await cardApi.insert({ name, description, card_type: cardType, id_hero: heroType, effects: [] }, image!);
             console.log(data);
         } catch (error) {
             console.log(error);
@@ -71,13 +71,13 @@ export default function AdminCards() {
                                 <Input onChange={(e) => { setDescription(e.target.value) }} value={description} />
                             </label>
                             <label className="w-[90%] h-10 mb-14">
-                                <strong>Tipo de carta:</strong>  <br />
+                                <strong>Tipo de carta:</strong>  <br/>
                                 <select onChange={(e) => { setCardType(e.target.value) }} className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl">
                                     <option value="0"> - </option>
-                                    <option value="1"> Arma </option>
-                                    <option value="2"> Armadura </option>
-                                    <option value="3"> Item </option>
-                                    <option value="4"> Epica </option>
+                                    <option value="sword"> Arma </option>
+                                    <option value="armor"> Armadura </option>
+                                    <option value="item"> Item </option>
+                                    <option value="epic"> Epica </option>
                                 </select>
                             </label>
                             <label className="w-[90%] h-10 mb-14">
@@ -86,7 +86,7 @@ export default function AdminCards() {
                                     <select onChange={(e) => { setheroType(e.target.value) }} className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl">
                                         <option value="-1"> - </option>
                                         {heroes.map((hero, id) => (
-                                            <option key={id} value={id}>
+                                            <option key={id} value={hero._id}>
                                                 {hero.name}
                                             </option>
                                         ))}

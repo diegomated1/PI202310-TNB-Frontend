@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<EditCards/>}/>
+        <Route path="/" element={<div>Sample</div>}/>
         <Route path="/admin/cards" element={<AdminCards/>}/>
         <Route path="/admin/heroes" element={<AdminHeroes/>}/>
         <Route path="/login" element={<Login/>}/>

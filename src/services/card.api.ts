@@ -5,14 +5,14 @@ import ICard from '../interfaces/ICard';
 class CardsApi {
 
     baseUrl: string
-    constructor(){
+    constructor() {
         this.baseUrl = 'http://192.168.1.8:3000';
     }
 
     insert(card: ICard, image: File) {
         return new Promise(async (res, rej) => {
             try {
-                
+
                 const formData = new FormData();
                 formData.append('card_image', image);
                 formData.append('name', card.name);
@@ -29,30 +29,31 @@ class CardsApi {
 
     modifyCard(card: ICard, image: File, _id: string) {
         return new Promise(async (res, rej) => {
-          try {
-            console.log(image);
-      
-            const formData = new FormData();
-            if(image != undefined){
-                formData.append('card_image', image);
-            }
-            console.log(card.description)
-            formData.append('name', card.name);
-            formData.append('description', card.description);
-            formData.append('card_type', card.card_type.toString());
-            formData.append('id_hero', card.id_hero);
-            console.log(formData)
-            const { data } = await axios.put(`${this.baseUrl}/cards/${_id}`, formData, {
+            try {
+                console.log(image);
+
+                const formData = new FormData();
+                if (image != undefined) {
+                    formData.append('card_image', image);
+                }
+                console.log(card.description)
+                formData.append('name', card.name);
+                formData.append('description', card.description);
+                formData.append('card_type', card.card_type.toString());
+                formData.append('id_hero', card.id_hero);
+                console.log(formData)
+                const { data } = await axios.put(`${this.baseUrl}/cards/${_id}`, formData, {
                     headers: {
-                  'Content-Type': 'multipart/form-data'
-                }});
-            res(data.data);
-          } catch (error) {
-            rej(error);
-          }
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                res(data.data);
+            } catch (error) {
+                rej(error);
+            }
         });
-      }
-      
+    }
+
 
     getById(_id: string): Promise<ICard> {
         return new Promise(async (res, rej) => {
