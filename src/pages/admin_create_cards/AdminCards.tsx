@@ -76,8 +76,8 @@ export default function AdminCards(){
                                     <option value="0"> - </option>
                                     <option value="1"> Arma </option>
                                     <option value="2"> Armadura </option>
-                                    <option value="2"> Item </option>
-                                    <option value="2"> Epica </option>
+                                    <option value="3"> Item </option>
+                                    <option value="4"> Epica </option>
                                 </select>
                             </label>
                             <label className="w-[90%] h-10 mb-14">

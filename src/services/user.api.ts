@@ -10,7 +10,7 @@ class UserApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = 'http://192.168.0.11:3002';
+        this.baseUrl = 'http://192.168.1.8:3000';
     }
 
     auth(){
