@@ -4,7 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+<<<<<<< HEAD
     "dev": "vite --host 192.168.1.8",
+=======
+    "dev": "vite ",
+>>>>>>> 8943b21f9dc3c6b57b019937f5c62731b750683e
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -12,6 +16,7 @@
     "axios": "^1.3.3",
     "dotenv": "^16.0.3",
     "react": "^18.2.0",
+    "react-card-flip": "^1.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
     "socket.io-client": "^4.6.1"
