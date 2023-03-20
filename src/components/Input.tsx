@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { ChangeEventHandler, Dispatch, SetStateAction } from "react";
 import Icons from "./Icons";
 
 type InputProps = {
@@ -21,22 +21,31 @@ type InputProps = {
     /**
      * recibe una funcion de estado con tipo string
      */
-    onChange?: (value:string) => void;
+    onChange?: ChangeEventHandler<HTMLInputElement>
+    
+    value?: string
 }
 
-export default function Input({ placeholder, inputType, icon, onClick, onChange }: InputProps) {
-    if(onChange){
+export default function Input({ placeholder, inputType, icon, onClick, onChange, value }: InputProps) {
+    if(value){
         return (
             <div className="w-full h-full shadow-xl relative">
-                <input className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" placeholder={placeholder} type={inputType} required onChange={(e)=>{onChange(e.target.value)}} />
-                {icon && <Icons icon={icon} onClick={onClick}  />}
+                <input className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" placeholder={placeholder} type={inputType} value={value}  required onChange={onChange} />
+                {icon && Icons[icon]({onClick})}
+            </div>)
+    }
+    else if(onChange){
+        return (
+            <div className="w-full h-full shadow-xl relative">
+                <input className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" placeholder={placeholder} type={inputType} value={value}  required onChange={onChange} />
+                {icon && Icons[icon]({onClick})}
             </div>
         )
     }else{
         return (
             <div className="w-full h-full shadow-xl relative">
-                <input className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" placeholder={placeholder} type={inputType} required />
-                {icon && <Icons icon={icon} onClick={onClick}  />}
+                <input className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" placeholder={placeholder} type={inputType} value={value} required onChange={onChange} />
+                {icon && Icons[icon]({onClick})}
             </div>
         )
     }

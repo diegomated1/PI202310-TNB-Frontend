@@ -1,7 +1,6 @@
 import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
 import Input from "../../components/Input"
-import Icons from "../../components/Icons"
 import heroesApi from "../../services/heroe.api";
 import { useState, FormEvent } from "react";
 
@@ -58,40 +57,40 @@ export default function AdminHeroes() {
                             </div>
                             <p>Añadir una imagen aquí</p>
                         </div>
-                        <div className="col-span-2">
+                        <div className="col-span-2 flex">
                             <form onSubmit={handleCreateHeroe} className="grid grid-cols-2 p-5 gap-10 w-full">
-                                <div className="col-span-1 flex flex-col items-center">
+                                <div className="col-span-1 flex flex-col items-center justify-center">
                                     <label className="w-[90%] h-10 mb-14">
                                         <strong>Nombre:</strong> <br />
-                                        <Input onChange={setName}/>
+                                        <Input onChange={(e) => { setName(e.target.value) }}/>
                                     </label>
                                     <label className="w-[90%] h-10 mb-14">
                                         <strong>Vida:</strong>  <br />
-                                        <Input onChange={setHealth}/>
+                                        <Input onChange={(e) => { setHealth(e.target.value) }}/>
                                     </label>
                                     <label className="w-[90%] h-10 mb-14">
                                         <strong>Defensa:</strong>  <br />
-                                        <Input onChange={setDefense}/>
+                                        <Input onChange={(e) => { setDefense(e.target.value) }}/>
                                     </label>
                                     <label className="w-[90%] h-10 mb-14">
                                         <strong>Ataque Básico:</strong>  <br />
-                                        <Input onChange={setAttack_basic}/>
+                                        <Input onChange={(e) => { setAttack_basic(e.target.value) }}/>
                                     </label>
                                     <p>Ingrese la imagen primero</p>
                                     <Button text="Crear" type="buttonYellow" />
                                 </div>
-                                <div className="col-span-1 flex flex-col">
+                                <div className="col-span-1 flex flex-col items-center justify-center">
                                     <label className="w-full h-10">
                                         Ataque Rango: <br />
-                                        <Input onChange={setAttack_range}/>
+                                        <Input onChange={(e) => { setAttack_range(e.target.value) }}/>
                                     </label><br /><br />
                                     <label className="w-full h-10">
                                         Daño Rango: <br />
-                                        <Input onChange={setDamage_range}/>
+                                        <Input onChange={(e) => { setDamage_range(e.target.value) }}/>
                                     </label><br /><br />
                                     <label className="w-full h-52">
                                         Descripcion: <br />
-                                        <Input onChange={setDescription}/>
+                                        <Input onChange={(e) => { setDescription(e.target.value) }}/>
                                     </label><br />
                                 </div>
                             </form>

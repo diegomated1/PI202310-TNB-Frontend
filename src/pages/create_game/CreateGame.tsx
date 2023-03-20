@@ -50,7 +50,7 @@ export default function CreateGame(){
                         <div className="flex-[2] flex flex-col justify-evenly">
                             <label><strong>Apuesta de la partida:</strong></label>
                             <div className="w-28">
-                                <Input onChange={(e)=>{setBet(parseInt(e))}}/>
+                                <Input onChange={(e)=>{setBet(parseInt(e.target.value))}}/>
                             </div>
                         </div>
                         <div className="flex-[2] flex flex-col justify-evenly">

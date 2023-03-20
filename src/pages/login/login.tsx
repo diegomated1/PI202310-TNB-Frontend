@@ -54,11 +54,11 @@ export default function Login() {
                         </h2>
                         <div className="w-[80%] justify-center flex flex-col mt-10">
                             <p className="mb-2">Correo Electronico:</p>
-                            <Input placeholder="Correo electronico" inputType="email" onChange={setEmail}/>
+                            <Input placeholder="Correo electronico" inputType="email" onChange={(e)=>{setEmail(e.target.value)}}/>
                         </div>
                         <div className="w-[80%] justify-center flex flex-col mt-4">
                             <p className="mb-2">Contraseña:</p>
-                            <Input placeholder="Contraseña" inputType={typeInput} icon="eye" onClick={showPassword} onChange={setPassword}/>
+                            <Input placeholder="Contraseña" inputType={typeInput} icon="eye" onClick={showPassword} onChange={(e)=>{setPassword(e.target.value)}}/>
                         </div>
                         <p className="mt-4">{alertlogin}</p>
                         <div className="mt-6 font-light">

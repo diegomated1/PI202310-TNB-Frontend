@@ -15,7 +15,7 @@ export default function Button({ text, type, onClick } : BtnProps ) {
             </button>
         )
         case "buttonYellow": return (
-            <button onClick={onClick} className="w-full h-full rounded-md bg-buttonYellow hover:bg-amber-500" >
+            <button onClick={onClick} className="w-[80%] h-10 rounded-md bg-buttonYellow hover:bg-amber-500" >
                 <strong>{text}</strong>
             </button>
         )

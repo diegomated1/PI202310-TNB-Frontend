@@ -5,7 +5,7 @@ class HeroesApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = 'http://192.168.0.11:3001';
+        this.baseUrl = 'http://192.168.56.1:3000';
     }
 
     insert(heroe:IHeroe, image:File){
