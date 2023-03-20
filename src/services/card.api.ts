@@ -6,7 +6,7 @@ class CardsApi {
 
     baseUrl: string
     constructor() {
-        this.baseUrl = 'http://192.168.1.8:3000';
+        this.baseUrl = 'http://192.168.56.1:3000';
     }
 
     insert(card: ICard, image: File) {
@@ -17,7 +17,7 @@ class CardsApi {
                 formData.append('card_image', image);
                 formData.append('name', card.name);
                 formData.append('description', card.description);
-                formData.append('card_type', card.card_type.toString());
+                formData.append('card_type', card.card_type);
                 formData.append('id_hero', card.id_hero);
                 const { data } = await axios.post(`${this.baseUrl}/cards`, formData);
                 res(data.data);
