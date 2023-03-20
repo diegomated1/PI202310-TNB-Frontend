@@ -13,9 +13,12 @@ module.exports = {
         'buttonPurple':'#9E1CB0',
         'buttonBlue':'#0049FF',
         'buttonRed':'#FF004D',
-        'buttonGreen':'#21B727'
-
-      }
+        'buttonGreen':'#21B727',
+        'bg-card':'#42636E'
+      },
+      aspectRatio: {
+        '4/5': '4/5',
+      },
     }
   },
   plugins: [],
