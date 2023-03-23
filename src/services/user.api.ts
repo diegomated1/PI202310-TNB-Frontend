@@ -10,7 +10,8 @@ class UserApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = 'http://10.153.82.38:3000';
+        this.baseUrl = import.meta.env.VITE_API_USERS_URL;
+        console.log(this.baseUrl);
     }
 
     auth(){

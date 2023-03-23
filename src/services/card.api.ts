@@ -6,7 +6,7 @@ class CardsApi {
 
     baseUrl: string
     constructor() {
-        this.baseUrl = 'http://10.153.82.38:3000';
+        this.baseUrl = import.meta.env.VITE_API_CARDS_URL;
     }
 
     insert(card: ICard, image: File) {
