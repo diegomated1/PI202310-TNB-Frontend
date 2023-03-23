@@ -42,7 +42,7 @@ export default function Pager({cardsArray, setParcialCards}: PagerProps) {
               disabled={currentPage == 1} onClick={() => setCurrentPage(currentPage=>currentPage - 1)}
             >
               <span className="sr-only">Previous</span>
-              <Icons icon="left"></Icons>
+              <Icons.left/>
             </button>
             {pageNumbers.map((number,i) => (
 
@@ -63,7 +63,7 @@ export default function Pager({cardsArray, setParcialCards}: PagerProps) {
               onClick={() => setCurrentPage(currentPage=>currentPage + 1)}
             >
               <span className="sr-only">Next</span>
-              <Icons icon="right"></Icons>
+              <Icons.right></Icons.right>
             </button>
           </nav>
         </div>
