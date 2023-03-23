@@ -15,7 +15,7 @@ export default function Hero(){
             <div className="flex-[4] bg-red-200 rounded-t-lg">
                 <div className="w-full h-full bg-blue-50 relative rounded-t-lg">
                     <img className="w-full h-full object-cover absolute top-0 left-0 rounded-t-lg" 
-                        src="" 
+                        src="https://genshin.global/wp-content/uploads/2022/05/yae-miko-electro-profile-genshin-impact-1.webp" 
                         alt=""
                     />
                     <div className="absolute w-8 h-8 rounded-full bg-red-200 top-1 right-1">
@@ -56,7 +56,7 @@ export default function Hero(){
                     </div>
                 </div>
             </div>
-            <div className="flex-1 bg-red-400 rounded-b-lg flex justify-around">
+            <div className="flex-1 bg-gray-500 rounded-b-lg flex justify-around">
                 <span className="flex items-center">Power: 1</span>
                 <span className="flex items-center">Daño efectivo: 6</span>
             </div>

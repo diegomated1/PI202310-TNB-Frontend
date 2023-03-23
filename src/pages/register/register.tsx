@@ -64,7 +64,7 @@ export default function Register() {
                         </div>
                         <p className="mt-4">{alertRegister}</p>
                         <div className="mt-3 font-light">
-                            <Button text="Iniciar Sesion" type="buttonPurple"/>
+                            <Button text="Registrarse" type="buttonPurple"/>
                         </div>
                         <div className="text-sm text-zinc-700 mt-3">
                             <p>

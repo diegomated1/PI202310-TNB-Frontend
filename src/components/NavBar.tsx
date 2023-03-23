@@ -33,7 +33,7 @@ const NavBarBtn = ({ text, icon }: NavBarBtnProps) => {
         <div className="flex justify-center items-center">
             <span>
                 {text && text}
-                {icon && <Icons icon={icon} />}
+                {icon && Icons[icon]({})}
             </span>
         </div>
     )

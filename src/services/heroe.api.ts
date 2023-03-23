@@ -5,7 +5,7 @@ class HeroesApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = 'http://192.168.56.1:3000';
+        this.baseUrl = import.meta.env.VITE_API_CARDS_URL;
     }
 
     insert(heroe:IHeroe, image:File){

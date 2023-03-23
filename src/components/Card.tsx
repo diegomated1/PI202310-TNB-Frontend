@@ -60,7 +60,7 @@ export default function Card({ _id, name, description, id_hero, card_type, price
     return (
         <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md overflow-hidden border-solid border-red-500 border-2">
             <figure className="relative h-[40%] w-full overflow-hidden shadow-md">
-                <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `http://192.168.56.1:3000/images/cards/${_id}`} />
+                <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `${import.meta.env.VITE_API_CARDS_URL}/images/cards/${_id}`} />
                 <div className="absolute top-0 left-0">
                     {Icons[iconId_hero!]({})}
                 </div>
