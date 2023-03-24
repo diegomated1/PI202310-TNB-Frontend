@@ -26,7 +26,7 @@ export default function AdminCards(){
                                 <strong>Descripcion:</strong>  <br/>
                                 <Input/>
                             </label>
-                            <Button text="Crear"/>
+                            <Button text="Crear" type={""}/>
                         </div>
                         <div className="col-span-1 flex flex-col">
                             <div><span className="text-xl"><strong>Reporte de cambios</strong></span></div>

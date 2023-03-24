@@ -40,7 +40,7 @@ export default function AdminHeroes(){
                                 <Input/>
                             </label>
                             <p>Ingrese la imagen primero</p>
-                            <Button text="Crear"/>
+                            <Button text="Crear" type={""}/>
                         </div>
                         <div className="col-span-1 flex flex-col">
                             {/* <div><span className="text-xl"><strong>Reporte de cambios</strong></span></div>
