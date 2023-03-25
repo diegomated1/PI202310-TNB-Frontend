@@ -17,13 +17,6 @@ export default function AdminHeroes() {
     const handleCreateHeroe = async (e: FormEvent) => {
         try {
             e.preventDefault();
-            console.log(name);
-            console.log(description);
-            console.log(health);
-            console.log(defense);
-            console.log(attack_basic);
-            console.log(attack_range);
-            console.log(damage_range);
             var data = await heroesApi.insert({name, description, power:1, health:parseInt(health), defense:parseInt(defense), attack_basic:parseInt(attack_basic), attack_range:parseInt(attack_range), damage_range:parseInt(damage_range)}, image!);
             console.log(data);
         } catch (error) {

@@ -5,6 +5,7 @@ import Input from "../../components/Input"
 import cardApi from "../../services/card.api";
 import IHeroe from "../../interfaces/IHeroe";
 import heroeApi from "../../services/heroe.api";
+import ModalReports from "../../components/modals/Reports";
 
 export default function AdminCards() {
 
@@ -44,7 +45,7 @@ export default function AdminCards() {
                     <div className="w-full h-20 flex items-center pl-10">
                         <h1 className="text-4xl md:text-5xl">Creacion de cartas</h1>
                     </div>
-                    <div className="w-full h-[calc(100%-5rem)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 gap-10">
+                    <form className="w-full h-[calc(100%-5rem)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 gap-10">
                         <div className="col-span-1 flex justify-center items-center">
                             <div className="border border-black rounded-md w-[300px] h-[440px] flex flex-col items-center">
                                 <img src={(image) ? URL.createObjectURL(image!) : ''}></img>
@@ -61,22 +62,14 @@ export default function AdminCards() {
                                 </div>
                             </div>
                         </div>
-                        <form onSubmit={handleCreateCard} className="col-span-1 flex flex-col items-center">
+                        <div className="col-span-1 flex flex-col items-center">
                             <label className="w-[90%] h-10 mb-10">
                                 <strong>Nombre:</strong> <br />
                                 <Input onChange={(e) => { setName(e.target.value) }} value={name} />
                             </label>
                             <label className="w-[90%] h-10 mb-14">
-                                <strong>Descripcion:</strong>  <br />
-                                <Input onChange={(e) => { setDescription(e.target.value) }} value={description} />
-                            </label>
-                            <label className="w-[90%] h-10 mb-10">
-                                <strong>Efecto:</strong> <br />
-                                <Input />
-                            </label>
-                            <label className="w-[90%] h-10 mb-14">
                                 <strong>Tipo de carta:</strong>  <br/>
-                                <select onChange={(e) => { setCardType(e.target.value) }} className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl">
+                                <select onChange={(e) => { setCardType(e.target.value) }} className="w-full focus:outline-none h-full rounded-md p-2 shadow-md">
                                     <option value="0"> - </option>
                                     <option value="sword"> Arma </option>
                                     <option value="armor"> Armadura </option>
@@ -98,31 +91,24 @@ export default function AdminCards() {
                                 </div>
                             </label>
                             <Button text="Crear" type="buttonYellow" />
-                        </form>
-                        <div className="col-span-1 flex flex-col">
-                            <div><span className="text-xl"><strong>Reporte de cambios</strong></span></div>
-                            <div>
-                                <span className="text-gray-500 text-sm" >
-                                    {`${new Date().getUTCMonth() + 1}/${new Date().getUTCDate()}/${new Date().getUTCFullYear()}`}
-                                </span>
-                            </div>
-                            <div>
-                                <p className="leading-5">
-                                    Ingrese un lenguaje natural a la lista de cambios realizados a esta carta 300 caracteres
-                                </p>
-                            </div><br />
-                            <label className="w-full h-10">
-                                Asunto: <br />
-                                <Input />
-                            </label><br /><br />
-                            <label className="w-full h-52">
-                                Descripcion: <br />
-                                <Input />
-                            </label><br />
                         </div>
-                    </div>
+                        <div className="col-span-1 flex flex-col items-center">
+                            <label className="w-full h-20">
+                                Descripcion: <br />
+                                <textarea
+                                    onChange={(e) => { setDescription(e.target.value) }} defaultValue={description}
+                                    className="border rounded-md border-gray-100 w-full h-full max-w-full max-h-full min-w-full min-h-full shadow-xl relative p-2"
+                                />
+                            </label><br />
+                            <label className="w-[90%] h-10 mb-10">
+                                <strong>Efecto:</strong> <br />
+                                <Input />
+                            </label>
+                        </div>
+                    </form>
                 </div>
             </div>
+            <ModalReports/>
         </div>
     )
 }
