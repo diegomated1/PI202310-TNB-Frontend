@@ -70,6 +70,10 @@ export default function AdminCards() {
                                 <strong>Descripcion:</strong>  <br />
                                 <Input onChange={(e) => { setDescription(e.target.value) }} value={description} />
                             </label>
+                            <label className="w-[90%] h-10 mb-10">
+                                <strong>Efecto:</strong> <br />
+                                <Input />
+                            </label>
                             <label className="w-[90%] h-10 mb-14">
                                 <strong>Tipo de carta:</strong>  <br/>
                                 <select onChange={(e) => { setCardType(e.target.value) }} className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl">
