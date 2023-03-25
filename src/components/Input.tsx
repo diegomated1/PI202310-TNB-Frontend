@@ -1,54 +1,21 @@
-import { ChangeEventHandler, Dispatch, SetStateAction } from "react";
-import Icons from "./Icons";
-
-type InputProps = {
-        /**
-     *  es un placeholder, letras que aprecen al fondo
-     */
-    placeholder?: string;
-    /**
-     * escoge eltipo de input, hay que ver bien los tipos de input y ponerlo
-     */
-    inputType?: string;
+import { InputHTMLAttributes } from "react";
+import {Icon} from "./Icons";
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     /**
      * recibe un nombre de icono definido en la bilbiote de iconos
      */
-    icon?: string;
+    icon?: Icon;
     /**
-     * recibe una funcion onclick, normalmente para un icono
+     * 
      */
-    onClick?: () => void;
-    /**
-     * recibe una funcion de estado con tipo string
-     */
-    onChange?: ChangeEventHandler<HTMLInputElement>
-    
-    value?: string
+    onClickIcon?: ()=>void
 }
 
-export default function Input({ placeholder, inputType, icon, onClick, onChange, value }: InputProps) {
-    if(value){
-        return (
-            <div className="w-full h-full shadow-xl relative">
-                <input className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" placeholder={placeholder} type={inputType} value={value}  required onChange={onChange} />
-                {icon && Icons[icon]({onClick})}
-            </div>)
-    }
-    else if(onChange){
-        return (
-            <div className="w-full h-full shadow-xl relative">
-                <input className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" placeholder={placeholder} type={inputType} value={value}  required onChange={onChange} />
-                {icon && Icons[icon]({onClick})}
-            </div>
-        )
-    }else{
-        return (
-            <div className="w-full h-full shadow-xl relative">
-                <input className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl" placeholder={placeholder} type={inputType} value={value} required onChange={onChange} />
-                {icon && Icons[icon]({onClick})}
-            </div>
-        )
-    }
-    
-
+export default function Input(props: InputProps) {
+    return(
+        <div className="w-full h-full shadow-md relative bg-transparent">
+            <input className="w-full focus:outline-double h-full rounded-md p-2 shadow-xl border border-gray-100" {...props} required/>
+            {(props.icon) ? <props.icon onClick={props.onClickIcon}/> : ''}
+        </div>
+    )
 }
