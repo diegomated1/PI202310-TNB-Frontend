@@ -111,11 +111,11 @@ export default function EditCards() {
                             </label>
                             <label className="w-[90%] h-10 mb-10">
                                 <strong>Nombre:</strong> <br />
-                                <Input onChange={(e) => { setName(e.target.value) }} value={name} inputType="text" />
+                                <Input onChange={(e) => { setName(e.target.value) }} value={name} />
                             </label>
                             <label className="w-[90%] h-10 mb-10">
                                 <strong>Descripcion:</strong> <br />
-                                <Input onChange={(e) => { setDescription(e.target.value) }} value={description} inputType="text" />
+                                <Input onChange={(e) => { setDescription(e.target.value) }} value={description} />
                             </label>
                             <label className="w-[90%] h-10 mb-14">
                                 <strong>Tipo de carta:</strong>  <br />
