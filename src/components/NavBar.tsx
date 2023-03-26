@@ -28,7 +28,7 @@ export default function AdminCardsNavBar() {
                 <NavBarBtn icon="shoppingCart" />
                 <NavBarBtn icon="favorites" />
                 <Dropdown options={optionsCard} icon={Icons.profile} />
-                <Button text="Battle" type="navbar" />
+                <Button.navbar>Battle</Button.navbar>
             </div>
         </div>)
 }

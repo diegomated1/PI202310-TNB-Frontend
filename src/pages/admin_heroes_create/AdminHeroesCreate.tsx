@@ -70,7 +70,7 @@ export default function AdminHeroesCreate() {
                                         <Input onChange={(e) => { setAttack_basic(e.target.value) }}/>
                                     </label>
                                     <p>Ingrese la imagen primero</p>
-                                    <Button text="Crear" type="buttonYellow" />
+                                    <Button.buttonYellow btnType="buttonYellow">Crear</Button.buttonYellow>
                                 </div>
                                 <div className="col-span-1 flex flex-col items-center justify-center">
                                     <label className="w-full h-10">

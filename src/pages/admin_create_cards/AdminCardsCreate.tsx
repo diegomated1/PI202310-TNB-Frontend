@@ -88,7 +88,7 @@ export default function AdminCardsCreate() {
                                     </select>
                                 </div>
                             </label>
-                            <Button text="Crear" type="buttonYellow" />
+                            <Button.buttonYellow>Crear</Button.buttonYellow>
                         </div>
                         <div className="col-span-1 flex flex-col items-center">
                             <label className="w-full h-20">

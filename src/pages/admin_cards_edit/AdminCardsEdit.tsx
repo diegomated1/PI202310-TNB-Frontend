@@ -140,7 +140,7 @@ export default function EditCards() {
                                     </select>
                                 </div>
                             </label>
-                            <Button text="Actualizar" type="buttonYellow" />
+                            <Button.buttonYellow>Actualizar</Button.buttonYellow>
                         </form>
                         <div className="col-span-1 flex flex-col">
                             <div><span className="text-xl"><strong>Reporte de cambios</strong></span></div>

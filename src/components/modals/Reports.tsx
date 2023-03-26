@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../Button";
+import Icons from "../Icons";
 import Input from "../Input";
 
 interface ModalReports{
@@ -9,15 +10,19 @@ interface ModalReports{
 
 export default function ModalReports({onClose}:ModalReports){
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     return (
         <div
           className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30 ${isOpen ? '' : 'hidden'}`}
           onClick={onClose}
         >
-            <div className="absolute top-1 right-1 w-20 h-20 rounded-full border border-gray-200 bg-green-100"></div>
             <form className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg p-4 flex flex-col">
+                <button
+                    onClick={()=>{setIsOpen(false)}}
+                    className="absolute top-1 right-1 w-8 h-8 border border-gray-200 bg-gray-300 hover:bg-gray-200 flex justify-center items-center">
+                    <Icons.x/>
+                </button>
                 <div><span className="text-xl"><strong>Reporte de cambios</strong></span></div>
                 <div>
                     <span className="text-gray-500 text-sm" >
@@ -41,7 +46,7 @@ export default function ModalReports({onClose}:ModalReports){
                 </label><br />
                 <div className="w-full h-16 flex justify-center items-center">
                     <div className="w-1/2 h-1/2">
-                        <Button type="buttonYellow" text="Completar" onClick={onClose}/>
+                        <Button.buttonYellow onClick={onClose}>Completar</Button.buttonYellow>
                     </div>
                 </div>
             </form>
