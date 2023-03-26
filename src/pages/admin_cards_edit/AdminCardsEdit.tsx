@@ -76,7 +76,7 @@ export default function EditCards() {
                     <div className="w-full h-[calc(100%-5rem)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 gap-10">
                         <div className="col-span-1 flex justify-center items-center">
                             <div className="border border-black rounded-md w-[300px] h-[440px] flex flex-col items-center">
-                                <img src={(image) ? URL.createObjectURL(image!) : `http://localhost:3000/images/cards/${cardID}`}></img>
+                                <img src={(image) ? URL.createObjectURL(image!) : ``}></img>
                                 <div className="mt-auto relative w-[50px] h-[50px] rounded-[25px]">
                                     <input
                                         className="cursor-pointer opacity-0 absolute top-0 left-0 w-full h-full z-20"
