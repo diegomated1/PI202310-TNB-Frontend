@@ -53,7 +53,7 @@ export default function Card({ _id, name, description, id_hero, card_type, price
             break
         }
         default: {
-            iconId_hero = "arma"
+            iconId_hero = "armas"
         }
     }
 
@@ -70,7 +70,7 @@ export default function Card({ _id, name, description, id_hero, card_type, price
                     </div>}
                 </div>
                 <div className="absolute top-[80%] left-0">
-                    {Icons[card_type!]({})}
+                    {/*Icons[card_type!]({})*/}
                 </div>
                 <div className="absolute top-[80%] right-0">
                     {/* aca deben poner las cosas que quieren que se carguen con el descuento*/}
