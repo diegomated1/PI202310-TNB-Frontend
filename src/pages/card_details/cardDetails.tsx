@@ -7,20 +7,32 @@ import '../../assets/tailwind.css';
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import cardsApi from '../../services/card.api';
+import IComments from "../../interfaces/IComments";
+import productsApi from "../../services/products.api";
 
 export default function CardDetails() {
 
-    const params = useParams();
+    const {id_card} = useParams();
     const [card, setCard] = useState();
 
     const handleGetCard = async () => {
-        const data = await cardsApi.getById(params.id_card!);
+        const data = await cardsApi.getById(id_card!);
+        console.log(data);
+    }
+
+    const [comments, setComments] = useState<IComments[]>([]);
+    
+    const handleGetComments = async () => {
+        const data = await productsApi.getComments(id_card!);
         console.log(data);
     }
 
     useEffect(() => {
-        handleGetCard();
+        handleGetComments();
     }, []);
+
+    
+
 
     return (
         <div className="flex flex-col w-screen h-screen">
