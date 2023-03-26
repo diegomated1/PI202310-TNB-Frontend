@@ -1,7 +1,7 @@
 
 type BtnProps = {
     text?: string;
-    type?: 'navbar'|'buttonYellow'|'buttonPurple'|'buttonBlue'|'buttonRed'|'buttonGreen'|'buttonlarge'; 
+    type?: 'navbar'|'buttonYellow'|'buttonPurple'|'buttonBlue'|'buttonRed'|'buttonGreen'|'buttonlarge'|'buttonborder'|''; 
 
     onClick?: ()=>void;
 }
@@ -26,6 +26,14 @@ export default function Button({ text, type, onClick } : BtnProps ) {
         )
         case "buttonBlue": return (
             <button onClick={onClick} className="text-white w-full h-full rounded-md bg-buttonBlue hover:bg-sky-900 p-2" >
+                <strong className="text-current">{text}</strong>
+            </button>
+        )
+        case "buttonborder": return (
+            <button onClick={onClick} className="px-4 py-2 font-semibold text-sm bg-white
+             text-slate-700 border border-slate-300 rounded-md shadow-sm outline outline-2 
+             outline-offset-2 outline-blue-500 dark:bg-slate-700 dark:text-slate-200 
+             dark:border-transparent" >
                 <strong className="text-current">{text}</strong>
             </button>
         )

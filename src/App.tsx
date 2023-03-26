@@ -10,6 +10,8 @@ import Login from "./pages/login/login"
 import Register from "./pages/register/register"
 import EditCards from "./pages/edicion_de_cartas/EditCards"
 import CardDetails from "./pages/card_details/cardDetails"
+import Vitrina from "./pages/vitrina/vitrina"
+import Account from "./pages/account/Account"
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path="/game/create" element={<CreateGame/>}/>
         <Route path="/game/lobby/:id_match" element={<Lobby/>}/>
         <Route path="/card/:id_card" element={<CardDetails/>}/>
+        <Route path="/vitrina" element={<Vitrina/>}/>
+        <Route path="/account" element={<Account/>}/>
       </Routes>
     </BrowserRouter>
   )

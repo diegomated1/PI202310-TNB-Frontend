@@ -1,4 +1,4 @@
-import AdminCardsNavBar from "../../components/AdminCardsNavBar";
+import AdminCardsNavBar from "../../components/NavBar";
 import Card from "../../components/Card";
 import Button from "../../components/Button";
 import Icons from "../../components/Icons";
@@ -83,19 +83,18 @@ export default function CardDetails() {
                 </div>
                 <div className="w-[80%] h-full grid grid-cols-2 lg:grid-cols-5">
                     <div className="col-span-2 p-5">
-                        <div className="w-full h-full border border-gray-500 bg-white rounded-lg">
+                        <div className="w-full h-full border bg-white rounded-lg">
                             <div className="p-5">
                                 <h2 className="text-3xl text-center"><strong>Comentario</strong></h2>
                             </div>
                             <div className="p-3 ">
                                 <h3 className="text-xl">Ranking</h3>
                                 <div className="p-3 flex">
-
-                                    <Icons icon="star"></Icons>
-                                    <Icons icon="star"></Icons>
-                                    <Icons icon="star"></Icons>
-                                    <Icons icon="star"></Icons>
-                                    <Icons icon="star"></Icons>
+                                    <Icons.star/>
+                                    <Icons.star/>
+                                    <Icons.star/>
+                                    <Icons.star/>
+                                    <Icons.star/>
                                 </div>
                             </div>
                             <div className="p-3">
@@ -108,7 +107,7 @@ export default function CardDetails() {
                             </div>
                             <div className="p-5 w-full flex">
                                 <div className="w-[10%] p-1">
-                                    <Icons icon="clip"></Icons>
+                                    <Icons.clip/>
                                 </div>
                                 <div className="w-[90%] p-1">
                                     <Button text="Add To Comment" type="buttonlarge" />
@@ -118,24 +117,24 @@ export default function CardDetails() {
                     </div>
                     <div className="col-span-3 p-3">
                         <div className="w-full h-full border border-gray-500 bg-white rounded-lg">
-                            <div className=" border border-spacing-1  border-black">
+                            <div className=" border   border-black">
                                 <div className="p-1 w-full flex">
                                     <div className="w-[90%] p-1">
                                         <h2 className="text-xl p-2"><strong>Usuario1</strong></h2>
                                     </div>
                                     <div className=" flex text-right w-[10%] p-1">
-                                        <Icons icon="edit"></Icons>
-                                        <Icons icon="trash"></Icons>
+                                        <Icons.edit/>
+                                        <Icons.trash/>
                                     </div>
                                 </div>
                                 <div className="p-1">
                                     <h2 className="text-xl p-3">2002-14-34</h2>
                                     <div className="p-3 flex">
-                                        <Icons icon="star"></Icons>
-                                        <Icons icon="star"></Icons>
-                                        <Icons icon="star"></Icons>
-                                        <Icons icon="star"></Icons>
-                                        <Icons icon="star"></Icons>
+                                        <Icons.star/>
+                                        <Icons.star/>
+                                        <Icons.star/>
+                                        <Icons.star/>
+                                        <Icons.star/>
                                     </div>
                                     <div className="p-3">
                                         <label className="p-3"> Es un panda gigante que de manera improbable es elegido como el Guerrero
