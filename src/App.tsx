@@ -9,7 +9,7 @@ import Lobby from "./pages/lobby/Lobby"
 import Login from "./pages/login/login"
 import Register from "./pages/register/register"
 import EditCards from "./pages/edicion_de_cartas/EditCards"
-
+import CardDetails from "./pages/card_details/cardDetails"
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
         <Route path="/game" element={<Game/>}/>
         <Route path="/game/create" element={<CreateGame/>}/>
         <Route path="/game/lobby/:id_match" element={<Lobby/>}/>
+        <Route path="/card/:id_card" element={<CardDetails/>}/>
       </Routes>
     </BrowserRouter>
   )
