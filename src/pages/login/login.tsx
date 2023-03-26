@@ -63,7 +63,7 @@ export default function Login() {
                         </div>
                         <p className="mt-4">{alertlogin}</p>
                         <div className="mt-6 font-light">
-                            <Button text="Iniciar Sesion" type="buttonPurple"/>
+                            <Button.buttonPurple>Iniciar Sesion</Button.buttonPurple>
                         </div>
                         <div className="text-sm text-zinc-700 mt-6">
                             <p>
