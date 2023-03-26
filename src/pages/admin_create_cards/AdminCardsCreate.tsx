@@ -7,7 +7,7 @@ import IHeroe from "../../interfaces/IHeroe";
 import heroeApi from "../../services/heroe.api";
 import ModalReports from "../../components/modals/Reports";
 
-export default function AdminCards() {
+export default function AdminCardsCreate() {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -19,8 +19,6 @@ export default function AdminCards() {
     const handleCreateCard = async (e: FormEvent) => {
         try {
             e.preventDefault();
-            console.log(name);
-            console.log(description);
             var data = await cardApi.insert({ name, description, card_type: cardType, id_hero: heroType, effects: [] }, image!);
             console.log(data);
         } catch (error) {

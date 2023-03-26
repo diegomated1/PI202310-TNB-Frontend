@@ -4,7 +4,7 @@ import Input from "../../components/Input"
 import heroesApi from "../../services/heroe.api";
 import { useState, FormEvent } from "react";
 
-export default function AdminHeroes() {
+export default function AdminHeroesCreate() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState<File>();

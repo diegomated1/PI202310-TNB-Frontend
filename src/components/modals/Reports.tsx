@@ -16,6 +16,7 @@ export default function ModalReports({onClose}:ModalReports){
           className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30 ${isOpen ? '' : 'hidden'}`}
           onClick={onClose}
         >
+            <div className="absolute top-1 right-1 w-20 h-20 rounded-full border border-gray-200 bg-green-100"></div>
             <form className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg p-4 flex flex-col">
                 <div><span className="text-xl"><strong>Reporte de cambios</strong></span></div>
                 <div>

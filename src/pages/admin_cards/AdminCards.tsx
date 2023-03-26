@@ -1,53 +1,42 @@
-import AdminCardsNavBar from "../../components/NavBar"
-import Button from "../../components/Button"
-import Input from "../../components/Input"
+import { useState, FormEvent, useEffect } from "react";
+import Card from "../../components/Card";
+import NavBar from "../../components/NavBar";
+import cardApi from "../../services/card.api";
+import ICard from "../../interfaces/ICard";
+import Pager from "../../components/Pager";
 
-export default function AdminCards(){
-    return(
-        <div className="w-screen h-screen flex flex-wrap flex-col">
-            <AdminCardsNavBar/>
-            <div className="w-full h-[calc(100%-70px)] bg-gray-300 flex justify-center items-center">
-                <div className="w-full h-full bg-gray-300">
-                    <div className="w-full h-20 flex items-center pl-10">
-                        <h1 className="text-4xl md:text-5xl">Edicion cartas Epicas</h1>
-                    </div>
-                    <div className="w-full h-[calc(100%-5rem)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 gap-10">
-                        <div className="col-span-1 flex justify-center items-center">
-                            <div className="border border-black rounded-md w-[300px] h-[440px]">
+export default function AdminCards() {
 
-                            </div>
-                        </div>
-                        <div className="col-span-1 flex flex-col items-center">
-                            <label className="w-[90%] h-10 mb-10">
-                                <strong>Nombre:</strong> <br/>
-                                <Input/>
-                            </label>
-                            <label className="w-[90%] h-10 mb-14">
-                                <strong>Descripcion:</strong>  <br/>
-                                <Input/>
-                            </label>
-                            <Button text="Crear" type={"navbar"}/>
-                        </div>
-                        <div className="col-span-1 flex flex-col">
-                            <div><span className="text-xl"><strong>Reporte de cambios</strong></span></div>
-                            <div><span className="text-gray-500 text-sm" >14/02/2023</span></div>
-                            <div>
-                                <p className="leading-5">
-                                    Ingrese un lenguaje natural a la lista de cambios realizados a esta carta 300 caracteres
-                                </p>
-                            </div><br />
-                            <label className="w-full h-10">
-                                Asunto: <br/>
-                                <Input/>
-                            </label><br /><br />
-                            <label className="w-full h-52">
-                                Descripcion: <br/>
-                                <Input/>
-                            </label><br />
-                        </div>
+    const [cards, setCards] = useState<ICard[]>([]);
+
+    const [parcialCards, setParcialCards] = useState<ICard[]>([]);
+
+    const handlerGetCards = async () => {
+        var data = await cardApi.getAll();
+        setParcialCards(data.slice(0,6));
+        setCards(data);
+    }
+
+    useEffect(() => {
+        handlerGetCards();
+    }, []);
+
+    console.log("hola")
+    return (
+        <div className="w-full h-screen flex flex-col">
+            <NavBar></NavBar>
+            <div className="flex flex-1 overflow-hidden">
+                <div className="flex-1 items-center flex flex-col">
+                <Pager setParcialCards={setParcialCards} cardsArray={cards}></Pager>
+                </div>
+                <div className="flex-[4]">
+                    <div className="h-full grid grid-cols-3 grid-rows-2 gap-3 p-2">
+                        {parcialCards.map((card, id) => (
+                            <Card key={card._id} _id={card._id} name={id.toString()} description={card.description} id_hero={card.id_hero} card_type={card.card_type} price={10} discount={15} obtained={"yes"}></Card>
+                        ))}
                     </div>
                 </div>
             </div>
         </div>
-    ) 
+    )
 }

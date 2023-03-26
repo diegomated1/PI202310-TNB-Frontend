@@ -24,7 +24,7 @@ export default function AdminCardsNavBar() {
                 <span>NEXUS BATTLE</span>
             </div>
             <div className="col-span-1 flex grid-cols-3 text-white justify-end items-center gap-8">
-                <Dropdown options={optionsCard} icon={Icons.card}/>
+                <Dropdown options={optionsCard} icon={Icons.shoppingCart}/>
                 <NavBarBtn icon="shoppingCart" />
                 <NavBarBtn icon="favorites" />
                 <Dropdown options={optionsCard} icon={Icons.profile} />
