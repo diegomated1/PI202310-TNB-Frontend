@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Children, Dispatch, SetStateAction, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import AdminCardsNavBar from "../../components/NavBar";
@@ -57,13 +57,13 @@ export default function CreateGame(){
                             <label><strong>Numero de jugadores:</strong></label>
                             <div className="w-full flex">
                                 <div className="w-8 h-8 mr-2">
-                                    <Button onClick={()=>{setNumberPlayers(2)}} text="2" type={(numberPlayers==2)?'buttonYellow':''}/>
+                                    <BtnNumPlayers number={2} currentNumber={numberPlayers} setNumberPlayers={setNumberPlayers} />
                                 </div>
                                 <div className="w-8 h-8 mr-2">
-                                    <Button onClick={()=>{setNumberPlayers(3)}} text="3" type={(numberPlayers==3)?'buttonYellow':''}/>
+                                    <BtnNumPlayers number={3} currentNumber={numberPlayers} setNumberPlayers={setNumberPlayers} />
                                 </div>
                                 <div className="w-8 h-8">
-                                    <Button onClick={()=>{setNumberPlayers(4)}} text="4" type={(numberPlayers==4)?'buttonYellow':''}/>
+                                    <BtnNumPlayers number={4} currentNumber={numberPlayers} setNumberPlayers={setNumberPlayers} />
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@ export default function CreateGame(){
                         </div>
                         <div className="flex-[2] flex justify-end items-center pr-5">
                             <div className="w-36">
-                                <Button onClick={handleCreateMatch} text="Crear partida"/>
+                                <Button.default onClick={handleCreateMatch}>Crear partida</Button.default>
                                 {(creatingMatch==1) ? (
                                     <span className="w-full flex justify-center">Creando partida...</span>
                                 ) : (
@@ -92,4 +92,21 @@ export default function CreateGame(){
         </div>
     )
 }
+
+interface BtnNumPlayersProps{
+    number:number,
+    currentNumber:number,
+    setNumberPlayers:Dispatch<SetStateAction<number>>
+}
+
+function BtnNumPlayers({number, currentNumber, setNumberPlayers}:BtnNumPlayersProps){
+    return(
+        (number==currentNumber) ? (
+            <Button.buttonYellow onClick={()=>{setNumberPlayers(number)}}>{number}</Button.buttonYellow>
+        ) : (
+            <Button.default onClick={()=>{setNumberPlayers(number)}}>{number}</Button.default>
+        )
+    )
+}
+
 

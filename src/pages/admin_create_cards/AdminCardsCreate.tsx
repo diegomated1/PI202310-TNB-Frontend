@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react"
+import { FormEvent, FormEventHandler, useEffect, useState } from "react"
 import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
 import Input from "../../components/Input"
@@ -9,6 +9,9 @@ import ModalReports from "../../components/modals/Reports";
 
 export default function AdminCardsCreate() {
 
+    /**
+     * Card attributes
+     */
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [cardType, setCardType] = useState('');
@@ -16,19 +19,64 @@ export default function AdminCardsCreate() {
     const [image, setImage] = useState<File>();
     const [heroes, setHeroes] = useState<IHeroe[]>([]);
 
-    const handleCreateCard = async (e: FormEvent) => {
+    /**
+     * Effects of the card
+     */
+    const [effectsAmount, setEffectsAmounst] = useState(0);
+    const [effects, setEffects] = useState<string[]>([]);
+
+    /**
+     * State for open and close report modal
+     */
+    const [modalReportOpen, setModalReportOpen] = useState(false);
+
+    /**
+     * Function handler 
+     */
+    const handleCreateCard = async () => {
         try {
-            e.preventDefault();
-            var data = await cardApi.insert({ name, description, card_type: cardType, id_hero: heroType, effects: [] }, image!);
-            console.log(data);
+            await cardApi.insert({ name, description, card_type: cardType, id_hero: heroType, effects }, image!);
+            alert("Carta creada con exito");
+            window.location.reload();
         } catch (error) {
-            console.log(error);
+            alert("No se pudo crear la carta");
         }
     }
 
+    /**
+     * Fucntion for get all heroes
+     */
     const handleGetHeroes = async () => {
         var data = await heroeApi.get();
         setHeroes(data);
+    }
+
+    /**
+     * Function for set effects state
+     * @param idx index of the effect in the array
+     * @param value new value of the effect
+     */
+    const setEffect = (idx:number, value:string)=>{
+        effects[idx] = value;
+        setEffects([...effects]);
+    }
+
+    /**
+     * Function for add new effect
+     */
+    const addEffect = ()=>{
+        effects.push('');
+        setEffects([...effects]);
+        setEffectsAmounst(amount=>amount+1);
+    }
+
+    /**
+     * Function submit form
+     * @param e 
+     */
+    const handleSubmitForm = (e:FormEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+        setModalReportOpen(true);
     }
 
     useEffect(() => {
@@ -43,7 +91,7 @@ export default function AdminCardsCreate() {
                     <div className="w-full h-20 flex items-center pl-10">
                         <h1 className="text-4xl md:text-5xl">Creacion de cartas</h1>
                     </div>
-                    <form className="w-full h-[calc(100%-5rem)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 gap-10">
+                    <form onSubmit={handleSubmitForm} className="w-full h-[calc(100%-5rem)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 gap-10">
                         <div className="col-span-1 flex justify-center items-center">
                             <div className="border border-black rounded-md w-[300px] h-[440px] flex flex-col items-center">
                                 <img src={(image) ? URL.createObjectURL(image!) : ''}></img>
@@ -61,11 +109,11 @@ export default function AdminCardsCreate() {
                             </div>
                         </div>
                         <div className="col-span-1 flex flex-col items-center">
-                            <label className="w-[90%] h-10 mb-10">
+                            <label className="w-full h-10 mb-10">
                                 <strong>Nombre:</strong> <br />
                                 <Input onChange={(e) => { setName(e.target.value) }} value={name} />
                             </label>
-                            <label className="w-[90%] h-10 mb-14">
+                            <label className="w-full h-10 mb-14">
                                 <strong>Tipo de carta:</strong>  <br/>
                                 <select onChange={(e) => { setCardType(e.target.value) }} className="w-full focus:outline-none h-full rounded-md p-2 shadow-md">
                                     <option value="0"> - </option>
@@ -75,7 +123,7 @@ export default function AdminCardsCreate() {
                                     <option value="epic"> Epica </option>
                                 </select>
                             </label>
-                            <label className="w-[90%] h-10 mb-14">
+                            <label className="w-full h-10 mb-14">
                                 <strong>Heroe al que pertenece:</strong>  <br />
                                 <div className="w-full h-full shadow-xl relative">
                                     <select onChange={(e) => { setheroType(e.target.value) }} className="w-full focus:outline-none h-full rounded-md p-2 shadow-xl">
@@ -88,25 +136,46 @@ export default function AdminCardsCreate() {
                                     </select>
                                 </div>
                             </label>
-                            <Button text="Crear" type="buttonYellow" />
-                        </div>
-                        <div className="col-span-1 flex flex-col items-center">
-                            <label className="w-full h-20">
-                                Descripcion: <br />
+                            <label className="w-full h-40 mb-10">
+                                <strong>Descripcion de la carta: </strong><br />
                                 <textarea
-                                    onChange={(e) => { setDescription(e.target.value) }} defaultValue={description}
+                                    onChange={(e) => { setDescription(e.target.value) }}
                                     className="border rounded-md border-gray-100 w-full h-full max-w-full max-h-full min-w-full min-h-full shadow-xl relative p-2"
                                 />
                             </label><br />
-                            <label className="w-[90%] h-10 mb-10">
-                                <strong>Efecto:</strong> <br />
-                                <Input />
+                            <div className="w-full h-12">
+                                <Button.buttonYellow type="submit">
+                                    Crear carta
+                                </Button.buttonYellow>
+                            </div>
+                        </div>
+                        <div className="col-span-1 flex flex-col items-center">
+                            <label className="w-full h-10 mb-10">
+                                <strong>Efectos:</strong> <br />
+                                {[...Array(effectsAmount)].map((x,i)=>(
+                                    <div key={i} className="w-full h-14 mb-10">
+                                        <textarea
+                                            required
+                                            onChange={(e)=>{setEffect(i, e.target.value)}}
+                                            className="border rounded-md border-gray-100 w-full h-full max-w-full max-h-full min-w-full min-h-full shadow-xl relative p-2"
+                                        />
+                                    </div>
+                                ))}
+                                <div className="w-full h-10">
+                                    <Button.buttonGreen type="button" onClick={addEffect}>
+                                        Añadir efecto
+                                    </Button.buttonGreen>
+                                </div>
                             </label>
                         </div>
                     </form>
                 </div>
             </div>
-            <ModalReports/>
+            <ModalReports 
+                isOpen={modalReportOpen}
+                setIsOpen={setModalReportOpen}
+                onAccept={()=>{handleCreateCard()}}
+            />
         </div>
     )
 }
