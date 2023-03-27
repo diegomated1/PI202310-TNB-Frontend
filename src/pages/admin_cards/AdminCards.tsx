@@ -31,7 +31,7 @@ export default function AdminCards() {
                 <div className="flex-[4] flex-col">
                     <div className="h-full grid grid-cols-3 grid-rows-2 gap-3 p-2">
                         {parcialCards.map((card, id) => (
-                            <Card key={card._id} _id={card._id} name={id.toString()} description={card.description} id_hero={card.id_hero} card_type={card.card_type} price={10} discount={15} obtained={"yes"}></Card>
+                            <Card key={card._id} card={card} price={10} discount={15} obtained={"yes"}></Card>
                         ))}
                     </div>
                 </div>

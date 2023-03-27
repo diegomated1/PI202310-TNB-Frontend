@@ -4,34 +4,38 @@ import NavBar from "../../components/NavBar";
 import cardApi from "../../services/card.api";
 import ICard from "../../interfaces/ICard";
 import Pager from "../../components/Pager";
+import Hero from "../../components/Hero";
+import IHeroe from "../../interfaces/IHeroe";
+import heroeApi from "../../services/heroe.api";
 
-export default function AdminCards() {
+export default function AdminHeroes() {
 
-    const [cards, setCards] = useState<ICard[]>([]);
+    const [heroes, setHeroes] = useState<IHeroe[]>([]);
 
-    const [parcialCards, setParcialCards] = useState<ICard[]>([]);
+    const [parcialHeroes, setParcialHeroes] = useState<IHeroe[]>([]);
 
-    const handlerGetCards = async () => {
-        var data = await cardApi.getAll();
-        setParcialCards(data.slice(0,6));
-        setCards(data);
+    const handlerGetHeroes = async () => {
+        var data = await heroeApi.getAll();
+        setParcialHeroes(data.slice(0,6));
+        setHeroes(data);
     }
 
     useEffect(() => {
-        handlerGetCards();
+        handlerGetHeroes();
     }, []);
+
 
     return (
         <div className="w-full h-screen flex flex-col">
             <NavBar></NavBar>
             <div className="flex flex-1 overflow-hidden">
                 <div className="flex-1 items-center flex flex-col">
-                    <Pager setParcialCards={setParcialCards} cardsArray={cards}></Pager>
+                    
                 </div>
                 <div className="flex-[4] flex-col">
                     <div className="h-full grid grid-cols-3 grid-rows-2 gap-3 p-2">
-                        {parcialCards.map((card, id) => (
-                            <Card key={card._id} _id={card._id} name={id.toString()} description={card.description} id_hero={card.id_hero} card_type={card.card_type} price={10} discount={15} obtained={"yes"}></Card>
+                        {parcialHeroes.map((hero, id) => (
+                            <Hero key={hero._id} heroe={hero} discount={10} price={20}></Hero>
                         ))}
                     </div>
                 </div>

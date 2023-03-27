@@ -51,6 +51,17 @@ class HeroesApi{
         });
     }
 
+    getAll(): Promise<IHeroe[]> {
+        return new Promise(async (res, rej) => {
+            try {
+                const { data } = await axios.get(`${this.baseUrl}/heroes`);
+                res(data.data);
+            } catch (error) {
+                rej(error);
+            }
+        });
+    }
+
 }
 
 export default new HeroesApi();
