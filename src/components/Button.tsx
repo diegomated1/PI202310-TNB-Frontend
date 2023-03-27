@@ -1,8 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 
 export interface BtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    btnType?: 'navbar'|'buttonYellow'|'buttonPurple'|'buttonBlue'|'buttonRed'|'buttonGreen'|'buttonlarge'|'buttonborder'|'';
-    onClick?: ()=>void;
 }
 
 export type Button = (props:BtnProps)=>JSX.Element
