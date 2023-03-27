@@ -13,6 +13,7 @@ import Register from "./pages/register/register"
 import CardDetails from "./pages/card_details/cardDetails"
 import Vitrina from "./pages/vitrina/vitrina"
 import Account from "./pages/account/Account"
+import CreateDeck from "./pages/create_deck/CreateDeck"
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/admin/heroes/:id_hero" element={<div>Hero edit</div>}/>
 
         <Route path="/game" element={<Game/>}/>
+        <Route path="/game/create/deck" element={<CreateDeck/>}/>
         <Route path="/game/lobby/create" element={<CreateGame/>}/>
         <Route path="/game/lobby/:id_match" element={<Lobby/>}/>
         
