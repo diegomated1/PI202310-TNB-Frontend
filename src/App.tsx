@@ -13,6 +13,7 @@ import Register from "./pages/register/register"
 import CardDetails from "./pages/card_details/cardDetails"
 import Vitrina from "./pages/vitrina/vitrina"
 import Account from "./pages/account/Account"
+import AdminHeroes from "./pages/admin_heroes/AdminHeroes"
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         <Route path="/admin/cards/create" element={<AdminCardsCreate/>}/>
         <Route path="/admin/cards/:id_card" element={<AdminCardsEdit/>}/>
 
-        <Route path="/admin/heroes" element={<div>Hero grilla</div>}/>
+        <Route path="/admin/heroes" element={<AdminHeroes/>}/>
         <Route path="/admin/heroes/create" element={<AdminHeroesCreate/>}/>
         <Route path="/admin/heroes/:id_hero" element={<div>Hero edit</div>}/>
 
