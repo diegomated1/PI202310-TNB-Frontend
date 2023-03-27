@@ -59,9 +59,9 @@ export default function Card({ heroe, price, discount, obtained, onClick1, onCli
                                 <h1 className="font-bold text-xl">{heroe.attack_range}</h1>
                             </div>
                             <div className="flex">
-                            <Icons.ramdomAttack></Icons.ramdomAttack>
-                            <Icons.ramdomDamage></Icons.ramdomDamage>
-                            <h1 className="font-bold text-xl">{heroe.damage_range}</h1>
+                                <Icons.ramdomAttack></Icons.ramdomAttack>
+                                <Icons.ramdomDamage></Icons.ramdomDamage>
+                                <h1 className="font-bold text-xl">{heroe.damage_range}</h1>
                             </div>
                         </div>
                     </div>
