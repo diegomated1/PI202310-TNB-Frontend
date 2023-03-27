@@ -30,23 +30,14 @@ class CardsApi {
     modifyCard(card: ICard, image: File, _id: string) {
         return new Promise(async (res, rej) => {
             try {
-                console.log(image);
-
                 const formData = new FormData();
-                if (image != undefined) {
-                    formData.append('card_image', image);
-                }
-                console.log(card.description)
+                formData.append('card_image', image);
                 formData.append('name', card.name);
                 formData.append('description', card.description);
                 formData.append('card_type', card.card_type.toString());
                 formData.append('id_hero', card.id_hero);
-                console.log(formData)
-                const { data } = await axios.put(`${this.baseUrl}/cards/${_id}`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                });
+                formData.append('effects', JSON.stringify(card.effects));
+                const { data } = await axios.put(`${this.baseUrl}/cards/${_id}`, formData);
                 res(data.data);
             } catch (error) {
                 rej(error);
