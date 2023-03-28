@@ -65,6 +65,9 @@ export default function Login() {
                             <Button text="Iniciar Sesion" type="buttonPurple"/>
                         </div>
                         <div className="text-sm text-zinc-700 mt-6">
+
+
+                            
                             <p>
                                 No tienes una cuenta? <a onClick={()=>{navigate('/register')}} href="" className="border-b border-buttonYellow">Registrarse</a>
                             </p>
