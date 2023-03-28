@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import AdminCardsNavBar from "../../components/NavBar";
 import useLobby from "../../hooks/useLobby";
+import Chat from "../../components/Chat";
 import Player from "./components/Player";
 import WaitingPlayer from "./components/WaitingPlayer";
 
@@ -70,7 +71,7 @@ export default function Lobby(){
                     </div>
                 </div>
                 <div className="w-96 h-full bg-red-100 flex justify-center items-center">
-                    comentarios
+                    <Chat/>
                 </div>
             </div>
         </div>

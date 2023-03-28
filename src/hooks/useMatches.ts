@@ -14,7 +14,7 @@ import useSocket from "./useSocket";
 export default function useMatches(){
     
     // socket that allow to connect server 'game_create'
-    const socket = useSocket("ws://localhost:3000");
+    const socket = useSocket("ws://192.168.1.22:3000");
     // useAuth for get user session
     const {user} = useAuth();
 
