@@ -1,10 +1,12 @@
-import { useState } from "react";
-import Buttons from "../../components/Button";
+import { useEffect, useState } from "react";
 import DeckProgress from "../../components/DeckProgress";
+import GridDeck from "../../components/GridDeck";
 import Icons from "../../components/Icons";
 import NavBar from "../../components/NavBar";
 import Pager from "../../components/Pager";
 import ICard from "../../interfaces/ICard";
+import IHeroe from "../../interfaces/IHeroe";
+import cardApi from "../../services/card.api";
 
 
 export default function CreateDeck() {
@@ -12,6 +14,27 @@ export default function CreateDeck() {
   const [parcialCards, setParcialCards] = useState<ICard[]>([]);
 
   const [cards, setCards] = useState<ICard[]>([]);
+
+  const [heroes, setHeroes] = useState<IHeroe[]>([]);
+
+  const handlerGetCards = async () => {
+        var data = await cardApi.getAll();
+        setParcialCards(data.slice(0,6));
+        setCards(data);
+    }
+
+    const handlerGetHeroes = async () => {
+      var data = await cardApi.getAll();
+      setParcialCards(data.slice(0,6));
+      setCards(data);
+  }
+
+  useEffect(() => {
+    handlerGetCards();
+  }, []);
+
+
+
 
   return (
 
@@ -35,7 +58,7 @@ export default function CreateDeck() {
           </div>
         </div>
         <div className="flex-[4]">
-
+          <GridDeck parcialCards = {parcialCards}></GridDeck>
         </div>
       </div>
     </div>
