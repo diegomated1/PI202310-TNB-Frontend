@@ -5,6 +5,7 @@ import Button from "../../components/Button"
 import Input from "../../components/Input"
 import userApi from "../../services/user.api";
 import Pager from "../../components/Pager";
+import Icons from "../../components/Icons";
 
 export default function Login() {
     const navigate = useNavigate()
@@ -54,15 +55,15 @@ export default function Login() {
                         </h2>
                         <div className="w-[80%] justify-center flex flex-col mt-10">
                             <p className="mb-2">Correo Electronico:</p>
-                            <Input placeholder="Correo electronico" inputType="email" onChange={setEmail}/>
+                            <Input placeholder="Correo electronico" type={'email'} onChange={(e)=>{setEmail(e.target.value)}}/>
                         </div>
                         <div className="w-[80%] justify-center flex flex-col mt-4">
                             <p className="mb-2">Contraseña:</p>
-                            <Input placeholder="Contraseña" inputType={typeInput} icon="eye" onClick={showPassword} onChange={setPassword}/>
+                            <Input placeholder="Contraseña" type={typeInput} icon={Icons.eye} onClickIcon={showPassword} onChange={(e)=>{setPassword(e.target.value)}}/>
                         </div>
                         <p className="mt-4">{alertlogin}</p>
                         <div className="mt-6 font-light">
-                            <Button text="Iniciar Sesion" type="buttonPurple"/>
+                            <Button.buttonPurple>Iniciar Sesion</Button.buttonPurple>
                         </div>
                         <div className="text-sm text-zinc-700 mt-6">
 

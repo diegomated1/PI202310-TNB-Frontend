@@ -3,6 +3,6 @@ export default interface ICard{
     name: string,
     description: string,
     id_hero: string,
-    card_type: Number,
-    effects: []
+    card_type: string,
+    effects: string[]
 }

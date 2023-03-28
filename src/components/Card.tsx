@@ -1,121 +1,63 @@
-import ReactCardFlip from 'react-card-flip'
-import React, { Fragment, useState } from 'react'
-
+import { useEffect, useState } from "react";
+import ICard from "../interfaces/ICard";
+import IHeroe from "../interfaces/IHeroe";
+import heroeApi from "../services/heroe.api";
+import Icons from "./Icons";
 
 type CardProps = {
-    _id?:string;
-    name?:string;
-    description?:string;
-    id_hero?:string;
-    card_type?:number;
-    obtenida?:string;
 
-    precio?:number;
-    descuento?:number;
+    card:ICard;
 
-    onClick2?: ()=>void;
-    onClick3?: ()=>void;
+    obtained?: string;
+    price?: number;
+    discount?: number;
+
+    onClick1?: () => void;
+    onClick2?: () => void;
+    onClick3?: () => void;
 }
 
-function Card(props: any) {
-    const [isFlipped, setIsFlipped] = useState(false)
-    const handleclick = () => {
-        setIsFlipped(!isFlipped)
+export default function Card({card, price, discount, obtained, onClick1, onClick2, onClick3 }: CardProps) {
+
+    const [image, setImage] = useState<File>();
+    const [heroe, setHeroe] = useState<IHeroe>();
+
+    const handlerGetHeroes = async (id: string) => {
+        var data = await heroeApi.getById(id)
+        console.log(data)
+        setHeroe(data)
     }
+
+    useEffect(() => {
+        handlerGetHeroes(card.id_hero);
+    }, []);
+
     return (
-        <ReactCardFlip isFlipped={isFlipped} containerClassName='card' flipDirection="horizontal" >
-            <div className="front">
-                <div className="clash-card barbarian pattern2">
-                    <div className="bookmark"></div>
-                    <div className="clash-card__image">
-                        <img className="clash-card__barbarian" src={'../../public/img/barbaro.jpg'} alt="Barbarian" />
-                    </div>
-                    <div className='content justify-around flex flex-col'>
-                        <div className="clash-card__unit-name text-3xl ">Tank warrior</div>
-
-                        <div className='clash-card__stats grid grid-cols-3 gap-2'>
-                            <div className='flex justify-center align-middle'>
-                                <img className='h-9 mr-2' src='../../public/img/crown.png' />
-                                <p className='font-bold text-3xl'>11</p>
-                            </div>
-                            <div className='flex justify-center align-middle '>
-                                <img className='h-9 mr-2 ' src='../../public/img/green-love.png' />
-                                <p className='font-bold text-3xl'>11</p>
-                            </div>
-                            <div className='flex justify-center align-middle'>
-                                <img className='h-9 mr-2' src='../../public/img/wooden.png' />
-                                <p className='font-bold text-3xl'>11</p>
-                            </div>
-                            <div className='grid grid-cols-2 justify-around  align-middle col-span-3 flex-row'>
-                                <div className='flex justify-center'>
-                                    <img className='h-9 mr-2' src='../../public/img/sword.png' />
-                                    <p className='font-bold text-3xl'>(1d6)</p>
-                                </div>
-                                <div className='flex justify-center'>
-                                    <img className='h-9 mr-2' src='../../public/img/swords.png' />
-                                    <p className='font-bold text-3xl'>110+(1d6)</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='flex flex-row justify-center mt-1 relative' >
-                            <div className='pattern1 cuerda absolute' />
-                            <div className='placa '>
-                                <div className='flex flex-row items-center'>
-                                    <p className='font-bold text-3xl line-through pl-1 pr-1'>
-                                        $50.000
-                                    </p>
-                                    <p className='text-xl align-middle pr-1 font-bold'>
-                                        40.000
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='card-footer pattern4 '>
-                        <button id='btn-fav'>
-                            <i className="fa-solid fa-regular fa-heart"></i>
-                        </button>
-                        <button id='btn-car' >
-                            <i className="fa-solid fa-cart-shopping"></i>
-                        </button>
-                        <button id='btn-rotate' className='justify-center align-middle' onClick={handleclick}>
-                            <i className="fa-solid fa-rotate"></i>
-                        </button>
-                    </div>
+        <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md border-solid border-red-500 border-2">
+            <figure className="relative h-[40%] w-full shadow-md">
+                <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `${import.meta.env.VITE_API_HEROES_URL}/images/cards/${card._id}`} />
+                <div className="absolute top-0 left-0">
+                    {Icons[card.card_type!]({})}
+                </div>
+                <div className="absolute top-0 right-0">
+                    {price && <div className="flex text-white"><h1>{price}</h1><Icons.currency/></div>}
+                </div>
+                <div className="absolute top-[80%] left-0">
+                    {(heroe && heroe.name && heroe.name in Icons) ? Icons[heroe.name]({}) : ""}
+                </div>
+                <div className="absolute top-[80%] right-0">
+                    {discount && <div className="flex text-white"><h1>{discount}</h1><Icons.discount/></div>}
+                </div>
+            </figure>
+            <div className="h-[45%]  w-full pt-2 px-2">
+                <div className="flex flex-col justify-evenly h-full bg-teal-900 px-2 rounded-md overflow-hidden border-2 border-red-500 shadow-xl text-lime-700">
+                    <h1 className="font-bold text-xl border-b-2 border-red-500">{card.name}</h1>
+                    <h1 className="text-sm font-semibold italic">{card.description}</h1>
                 </div>
             </div>
-            <div className='back'>
-                <div className="clash-card barbarian pattern2">
-
-                    <div className="clash-card__unit-name">Description</div>
-                    <div className="clash-card__unit-description">
-                        Es un panda gigante que de manera improbable es elegido como el Guerrero
-                        Dragón. Él es hijo adoptivo del Sr. Ping, y es uno de los estudiantes del
-                        maestro Shifu. La profecía se refiere a Po como el Guerrero Dragón o guerrero
-                        de blanco y negro.Es un panda gigante que de manera improbable es elegido
-                        como el Guerrero Dragón. Él es hijo adoptivo del Sr. Ping, y es uno de
-                        los estudiantes del maestro Shifu. La profecía se refiere a Po como el
-                        Guerrero Dragón o guerrero de blanco y negro.Es un panda gigante que de
-                        manera improbable es elegido como el Guerrero Dragón. Él es hijo adoptivo
-                        del Sr. Ping, y es uno de los estudiantes del maestro Shifu. La profecía
-                        se refiere a Po como el Guerrero Dragón o guerrero de blanco y negro.
-                    </div>
-                    <div className='card-footer pattern4'>
-                        <button id='btn-fav'>
-                            <i className="fa-sharp fa-regular fa-heart "></i>
-                        </button>
-                        <button id='btn-car'>
-                            <i className="fa-solid fa-cart-shopping"></i>
-                        </button>
-                        <button id='btn-rotate' onClick={handleclick}>
-                            <i className="fa-solid fa-rotate"></i>
-                        </button>
-                    </div>
-                </div>
+            <div className="h-[15%] w-full flex justify-evenly items-center">
+                {obtained && <div className="flex text-white"><Icons.wishlist/></div>}
             </div>
-
-        </ReactCardFlip>
+        </div>
     )
 }
-
-export default Card

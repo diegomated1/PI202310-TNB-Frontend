@@ -4,6 +4,7 @@ import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
 import Input from "../../components/Input"
 import userApi from "../../services/user.api";
+import Icons from "../../components/Icons";
 
 export default function Register() {
     const navigate = useNavigate()
@@ -64,7 +65,7 @@ export default function Register() {
                         </div>
                         <p className="mt-4">{alertRegister}</p>
                         <div className="mt-3 font-light">
-                            <Button text="Iniciar Sesion" type="buttonPurple"/>
+                            <Button.buttonPurple>Registrarse</Button.buttonPurple>
                         </div>
                         <div className="text-sm text-zinc-700 mt-3">
                             <p>
