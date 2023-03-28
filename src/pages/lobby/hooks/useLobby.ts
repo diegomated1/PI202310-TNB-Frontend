@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import IMatch from "../interfaces/IMatch";
-import useAuth from "./useAuth";
-import useSocket from "./useSocket";
+import IMatch from "../../../interfaces/IMatch";
+import useAuth from "../../../hooks/useAuth";
+import useSocket from "../../../hooks/useSocket";
 
 /**
  * Custom hook for managing lobby.
  * @param {string?} id_match id of the match for get info
- * @returns A tuple containing match info (players, ias, bet, etc.) and a function to leave the lobby.
+ * @returns A tuple containing match info (players, ias, bet, etc.), function to leave the lobby and function to start match.
  * The first element is the match info as an IMatch object, null if the match is not founded or user is not in the match, and undefined if it hasn't been retrieved yet.
  * The second element is a function that allows the user to leave the lobby.
+ * Thi third element is a function that allow the owner to start match
  */
-export default function useLobby(id_match?:string):[IMatch|null|undefined, ()=>void]{
+export default function useLobby(id_match?:string):[IMatch|null|undefined, ()=>void, (idGame:string)=>void, string|undefined]{
 
     // socket that allow to connect server 'game_create'
     const socket = useSocket("ws://localhost:3000");
@@ -19,6 +20,9 @@ export default function useLobby(id_match?:string):[IMatch|null|undefined, ()=>v
 
     // state for almacening match info (players, ias, bet, etc.)
     const [match, setMatch] = useState<IMatch|null|undefined>(undefined);
+
+
+    const [tokenMath, setTokenMath] = useState<string|undefined>();
 
     useEffect(()=>{
         if(id_match===undefined){
@@ -55,7 +59,12 @@ export default function useLobby(id_match?:string):[IMatch|null|undefined, ()=>v
                 }
             }
 
+            function matchStart(token:string){
+                setTokenMath(token);
+            }
+
             // Events that this custom hook listens to
+            socket.on('match:start', matchStart);
             socket.on('match:get:one', matchGet);
             socket.on('match:user:join', matchUserJoin);
             socket.on('match:user:leave', matchUserLeave);
@@ -65,6 +74,7 @@ export default function useLobby(id_match?:string):[IMatch|null|undefined, ()=>v
 
             // Clean up function to remove the event listener when the component unmounts.
             return () => {
+                socket.off('match:start', matchStart);
                 socket.off('match:get', matchGet);
                 socket.off('match:user:join', matchUserJoin);
                 socket.off('match:user:leave', matchUserLeave);
@@ -81,7 +91,16 @@ export default function useLobby(id_match?:string):[IMatch|null|undefined, ()=>v
         }
     }
 
-    return [match, matchLeave]
+    /**
+     * Function to start round
+     */
+    function start(idGame:string){
+        if(socket && user && id_match){
+            socket.emit('match:start', id_match, idGame);
+        }
+    }
+
+    return [match, matchLeave, start, tokenMath]
 }
 
 

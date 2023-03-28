@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import AdminCardsNavBar from "../../components/NavBar";
 import AddPlayerSquare from "./components/AddPlayerSquare";
-import useMatches from "../../hooks/useMatches";
+import useMatches from "./hooks/useMatches";
 import { useNavigate } from "react-router";
 
 /**
@@ -23,10 +23,8 @@ export default function CreateGame(){
      * Handler function for creating a new match
      */
     const handleCreateMatch = ()=>{
-        if(true){
-            setCreatingMatch(1);
-            matches.createMatch(numberPlayers, ias, bet);
-        }
+        setCreatingMatch(1);
+        matches.createMatch(numberPlayers, ias, bet);
     }
 
     /**
@@ -74,8 +72,8 @@ export default function CreateGame(){
                             ))}
                         </div>
                         <div className="flex-[2] flex justify-end items-center pr-5">
-                            <div className="w-36">
-                                <Button.default onClick={handleCreateMatch}>Crear partida</Button.default>
+                            <div className="w-36 h-10">
+                                <Button.buttonYellow onClick={handleCreateMatch}>Crear partida</Button.buttonYellow>
                                 {(creatingMatch==1) ? (
                                     <span className="w-full flex justify-center">Creando partida...</span>
                                 ) : (

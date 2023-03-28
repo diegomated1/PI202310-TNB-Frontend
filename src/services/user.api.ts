@@ -22,6 +22,7 @@ class UserApi{
                 });
                 res(data.data);
             }catch(error){
+                console.log(error);
                 rej(error);
             }
         });
