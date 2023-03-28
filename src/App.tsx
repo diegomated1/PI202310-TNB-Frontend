@@ -32,10 +32,10 @@ function App() {
         <Route path="/admin/heroes/create" element={<AdminHeroesCreate/>}/>
         <Route path="/admin/heroes/:id_hero" element={<div>Hero edit</div>}/>
 
-        <Route path="/game" element={<Game/>}/>
         <Route path="/game/create/deck" element={<CreateDeck/>}/>
         <Route path="/game/lobby/create" element={<CreateGame/>}/>
         <Route path="/game/lobby/:id_match" element={<Lobby/>}/>
+        <Route path="/game/:id_game" element={<Game/>}/>
         
         <Route path="/card/:id_card" element={<CardDetails/>}/>
         <Route path="/vitrina" element={<Vitrina/>}/>

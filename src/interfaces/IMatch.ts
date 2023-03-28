@@ -4,6 +4,6 @@ export default interface IMatch{
     id_owner: string,
     max_number_players: number,
     ias: number,
-    players: {id_user: string, bet: number}[],
+    players: {id_user: string, id_hero: string}[],
     min_bet: number
 }

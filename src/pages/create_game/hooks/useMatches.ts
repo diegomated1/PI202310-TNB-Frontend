@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import IMatch from "../interfaces/IMatch";
-import useAuth from "./useAuth";
-import useSocket from "./useSocket";
+import IMatch from "../../../interfaces/IMatch";
+import useAuth from "../../../hooks/useAuth";
+import useSocket from "../../../hooks/useSocket";
 
 /**
  * Custom hook for managing matches.
