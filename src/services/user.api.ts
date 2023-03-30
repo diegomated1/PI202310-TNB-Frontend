@@ -10,7 +10,7 @@ class UserApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = 'http://192.168.1.22:3002';
+        this.baseUrl = import.meta.env.VITE_API_USERS_URL;
     }
 
     auth(){

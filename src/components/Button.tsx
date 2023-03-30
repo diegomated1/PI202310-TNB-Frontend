@@ -20,17 +20,17 @@ export interface IButton {
 
 const Buttons:IButton = {
     "navbar": (props)=>(
-        <button {...props} className="text-white w-full h-full rounded-lg border-2 border-white justify-center items-center" >
+        <button {...props} className="text-white w-auto p-2 h-full rounded-lg border-2 border-white justify-center items-center" >
             <strong className="text-current" >{props.children}</strong>
         </button>
     ),
     "buttonYellow": (props)=>(
-        <button {...props} className="w-full h-full rounded-md bg-buttonYellow hover:bg-amber-500" >
+        <button {...props} className="w-full h-ful p-2 rounded-md bg-buttonYellow hover:bg-amber-500" >
             <strong>{props.children}</strong>
         </button>
     ),
     "buttonPurple": (props)=>(
-        <button {...props} className="text-white w-full h-full rounded-md bg-buttonPurple hover:bg-purple-700" >
+        <button {...props} className="text-white w-full h-full p-2 rounded-md bg-buttonPurple hover:bg-purple-700" >
             <strong className="text-current">{props.children}</strong>
         </button>
     ),
@@ -53,7 +53,7 @@ const Buttons:IButton = {
         </button>
     ),
     "buttonGreen": (props)=>(
-        <button {...props} className="text-white w-full h-full rounded-md bg-buttonGreen hover:bg-lime-900" >
+        <button {...props} className="text-white w-full h-full p-2 rounded-md bg-buttonGreen hover:bg-lime-900" >
             <strong className="text-current">{props.children}</strong>
         </button>
     ),
@@ -63,7 +63,7 @@ const Buttons:IButton = {
         </button>
     ),
     "default": (props)=>(
-        <button {...props} className="w-full h-full rounded-md border-2 border-gray-500 bg-gray-300 hover:bg-gray-50">
+        <button {...props} className="w-full h-full rounded-md p-2 border-2 border-gray-500 bg-gray-300 hover:bg-gray-50">
             <strong>{props.children}</strong>
         </button>
     ),
