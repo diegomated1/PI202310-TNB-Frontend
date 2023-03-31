@@ -4,7 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+<<<<<<< HEAD
     "dev": "vite --host 172.20.10.2",
+=======
+    "dev": "vite --host 192.168.1.8",
+>>>>>>> 872a4d47640e822131206f387d98fdbf7cc664da
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
