@@ -7,13 +7,13 @@ import * as io from 'socket.io-client';
  * @param {string} url The URL of the socket server to connect to.
  * @returns {io.Socket|null} The socket instance or null if it has not been initialized yet.
  */
-export default function useSocket(url?:string){
+export default function useSocket(url?:string, opts?:Partial<io.ManagerOptions & io.SocketOptions>){
     const [socket, setSocket] = useState<io.Socket|null>(null);
 
     useEffect(() => {
         if(url){
             // Creates a new socket instance and sets it to the state.
-            const newSocket = io.connect(url);
+            const newSocket = io.connect(url, opts);
             setSocket(newSocket);
 
             // Disconnects the socket when the component using the hook unmounts.
