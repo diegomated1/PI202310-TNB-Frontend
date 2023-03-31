@@ -15,6 +15,9 @@ import Vitrina from "./pages/vitrina/vitrina"
 import Account from "./pages/account/Account"
 import AdminHeroes from "./pages/admin_heroes/AdminHeroes"
 import CreateDeck from "./pages/create_deck/CreateDeck"
+import CreateAuction from "./pages/auctions/create/CreateAuction"
+import Auctions from "./pages/auctions/auctions/Auctions"
+import Auction from "./pages/auctions/auction/Auction"
 
 function App() {
   return (
@@ -40,6 +43,11 @@ function App() {
         <Route path="/card/:id_card" element={<CardDetails/>}/>
         <Route path="/vitrina" element={<Vitrina/>}/>
         <Route path="/account" element={<Account/>}/>
+
+        <Route path="/auctions"  element={<Auctions/>} />
+        <Route path="/auctions/:id_card"  element={<Auction/>} />
+        <Route path="/auctions/create"  element={<CreateAuction/>} />
+
       </Routes>
     </BrowserRouter>
   )
