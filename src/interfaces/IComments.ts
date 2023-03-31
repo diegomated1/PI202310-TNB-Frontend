@@ -1,5 +1,5 @@
 export default interface IComments{
-    id_usuario: number,
+    id_usuario: string,
     Valoracion: number,
     id_comentario:number,
     comentario: string,
