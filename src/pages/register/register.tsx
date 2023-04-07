@@ -53,15 +53,15 @@ export default function Register() {
                         </h2>
                         <div className="w-[80%] justify-center flex flex-col mt-5">
                             <p className="mb-2">Username:</p>
-                            <Input placeholder="Username" inputType="text" onChange={(e)=>{setUsername(e.target.value)}}/>
+                            <Input placeholder="Username" onChange={(e)=>{setUsername(e.target.value)}}/>
                         </div>
                         <div className="w-[80%] justify-center flex flex-col mt-3">
                             <p className="mb-2">Correo Electronico:</p>
-                            <Input placeholder="Correo Electronico" inputType="email" onChange={(e)=>{setEmail(e.target.value)}}/>
+                            <Input placeholder="Correo Electronico"  onChange={(e)=>{setEmail(e.target.value)}}/>
                         </div>
                         <div className="w-[80%] justify-center flex flex-col mt-3">
                             <p className="mb-2">Contraseña:</p>
-                            <Input placeholder="Contraseña" inputType={typeInput} icon="eye" onClick={showPassword} onChange={(e)=>{setPassword(e.target.value)}}/>
+                            <Input type={typeInput} placeholder="Contraseña" onClickIcon={showPassword} onChange={(e)=>{setPassword(e.target.value)}} icon={Icons.eye}/>
                         </div>
                         <p className="mt-4">{alertRegister}</p>
                         <div className="mt-3 font-light">

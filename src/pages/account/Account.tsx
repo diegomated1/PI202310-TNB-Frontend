@@ -6,8 +6,6 @@ import Icons from "../../components/Icons";
 
 
 export default function Account() {
-
-
     const [showContainer, setShowContainer] = useState<{ [key: number]: boolean }>({});
 
     const handleIconClick = (id: number) => {
@@ -41,8 +39,9 @@ export default function Account() {
                     </div>
                 </div>
                 <div className="flex border-b justify-evenly items-center p-4">
-                    <Button type={"buttonborder"} text="Cuenta" onClick={mostrarMenu1}></Button>
-                    <Button type={"buttonborder"} text="Banco" onClick={mostrarMenu2}></Button>
+                    
+                    <Button.buttonBorder onClick={mostrarMenu1}>Cuenta</Button.buttonBorder>
+                    <Button.buttonBorder onClick={mostrarMenu2}>Banco</Button.buttonBorder>
                 </div>
                 <div className="flex  flex-1">
                     <div className="flex w-[40%] flex-col">

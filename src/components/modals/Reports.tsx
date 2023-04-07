@@ -45,8 +45,7 @@ export default function ModalReports({isOpen, setIsOpen, onAccept, onClose}:Moda
           className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30 ${isOpen ? '' : 'hidden'}`}
         >
             <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg p-4 flex flex-col">
-                <button
-                    onClick={handleClose}
+                <button onClick={handleClose}
                     className="absolute top-1 right-1 w-8 h-8 border border-gray-200 bg-gray-300 hover:bg-gray-200 flex justify-center items-center">
                     <Icons.x/>
                 </button>

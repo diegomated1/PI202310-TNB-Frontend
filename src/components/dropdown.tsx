@@ -35,10 +35,10 @@ export default function Dropdown(props: Dropdownprops) {
         }`}
       >
         {props.options.map((option, index) => (
-          <div className="flex">
+          <div className="flex" key={index}>
             <a
               onMouseOut={toggleDropdownof}
-              key={option.text}
+              
               href="#"
               className=" px-2 py-2 w-36 text-gray-200 rounded hover:bg-slate-700 hover:underline"
               onClick={option.onClick}
