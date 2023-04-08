@@ -12,6 +12,7 @@ import EditCards from "./pages/edicion_de_cartas/EditCards"
 import CardDetails from "./pages/card_details/cardDetails"
 import Vitrina from "./pages/vitrina/vitrina"
 import Account from "./pages/account/Account"
+import Wishlist from "./pages/wishlist/favorites"
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
         <Route path="/game/lobby/:id_match" element={<Lobby/>}/>
         <Route path="/card/:id_card" element={<CardDetails/>}/>
         <Route path="/vitrina" element={<Vitrina/>}/>
-        <Route path="/account" element={<Account/>}/>
+        <Route path="/account" element={<Account/>}/>.
+        <Route path="/wishlist" element={<Wishlist/>}/>
       </Routes>
     </BrowserRouter>
   )

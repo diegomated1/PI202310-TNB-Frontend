@@ -46,6 +46,40 @@ class ProductsApi {
         });
     }
 
+    addListFavorites(id_producto: string): void {
+        // Crear una estructura de datos para almacenar los productos en favoritos
+        let favoriteProducts: { [key: string]: IProduct } = {};
+
+        // Función para agregar un producto a la lista de favoritos
+        const addFavoriteProduct = (id: string) => {
+            this.getProductById(id).then((product: IProduct) => {
+                favoriteProducts[id] = product;
+            }).catch((error: any) => {
+                console.log(`Error al agregar el producto ${id} a la lista de favoritos: ${error}`);
+            });
+        };
+
+        // Función para eliminar un producto de la lista de favoritos
+        const removeFavoriteProduct = (id: string) => {
+            delete favoriteProducts[id];
+        };
+
+        // Función para obtener la lista de productos que están en favoritos
+        const getFavoriteProducts = (): { [key: string]: IProduct } => {
+            return favoriteProducts;
+        };
+
+        // Agregar el producto a la lista de favoritos
+        addFavoriteProduct(id_producto);
+
+        // Obtener la lista de productos que están en favoritos
+        const favoriteProductsList = getFavoriteProducts();
+
+        console.log('Lista de productos en favoritos:');
+        console.log(favoriteProductsList);
+    }
+
+
     /*insert(comment:ISetComment,idusuario:id_usuario, image:File){
         return new Promise(async(res, rej)=>{
             try{
