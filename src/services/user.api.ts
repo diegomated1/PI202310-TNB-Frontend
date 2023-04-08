@@ -11,7 +11,6 @@ class UserApi{
     baseUrl: string
     constructor(){
         this.baseUrl = import.meta.env.VITE_API_USERS_URL;
-        console.log(this.baseUrl);
     }
 
     auth(){

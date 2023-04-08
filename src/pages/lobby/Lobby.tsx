@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import AdminCardsNavBar from "../../components/NavBar";
 import useLobby from "../../hooks/useLobby";
+import Chat from "../../components/Chat";
 import Player from "./components/Player";
 import WaitingPlayer from "./components/WaitingPlayer";
 
@@ -33,7 +34,7 @@ export default function Lobby(){
                         <div className="flex-1 flex justify-between">
                             <h1 className="text-3xl font-black">Lobby</h1>
                             <div className="h-10 w-20">
-                                <Button onClick={handleLeave} text="Salir" type="buttonYellow"/>
+                                <Button.buttonYellow onClick={handleLeave}>Salir</Button.buttonYellow>
                             </div>
                         </div>
                         <div className="flex-1">
@@ -64,13 +65,13 @@ export default function Lobby(){
                         )}
                         <div className="flex-1 flex justify-end items-center pr-5">
                             <div className="w-36">
-                                <Button text="Iniciar partida"/>
+                                <Button.default>Iniciar partida</Button.default>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="w-96 h-full bg-red-100 flex justify-center items-center">
-                    comentarios
+                    <Chat/>
                 </div>
             </div>
         </div>
