@@ -126,7 +126,7 @@ export default function Account() {
                                         <h1 className="text-xl p-1">
                                             Mi banco
                                         </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(2)}>
+                                        <div className="cursor-pointer" onClick={() => handleIconClick(1)}>
                                             <Icons.right/>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@ export default function Account() {
                                         <h1 className="text-xl p-1">
                                             Mis creditos
                                         </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(3)}>
+                                        <div className="cursor-pointer" onClick={() => handleIconClick(2)}>
                                             <Icons.right/>
                                         </div>
                                     </div>
@@ -142,7 +142,7 @@ export default function Account() {
                                         <h1 className="text-xl p-1">
                                             Jugar en linea
                                         </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(4)}>
+                                        <div className="cursor-pointer" onClick={() => handleIconClick(3)}>
                                             <Icons.right/>
                                         </div>
                                     </div>
@@ -157,7 +157,14 @@ export default function Account() {
                                     <div className="" >
                                         {showContainer[1] && (
                                             <div className="border border-slate-100 p-4 rounded">
-                                                <form className="max-w-lg mx-auto">
+                                                
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="" >
+                                        {showContainer[2] && (
+                                            <div className="border border-slate-100 p-4 rounded">
+                                                <form className="max-w-xl mx-auto">
                                                     <div className="mb-4">
                                                         <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
                                                         Name
@@ -182,6 +189,12 @@ export default function Account() {
                                                         </label>
                                                         <textarea className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" rows="4" placeholder="123 Main St."></textarea>
                                                     </div>
+                                                    <div className="mb-4">
+                                                        <label className="block text-gray-700 font-bold mb-2" htmlFor="profile-pic">
+                                                        Avatar
+                                                        </label>
+                                                        <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-pic" type="file"/>
+                                                    </div>
                                                     <div className="flex items-center justify-center">
                                                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                                                         Save
@@ -189,11 +202,6 @@ export default function Account() {
                                                     </div>
                                                 </form>
                                             </div>
-                                        )}
-                                    </div>
-                                    <div className="" >
-                                        {showContainer[2] && (
-                                            <div className="border border-slate-100 p-4 rounded">Contenido del contenedor Azul</div>
                                         )}
                                     </div>
                                     <div className="" >
