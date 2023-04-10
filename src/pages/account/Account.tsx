@@ -24,6 +24,7 @@ export default function Account() {
     const mostrarMenu2 = () => {
         setMenuActivo('menu2');
     };
+    const [isOpen, setIsOpen] = useState(false);
     return (
         <div className="w-full h-screen flex flex-wrap flex-col">
             <AdminCardsNavBar></AdminCardsNavBar>
@@ -66,87 +67,32 @@ export default function Account() {
                     <div className="flex w-[40%] flex-col">
                         {menuActivo === 'menu1' && (
                             <div className="rounded mr-20 ml-20">
-                                <div className=" border border-slate-100 p-4 rounded">
-                                    <div className="flex border justify-between items-center border-slate-100 p-4 text-2xl">
-                                        <h1 className="text-xl p-1">Mi cuenta</h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(1)}>
-                                            <Icons.right/>
-                                        </div>
-                                    </div>
-                                    <div className="flex border justify-between items-center border-slate-100 p-4 text-2xl">
-                                        <h1 className="text-xl p-1">
-                                            Datos personales
-                                        </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(2)}>
-                                            <Icons.right/>
-                                        </div>
-                                    </div>
-                                    <div className="flex border justify-between items-center border-slate-100 p-4 text-2xl">
-                                        <h1 className="text-xl p-1">
-                                            Metodos de pago
-                                        </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(3)}>
-                                            <Icons.right/>
-                                        </div>
-                                    </div>
-                                    
-                                   {/* <div className="flex border justify-between items-center border-slate-100 p-4 text-2xl">
-                                        <h1 className="text-xl p-1">
-                                            Seguridad
-                                        </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(4)}>
-                                            <Icons.right/>
-                                        </div>
-                                    </div>
-                                    <div className="flex border justify-between items-center border-slate-100 p-4 text-2xl">
-                                        <h1 className="text-xl p-1">
-                                            Privacidad
-                                        </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(5)}>
-                                            <Icons.right/>
-                                        </div>
-                                    </div>*/ } 
+                              <div className="border border-gray-300 p-4 rounded relative">
+                                <div className="flex justify-between items-center text-lg font-medium mb-2 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+                                  <h1>Mi cuenta</h1>
+                                  <div className="transform rotate-90">
+                                    <Icons.right />
+                                  </div>
                                 </div>
-                            </div>
-                        )}
-                        {menuActivo === 'menu2' && (
-                            <div className=" rounded mr-20 ml-20">
-                                <div className="border border-slate-100 p-4 rounded">
-                                    {/* <div className="flex border justify-between items-center border-slate-100 p-4 text-2xl">
-                                        <h1 className="text-xl p-1">
-                                            Subasta
-                                        </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(1)}>
-                                            <Icons.right/>
-                                        </div>
-                                    </div>*/   }
-                                    
-
-                                    <div className="flex border justify-between items-center border-slate-100 p-4 text-2xl">
-                                        <h1 className="text-xl p-1">
-                                            Mi banco
-                                        </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(1)}>
-                                            <Icons.right/>
-                                        </div>
-                                    </div>
-                                    <div className="flex border justify-between items-center border-slate-100 p-4 text-2xl">
-                                        <h1 className="text-xl p-1">
-                                            Mis creditos
-                                        </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(2)}>
-                                            <Icons.right/>
-                                        </div>
-                                    </div>
-                                    <div className="flex border justify-between items-center border-slate-100 p-4 text-2xl">
-                                        <h1 className="text-xl p-1">
-                                            Jugar en linea
-                                        </h1>
-                                        <div className="cursor-pointer" onClick={() => handleIconClick(3)}>
-                                            <Icons.right/>
-                                        </div>
+                                {isOpen && (
+                                  <div className="border-t border-gray-300 pt-4">
+                                    <button className="w-full text-left mb-2 py-2 px-4 block text-gray-700 hover:bg-gray-100 hover:text-gray-900" onClick={() => handleIconClick(1)}>Cambiar contraseña</button>
+                                    <button className="w-full text-left mb-2 py-2 px-4 block text-gray-700 hover:bg-gray-100 hover:text-gray-900" onClick={() => handleIconClick(2)}>Eliminar cuenta</button>
+                                  </div>
+                                )}
+                                <div className="flex justify-between items-center text-lg font-medium mb-2">
+                                  <h1>Datos personales</h1>
+                                  <div className="cursor-pointer" onClick={() => handleIconClick(2)}>
+                                        <Icons.right/>
                                     </div>
                                 </div>
+                                <div className="flex justify-between items-center text-lg font-medium mb-2">
+                                  <h1>Metodos de pago</h1>
+                                  <div className="cursor-pointer" onClick={() => handleIconClick(3)}>
+                                        <Icons.right/>
+                                    </div>
+                                </div>
+                              </div>
                             </div>
                         )}
                     </div>
@@ -157,7 +103,17 @@ export default function Account() {
                                     <div className="" >
                                         {showContainer[1] && (
                                             <div className="border border-slate-100 p-4 rounded">
-                                                
+                                                <div className="flex flex-col space-y-4">
+                                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button">
+                                                    Define Password Restore Questions
+                                                </button>
+                                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="button">
+                                                    Restore Password
+                                                </button>
+                                                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="button">
+                                                    Delete Account
+                                                </button>
+                                                </div>
                                             </div>
                                         )}
                                     </div>
@@ -167,25 +123,25 @@ export default function Account() {
                                                 <form className="max-w-xl mx-auto">
                                                     <div className="mb-4">
                                                         <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
-                                                        Name
+                                                        Nombre
                                                         </label>
                                                         <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="John"/>
                                                     </div>
                                                     <div className="mb-4">
                                                         <label className="block text-gray-700 font-bold mb-2" htmlFor="last-name">
-                                                        Last Name
+                                                        Apellido
                                                         </label>
                                                         <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="last-name" type="text" placeholder="Doe"/>
                                                     </div>
                                                     <div className="mb-4">
                                                         <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-                                                        Email
+                                                        E-mail
                                                         </label>
                                                         <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="johndoe@example.com"/>
                                                     </div>
                                                     <div className="mb-6">
                                                         <label className="block text-gray-700 font-bold mb-2" htmlFor="address">
-                                                        Address
+                                                        Direccion
                                                         </label>
                                                         <textarea className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" rows="4" placeholder="123 Main St."></textarea>
                                                     </div>
@@ -197,7 +153,10 @@ export default function Account() {
                                                     </div>
                                                     <div className="flex items-center justify-center">
                                                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                                                        Save
+                                                        Guardar
+                                                        </button>
+                                                        <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                                                        Cancelar
                                                         </button>
                                                     </div>
                                                 </form>
@@ -206,7 +165,32 @@ export default function Account() {
                                     </div>
                                     <div className="" >
                                         {showContainer[3] && (
-                                            <div className="border border-slate-100 p-4 rounded">Contenido del contenedor verde</div>
+                                            <div className="border border-slate-100 p-4 rounded">
+                                                <div className="max-w-md mx-auto">
+                                                    <form>
+                                                    <div className="mb-6">
+                                                        <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name on card</label>
+                                                        <input id="name" type="text" name="name" placeholder="John Doe" required className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                                    </div>
+                                                    <div className="mb-6">
+                                                        <label htmlFor="card" className="block text-gray-700 font-bold mb-2">Card number</label>
+                                                        <input id="card" type="text" name="card" placeholder="**** **** **** ****" required className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                                    </div>
+                                                    <div className="mb-6">
+                                                        <label htmlFor="expiry" className="block text-gray-700 font-bold mb-2">Expiration date</label>
+                                                        <input id="expiry" type="text" name="expiry" placeholder="MM / YY" required className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                                    </div>
+                                                    <div className="mb-6">
+                                                        <label htmlFor="cvc" className="block text-gray-700 font-bold mb-2">CVC</label>
+                                                        <input id="cvc" type="text" name="cvc" placeholder="***" required className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                                                    </div>
+                                                    <div className="flex items-center justify-between">
+                                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                                        Submit
+                                                        </button>
+                                                    </div>
+                                                    </form>
+                                          </div></div>
                                         )}
                                     </div>
                                     <div className="" >
