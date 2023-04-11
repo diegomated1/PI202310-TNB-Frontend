@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import io, { Socket } from 'socket.io-client';
-import useSocket from "../hooks/useSocket";
+import { useState } from 'react';
 import useAuth from "../hooks/useAuth";
-import IUser from '../interfaces/IUser';
 import useMessages from '../hooks/useMessages';
 import IMessage from '../interfaces/IMessage';
 
