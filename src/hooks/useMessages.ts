@@ -6,11 +6,12 @@ import IUser from "../interfaces/IUser";
 
 
 export default function useMessages(setMessages:React.Dispatch<React.SetStateAction<IMessage[]>>, user:IUser|null, id_room?:string){
-    const socket = useSocket("192.168.1.22");
+    const socket = useSocket(import.meta.env.VITE_SOCKET_CHAT);
 
     useEffect(()=>{
         if(socket){
             function receivedMessage(message:IMessage){
+                console.log(message);
                 setMessages((prevs)=>[...prevs, message]);
             }
 
