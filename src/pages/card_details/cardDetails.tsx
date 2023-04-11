@@ -3,7 +3,6 @@ import Card from "../../components/Card";
 import Button from "../../components/Button";
 import Icons from "../../components/Icons";
 import '../../assets/react.svg';
-import '../../assets/tailwind.css';
 import { useParams } from "react-router-dom";
 import { FormEvent, useEffect, useState } from "react";
 import cardsApi from '../../services/card.api';
