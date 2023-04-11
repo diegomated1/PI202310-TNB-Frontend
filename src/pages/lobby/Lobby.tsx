@@ -1,41 +1,47 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button";
-import Input from "../../components/Input";
 import AdminCardsNavBar from "../../components/NavBar";
 import useLobby from "./hooks/useLobby";
 import Chat from "../../components/Chat";
 import Player from "./components/Player";
 import WaitingPlayer from "./components/WaitingPlayer";
-import useGame from "./hooks/useGame";
-import useAuth from "../../hooks/useAuth";
+import gameApi from "../../services/game.api";
+import all_cards from "../../utils/createUsers";
 
 export default function Lobby(){
 
     const navigate = useNavigate();
-    const {id_match} = useParams();
-    const [match, matchLeave, start, token] = useLobby(id_match);
-    const [isOwner, setIsOwner] = useState(false);
-    const [idGame, gameCreate] = useGame(isOwner);
-    const {user} = useAuth();
+    const {id_lobby} = useParams();
+    const [isOwner, lobby, leave, start] = useLobby(id_lobby);
 
-    const [creatingMatch, setCreatingMatch] = useState(1);
+    const [startMessage, setStartMessage] = useState<string>();
 
     /**
      * Function for leaving the lobby
      */
     const handleLeave = ()=>{
-        matchLeave();
+        leave();
         navigate('/game/create');
     }
 
     /**
      * Function to start game, only the owner can start the game
      */
-    const handleStart = ()=>{
-        if(match && isOwner){
-            gameCreate(match);
-            setCreatingMatch(1);
+    const handleStart = async ()=>{
+        if(lobby && isOwner){
+            setStartMessage("Iniciando partida...");
+            try{
+                const game = await gameApi.create(lobby.players, lobby.ias, lobby.min_bet);
+                console.log(game);
+                if(game){
+                    for(let i=0;i<lobby.players.length;i++){
+                        await gameApi.addUser(game.id_game, lobby.players[i], "ilfr4mbhc", all_cards);
+                    }
+                }
+            }catch(error){
+                console.log(error);
+            }
         }
     }
 
@@ -43,38 +49,10 @@ export default function Lobby(){
      * check if the user is in the lobby, if not navigate to /game/create
      */
     useEffect(()=>{
-        if(match===null){
+        if(lobby===null){
             navigate('/game/lobby/create');
         }
-    }, [match]);
-
-    /**
-     * Check if user is the owner of the lobby
-     */
-    useEffect(()=>{
-        if(user && match){
-            setIsOwner(user.id_user==match.id_owner);
-        }
-    }, [user]);
-
-    /**
-     * check if the match is created when owner start the game
-     */
-    useEffect(()=>{
-        if(idGame){
-            start(idGame);
-        }
-    }, [idGame]);
-
-    /**
-     * Go to game when all user join in the game
-     */
-    useEffect(()=>{
-        if(token){
-            localStorage.setItem('mathToken', token);
-            navigate(`/game/${id_match}`);
-        }
-    }, [token]);
+    }, [lobby]);
 
     return(
         <div className="w-screen h-screen flex flex-col">
@@ -89,25 +67,25 @@ export default function Lobby(){
                             </div>
                         </div>
                         <div className="flex-1">
-                            <h1 className="text-3xl font-black">ID de partida: {(match)?match._id:''}</h1>
+                            <h1 className="text-3xl font-black">ID de partida: {(lobby)?lobby._id:''}</h1>
                         </div>
                         <div className="flex-1 flex flex-col justify-evenly">
                             <span>Apuesta de la partida:</span>
-                            <span className="text-3xl ml-5">{(match)?match.min_bet:''}</span>
+                            <span className="text-3xl ml-5">{(lobby)?lobby.min_bet:''}</span>
                         </div>
                         <div className="flex-1 flex flex-col justify-evenly">
                             <span>Numero de jugadores:</span>
-                            <span className="text-3xl ml-5">{(match)?match.max_number_players:''}</span>
+                            <span className="text-3xl ml-5">{(lobby)?lobby.max_number_players:''}</span>
                         </div>
-                        {(match) ? (
+                        {(lobby) ? (
                             <div className="flex-[3] grid grid-cols-4">
-                                {match.players.map((player,i)=>(
-                                    <Player key={i} id_user={player.id_user} />
+                                {lobby.players.map((player,i)=>(
+                                    <Player key={i} id_user={player} />
                                 ))}
-                                {[...Array(match.max_number_players-(match.players.length+match.ias))].map((x,i)=>(
+                                {[...Array(lobby.max_number_players-(lobby.players.length+lobby.ias))].map((x,i)=>(
                                     <WaitingPlayer key={i}/>
                                 ))}
-                                {[...Array(match.ias)].map((x,i)=>(
+                                {[...Array(lobby.ias)].map((x,i)=>(
                                     <Player key={i}/>
                                 ))}
                             </div>
@@ -117,20 +95,20 @@ export default function Lobby(){
                         <div className="flex-1 flex justify-end items-center pr-5">
                             <div className="w-36 h-12">
                                 {
-                                    (match && match.max_number_players==match.players.length) ? (
+                                    (isOwner && lobby && lobby.max_number_players==lobby.players.length) ? (
                                         <Button.buttonYellow 
                                             onClick={handleStart}
                                         >
                                             Iniciar partida
                                         </Button.buttonYellow>
                                     ) : (
-                                        <Button.default>
+                                        <Button.default disabled={true} >
                                             Iniciar partida
                                         </Button.default>
                                     )
                                 }
-                                {(creatingMatch==1) ? (
-                                    <span className="w-full flex justify-center">Iniciando partida...</span>
+                                {(startMessage) ? (
+                                    <span className="w-full flex justify-center">{startMessage}</span>
                                 ) : (
                                     ''
                                 )}
