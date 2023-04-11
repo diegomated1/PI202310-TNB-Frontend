@@ -36,7 +36,7 @@ function App() {
         <Route path="/game/deck" element={<Mazo/>}/>
         <Route path="/game/create/deck" element={<CreateDeck/>}/>
         <Route path="/game/lobby/create" element={<CreateGame/>}/>
-        <Route path="/game/lobby/:id_match" element={<Lobby/>}/>
+        <Route path="/game/lobby/:id_lobby" element={<Lobby/>}/>
         <Route path="/game/:id_game" element={<Game/>}/>
         
         <Route path="/card/:id_card" element={<CardDetails/>}/>
