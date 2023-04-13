@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 @layer{
-    body{
-        font-family: 'Josefin Sans', sans-serif;
+    *{
+        @apply font-jose;
+        
     }
 }
