@@ -5,7 +5,7 @@ class LobbyApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = import.meta.env.VITE_SERVER_LOBBIES;
+        this.baseUrl = import.meta.env.VITE_API_LOBBY_URL;
     }
 
     insert(lobby:ILobby){
