@@ -4,6 +4,6 @@ export default interface ILobby{
     id_owner: string,
     max_number_players: number,
     ias: number,
-    players: string[],
+    players: {id_user:string, id_hero:string}[],
     min_bet: number
 }
