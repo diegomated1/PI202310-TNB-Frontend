@@ -20,7 +20,7 @@ export interface IButton {
 
 const Buttons:IButton = {
     "navbar": (props)=>(
-        <button {...props} className="text-white w-auto p-2 h-full rounded-lg border-2 border-white justify-center items-center" >
+        <button {...props} className="text-white w-20 p-3 mb-2 mt-2 h-auto rounded-lg border-2 border-white justify-center items-center  " >
             <strong className="text-current" >{props.children}</strong>
         </button>
     ),
@@ -40,7 +40,7 @@ const Buttons:IButton = {
         </button>
     ),
     "buttonBorder": (props)=>(
-        <button {...props} className="px-4 py-2 font-semibold text-sm bg-white
+        <button {...props} className="mx-5 px-4 py-2 font-semibold text-sm bg-white 
             text-slate-700 border border-slate-300 rounded-md shadow-sm outline outline-2 
             outline-offset-2 outline-blue-500 dark:bg-slate-700 dark:text-slate-200 
             dark:border-transparent" >

@@ -60,4 +60,4 @@ export default function Card({card, price, discount, obtained, onClick1, onClick
             </div>
         </div>
     )
-}
+}   
