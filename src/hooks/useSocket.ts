@@ -12,8 +12,10 @@ export default function useSocket(url?:string, opts?:Partial<io.ManagerOptions &
 
     useEffect(() => {
         if(url){
+            console.log(url, opts)
             // Creates a new socket instance and sets it to the state.
             const newSocket = io.connect(url, opts);
+            console.log(newSocket)
             setSocket(newSocket);
 
             // Disconnects the socket when the component using the hook unmounts.

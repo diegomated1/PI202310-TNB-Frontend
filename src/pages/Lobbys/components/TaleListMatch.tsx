@@ -1,48 +1,46 @@
 import { useEffect, useState } from "react";
-import IMatch from "../../../interfaces/IMatch";
+import ILobby from "../../../interfaces/ILobby";
 import Button from "../../../components/Button";
 
-type ListMatchProps = {
-  match?: IMatch;
-  onClick1?: () => void;
-
+type ListLobbyProps = {
+  lobby?: ILobby;
 };
 
-export default function TileMatch({ match, onClick1 }: ListMatchProps) {
+export default function TileLobby({ lobby }: ListLobbyProps) {
   const [image, setImage] = useState<File>();
+
+  //const onClick1: () => void;
 
   return (
     <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
       <div className="flex-[3]  flex justify-evenly items-center">
         <div className="flex-1 flex-col p-2 text-center">
           <h1 className="text-base font-semibold">ID de partida</h1>
-          <h2 className="text-3xl">{match?._id}</h2>
+          <h2 className="text-3xl">{lobby?._id}</h2>
         </div>
         <div className="flex-1 flex-col p-2 text-center">
           <h1 className="text-base font-semibold">Max jugadores</h1>
-          <h2 className="text-3xl">{match?.max_number_players}</h2>
+          <h2 className="text-3xl">{lobby?.max_number_players}</h2>
         </div>
         <div className="flex-1 flex-col p-2 text-center">
           <h1 className="text-base font-semibold">Apuesta</h1>
-          <h2 className="text-3xl">{match?.min_bet}</h2>
+          <h2 className="text-3xl">{lobby?.min_bet}</h2>
         </div>
       </div>
       <div className="flex-[4]  flex justify-start items-center">
-        {match?.players
-          ? match?.players.map((index) => {
+        {lobby?.players
+          ? lobby?.players.map((index) => {
               return (
-                <div className="h-full p-1 w-[25%]">
+                <div key={index.id_user} className="h-full p-1 w-[25%]">
                     <img
                   className="object-cover h-full w-full"
-                  key={index.id_user}
-                  src="../../../../imagen/FIWfOaWXsAEii7c.jpeg"
-                  /*src={
+                  src={
                     image
                       ? URL.createObjectURL(image!)
                       : `${import.meta.env.VITE_API_HEROES_URL}/images/cards/${
                           index.id_hero
                         }`
-                  }*/
+                  }
                 />
                 </div>
               );
