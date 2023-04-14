@@ -1,11 +1,11 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import AdminCardsNavBar from "../../components/NavBar";
 import AddPlayerSquare from "./components/AddPlayerSquare";
 import { useNavigate } from "react-router";
-import lobbyApi from "../../services/lobby.api";
-import useAuth from "../../hooks/useAuth";
+import Chat from "../../components/Chat";
+import useLobby from "../../hooks/useLobby";
 
 /**
  * Component for creating a new game match.
@@ -17,25 +17,17 @@ export default function CreateGame(){
     const [numberPlayers, setNumberPlayers] = useState(2);
     const [ias, setIas] = useState(0);
 
-    const {user} = useAuth();
+    const [lobby, lobbies, createLobby] = useLobby();
 
-    /**
-     * Handler function for creating a new match
-     */
-    const handleCreateLobby = async ()=>{
-        if(user){
-            const data = {
-                ias, 
-                id_owner: user.id_user, 
-                max_number_players: numberPlayers, 
-                min_bet: bet,
-                players: [user.id_user]
-            }
-            console.log(data);
-            await lobbyApi.insert(data);
-            navigate(`/game/lobby/""`);
-        }
+    const handleCreateLobby = ()=>{
+        createLobby('ilfr4bh8k', ias, numberPlayers, bet);
     }
+
+    useEffect(()=>{
+        if(lobby){
+            console.log(lobby);
+        }
+    }, [lobby]);
 
     return(
         <div className="w-screen h-screen flex flex-col">
@@ -80,7 +72,7 @@ export default function CreateGame(){
                     </div>
                 </div>
                 <div className="w-96 h-full bg-red-100 flex justify-center items-center">
-                    comentarios
+                    <Chat/>
                 </div>
             </div>
         </div>
