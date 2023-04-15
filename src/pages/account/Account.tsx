@@ -211,7 +211,29 @@ export default function Account() {
                            <div>
                                <div className="" >
                                    {showContainer[1] && (
-                                       <div className="border border-slate-100 p-4 rounded">Contenido del contenedor rojo1</div>
+                                       <div className="border border-slate-100 p-4 rounded">
+                                        <div className="container mx-auto py-8">
+                                            <h1 className="text-2xl font-bold mb-4">Form with Preset Questions in Dropdown Lists</h1>
+                                            <form>
+                                                <div className="mb-4">
+                                                <label className="block font-bold mb-2" htmlFor="question">Choose a question:</label>
+                                                <div className="relative">
+                                                    <select className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" id="question" name="question">
+                                                    <option value="">Select a question</option>
+                                                    <option value="graduation">At what age did you graduate from high school?</option>
+                                                    <option value="pet">What was the name of your first pet?</option>
+                                                    <option value="country">What is your favorite country to visit?</option>
+                                                    </select>
+                                                </div>
+                                                </div>
+                                                <div className="mb-4">
+                                                <label className="block font-bold mb-2" htmlFor="answer">Your answer:</label>
+                                                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="answer" type="text" placeholder="Type your answer here" name="answer"/>
+                                                </div>
+                                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Submit</button>
+                                            </form>
+                                            </div>
+                                       </div>
                                    )}
                                </div>
                                <div className="" >
