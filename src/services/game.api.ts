@@ -1,5 +1,5 @@
 import axios from 'axios';
-import ILobby from '../interfaces/ILobby';
+import ILobby, {IPLayer} from '../interfaces/ILobby';
 import IGame from '../pages/game/interfaces/IGame';
 
 class GameApi{
@@ -9,7 +9,7 @@ class GameApi{
         this.baseUrl = import.meta.env.VITE_SERVER_GAME;
     }
 
-    create(players:string[], ias:number, min_bet:number):Promise<{message:string, id_game:string}>{
+    create(players:IPLayer[], ias:number, min_bet:number):Promise<{message:string, id_game:string}>{
         return new Promise(async(res, rej)=>{
             try{
                 const {data} = await axios.post(`${this.baseUrl}/games`, {players, ias, min_bet});
@@ -31,11 +31,11 @@ class GameApi{
         });
     }
 
-    addUser(id_game:string, id_user:string, id_hero:string, cards:string[]){
+    addUser(id_game:string, id_user:string, id_hero:string, id_deck:string){
         return new Promise(async (res, rej)=>{
             try{
                 const { data } = await axios.post(`${this.baseUrl}/games/${id_game}/users`, {
-                    id_player: id_user, id_hero, cards
+                    id_player: id_user, id_hero, id_deck
                 });
                 res(data);
             } catch(error) {
