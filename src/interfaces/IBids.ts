@@ -1,4 +1,4 @@
-export default interface IBidder{
+export default interface IBids{
     id_user: string,
     coins: number,
     cards: string[],
