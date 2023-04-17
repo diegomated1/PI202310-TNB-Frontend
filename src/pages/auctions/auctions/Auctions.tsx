@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import useAuctions from "./hooks/useAuctions"
 import AdminCardsNavBar from "../../../components/NavBar";
+import Auction from "./components/Auction";
 
 
 export default function Auctions(){
 
-    //const [auctions] = useAuctions();
+    const [auctions] = useAuctions();
 
     return(
         <div className="w-screen h-screen bg-red-200 flex flex-col">
@@ -18,16 +19,14 @@ export default function Auctions(){
                     <div className="h-20 bg-gray-200">
 
                     </div>
-                    <div className="flex-1 bg-green-200 flex">
-                        <div className="flex-1">
-
-                        </div>
-                        <div className="flex-[3] bg-blue-200">
-
-                        </div>
-                    </div>
-                    <div className="h-20 bg-gray-200">
-
+                    <div className="flex-1 bg-gray-300">
+                        <ul className="w-full h-full flex flex-col">
+                            {auctions.map((auction, i)=>(
+                                <li key={i}>
+                                    <Auction auction={auction}/>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
             </div>
