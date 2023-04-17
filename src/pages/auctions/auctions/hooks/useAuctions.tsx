@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useAuth from "../../../../hooks/useAuth";
 import useSocket from "../../../../hooks/useSocket";
 import IAuction from "../../../../interfaces/IAuction";
 import auctionApi from "../../../../services/auction.api";
@@ -7,36 +6,31 @@ import auctionApi from "../../../../services/auction.api";
 
 export default function useAuctions(){
 
-    const socket = useSocket();
-    const [auctions, setAuctions] = useState<IAuction[]|undefined>(); 
-
-    const handleGetAuctions = async () => {
-        try{
-            const auctions = await auctionApi.getAll();
-            setAuctions(auctions);
-        }catch(error){
-            console.log(error);
-        }
-    }
+    const socket = useSocket('http://localhost:3000');
+    const [auctions, setAuctions] = useState<IAuction[]>([]); 
 
     useEffect(()=>{
+        const handleGetAuctions = async () => {
+            const auctions = await auctionApi.getAll();
+            setAuctions(auctions);
+        }
         handleGetAuctions();
     }, []);
 
     useEffect(()=>{
-        if(socket && auctions){
+        if(socket){
 
             function onCreateAuction(auction:IAuction){
-                setAuctions((auctions)=>[...auctions!, auction]);
+                setAuctions((auctions)=>[...auctions, auction]);
             }
 
-            socket.on('post:auctions', onCreateAuction);
+            socket.on('create:auction', onCreateAuction);
 
             return () => {
-                socket.off('post:auctions', onCreateAuction);
+                socket.off('create:auction', onCreateAuction);
             }
         }
-    }, [socket, auctions]);
+    }, [socket]);
 
     return [
         auctions
