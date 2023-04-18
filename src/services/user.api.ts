@@ -19,8 +19,10 @@ class UserApi{
                 const {data} = await axios.post(`${this.baseUrl}/auth`, {}, {
                     withCredentials: true,
                 });
+                console.log(data);
                 res(data.data);
             }catch(error){
+                console.log(error);
                 rej(error);
             }
         });

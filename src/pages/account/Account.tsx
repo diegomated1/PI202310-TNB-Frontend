@@ -2,7 +2,8 @@ import { useState } from "react";
 import AdminCardsNavBar from "../../components/NavBar";
 import Button from "../../components/Button";
 import Icons from "../../components/Icons";
-
+import SecurityQuestionsForm from "../../components/SecurityQuestions";
+import personalInfoForm from "../../components/personalInfoForm";
 
 
 export default function Account() {
@@ -24,6 +25,17 @@ export default function Account() {
     const mostrarMenu2 = () => {
         setMenuActivo('menu2');
     };
+
+    const [isDeleting, setIsDeleting] = useState(false);
+    
+    const handleDeleteClick = () => {
+        const confirmDelete = window.confirm("Está seguro que desea eliminar su cuenta? Esta acción no puede revertirse.");
+        if (confirmDelete) {
+          setIsDeleting(true);
+          window.location.href = "/login";
+        }
+      };
+
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className="w-full h-screen flex flex-wrap flex-col">
@@ -77,42 +89,71 @@ export default function Account() {
                                 {isOpen && (
                                   <div className="border-t border-gray-300 pt-4">
                                     <button className="w-full text-left mb-2 py-2 px-4 block text-gray-700 hover:bg-gray-100 hover:text-gray-900" onClick={() => handleIconClick(1)}>Cambiar contraseña</button>
-                                    <button className="w-full text-left mb-2 py-2 px-4 block text-gray-700 hover:bg-gray-100 hover:text-gray-900" onClick={() => handleIconClick(2)}>Eliminar cuenta</button>
+                                    <button className="w-full text-left mb-2 py-2 px-4 block text-gray-700 hover:bg-gray-100 hover:text-gray-900" onClick={() => handleIconClick(4)}>Eliminar cuenta</button>
                                   </div>
                                 )}
-                                <div className="flex justify-between items-center text-lg font-medium mb-2">
+                                <div className="flex justify-between items-center text-lg font-medium mb-2 cursor-pointer" onClick={() => handleIconClick(2)}>
                                   <h1>Datos personales</h1>
-                                  <div className="cursor-pointer" onClick={() => handleIconClick(2)}>
+                                  <div className="cursor-pointer" >
                                         <Icons.right/>
                                     </div>
                                 </div>
-                                <div className="flex justify-between items-center text-lg font-medium mb-2">
+                                <div className="flex justify-between items-center text-lg font-medium mb-2 cursor-pointer" onClick={() => handleIconClick(3)}>
                                   <h1>Metodos de pago</h1>
-                                  <div className="cursor-pointer" onClick={() => handleIconClick(3)}>
+                                  <div className="cursor-pointer" >
                                         <Icons.right/>
                                     </div>
                                 </div>
                               </div>
                             </div>
                         )}
+                        {menuActivo === 'menu2' && (
+                                <div className="rounded mr-20 ml-20">
+                                <div className="border border-gray-300 p-4 rounded relative">
+                                    <div className="flex justify-between items-center text-lg font-medium mb-2 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+                                    <h1>Misssa</h1>
+                                    <div className="transform rotate-90">
+                                        <Icons.right />
+                                    </div>
+                                    </div>
+                                    {isOpen && (
+                                    <div className="border-t border-gray-300 pt-4">
+                                        <button className="w-full text-left mb-2 py-2 px-4 block text-gray-700 hover:bg-gray-100 hover:text-gray-900" onClick={() => handleIconClick(1)}>Cambiar contraseña</button>
+                                        <button className="w-full text-left mb-2 py-2 px-4 block text-gray-700 hover:bg-gray-100 hover:text-gray-900" onClick={() => handleIconClick(4)}>Eliminar cuenta</button>
+                                    </div>
+                                    )}
+                                    <div className="flex justify-between items-center text-lg font-medium mb-2">
+                                    <h1>Datos personales</h1>
+                                    <div className="cursor-pointer" onClick={() => handleIconClick(2)}>
+                                            <Icons.right/>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-between items-center text-lg font-medium mb-2">
+                                    <h1>Metodos de pago</h1>
+                                    <div className="cursor-pointer" onClick={() => handleIconClick(3)}>
+                                            <Icons.right/>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            )}
                     </div>
-                    <div className="flex w-[60%] rounded">
+                    
+                    <div className="flex max-w-md rounded" id="displayDiv">
                         {menuActivo === 'menu1' && (
                             <div>
                                 <div className=" border border-slate-100 p-4 rounded">
                                     <div className="" >
                                         {showContainer[1] && (
-                                            <div className="border border-slate-100 p-4 rounded">
+                                            <div className=" border-slate-100 p-4 rounded">
                                                 <div className="flex flex-col space-y-4">
-                                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button">
-                                                    Define Password Restore Questions
-                                                </button>
-                                                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="button">
-                                                    Restore Password
-                                                </button>
-                                                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="button">
-                                                    Delete Account
-                                                </button>
+                                                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" onClick={SecurityQuestionsForm}>
+                                                        Definir nuevas preguntas de seguridad
+                                                    </button>
+                                                    <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="button">
+                                                        Reestablecer contraseña
+                                                    </button>
+                                                
                                                 </div>
                                             </div>
                                         )}
@@ -122,42 +163,70 @@ export default function Account() {
                                             <div className="border border-slate-100 p-4 rounded">
                                                 <form className="max-w-xl mx-auto">
                                                     <div className="mb-4">
-                                                        <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
-                                                        Nombre
-                                                        </label>
-                                                        <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="John"/>
+                                                        <label className="block text-gray-700 font-bold mb-2" htmlFor="name">Nombre</label>
+                                                        <input
+                                                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                        id="name"
+                                                        type="text"
+                                                        placeholder="John"
+                                                        disabled
+                                                        />
                                                     </div>
                                                     <div className="mb-4">
-                                                        <label className="block text-gray-700 font-bold mb-2" htmlFor="last-name">
-                                                        Apellido
-                                                        </label>
-                                                        <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="last-name" type="text" placeholder="Doe"/>
+                                                        <label className="block text-gray-700 font-bold mb-2" htmlFor="last-name">Apellido</label>
+                                                        <input
+                                                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                        id="last-name"
+                                                        type="text"
+                                                        placeholder="Doe"
+                                                        disabled
+                                                        />
                                                     </div>
                                                     <div className="mb-4">
-                                                        <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-                                                        E-mail
-                                                        </label>
-                                                        <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="johndoe@example.com"/>
+                                                        <label className="block text-gray-700 font-bold mb-2" htmlFor="email">E-mail</label>
+                                                        <input
+                                                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                        id="email"
+                                                        type="email"
+                                                        placeholder="johndoe@example.com"
+                                                        disabled
+                                                        />
                                                     </div>
                                                     <div className="mb-6">
-                                                        <label className="block text-gray-700 font-bold mb-2" htmlFor="address">
-                                                        Direccion
-                                                        </label>
-                                                        <textarea className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" rows="4" placeholder="123 Main St."></textarea>
+                                                        <label className="block text-gray-700 font-bold mb-2" htmlFor="address">Direccion</label>
+                                                        <textarea
+                                                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                        id="address"
+                                                        rows="4"
+                                                        placeholder="123 Main St."
+                                                        disabled
+                                                        ></textarea>
                                                     </div>
-                                                    <div className="mb-4">
-                                                        <label className="block text-gray-700 font-bold mb-2" htmlFor="profile-pic">
-                                                        Avatar
-                                                        </label>
-                                                        <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-pic" type="file"/>
+                                                    <div className="mb-4"><label className="block text-gray-700 font-bold mb-2" htmlFor="profile-pic">Avatar</label>
+                                                        <input
+                                                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                        id="profile-pic"
+                                                        type="file"
+                                                        disabled
+                                                        />
                                                     </div>
-                                                    <div className="flex items-center justify-center">
-                                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                                                        Guardar
-                                                        </button>
-                                                        <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                                                        Cancelar
-                                                        </button>
+                                                    <div className="flex justify-center space-x-4">
+                                                        <button
+                                                        className="bg-yellow-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                        type="button"
+                                                        onClick={() => {
+                                                            document.querySelectorAll("input, textarea, button[type='file']").forEach((el) => {
+                                                            el.removeAttribute("disabled");
+                                                            });
+                                                        }}>Editar</button>
+                                                        <button
+                                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                        type="button"
+                                                        disabled> Guardar</button>
+                                                        <button
+                                                        className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                        type="button"
+                                                        disabled>Cancelar</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -165,19 +234,19 @@ export default function Account() {
                                     </div>
                                     <div className="" >
                                         {showContainer[3] && (
-                                            <div className="border border-slate-100 p-4 rounded">
-                                                <div className="max-w-md mx-auto">
+                                            <div className="border-slate-100 p-4 rounded max-w-md mx-auto">
+                                                <div className="w-full mx-auto flex">
                                                     <form>
                                                     <div className="mb-6">
-                                                        <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name on card</label>
+                                                        <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Nombre de la tarjeta</label>
                                                         <input id="name" type="text" name="name" placeholder="John Doe" required className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                                                     </div>
                                                     <div className="mb-6">
-                                                        <label htmlFor="card" className="block text-gray-700 font-bold mb-2">Card number</label>
+                                                        <label htmlFor="card" className="block text-gray-700 font-bold mb-2">Numero de tarjeta</label>
                                                         <input id="card" type="text" name="card" placeholder="**** **** **** ****" required className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                                                     </div>
                                                     <div className="mb-6">
-                                                        <label htmlFor="expiry" className="block text-gray-700 font-bold mb-2">Expiration date</label>
+                                                        <label htmlFor="expiry" className="block text-gray-700 font-bold mb-2">Fecha de expiracion</label>
                                                         <input id="expiry" type="text" name="expiry" placeholder="MM / YY" required className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                                                     </div>
                                                     <div className="mb-6">
@@ -186,16 +255,21 @@ export default function Account() {
                                                     </div>
                                                     <div className="flex items-center justify-between">
                                                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                                                        Submit
+                                                        ACEPTAR
                                                         </button>
                                                     </div>
                                                     </form>
-                                          </div></div>
+                                                </div>
+                                            </div>
                                         )}
                                     </div>
                                     <div className="" >
                                         {showContainer[4] && (
-                                            <div className="border border-slate-100 p-4 rounded">Contenido del contenedor morado</div>
+                                            <div className="border border-slate-100 p-4 rounded">
+                                                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="button" onClick={handleDeleteClick} disabled={isDeleting}>
+                                                     {isDeleting ? "Deleting..." : "ELIMINAR CUENTA"}
+                                                </button>
+                                            </div>
                                         )}
                                     </div>
                                     <div className="" >
@@ -206,29 +280,33 @@ export default function Account() {
                                 </div>
                             </div>
                         )}
+
+                        
                         {menuActivo === 'menu2' && (
                            <div>
-                           <div>
-                               <div className="" >
-                                   {showContainer[1] && (
-                                       <div className="border border-slate-100 p-4 rounded">Contenido del contenedor rojo1</div>
-                                   )}
-                               </div>
-                               <div className="" >
-                                   {showContainer[2] && (
-                                       <div className="border border-slate-100 p-4 rounded">Contenido del contenedor Azul1</div>
-                                   )}
-                               </div>
-                               <div className="" >
-                                   {showContainer[3] && (
-                                       <div className="border border-slate-100 p-4 rounded">Contenido del contenedor verde1</div>
-                                   )}
-                               </div>
-                               <div className="" >
-                                   {showContainer[4] && (
-                                       <div className="border border-slate-100 p-4 rounded">Contenido del contenedor morado1</div>
-                                   )}
-                               </div>
+                                <div>
+                                    <div className="" >
+                                        {showContainer[1] && (
+                                            <div className="border border-slate-100 p-4 rounded">
+                                                
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="" >
+                                        {showContainer[2] && (
+                                            <div className="border border-slate-100 p-4 rounded">Contenido del contenedor Azul1</div>
+                                        )}
+                                    </div>
+                                    <div className="" >
+                                        {showContainer[3] && (
+                                            <div className="border border-slate-100 p-4 rounded">Contenido del contenedor verde1</div>
+                                        )}
+                                    </div>
+                                    <div className="" >
+                                        {showContainer[4] && (
+                                            <div className="border border-slate-100 p-4 rounded">Contenido del contenedor morado1</div>
+                                        )}
+                                    </div>
                                
                            </div>
                        </div> 
