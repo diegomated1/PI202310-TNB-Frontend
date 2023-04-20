@@ -6,7 +6,7 @@ import auctionApi from "../../../../services/auction.api";
 
 export default function useAuctions(){
 
-    const socket = useSocket('http://localhost:3000');
+    const socket = useSocket(import.meta.env.VITE_SERVER_AUCTION);
     const [auctions, setAuctions] = useState<IAuction[]>([]); 
 
     useEffect(()=>{

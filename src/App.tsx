@@ -45,7 +45,7 @@ function App() {
         <Route path="/account" element={<Account/>}/>
 
         <Route path="/auctions"  element={<Auctions/>} />
-        <Route path="/auctions/:id_card"  element={<Auction/>} />
+        <Route path="/auctions/:id_auction"  element={<Auction/>} />
         <Route path="/auctions/create"  element={<CreateAuction/>} />
 
       </Routes>

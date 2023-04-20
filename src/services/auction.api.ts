@@ -8,13 +8,13 @@ class AuctionsApi {
         this.baseUrl = import.meta.env.VITE_SERVER_AUCTION;
     }
 
-    getById(id_card: string): Promise<IAuction> {
+    getById(id_card: string): Promise<IAuction|null> {
         return new Promise(async (res, rej) => {
             try {
                 const { data } = await axios.get(`${this.baseUrl}/auctions/${id_card}`);
                 res(data.data);
             } catch (error) {
-                rej(error);
+                res(null);
             }
         });
     }
