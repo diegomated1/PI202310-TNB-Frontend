@@ -74,13 +74,42 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
             }
 
             function onPass(turn:string, round?:number){
-                setGame(game=>({...game!, turn, current_round: round??game!.current_round}));
+                if(round){
+                    setGame(game=>({...game!, turn, current_round: round}));
+                    socket?.emit('game:newRound', id_game, user?.id_user);
+                }else{
+                    setGame(game=>({...game!, turn}));
+                }
+            }
+
+            function onNewRound(id_player:string, id_hero:string, new_card?:string){
+                if(new_card){
+                    setPlayers(players=>({
+                        ...players,
+                        [id_player]: {
+                            ...players[id_player],
+                            all_cards: players[id_player].all_cards.slice(0, players[id_player].all_cards.length-1),
+                            hand_cards: [...players[id_player].hand_cards, new_card]
+                        }
+                    }));
+                }
+                
+                setHeroes(heroes=>({
+                    ...heroes,
+                    [id_hero]: {
+                        ...heroes[id_hero],
+                        power: (heroes[id_hero].power>0) ? 
+                            heroes[id_hero].power : 
+                            heroes[id_hero].power+1
+                    }
+                }));
             }
 
             socket.on('game:user:join', gameUseJoin);
             socket.on('game:user:leave', gameUserLeave);
             socket.on('game:user:attack', onAttack);
             socket.on('game:user:pass', onPass);
+            socket.on('game:newRound', onNewRound);
             socket.on('game:start', gameStart);
 
             socket.emit('game:user:join', user.id_user, id_game);
@@ -89,6 +118,7 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
                 socket.off('game:user:join', gameUseJoin);
                 socket.off('game:user:leave', gameUserLeave);
                 socket.off('game:user:attack', onAttack);
+                socket.off('game:newRound', onNewRound);
                 socket.off('game:start', gameStart);
                 socket.off('game:user:pass', onPass);
             }
@@ -104,6 +134,7 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
 
     function grabCard(){
         if(socket && user && game){
+            console.log("grabeando");
             socket.emit('game:user:grab', game._id, user.id_user);
         }
     }
