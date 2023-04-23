@@ -1,51 +1,43 @@
-import { func } from "prop-types";
 import { useEffect, useState } from "react";
 import Icons from "../../../components/Icons";
-import IHeroe from "../../../interfaces/IHeroe";
-import heroeApi from "../../../services/heroe.api";
+import IHero from "../interfaces/IHero";
 
 
 interface HeroProps{
-    id_hero: string
+    canSelect: boolean
+    onSelect?: (id_hero:string)=>void
+    hero:IHero
 }
 
-export default function Hero({id_hero}:HeroProps){
+export default function Hero({hero, canSelect, onSelect}:HeroProps){
     
-    const [hero, setHero] = useState<IHeroe>();
-    const [currentStats, setCurrentStats] = useState<IHeroe>();
+    const [baseStats, setBaseStats] = useState<IHero>(hero);
+    const [stats, setStats] = useState<IHero>(hero);
 
     const [lifePer, setLifePer] = useState(100);
-    const [atq, setAtq] = useState(0);
-    const [def, setDef] = useState(0);
-    const [dmg, setDmg] = useState(0);
-
-    const handleGetHero = async ()=>{
-        const _hero = await heroeApi.getById(id_hero);
-        setHero(_hero);
-        setCurrentStats(_hero);
-    }
 
     useEffect(()=>{
-        if(hero && currentStats){
-            const _life = ((currentStats.health*100)/hero.health).toPrecision(4);
-            setLifePer(parseFloat(_life));
-        }
-    }, [hero?.health, currentStats?.health]);
+        setStats(hero);
+    }, [hero]);
 
     useEffect(()=>{
-        handleGetHero();
-    }, [id_hero]);
+        const _life = ((stats.life*100)/baseStats.life).toPrecision(4);
+        setLifePer(parseFloat(_life));
+    }, [stats.life]);
 
     return(
-        <div className="w-56 h-72 border border-black rounded-lg flex flex-col">
+        <div onClick={()=>{if(onSelect)onSelect(hero._id)}} className="relative w-56 h-72 border-2 border-black rounded-lg flex flex-col cursor-pointer hover:w-[230px] hover:h-[300px]">
+            {onSelect ? (
+                <div className="absolute w-[110%] h-[110%] bg-green-400 -top-[5%] -left-[5%] -z-10 rounded-lg"/>
+            ) : ''}
             <div className="flex-[4] bg-red-200 rounded-t-lg">
                 <div className="w-full h-full bg-blue-50 relative rounded-t-lg">
                     <img className="w-full h-full object-cover absolute top-0 left-0 rounded-t-lg" 
-                        src="https://genshin.global/wp-content/uploads/2022/05/yae-miko-electro-profile-genshin-impact-1.webp" 
+                        src={`${(import.meta.env.VITE_API_CARDS_URL) ? `${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${hero.id_hero}` : ''}`} 
                         alt=""
                     />
                     <div className="absolute w-8 h-8 rounded-full top-1 right-1 flex justify-center items-center">
-                        <Icons.basicAttack/>
+                        <Icons.basicAttack/> 
                     </div>
                     <div className="absolute w-full h-8 bottom-0 flex justify-center items-center">
                         <div className="w-[90%] h-6 bg-gray-300 opacity-90 border border-gray-500 rounded-xl">
@@ -60,31 +52,28 @@ export default function Hero({id_hero}:HeroProps){
             </div>
             <div className="flex-[3] bg-red-300 flex flex-col">
                 <div className="flex-1 flex justify-evenly">
-                    <span className="text-2xl flex items-center">{currentStats?.name}</span>
+                    <span className="text-2xl flex items-center">{stats.name}</span>
                     <div className="w-8 h-full flex items-center">
                         {(hero && hero.name && hero.name in Icons) ? Icons[hero.name]({}) : ""}
                     </div>
                 </div>
                 <div className="flex-1 flex">
-                    <div className="flex-1 flex justify-center text-2xl cursor-pointer">
+                    <div className="flex-1 flex justify-center text-xl cursor-pointer">
                         <StatInfo before={
-                            <div className="flex-1 flex flex-col justify-center items-center">
-                                <span className="text-xl">{currentStats?.attack_basic}</span>
-                                <span className="text-sm">1d{currentStats?.attack_range}</span>
-                            </div>
+                            `${stats.atq.base}-${stats.atq.base+stats.atq.range}`
                         } after="Atq"/>
                     </div>
                     <div className="flex-1 flex justify-center text-2xl cursor-pointer">
-                        <StatInfo before={(hero)?hero.defense.toString():''} after="Def"/>
+                        <StatInfo before={stats.def.toString()} after="Def"/>
                     </div>
-                    <div className="flex-1 flex justify-center text-xl cursor-pointer">
-                        <StatInfo before={`1d${(hero)?hero.damage_range.toString():''}`} after="Dmg"/>
+                    <div className="flex-1 flex justify-center text-2xl cursor-pointer">
+                        <StatInfo before={`1-${stats.dmg.range}`} after="Dmg"/>
                     </div>
                 </div>
             </div>
             <div className="flex-1 bg-gray-500 rounded-b-lg flex justify-around">
-                <span className="flex items-center">Power: {currentStats?.power}</span>
-                <span className="flex items-center">Daño efectivo: 0</span>
+                <span className="flex items-center">Power: {stats.power}</span>
+                <span className="flex items-center">Daño efectivo: {stats.last_dmg}</span>
             </div>
         </div>
     )
