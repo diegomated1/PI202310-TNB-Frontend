@@ -24,7 +24,7 @@ interface ModalCardsEquiped{
     onClose?: ()=>void,
 }
 
-export default function CardsEquiped({modalInfo, isOpen,setIsOpen, onClose}:ModalCardsEquiped){
+export default function CardsEquiped({modalInfo, isOpen, setIsOpen, onClose}:ModalCardsEquiped){
 
     const handleClose = ()=>{
         setIsOpen(false);

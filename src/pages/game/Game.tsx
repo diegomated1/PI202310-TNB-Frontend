@@ -30,12 +30,15 @@ export default function Game(){
     const [modalCardsEquiped, setModalCardsEquiped] = useState<boolean>(false);
     const [modalInfo, setModalInfo] = useState<{hero_name:string,cards:string[]}>({hero_name:'', cards: []});
 
+
+    // Get user hero
     useEffect(()=>{
         if(user && heroes[players[user.id_user].id_hero]){
             setHero(heroes[players[user.id_user].id_hero]);
         }
     }, [heroes]);
 
+    // Change turn info 
     useEffect(()=>{
         if(game){
             const handleGetUser = async ()=>{
@@ -56,12 +59,30 @@ export default function Game(){
         actions.passTurn();
     }
 
+    // open and change modal info
     const handleOpenModal = (id_player:string, id_hero:string)=>{
         setModalInfo({
             cards: [...players[id_player].used_cards],
             hero_name: heroes[id_hero].name
         });
         setModalCardsEquiped(true);
+    }
+
+    const [canChangeCard, setCanChangeCard] = useState(false);
+    const [canUseCard, setCanUseCard] = useState(false);
+
+    useEffect(()=>{
+        if(user && players[user.id_user]){
+            const canUse = players[user.id_user].upgrades>0;
+            const canChange = players[user.id_user].changes>0;
+            setCanUseCard(canUse);
+            setCanChangeCard(canUse?false:canChange);
+        }
+    }, [players, user]);
+
+    const handleChange = ()=>{
+        setCanChangeCard(est=>!est);
+        setCanUseCard(est=>!est);
     }
 
     return(
@@ -125,13 +146,22 @@ export default function Game(){
                         )}
                         {(user && players[user.id_user]) ? (
                             players[user.id_user].hand_cards.map((card,i)=>(
-                                <Card key={i} id_card={card} id_hero={hero?._id} canSelect={true}/>
+                                <Card 
+                                    key={i} 
+                                    id_card={card} 
+                                    id_hero={hero?._id} 
+                                    canChange={canChangeCard}
+                                    onChange={actions.changeCard}
+                                    canUse={canUseCard}
+                                    onUse={actions.useCard}
+                                />
                             ))
                         ):''}
                     </div>
                 </div>
             </div>
             <Actions 
+                change={handleChange}
                 attack={()=>{}} pass={handlePassTurn} 
                 power={hero?hero.power:0}
                 turn={(user && game) ? (user.id_user == game.turn) : false}
@@ -140,6 +170,7 @@ export default function Game(){
                 modalInfo={modalInfo}
                 isOpen={modalCardsEquiped} 
                 setIsOpen={setModalCardsEquiped}
+                onClose={()=>{setModalInfo({hero_name:'', cards: []})}}
             />
         </div>
     )

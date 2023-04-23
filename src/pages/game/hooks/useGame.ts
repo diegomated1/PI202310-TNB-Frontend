@@ -88,12 +88,11 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
                         ...players,
                         [id_player]: {
                             ...players[id_player],
-                            all_cards: players[id_player].all_cards.slice(0, players[id_player].all_cards.length-1),
+                            all_cards: [...players[id_player].all_cards.slice(0, -1)],
                             hand_cards: [...players[id_player].hand_cards, new_card]
                         }
                     }));
                 }
-                
                 setHeroes(heroes=>({
                     ...heroes,
                     [id_hero]: {
@@ -105,10 +104,26 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
                 }));
             }
 
+            function onChangeCard(id_player:string, all_cards:string[], hand_cards:string[]){
+                setPlayers((players)=>({
+                    ...players,
+                    [id_player]: {
+                        ...players[id_player],
+                        hand_cards: [...hand_cards],
+                        all_cards: [...all_cards]
+                    }
+                }))
+            }
+
+            function onUseCard(turn:string, round?:number){
+                
+            }
+
             socket.on('game:user:join', gameUseJoin);
             socket.on('game:user:leave', gameUserLeave);
             socket.on('game:user:attack', onAttack);
             socket.on('game:user:pass', onPass);
+            socket.on('game:user:changeCard', onChangeCard);
             socket.on('game:newRound', onNewRound);
             socket.on('game:start', gameStart);
 
@@ -118,9 +133,10 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
                 socket.off('game:user:join', gameUseJoin);
                 socket.off('game:user:leave', gameUserLeave);
                 socket.off('game:user:attack', onAttack);
+                socket.off('game:user:pass', onPass);
+                socket.off('game:user:changeCard', onChangeCard);
                 socket.off('game:newRound', onNewRound);
                 socket.off('game:start', gameStart);
-                socket.off('game:user:pass', onPass);
             }
         }
     }, [socket, user]);
@@ -136,6 +152,12 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
         if(socket && user && game){
             console.log("grabeando");
             socket.emit('game:user:grab', game._id, user.id_user);
+        }
+    }
+
+    function useCard(id_card:string){
+        if(socket && user && game){
+            socket.emit('game:user:useCard', game._id, user.id_user, id_card);
         }
     }
 
@@ -155,7 +177,7 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
         game,
         players, heroes,
         actions: {
-            attack, grabCard, changeCard, passTurn
+            attack, grabCard, changeCard, passTurn, useCard
         }
     }
 }
