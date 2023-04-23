@@ -4,12 +4,14 @@ import IHero from "../interfaces/IHero";
 
 
 interface HeroProps{
+    openModal: (id_player: string, id_hero: string) => void
+    id_user?: string
     canSelect: boolean
     onSelect?: (id_hero:string)=>void
     hero:IHero
 }
 
-export default function Hero({hero, canSelect, onSelect}:HeroProps){
+export default function Hero({id_user, hero, canSelect, onSelect, openModal}:HeroProps){
     
     const [baseStats, setBaseStats] = useState<IHero>(hero);
     const [stats, setStats] = useState<IHero>(hero);
@@ -25,9 +27,13 @@ export default function Hero({hero, canSelect, onSelect}:HeroProps){
         setLifePer(parseFloat(_life));
     }, [stats.life]);
 
+    const handleOpenModal = ()=>{
+        openModal(hero.id_user, hero._id);
+    }
+
     return(
-        <div onClick={()=>{if(onSelect)onSelect(hero._id)}} className="relative w-56 h-72 border-2 border-black rounded-lg flex flex-col cursor-pointer hover:w-[230px] hover:h-[300px]">
-            {onSelect ? (
+        <div onClick={()=>{if(canSelect&&onSelect)onSelect(hero._id)}} className="relative w-56 h-72 border-2 border-black rounded-lg flex flex-col cursor-pointer">
+            {canSelect ? (
                 <div className="absolute w-[110%] h-[110%] bg-green-400 -top-[5%] -left-[5%] -z-10 rounded-lg"/>
             ) : ''}
             <div className="flex-[4] bg-red-200 rounded-t-lg">
@@ -36,6 +42,9 @@ export default function Hero({hero, canSelect, onSelect}:HeroProps){
                         src={`${(import.meta.env.VITE_API_CARDS_URL) ? `${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${hero.id_hero}` : ''}`} 
                         alt=""
                     />
+                    <div className="absolute w-8 h-8 rounded-full top-1 left-1 flex justify-center items-center">
+                        <Icons.edit onClick={handleOpenModal}/> 
+                    </div>
                     <div className="absolute w-8 h-8 rounded-full top-1 right-1 flex justify-center items-center">
                         <Icons.basicAttack/> 
                     </div>

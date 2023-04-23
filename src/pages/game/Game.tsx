@@ -8,11 +8,12 @@ import useGame from "./hooks/useGame";
 import { useSearchParams } from "react-router-dom";
 import IGame from "./interfaces/IGame";
 import Actions from "./components/Actions";
-import Alert from "./components/alerts/alert";
+import Alert from "./components/modals/alert";
 import IHero from "./interfaces/IHero";
 import useAuth from "../../hooks/useAuth";
 import IUser from "../../interfaces/IUser";
 import userApi from "../../services/user.api";
+import CardsEquiped from "./components/modals/cardsEquiped";
 
 
 export default function Game(){
@@ -24,14 +25,10 @@ export default function Game(){
     const {game, players, heroes, actions} = useGame(searchParams.get('g'), user);
 
     const [hero, setHero] = useState<IHero>();
-
     const [userTurn, setUserTurn] = useState<IUser>();
 
-    const [ups, setUps] = useState(0);
-    const [grabs, setGrabs] = useState(0);
-    const [changes, setChanges] = useState(0);
-    const [attacks, setAttacks] = useState(0);
-    const [pass, setPass] = useState(0);
+    const [modalCardsEquiped, setModalCardsEquiped] = useState<boolean>(false);
+    const [modalInfo, setModalInfo] = useState<{hero_name:string,cards:string[]}>({hero_name:'', cards: []});
 
     useEffect(()=>{
         if(user && heroes[players[user.id_user].id_hero]){
@@ -57,6 +54,14 @@ export default function Game(){
 
     const handlePassTurn = ()=>{
         actions.passTurn();
+    }
+
+    const handleOpenModal = (id_player:string, id_hero:string)=>{
+        setModalInfo({
+            cards: [...players[id_player].used_cards],
+            hero_name: heroes[id_hero].name
+        });
+        setModalCardsEquiped(true);
     }
 
     return(
@@ -100,23 +105,29 @@ export default function Game(){
                             <Hero 
                                 key={i} 
                                 hero={_hero}
-                                canSelect={(hero && hero.power>0)?true:false}
+                                canSelect={(userTurn?.id_user==user?.id_user && hero?.power!>0)?true:false}
                                 onSelect={handleAttack}
+                                openModal={handleOpenModal}
                             />
                         ))}
                     </div>
                 </div>
                 <div className="flex-1 flex items-center">
                     <div className="flex-1 flex justify-evenly">
-                        <Deck/>
+                        <Deck cards_in_deck={(user&&players[user.id_user])?players[user.id_user].all_cards.length:0}/>
                         {(user && hero) ? (
-                            <Hero hero={hero} canSelect={false}/>
+                            <Hero hero={hero} 
+                                canSelect={false}
+                                openModal={handleOpenModal}
+                            />
                         ) : (
                             ''
                         )}
-                        <Card/>
-                        <Card/>
-                        <Card/>
+                        {(user && players[user.id_user]) ? (
+                            players[user.id_user].hand_cards.map((card,i)=>(
+                                <Card key={i} id_card={card} id_hero={hero?._id} canSelect={true}/>
+                            ))
+                        ):''}
                     </div>
                 </div>
             </div>
@@ -124,6 +135,11 @@ export default function Game(){
                 attack={()=>{}} pass={handlePassTurn} 
                 power={hero?hero.power:0}
                 turn={(user && game) ? (user.id_user == game.turn) : false}
+            />
+            <CardsEquiped
+                modalInfo={modalInfo}
+                isOpen={modalCardsEquiped} 
+                setIsOpen={setModalCardsEquiped}
             />
         </div>
     )
