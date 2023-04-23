@@ -1,5 +1,6 @@
 export default interface IHero {
     _id: string,
+    id_hero: string,
     name: string,
     type: string,
     life: number,
