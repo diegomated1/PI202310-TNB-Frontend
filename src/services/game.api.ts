@@ -1,6 +1,7 @@
 import axios from 'axios';
-import ILobby, {IPLayer} from '../interfaces/ILobby';
 import IGame from '../pages/game/interfaces/IGame';
+import IHero from '../pages/game/interfaces/IHero';
+import IPlayer from '../pages/game/interfaces/IPlayer';
 
 class GameApi{
 
@@ -9,7 +10,7 @@ class GameApi{
         this.baseUrl = import.meta.env.VITE_SERVER_GAME;
     }
 
-    create(players:IPLayer[], ias:number, min_bet:number):Promise<{message:string, id_game:string}>{
+    create(players:IPlayer[], ias:number, min_bet:number):Promise<{message:string, id_game:string}>{
         return new Promise(async(res, rej)=>{
             try{
                 const {data} = await axios.post(`${this.baseUrl}/games`, {players, ias, min_bet});
@@ -20,7 +21,18 @@ class GameApi{
         });
     }
 
-    getGameById(id_game:string, id_user:string): Promise<IGame> {
+    getGameById(id_game:string): Promise<{game:IGame}> {
+        return new Promise(async (res, rej) => {
+            try {
+                const { data } = await axios.get(`${this.baseUrl}/games/${id_game}`);
+                res(data.data);
+            } catch (error) {
+                rej(error);
+            }
+        });
+    }
+
+    getUserByGameId(id_game:string, id_user:string): Promise<{user:IPlayer,hero:IHero}> {
         return new Promise(async (res, rej) => {
             try {
                 const { data } = await axios.get(`${this.baseUrl}/games/${id_game}/users/${id_user}`);
