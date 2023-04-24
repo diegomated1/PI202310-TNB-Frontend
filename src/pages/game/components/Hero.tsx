@@ -76,7 +76,7 @@ export default function Hero({id_user, hero, canSelect, onSelect, openModal}:Her
                         <StatInfo before={stats.def.toString()} after="Def"/>
                     </div>
                     <div className="flex-1 flex justify-center text-2xl cursor-pointer">
-                        <StatInfo before={`1-${stats.dmg.range}`} after="Dmg"/>
+                        <StatInfo before={`${stats.dmg.base}-${stats.dmg.base+stats.dmg.range}`} after="Dmg"/>
                     </div>
                 </div>
             </div>

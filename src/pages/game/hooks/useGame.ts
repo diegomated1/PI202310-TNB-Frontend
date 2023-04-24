@@ -7,6 +7,7 @@ import gameApi from "../../../services/game.api";
 import IResult from "../interfaces/IResult";
 import IPlayer from "../interfaces/IPlayer";
 import IUser from "../../../interfaces/IUser";
+import IAction, { IUseCard } from "../interfaces/IAction";
 
 
 export default function userGame(id_game:string|null, user:IUser|null|undefined){
@@ -115,8 +116,20 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
                 }))
             }
 
-            function onUseCard(turn:string, round?:number){
-                
+            function onUseCard(action:IAction<IUseCard>, hero:IHero){
+                console.log(action);
+                setHeroes((heroes)=>({
+                    ...heroes,
+                    [hero._id]: hero
+                }));
+                setPlayers(players=>({
+                    ...players,
+                    [action.action.id_user]: {
+                        ...players[action.action.id_user],
+                        used_cards: [...players[action.action.id_user].used_cards, action.action.id_card],
+                        hand_cards: [...players[action.action.id_user].hand_cards.filter(card=>card!=action.action.id_card)]
+                    }
+                }));
             }
 
             socket.on('game:user:join', gameUseJoin);
@@ -124,6 +137,7 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
             socket.on('game:user:attack', onAttack);
             socket.on('game:user:pass', onPass);
             socket.on('game:user:changeCard', onChangeCard);
+            socket.on('game:user:useCard', onUseCard);
             socket.on('game:newRound', onNewRound);
             socket.on('game:start', gameStart);
 
@@ -135,6 +149,7 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
                 socket.off('game:user:attack', onAttack);
                 socket.off('game:user:pass', onPass);
                 socket.off('game:user:changeCard', onChangeCard);
+                socket.off('game:user:useCard', onUseCard);
                 socket.off('game:newRound', onNewRound);
                 socket.off('game:start', gameStart);
             }
@@ -157,7 +172,7 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
 
     function useCard(id_card:string){
         if(socket && user && game){
-            socket.emit('game:user:useCard', game._id, user.id_user, id_card);
+            socket.emit('game:user:useCard', game._id, players[user.id_user].id_hero, user.id_user, id_card);
         }
     }
 
