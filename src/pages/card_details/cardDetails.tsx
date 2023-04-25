@@ -12,19 +12,27 @@ import Comment from "./components/comment";
 import ICard from "../../interfaces/ICard";
 import IProduct from "../../interfaces/IProduct";
 import ISetComment from "../../interfaces/ISetComment";
+import heroeApi from "../../services/heroe.api";
+import IHeroe from "../../interfaces/IHeroe";
+import Hero from "../../components/Hero";
+import cartApi from "../../services/cart.api";
+import useAuth from "../../hooks/useAuth";
 
 export default function CardDetails() {
 
-    const id_card  = "ilfr4psm2";
-    const  id = "1";
+    const {id_product} = useParams();
+    const {user} = useAuth();
 
-    const [card, setCard] = useState<ICard>();
     const [product, setProduct] = useState<IProduct>();
+    const [card, setCard] = useState<ICard>();
+    const [hero, setHeroe] = useState<IHeroe>()
+
     const [valoracion, setValoracion] = useState<number>();
     const [comentario, setComentario] = useState('')
-    
 
     const [cantidad, setCantidad] = useState(1);
+
+    const [comments, setComments] = useState<IComments[]>([]);
 
     const sum = () => {
         setCantidad(cantidad + 1);
@@ -37,16 +45,6 @@ export default function CardDetails() {
         }
     };
 
-    const handleGetCard = async () => {
-        const data = await cardsApi.getById(id_card!);
-        setCard(data);
-    }
-
-    const handleGetProduct = async () => {
-        const data = await productsApi.getProductById(id_card!);
-        setProduct(data);
-    }
-
     /*const handleSetComment = async (e: FormEvent) => {
         try {
             e.preventDefault();
@@ -56,21 +54,50 @@ export default function CardDetails() {
             console.log(error);
         }
     }*/
-
-    const [comments, setComments] = useState<IComments[]>([]);
-
-    const handleGetComments = async () => {
-        const data = await productsApi.getComments(id!);
-        setComments(data);
-    }
     
     useEffect(() => {
-        handleGetCard();
-        handleGetComments();
+        const handleGetCard = async (id_card:string) => {
+            const data = await cardsApi.getById(id_card);
+            setCard(data);
+        }
+        const handleGetHeroe= async (id_heroe:string) => {
+            const data = await heroeApi.getById(id_heroe);
+            setHeroe(data);
+        }
+        const handleGetComments = async (id_product:string) => {
+            const data = await productsApi.getComments(id_product);
+            setComments(data);
+        }
+        const handleGetProduct = async () => {
+            if(id_product){
+
+                const data = await productsApi.getProductById(id_product!);
+                if(data.type=='card'){
+                    handleGetCard(data.id_product!);
+                }else{
+                    handleGetHeroe(data.id_product!);
+                }
+                setProduct(data);
+                //handleGetComments(data.id_product!);
+            }
+        }
         handleGetProduct();
     }, []);
 
+    const handleAddShoppingCart = async () => {
+        try{
+            if(user && product){
+                await cartApi.addToCart(user.id_user, id_product!, cantidad);
+                alert("Producto añadido");
+            }else{
+                await cartApi.addToCart("12345", id_product!, cantidad);
+                alert("Producto añadido");
 
+            }
+        }catch(error){
+
+        }
+    }
 
 
     return (
@@ -80,46 +107,56 @@ export default function CardDetails() {
                 <div className="w-[80%] h-full grid grid-cols-2 lg:grid-cols-5">
                     <div className="col-span-2 p-5">
                         <div className="w-full h-full border border-gray-500 bg-white rounded-xl ">
-                            {card ? (
-                                <Card card={card} discount={product?.descuento} obtained={"y"} price={product?.precio}></Card>
-                            ) : ''}
+                            {
+                                (product) ? (
+                                    (card) ? (
+                                        <Card card={card} product={product} />
+                                    ) : (
+                                        (hero) ? (
+                                            <Hero heroe={hero} product={product} />
+                                        ) : ''
+                                    )
+                                ) : ''
+                            }
                         </div>
                     </div>
                     <div className="col-span-3 p-5">
                         <div className="border border-gray-500 bg-white flex flex-col rounded-lg">
                             <div className="p-5">
-                                <h2 className="text-3xl"><strong>{card?.name}</strong></h2>
-                                <h3 className="text-xl">Category: {card?.card_type}</h3>
+                                <h2 className="text-3xl">
+                                    <strong>
+                                        {card ? card.name : hero?.name}
+                                    </strong>
+                                </h2>
+                                <h3 className="text-xl">Category: {card ? card.card_type : "hero"}</h3>
                             </div>
                             <hr />
                             <div className="p-5">
                                 <p >
-                                    {
-                                        card?.description
-                                    }
+                                    {card ? card.description : hero?.description}
                                 </p>
                             </div>
                             <hr />
                             <div className="p-5">
                                 <span className="text-xl">
                                     <strong>
-                                        Price: ${product?.precio}
+                                        Price: ${product?.price}
                                     </strong>
                                 </span>
                             </div>
-                            <div className="p-5 w-full flex">
-                                <div className="w-[80%] p-1">
-                                    <Button.buttonLarge >Add To Card</Button.buttonLarge>
+                            <div className="p-5 w-[100%] flex">
+                                <div className="w-[70%] p-1">
+                                    <Button.buttonLarge onClick={handleAddShoppingCart} >Add To Card</Button.buttonLarge>
                                 </div>
-                                <div className="flex-1 p-1">
+                                <div className="w-[10%] p-1">
                                     <Button.buttonLarge onClick={res} > - </Button.buttonLarge>
                                 </div>
-                                <div className="flex-1 p-1">
+                                <div className="w-[10%] p-1">
                                     <div className="border border-separate rounded-lg w-full h-full flex justify-center items-center">
                                         <span>{cantidad}</span>
                                     </div>
                                 </div>
-                                <div className="flex-1 p-1">
+                                <div className="w-[10%] p-1">
                                     <Button.buttonLarge onClick={sum}> + </Button.buttonLarge>
                                 </div>
                             </div>
@@ -165,7 +202,6 @@ export default function CardDetails() {
                     <div className="col-span-3 p-3">
                         <div className="w-full h-full border bg-white ">
                             {
-
                                 comments.map((comment, i) => (<Comment key={i} comment={comment} />))
                             }
                         </div>
@@ -176,5 +212,8 @@ export default function CardDetails() {
         </div>
     )
 }
+
+
+
 
 
