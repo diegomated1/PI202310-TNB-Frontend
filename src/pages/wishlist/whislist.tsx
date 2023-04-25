@@ -10,35 +10,47 @@ import WishlistComponent from "./component/WishlistComponent"
 
 export default function Wishlist() {
 
+    // export default interface IProduct{
+    //     id_product?: string,
+    //     type: string,
+    //     price: number,
+    //     discount: number,
+    //     availability: number,
+    //     amount: number,
+    //     overall_rating: number,
+    //     amount_people_rate: number
+    // }
+
     const productList: IProduct[] = [
     {
-        id_product: 1,
-        type_object: "card",
-        id_object: "ilfr4nqjg",
+        id_product: "ilfr4nqjg",
+        type: "card",
         price: 20,
         discount: 0.1,
         availability: 10,
         amount: 100,
-        overall_rating: 4.5
+        overall_rating: 4.5,
+        amount_people_rate: 4.5
       },
       {
-        id_product: 2,
-        type_object: "hero",
-        id_object: "ilfr4jkmz",
+        id_product: "ilfr4jkmz",
+        type: "hero",
         price: 15,
         discount: 0.2,
         availability: 5,
         amount: 50,
-        overall_rating: 3.8
+        overall_rating: 3.8,
+        amount_people_rate: 4.5
       },
       {
-        type_object: "card",
-        id_object: "ilfr4p9r3",
+        id_product: "ilfr4p9r3",
+        type: "card",
         price: 25,
         discount: 0.15,
         availability: 20,
         amount: 200,
-        overall_rating: 4.2
+        overall_rating: 4.2,
+        amount_people_rate: 4.5
       }
     ]
       

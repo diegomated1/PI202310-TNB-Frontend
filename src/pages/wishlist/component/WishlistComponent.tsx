@@ -17,19 +17,19 @@ export default function TileLobby({ product }: ListWishlistProps) {
   const [card, setCard] = useState<ICard>();
 
   const handleGetCard = async () => {
-    const data = await cardsApi.getById(product?.id_object!);
+    const data = await cardsApi.getById(product?.id_product!);
     setCard(data);
   };
 
   const [hero, setHero] = useState<IHero>();
 
   const handleGetHero = async () => {
-    const data = await heroeApi.getById(product?.id_object!);
+    const data = await heroeApi.getById(product?.id_product!);
     setHero(data);
   };
 
   useEffect(() => {
-    if (product?.type_object == "hero") {
+    if (product?.type == "hero") {
       handleGetHero();
     } else {
       handleGetCard();
@@ -49,7 +49,7 @@ export default function TileLobby({ product }: ListWishlistProps) {
 
   //const onClick1: () => void;
 
-  if (product?.type_object == "hero") {
+  if (product?.type == "hero") {
     return (
       <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
         <h1>{hero?.name}</h1>
@@ -61,7 +61,7 @@ export default function TileLobby({ product }: ListWishlistProps) {
                 image
                   ? URL.createObjectURL(image!)
                   : `${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${
-                      product!.id_object
+                      product!.id_product
                     }`
               }
             />
