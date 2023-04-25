@@ -23,6 +23,20 @@ export default function CardDetails() {
     const [product, setProduct] = useState<IProduct>();
     const [valoracion, setValoracion] = useState<number>();
     const [comentario, setComentario] = useState('')
+    
+
+    const [cantidad, setCantidad] = useState(1);
+
+    const sum = () => {
+        setCantidad(cantidad + 1);
+    };
+
+    const res = () => {
+        if (cantidad > 1) {
+            setCantidad(
+                cantidad - 1);
+        }
+    };
 
     const handleGetCard = async () => {
         const data = await cardsApi.getById(id_card!);
@@ -50,7 +64,7 @@ export default function CardDetails() {
         const data = await productsApi.getComments(id!);
         setComments(data);
     }
-
+    
     useEffect(() => {
         handleGetCard();
         handleGetComments();
@@ -67,8 +81,9 @@ export default function CardDetails() {
                 <div className="w-[80%] h-full grid grid-cols-2 lg:grid-cols-5">
                     <div className="col-span-2 p-5">
                         <div className="w-full h-full border border-gray-500 bg-white rounded-xl ">
-                            <Card _id={card ? card._id : undefined } card_type={card?.card_type} description={card?.description} id_hero={card?.id_hero} name={card?.name} key={card
-                            ?._id} discount={product?.descuento} obtained={"y"} price={product?.precio}></Card>
+                            {card ? (
+                                <Card card={card} discount={product?.descuento} obtained={"y"} price={product?.precio}></Card>
+                            ) : ''}
                         </div>
                     </div>
                     <div className="col-span-3 p-5">
@@ -95,18 +110,18 @@ export default function CardDetails() {
                             </div>
                             <div className="p-5 w-full flex">
                                 <div className="w-[80%] p-1">
-                                    <Button text="Add To Card" type="buttonlarge"></Button>
+                                    <Button.buttonLarge >Add To Card</Button.buttonLarge>
                                 </div>
                                 <div className="flex-1 p-1">
-                                    <Button text="-" type="buttonlarge" />
+                                    <Button.buttonLarge onClick={res} > - </Button.buttonLarge>
                                 </div>
                                 <div className="flex-1 p-1">
                                     <div className="border border-separate rounded-lg w-full h-full flex justify-center items-center">
-                                        <span>0</span>
+                                        <span>{cantidad}</span>
                                     </div>
                                 </div>
                                 <div className="flex-1 p-1">
-                                    <Button text="+" type="buttonlarge" />
+                                    <Button.buttonLarge onClick={sum}> + </Button.buttonLarge>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +158,7 @@ export default function CardDetails() {
                                     <Icons.clip />
                                 </div>
                                 <div className="w-[90%] p-1">
-                                    <Button text="Add To Comment" type="buttonlarge" />
+                                    <Button.buttonLarge >Add To Card</Button.buttonLarge>
                                 </div>
                             </div>
                         </div>
