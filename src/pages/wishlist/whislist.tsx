@@ -24,7 +24,7 @@ export default function Wishlist() {
       {
         id_product: 2,
         type_object: "hero",
-        id_object: "ilfr4bh8k",
+        id_object: "ilfr4jkmz",
         price: 15,
         discount: 0.2,
         availability: 5,
@@ -47,6 +47,12 @@ export default function Wishlist() {
         <div className="w-screen h-full flex flex-col">
             <AdminCardsNavBar></AdminCardsNavBar>
             <h1 className="text-6xl pt-8 pl-6">Lista de deseos</h1>
+            {/* <div className="h-full flex">
+                    <h2>Nombre del producto</h2>
+                    <h2>Descuento</h2>
+                    <h2>Precio unitario</h2>
+                    <h2>En stock</h2>
+                </div> */}
             <div className="w-screen h-full flex">
                 <div className="flex-[3] p-4">
                 {productList?.map((index, i) => {

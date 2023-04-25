@@ -19,48 +19,63 @@ export default function TileLobby({ product }: ListWishlistProps) {
   const handleGetCard = async () => {
     const data = await cardsApi.getById(product?.id_object!);
     setCard(data);
-  
-}
+  };
 
   const [hero, setHero] = useState<IHero>();
 
   const handleGetHero = async () => {
     const data = await heroeApi.getById(product?.id_object!);
     setHero(data);
-  
-}
+  };
 
-useEffect(()=>{
-  if (product?.type_object == "hero") {
-    handleGetHero()
-  } else {
-    handleGetCard()
-  }
-}, []);
+  useEffect(() => {
+    if (product?.type_object == "hero") {
+      handleGetHero();
+    } else {
+      handleGetCard();
+    }
+  }, []);
 
-// cartas
+  // cartas
 
-// ilfr4nqjg
-// ilfr4bh8k
-// ilfr4p9r3
+  // ilfr4nqjg
+  // ilfr4bh8k
+  // ilfr4p9r3
 
-// heroes
+  // heroes
 
-// guererro tanque: ilfr4bh8k
-// guerrero armas: ilfr4jkmz
-
+  // guererro tanque: ilfr4bh8k
+  // guerrero armas: ilfr4jkmz
 
   //const onClick1: () => void;
 
   if (product?.type_object == "hero") {
-    console.log("entro 7u7");
-    return (<div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
-      <h1>{hero?.description}</h1>
-    </div>)
+    return (
+      <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
+        <h1>{hero?.name}</h1>
+        <div className="w-[50%] h-full">
+          <figure className="h-full w-full shadow-md">
+            <img
+              className="object-cover "
+              src={
+                image
+                  ? URL.createObjectURL(image!)
+                  : `${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${
+                      product!.id_object
+                    }`
+              }
+            />
+          </figure>
+        </div>
+        <div className="w-[50%] h-full"></div>
+      </div>
+    );
   } else {
-    return (<div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
-      <h1>{card?.name}</h1>
-    </div>)
+    return (
+      <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
+        <h1>{card?.name}</h1>
+      </div>
+    );
   }
 
   // return (
