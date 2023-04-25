@@ -1,7 +1,7 @@
 import Icons from "./Icons"
 import Button from "./Button"
 import Dropdown from "./dropdown";
-import Wishlist from "../pages/wishlist/favorites"; 
+import Wishlist from "../pages/wishlist/whislist"; 
 import { Link } from "react-router-dom";
 export default function AdminCardsNavBar() {
     const handleClick1 = () => console.log("Click 1");
