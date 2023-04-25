@@ -21,7 +21,7 @@ export default function Card({ heroe, price, discount, obtained, onClick1, onCli
     const [image, setImage] = useState<File>();
 
     return (
-        <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md border-solid border-red-500 border-2">
+        <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md border-solid border-red-500 border-2 hover:scale-[106%]">
             <figure className="relative h-[40%] w-full shadow-md">
                 <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${heroe._id}`} />
                 <div className="absolute top-0 right-0">

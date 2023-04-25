@@ -33,9 +33,9 @@ export default function Card({card, price, discount, obtained, onClick1, onClick
     }, []);
 
     return (
-        <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md border-solid border-red-500 border-2">
+        <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md border-solid border-red-500 border-2 hover:scale-[106%]">
             <figure className="relative h-[40%] w-full shadow-md">
-                <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `${import.meta.env.VITE_API_HEROES_URL}/images/cards/${card._id}`} />
+                <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `${import.meta.env.VITE_API_CARDS_URL}/images/cards/${card._id}`} />
                 <div className="absolute top-0 left-0">
                     {Icons[card.card_type!]({})}
                 </div>

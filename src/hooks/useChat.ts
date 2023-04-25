@@ -6,16 +6,17 @@ import IUser from "../interfaces/IUser";
 
 
 export default function useMessages(setMessages:React.Dispatch<React.SetStateAction<IMessage[]>>, user:IUser|null, id_room?:string){
-    const socket = useSocket("192.168.1.22");
-
+    const socket = useSocket(import.meta.env.VITE_SOCKET_CHAT, {query: {id_chat: id_room}, path: '/chat'});
+    
     useEffect(()=>{
         if(socket){
             function receivedMessage(message:IMessage){
+
                 setMessages((prevs)=>[...prevs, message]);
             }
 
             socket.on('chat:message', receivedMessage);
-
+            
             socket.emit('chat:join', id_room);
 
             return ()=>{
@@ -26,12 +27,13 @@ export default function useMessages(setMessages:React.Dispatch<React.SetStateAct
 
     const sendMessage = (message:string) => {
         if(socket && user){
+            
             const newMsg:IMessage = {
                 id_user: user.id_user,
                 username: user.username,
                 text: message
             }
-            socket.emit('chat:message', newMsg);
+            socket.emit('chat:message', newMsg, id_room);
         }
     }
 

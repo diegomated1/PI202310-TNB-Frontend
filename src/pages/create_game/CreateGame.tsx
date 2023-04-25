@@ -1,10 +1,11 @@
-import { Children, Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import AdminCardsNavBar from "../../components/NavBar";
 import AddPlayerSquare from "./components/AddPlayerSquare";
-import useMatches from "../../hooks/useMatches";
 import { useNavigate } from "react-router";
+import Chat from "../../components/Chat";
+import useLobby from "../../hooks/useLobby";
 
 /**
  * Component for creating a new game match.
@@ -12,32 +13,23 @@ import { useNavigate } from "react-router";
 export default function CreateGame(){
 
     const navigate = useNavigate();
-    const matches = useMatches();
     const [bet, setBet] = useState(0);
     const [numberPlayers, setNumberPlayers] = useState(2);
     const [ias, setIas] = useState(0);
 
-    const [creatingMatch, setCreatingMatch] = useState(0);
+    const {lobby, createLobby} = useLobby();
 
-    /**
-     * Handler function for creating a new match
-     */
-    const handleCreateMatch = ()=>{
-        if(true){
-            setCreatingMatch(1);
-            matches.createMatch(numberPlayers, ias, bet);
-        }
+    const handleCreateLobby = ()=>{
+        createLobby('ilfr4bh8k', 'ilfr4bh8k', ias, numberPlayers, bet);
     }
 
-    /**
-     * If the match is create redirect to lobby page
-     */
     useEffect(()=>{
-        if(matches.match){
-            navigate(`/game/lobby/${matches.match._id}`);
+        if(lobby){
+            navigate(`/game/lobby/${lobby._id}`);
         }
-    }, [matches.match]);
+    }, [lobby]);
 
+    
     return(
         <div className="w-screen h-screen flex flex-col">
             <AdminCardsNavBar/>
@@ -74,19 +66,14 @@ export default function CreateGame(){
                             ))}
                         </div>
                         <div className="flex-[2] flex justify-end items-center pr-5">
-                            <div className="w-36">
-                                <Button.default onClick={handleCreateMatch}>Crear partida</Button.default>
-                                {(creatingMatch==1) ? (
-                                    <span className="w-full flex justify-center">Creando partida...</span>
-                                ) : (
-                                    ''
-                                )}
+                            <div className="w-36 h-10">
+                                <Button.buttonYellow onClick={handleCreateLobby}>Crear partida</Button.buttonYellow>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="w-96 h-full bg-red-100 flex justify-center items-center">
-                    comentarios
+                    <Chat/>
                 </div>
             </div>
         </div>

@@ -15,7 +15,8 @@ import Account from "./pages/account/Account"
 import AdminHeroes from "./pages/admin_heroes/AdminHeroes"
 import CreateDeck from "./pages/create_deck/CreateDeck"
 import Mazo from "./pages/mazo_presentacion/mazo"
-import Wishlist from "./pages/wishlist/favorites"
+import Wishlist from "./pages/wishlist/whislist"
+import ListTileMatch from "./pages/Lobbys/Lobbys"
 
 function App() {
   return (
@@ -37,7 +38,8 @@ function App() {
         <Route path="/game/deck" element={<Mazo/>}/>
         <Route path="/game/create/deck" element={<CreateDeck/>}/>
         <Route path="/game/lobby/create" element={<CreateGame/>}/>
-        <Route path="/game/lobby/:id_match" element={<Lobby/>}/>
+        <Route path="/game/list" element={<ListTileMatch/>}/>
+        <Route path="/game/lobby/:id_lobby" element={<Lobby/>}/>
         
         <Route path="/card/:id_card" element={<CardDetails/>}/>
         <Route path="/vitrina" element={<Vitrina/>}/>
