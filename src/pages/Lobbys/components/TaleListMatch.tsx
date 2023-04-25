@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ILobby from "../../../interfaces/ILobby";
 import Button from "../../../components/Button";
+import useLobby from "../../../hooks/useLobby";
 
 type ListLobbyProps = {
   lobby?: ILobby;
@@ -9,7 +10,11 @@ type ListLobbyProps = {
 export default function TileLobby({ lobby }: ListLobbyProps) {
   const [image, setImage] = useState<File>();
 
-  //const onClick1: () => void;
+  const {joinLobby} = useLobby(false);
+
+  const handleJoinLobby = ()=>{
+    joinLobby('ilfr4bh8k', 'ilfr4bh8k', lobby?._id!);
+  }
 
   return (
     <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
@@ -49,7 +54,7 @@ export default function TileLobby({ lobby }: ListLobbyProps) {
       </div>
       <div className="flex-[1] w-full">
         <div className="flex h-full justify-center items-center flex-col p-2">
-          <Button.buttonYellow>Ingresar</Button.buttonYellow>
+          <Button.buttonYellow onClick={handleJoinLobby}>Ingresar</Button.buttonYellow>
         </div>
       </div>
     </div>

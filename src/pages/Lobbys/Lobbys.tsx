@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
-import ILobby from "../../interfaces/ILobby";
 import AdminCardsNavBar from "../../components/NavBar";
 import TileMatch from "./components/TaleListMatch";
-import matchApi from "../../services/lobby.api"
-import useLobby from "../../hooks/useLobby";
 import Chat from "../../components/Chat";
+import useLobbies from "../../hooks/useLobby";
 
 
 export default function ListTileMatch() {
 
-  const [lobby, lobbies, Clobby] = useLobby()
+  const {lobbies} = useLobbies()
 
   return (
     <div className="w-screen h-full flex flex-col">

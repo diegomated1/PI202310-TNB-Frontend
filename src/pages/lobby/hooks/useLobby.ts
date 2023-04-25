@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Ilobby from "../../../interfaces/ILobby";
+import Ilobby, { IPLayer } from "../../../interfaces/ILobby";
 import useAuth from "../../../hooks/useAuth";
 import useSocket from "../../../hooks/useSocket";
 import IUser from "../../../interfaces/IUser";
@@ -13,10 +13,10 @@ import lobbyApi from "../../../services/lobby.api";
  * The second element is a function that allows the user to leave the lobby.
  * Thi third element is a function that allow the owner to start lobby
  */
-export default function useLobby(id_lobby?:string):[boolean, Ilobby|null|undefined, ()=>void, (idGame:string)=>void]{
+export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefined, ()=>void, (idGame:string)=>void]{
 
     // socket that allow to connect server 'game_create'
-    const socket = useSocket(import.meta.env.VITE_SERVER_LOBBIES);
+    const socket = useSocket(import.meta.env.VITE_SOCKET_LOBBY, {path: '/lobby', query: {id_lobby}});
 
     // state for almacening lobby info (players, ias, bet, etc.)
     const [lobby, setLobby] = useState<Ilobby|null|undefined>(undefined);
@@ -26,32 +26,30 @@ export default function useLobby(id_lobby?:string):[boolean, Ilobby|null|undefin
     const [isOwner, setIsOwner] = useState(false);
 
     useEffect(()=>{
-        const handleGetLobby = async ()=>{
-            if(id_lobby){
+        if(user){
+            const handleGetLobby = async ()=>{
                 const lobby = await lobbyApi.getById(id_lobby);
-                setLobby(lobby);
-            }else{
-                setLobby(null);
+                const _user = lobby.players.find(player=>player.id_user==user.id_user);
+                if(_user){
+                    setLobby(lobby);
+                    setIsOwner(user.id_user==lobby.id_owner);
+                }else{
+                    setLobby(null);
+                }
             }
+            handleGetLobby();
         }
-        handleGetLobby();
-    }, []);
-
-    useEffect(()=>{
-        if(user && lobby){
-            setIsOwner(user.id_user==lobby.id_owner);
-        }
-    }, [lobby, user]);
+    }, [user]);
 
     useEffect(()=>{
         if(lobby && socket && user){
 
             /**
              * Function to get players when a new player is joining 
-             * @param {string} id_player the id of the player who enter the lobby
+             * @param {IPLayer} player player object (id_player, id_hero, id_deck)
              */
-            function lobbyUserJoin(id_player:string){
-                setLobby((lobby)=>({...lobby!, players: [...lobby!.players, id_player]}));
+            function lobbyUserJoin(player:IPLayer){
+                setLobby((lobby)=>({...lobby!, players: [...lobby!.players, player]}));
             }
 
             /**
@@ -59,8 +57,10 @@ export default function useLobby(id_lobby?:string):[boolean, Ilobby|null|undefin
              * @param {string} id_player the id of the player who leave the lobby
              */
             function lobbyUserLeave(id_player:string){
-                setLobby((lobby)=>({...lobby!, players: lobby!.players.filter(ply=>ply!=id_player)}));
+                setLobby((lobby)=>({...lobby!, players: lobby!.players.filter(ply=>ply.id_user!=id_player)}));
             }
+
+            socket.emit('lobby:room:join', user.id_user);
 
             // Events that this custom hook listens to
             socket.on('lobby:user:join', lobbyUserJoin);
@@ -87,7 +87,7 @@ export default function useLobby(id_lobby?:string):[boolean, Ilobby|null|undefin
      * Function to start round
      */
     function start(idGame:string){
-        if(socket && user && id_lobby){
+        if(socket && user && isOwner && id_lobby){
             socket.emit('lobby:start', id_lobby, idGame);
         }
     }

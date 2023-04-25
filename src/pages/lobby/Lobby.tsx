@@ -13,7 +13,7 @@ export default function Lobby(){
 
     const navigate = useNavigate();
     const {id_lobby} = useParams();
-    const [isOwner, lobby, leave, start] = useLobby(id_lobby);
+    const [isOwner, lobby, leave, start] = useLobby(id_lobby!);
 
     const [startMessage, setStartMessage] = useState<string>();
 
@@ -22,7 +22,7 @@ export default function Lobby(){
      */
     const handleLeave = ()=>{
         leave();
-        navigate('/game/create');
+        navigate('/game/list');
     }
 
     /**
@@ -36,7 +36,8 @@ export default function Lobby(){
                 console.log(game);
                 if(game){
                     for(let i=0;i<lobby.players.length;i++){
-                        await gameApi.addUser(game.id_game, lobby.players[i], "ilfr4mbhc", all_cards);
+                        const {id_user, id_hero, id_deck} = lobby.players[i];
+                        await gameApi.addUser(game.id_game, id_user, id_hero, id_deck);
                     }
                 }
             }catch(error){
@@ -45,12 +46,9 @@ export default function Lobby(){
         }
     }
 
-    /**
-     * check if the user is in the lobby, if not navigate to /game/create
-     */
     useEffect(()=>{
         if(lobby===null){
-            navigate('/game/lobby/create');
+            navigate('/game/list');
         }
     }, [lobby]);
 
@@ -80,7 +78,7 @@ export default function Lobby(){
                         {(lobby) ? (
                             <div className="flex-[3] grid grid-cols-4">
                                 {lobby.players.map((player,i)=>(
-                                    <Player key={i} id_user={player} />
+                                    <Player key={i} id_user={player.id_user} />
                                 ))}
                                 {[...Array(lobby.max_number_players-(lobby.players.length+lobby.ias))].map((x,i)=>(
                                     <WaitingPlayer key={i}/>
@@ -117,7 +115,7 @@ export default function Lobby(){
                     </div>
                 </div>
                 <div className="w-96 h-full bg-red-100 flex justify-center items-center">
-                    <Chat/>
+                    <Chat id_room={id_lobby}/>
                 </div>
             </div>
         </div>

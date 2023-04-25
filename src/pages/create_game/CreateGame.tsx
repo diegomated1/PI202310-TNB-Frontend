@@ -17,18 +17,19 @@ export default function CreateGame(){
     const [numberPlayers, setNumberPlayers] = useState(2);
     const [ias, setIas] = useState(0);
 
-    const [lobby, lobbies, createLobby] = useLobby();
+    const {lobby, createLobby} = useLobby();
 
     const handleCreateLobby = ()=>{
-        createLobby('ilfr4bh8k', ias, numberPlayers, bet);
+        createLobby('ilfr4bh8k', 'ilfr4bh8k', ias, numberPlayers, bet);
     }
 
     useEffect(()=>{
         if(lobby){
-            console.log(lobby);
+            navigate(`/game/lobby/${lobby._id}`);
         }
     }, [lobby]);
 
+    
     return(
         <div className="w-screen h-screen flex flex-col">
             <AdminCardsNavBar/>
