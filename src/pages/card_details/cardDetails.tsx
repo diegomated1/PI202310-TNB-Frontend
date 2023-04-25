@@ -17,11 +17,12 @@ import IHeroe from "../../interfaces/IHeroe";
 import Hero from "../../components/Hero";
 import cartApi from "../../services/cart.api";
 import useAuth from "../../hooks/useAuth";
+import commentsApi from "../../services/comments.api";
 
 export default function CardDetails() {
 
-    const {id_product} = useParams();
-    const {user} = useAuth();
+    const { id_product } = useParams();
+    const { user } = useAuth();
 
     const [product, setProduct] = useState<IProduct>();
     const [card, setCard] = useState<ICard>();
@@ -54,47 +55,47 @@ export default function CardDetails() {
             console.log(error);
         }
     }*/
-    
+
     useEffect(() => {
-        const handleGetCard = async (id_card:string) => {
+        const handleGetCard = async (id_card: string) => {
             const data = await cardsApi.getById(id_card);
             setCard(data);
         }
-        const handleGetHeroe= async (id_heroe:string) => {
+        const handleGetHeroe = async (id_heroe: string) => {
             const data = await heroeApi.getById(id_heroe);
             setHeroe(data);
         }
-        const handleGetComments = async (id_product:string) => {
-            const data = await productsApi.getComments(id_product);
+        const handleGetComments = async (id_product: string) => {
+            const data = await commentsApi.get(id_product);
             setComments(data);
         }
         const handleGetProduct = async () => {
-            if(id_product){
+            if (id_product) {
 
                 const data = await productsApi.getProductById(id_product!);
-                if(data.type=='card'){
+                if (data.type == 'card') {
                     handleGetCard(data.id_product!);
-                }else{
+                } else {
                     handleGetHeroe(data.id_product!);
                 }
                 setProduct(data);
-                //handleGetComments(data.id_product!);
+                handleGetComments(data.id_product!);
             }
         }
         handleGetProduct();
     }, []);
 
     const handleAddShoppingCart = async () => {
-        try{
-            if(user && product){
+        try {
+            if (user && product) {
                 await cartApi.addToCart(user.id_user, id_product!, cantidad);
                 alert("Producto añadido");
-            }else{
+            } else {
                 await cartApi.addToCart("12345", id_product!, cantidad);
                 alert("Producto añadido");
 
             }
-        }catch(error){
+        } catch (error) {
 
         }
     }
@@ -139,9 +140,15 @@ export default function CardDetails() {
                             <hr />
                             <div className="p-5">
                                 <span className="text-xl">
-                                    <strong>
-                                        Price: ${product?.price}
-                                    </strong>
+                                    {(product && product.discount > 0) ? (
+                                        <strong >
+                                            Price: <strong className="text-red-500">${product?.price - ((product?.price * product?.discount)/ 100) }</strong>
+                                        </strong>
+                                    ) : (
+                                        <strong>
+                                            Price: ${product?.price}
+                                        </strong>
+                                    )}
                                 </span>
                             </div>
                             <div className="p-5 w-[100%] flex">
@@ -173,11 +180,11 @@ export default function CardDetails() {
                             <div className="p-3 ">
                                 <h3 className="text-xl">Ranking</h3>
                                 <div className="p-3 flex">
-                                    <Icons.star onClick={()=>setValoracion(1)}/>
-                                    <Icons.star onClick={()=>setValoracion(2)}/>
-                                    <Icons.star onClick={()=>setValoracion(3)}/>
-                                    <Icons.star onClick={()=>setValoracion(4)}/>
-                                    <Icons.star onClick={()=>setValoracion(5)}/>
+                                    <Icons.star onClick={() => setValoracion(1)} />
+                                    <Icons.star onClick={() => setValoracion(2)} />
+                                    <Icons.star onClick={() => setValoracion(3)} />
+                                    <Icons.star onClick={() => setValoracion(4)} />
+                                    <Icons.star onClick={() => setValoracion(5)} />
                                 </div>
                             </div>
                             <div className="p-3">
@@ -186,7 +193,7 @@ export default function CardDetails() {
                                     <textarea
                                         className="border border-black peer block min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                         placeholder="Your message" onChange={(e) => { setComentario(e.target.value) }}>
-                                        </textarea>
+                                    </textarea>
                                 </div>
                             </div>
                             <div className="p-5 w-full flex">

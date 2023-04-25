@@ -12,12 +12,13 @@ export default function Comment(props:ICommentProps) {
     
     const [userName, setUserName] = useState("");
 
-    const handleGetCard = async () => {
-        const data = await userApi.getById(props.comment.id_usuario);
-        setUserName(data.username);
-    }
+    
 
     useEffect(() => {
+        const handleGetCard = async () => {
+            const data = await userApi.getById(props.comment.id_usuario);
+            setUserName(data.username);
+        }
         handleGetCard();
     }, []);
 
@@ -49,4 +50,13 @@ export default function Comment(props:ICommentProps) {
         </div>
     )
 }
+
+function Images(id_image:string){
+    return(
+        <div>
+            <img src="" alt="" />
+        </div>
+    )
+}
+
 
