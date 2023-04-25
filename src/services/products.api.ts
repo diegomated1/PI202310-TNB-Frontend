@@ -26,8 +26,7 @@ class ProductsApi {
     getProductById(id_carta: string): Promise<IProduct> {
         return new Promise(async (res, rej) => {
             try {
-                const { data } = await axios.get(`${this.baseUrl}/product/${id_carta}`);
-                console.log(data)
+                const { data } = await axios.get(`${this.baseUrl}/${id_carta}`);
                 res(data.data);
             } catch (error) {
                 rej(error);

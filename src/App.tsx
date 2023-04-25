@@ -41,7 +41,7 @@ function App() {
         <Route path="/game/list" element={<ListTileMatch/>}/>
         <Route path="/game/lobby/:id_lobby" element={<Lobby/>}/>
         
-        <Route path="/card/:id_card" element={<CardDetails/>}/>
+        <Route path="/card/:id_product" element={<CardDetails/>}/>
         <Route path="/vitrina" element={<Vitrina/>}/>
         <Route path="/account" element={<Account/>}/>.
         <Route path="/wishlist" element={<Wishlist/>}/>
