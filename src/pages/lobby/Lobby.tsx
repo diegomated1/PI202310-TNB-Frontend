@@ -37,7 +37,7 @@ export default function Lobby(){
                     for(let i=0;i<lobby.players.length;i++){
                         await gameApi.addUser(game.id_game, lobby.players[i]);
                     }
-                    navigate(`/game/?g=${game.id_game}`);
+                    start(game.id_game);
                 }
             }catch(error){
                 console.log(error);

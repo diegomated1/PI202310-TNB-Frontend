@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import useSocket from "../../../hooks/useSocket";
 import IUser from "../../../interfaces/IUser";
 import lobbyApi from "../../../services/lobby.api";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Custom hook for managing lobby.
@@ -15,6 +16,7 @@ import lobbyApi from "../../../services/lobby.api";
  */
 export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefined, ()=>void, (idGame:string)=>void]{
 
+    const navigate = useNavigate();
     // socket that allow to connect server 'game_create'
     const socket = useSocket(import.meta.env.VITE_SOCKET_LOBBY, {path: '/lobby', query: {id_lobby}});
 
@@ -60,16 +62,22 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
                 setLobby((lobby)=>({...lobby!, players: lobby!.players.filter(ply=>ply!=id_player)}));
             }
 
-            socket.emit('lobby:room:join', user.id_user);
+            function onStart(id_game:string){
+                navigate(`/game/?g=${id_game}`);
+            }
 
+            socket.emit('lobby:room:join', user.id_user);
+            
             // Events that this custom hook listens to
             socket.on('lobby:user:join', lobbyUserJoin);
             socket.on('lobby:user:leave', lobbyUserLeave);
+            socket.on('lobby:start', onStart);
 
             // Clean up function to remove the event listener when the component unmounts.
             return () => {
                 socket.off('lobby:user:join', lobbyUserJoin);
                 socket.off('lobby:user:leave', lobbyUserLeave);
+                socket.off('lobby:start', onStart);
             }
         }
     }, [lobby, socket, user]);
@@ -88,6 +96,7 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
      */
     function start(id_game:string){
         if(socket && user && isOwner && id_lobby){
+            console.log("llmando");
             socket.emit('lobby:start', id_lobby, id_game);
         }
     }
