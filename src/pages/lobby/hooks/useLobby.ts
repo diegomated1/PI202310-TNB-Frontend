@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Ilobby, { IPLayer } from "../../../interfaces/ILobby";
+import Ilobby from "../../../interfaces/ILobby";
 import useAuth from "../../../hooks/useAuth";
 import useSocket from "../../../hooks/useSocket";
 import IUser from "../../../interfaces/IUser";
@@ -29,7 +29,7 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
         if(user){
             const handleGetLobby = async ()=>{
                 const lobby = await lobbyApi.getById(id_lobby);
-                const _user = lobby.players.find(player=>player.id_user==user.id_user);
+                const _user = lobby.players.find(player=>player==user.id_user);
                 if(_user){
                     setLobby(lobby);
                     setIsOwner(user.id_user==lobby.id_owner);
@@ -48,7 +48,7 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
              * Function to get players when a new player is joining 
              * @param {IPLayer} player player object (id_player, id_hero, id_deck)
              */
-            function lobbyUserJoin(player:IPLayer){
+            function lobbyUserJoin(player:string){
                 setLobby((lobby)=>({...lobby!, players: [...lobby!.players, player]}));
             }
 
@@ -57,7 +57,7 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
              * @param {string} id_player the id of the player who leave the lobby
              */
             function lobbyUserLeave(id_player:string){
-                setLobby((lobby)=>({...lobby!, players: lobby!.players.filter(ply=>ply.id_user!=id_player)}));
+                setLobby((lobby)=>({...lobby!, players: lobby!.players.filter(ply=>ply!=id_player)}));
             }
 
             socket.emit('lobby:room:join', user.id_user);
@@ -86,9 +86,9 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
     /**
      * Function to start round
      */
-    function start(idGame:string){
+    function start(id_game:string){
         if(socket && user && isOwner && id_lobby){
-            socket.emit('lobby:start', id_lobby, idGame);
+            socket.emit('lobby:start', id_lobby, id_game);
         }
     }
 

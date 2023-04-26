@@ -1,6 +1,6 @@
 import useSocket from "./useSocket";
 import { useEffect, useState } from "react";
-import ILobby, { IPLayer } from "../interfaces/ILobby";
+import ILobby from "../interfaces/ILobby";
 import useAuth from "./useAuth";
 import lobbyApi from "../services/lobby.api";
 import { useNavigate } from "react-router-dom";
@@ -40,13 +40,14 @@ export default function useLobby(getlobbies:boolean=true){
                     if(user!.id_user==lobby.id_owner){
                         setLobby(lobby);
                     }
-                    setLobbies(lobbies=>[...lobbies, lobby]);
+                    if(getlobbies){
+                        setLobbies(lobbies=>[...lobbies, lobby]);
+                    }
                 }
             }
 
-            function onJoinLobby(player?:IPLayer, id_lobby?:string){
-                console.log(player);
-                if(player && id_lobby && player.id_user == user!.id_user){
+            function onJoinLobby(player?:string, id_lobby?:string){
+                if(player && id_lobby && player == user!.id_user){
                     navigate(`/game/lobby/${id_lobby}`);
                 }
             }
@@ -71,21 +72,15 @@ export default function useLobby(getlobbies:boolean=true){
      * @param max_number_players max amount of players in the lobby
      * @param bet min bet
      */
-    const createLobby = (
-        id_hero:string, id_deck:string, ias:number, max_number_players:number, bet:number
-    ) => {
+    const createLobby = (ias:number, max_number_players:number, bet:number) => {
         if(socket && user){
-            socket.emit('lobby:create', 
-            {id_user: user.id_user, id_deck, id_hero}, 
-            ias, max_number_players, bet);
+            socket.emit('lobby:create', user.id_user, ias, max_number_players, bet);
         }
     }
 
-    const joinLobby = (id_hero:string, id_deck:string, id_lobby:string) => {
+    const joinLobby = (id_lobby:string) => {
         if(socket && user){
-            socket.emit('lobby:user:join', 
-            {id_user: user.id_user, id_deck, id_hero}, 
-            id_lobby);
+            socket.emit('lobby:user:join', user.id_user, id_lobby);
         }
     }
 
