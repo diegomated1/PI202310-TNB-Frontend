@@ -11,7 +11,7 @@ class LobbyApi{
     insert(lobby:ILobby){
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.post(`${this.baseUrl}/lobbies`, {...lobby});
+                const {data} = await axios.post(`${this.baseUrl}`, {...lobby});
                 res(data.data);
             }catch(error){
                 console.log(error);
@@ -23,7 +23,7 @@ class LobbyApi{
     getAll():Promise<ILobby[]>{
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.get(`${this.baseUrl}/lobbies`);
+                const {data} = await axios.get(`${this.baseUrl}`);
                 res(data.data as ILobby[]);
             }catch(error){
                 rej(error);
@@ -34,7 +34,7 @@ class LobbyApi{
     getById(id_lobby: string): Promise<ILobby> {
         return new Promise(async (res, rej) => {
             try {
-                const { data } = await axios.get(`${this.baseUrl}/lobbies/${id_lobby}`);
+                const { data } = await axios.get(`${this.baseUrl}/${id_lobby}`);
                 res(data.data);
             } catch (error) {
                 rej(error);

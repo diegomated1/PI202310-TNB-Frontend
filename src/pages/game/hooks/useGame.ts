@@ -29,7 +29,7 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
                 const {game} = await gameApi.getGameById(id_game);
                 const _players:{[key:string]:IPlayer} = {};
                 const _heroes:{[key:string]:IHero} = {};
-                for(const player of game.players_in_game){
+                for(const player of game.players){
                     const _player = await gameApi.getUserByGameId(id_game, player);
                     _players[_player.user._id] = _player.user;
                     _heroes[_player.hero._id] = _player.hero;
@@ -61,7 +61,7 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
             }
 
             function gameStart(game:IGame){
-                console.log(game);
+                setGame(game);
             }
 
             function onAttack(result:IResult){

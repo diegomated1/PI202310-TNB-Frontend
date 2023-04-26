@@ -22,7 +22,6 @@ export default function Lobby(){
      */
     const handleLeave = ()=>{
         leave();
-        navigate('/game/list');
     }
 
     /**

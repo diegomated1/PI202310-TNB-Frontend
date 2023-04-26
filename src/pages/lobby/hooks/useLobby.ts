@@ -59,7 +59,11 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
              * @param {string} id_player the id of the player who leave the lobby
              */
             function lobbyUserLeave(id_player:string){
+                console.log(id_player);
                 setLobby((lobby)=>({...lobby!, players: lobby!.players.filter(ply=>ply!=id_player)}));
+                if(id_player==user?.id_user){
+                    navigate('/game/list');
+                }
             }
 
             function onStart(id_game:string){

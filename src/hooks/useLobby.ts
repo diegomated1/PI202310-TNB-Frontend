@@ -52,14 +52,22 @@ export default function useLobby(getlobbies:boolean=true){
                 }
             }
 
+            function onDeletedLobby(id_lobby:string){
+                if(getlobbies){
+                    setLobbies(lobbies=>[...lobbies.filter(lobby=>lobby._id!=id_lobby)]);
+                }
+            }
+
             // Events that this custom hook listens to
             socket.on('lobby:create', onCreateLobby);
             socket.on('lobby:user:join', onJoinLobby);
-
+            socket.on('lobby:deleted', onDeletedLobby);
+            
             // Clean up function to remove the event listener when the component unmounts.
             return ()=>{
                 socket.off('lobby:create', onCreateLobby);
                 socket.off('lobby:user:join', onJoinLobby);
+                socket.off('lobby:deleted', onDeletedLobby);
             }
         }
     }, [socket, user]);

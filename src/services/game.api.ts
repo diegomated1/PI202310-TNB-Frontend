@@ -1,6 +1,7 @@
 import axios from 'axios';
 import IGame from '../pages/game/interfaces/IGame';
 import IHero from '../pages/game/interfaces/IHero';
+import IPlayer from '../pages/game/interfaces/IPlayer';
 class GameApi{
 
     baseUrl: string
@@ -30,7 +31,7 @@ class GameApi{
         });
     }
 
-    getUserByGameId(id_game:string, id_user:string): Promise<{user:string,hero:IHero}> {
+    getUserByGameId(id_game:string, id_user:string): Promise<{user:IPlayer,hero:IHero}> {
         return new Promise(async (res, rej) => {
             try {
                 const { data } = await axios.get(`${this.baseUrl}/games/${id_game}/users/${id_user}`);
