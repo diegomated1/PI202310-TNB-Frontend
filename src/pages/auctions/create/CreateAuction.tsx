@@ -2,13 +2,21 @@ import { useEffect, useState } from "react";
 import useCreateAuction from "./hooks/useCreateAuction"
 import AdminCardsNavBar from "../../../components/NavBar";
 import Input from "../../../components/Input";
+import useAuth from "../../../hooks/useAuth";
+import IInventory from "../../../interfaces/IInventory";
+import inventoryApi from "../../../services/inventory.api";
+import ModalCards from "./components/modalCards";
 
 
 export default function CreateAuction(){
 
     //const [auction, setAuction] = useCreateAuction();
-
+    const [cards, setCards] = useState(0);
     const [minBidd, setMinBidd] = useState(0);
+
+    const {user} = useAuth();
+
+    const [modalOpen, setModalOpen] = useState(true);
 
     return(
         <div className="w-screen h-screen bg-red-200 flex flex-col">
@@ -30,6 +38,7 @@ export default function CreateAuction(){
                     </div>
                 </div>
             </div>
+            <ModalCards isOpen={modalOpen} setIsOpen={setModalOpen} id_user={user?.id_user} />
         </div>
     )
 }
