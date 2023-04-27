@@ -15,16 +15,7 @@ class InventoryApi{
         this.baseUrl = import.meta.env.VITE_API_INVENTORY_URL;
     }
 
-    getById(id_user:string):Promise<IDeck>{
-        return new Promise(async(res, rej)=>{
-            try{
-                const {data} = await axios.get(`${this.baseUrl}/users/${id_user}/decks`);
-                res(data.data)
-            }catch(error){
-                rej(error)
-            }
-        });
-    }
+   
 
     getByUserId(id_user:string):Promise<IInventory>{
         return new Promise(async(res, rej)=>{
@@ -37,6 +28,22 @@ class InventoryApi{
             }
         });
     }
+
+    insertInventoryById(id_user:string, id_product:string, quantity:number):Promise<IInventory>{
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.post(`${this.baseUrl}/users/${id_user}/inventory`,{
+                    id_product: id_product, quantity: quantity,
+                });
+                res(data.data);
+            }catch(error){
+                console.log(error);
+                rej(error);
+            }
+        });
+    }
+
+    
 
 }
 
