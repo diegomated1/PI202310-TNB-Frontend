@@ -12,6 +12,17 @@ class ProductsApi {
         this.baseUrl = import.meta.env.VITE_API_PRODUCTS_URL;
     }
 
+    getProducts(): Promise<IProduct[]>{
+        return new Promise(async (res, rej) => {
+            try {
+                const { data } = await axios.get(`${this.baseUrl}`);
+                res(data.data);
+            } catch (error) {
+                rej(error);
+            }
+        });
+    }
+
     getProductById(id_carta: string): Promise<IProduct> {
         return new Promise(async (res, rej) => {
             try {

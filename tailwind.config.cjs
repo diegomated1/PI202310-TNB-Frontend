@@ -25,6 +25,5 @@ module.exports = {
         '4/5': '4/5',
       },
     }
-  },
-  plugins:[require('@tailwindcss/line-clamp')],
+  }
 };
