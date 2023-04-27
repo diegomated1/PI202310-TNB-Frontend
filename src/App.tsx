@@ -11,7 +11,6 @@ import Login from "./pages/login/login"
 import Register from "./pages/register/register"
 import CardDetails from "./pages/card_details/cardDetails"
 import Vitrina from "./pages/vitrina/vitrina"
-import Account from "./pages/account/Account"
 import AdminHeroes from "./pages/admin_heroes/AdminHeroes"
 import CreateDeck from "./pages/create_deck/CreateDeck"
 import Mazo from "./pages/mazo_presentacion/mazo"
@@ -47,7 +46,6 @@ function App() {
         
         <Route path="/card/:id_product" element={<CardDetails/>}/>
         <Route path="/vitrina" element={<Vitrina/>}/>
-        <Route path="/account" element={<Account/>}/>.
         <Route path="/wishlist" element={<Wishlist/>}/>
         <Route path="/shoppingcart" element={<ShoppingCart/>}/>
 
