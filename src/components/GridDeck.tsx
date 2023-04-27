@@ -27,11 +27,11 @@ export default function GridDeck({type, parcialCards, onClick1, onClick2, onClic
           (parcialCards) ? (
             (type==1) ? (
               (parcialCards as ICard[]).map((card, id) => (
-                <Card key={card._id} card={card} price={10} discount={15} obtained={"yes"}></Card>
+                <Card key={card._id} card={card}></Card>
               ))
             ) : (
               (parcialCards as IHeroe[]).map((heroe, id) => (
-                <Hero key={heroe._id} heroe={heroe} price={10} discount={15} obtained={"yes"}></Hero>
+                <Hero key={heroe._id} heroe={heroe}></Hero>
               ))
             )
           ) : ''

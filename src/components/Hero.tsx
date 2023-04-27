@@ -7,7 +7,7 @@ import IProduct from "../interfaces/IProduct";
 type HeroProps = {
 
     heroe: IHeroe;
-    product: IProduct;
+    product?: IProduct;
 
     onClick1?: () => void;
     onClick2?: () => void;

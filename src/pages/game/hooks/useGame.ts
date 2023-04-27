@@ -85,9 +85,6 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
             }
 
             function onNewRound(id_player:string, id_hero:string, new_card?:string){
-                console.log(id_player);
-                console.log(id_hero);
-                console.log(new_card);
                 if(new_card){
                     setPlayers(players=>({
                         ...players,
