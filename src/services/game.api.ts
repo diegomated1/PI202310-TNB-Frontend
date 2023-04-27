@@ -2,7 +2,6 @@ import axios from 'axios';
 import IGame from '../pages/game/interfaces/IGame';
 import IHero from '../pages/game/interfaces/IHero';
 import IPlayer from '../pages/game/interfaces/IPlayer';
-
 class GameApi{
 
     baseUrl: string
@@ -10,7 +9,7 @@ class GameApi{
         this.baseUrl = import.meta.env.VITE_SERVER_GAME;
     }
 
-    create(players:IPlayer[], ias:number, min_bet:number):Promise<{message:string, id_game:string}>{
+    create(players:string[], ias:number, min_bet:number):Promise<{message:string, id_game:string}>{
         return new Promise(async(res, rej)=>{
             try{
                 const {data} = await axios.post(`${this.baseUrl}/games`, {players, ias, min_bet});
@@ -43,11 +42,11 @@ class GameApi{
         });
     }
 
-    addUser(id_game:string, id_user:string, id_hero:string, id_deck:string){
+    addUser(id_game:string, id_user:string){
         return new Promise(async (res, rej)=>{
             try{
                 const { data } = await axios.post(`${this.baseUrl}/games/${id_game}/users`, {
-                    id_player: id_user, id_hero, id_deck
+                    id_player: id_user
                 });
                 res(data);
             } catch(error) {
