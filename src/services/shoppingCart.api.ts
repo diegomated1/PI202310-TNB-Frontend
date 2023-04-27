@@ -25,6 +25,34 @@ class ShoppingCartApi{
         });
     }
 
+    setQuantityShoppingCart(id_user:string, id_producto:string):Promise<errorResponse>{
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.put(`${this.baseUrl}/auth/login`, {id_user,id_producto}, {
+                    withCredentials: true,
+                });
+                res(data)
+            }catch(error){
+                console.log(error);
+                res({error: '', message: (error as Error).message});
+            }
+        });
+    }
+
+    getOrderById(id_user:string):Promise<errorResponse>{
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.get(`${this.baseUrl}/auth/login?id_user=${id_user}`, {
+                    withCredentials: true,
+                });
+                res(data)
+            }catch(error){
+                console.log(error);
+                res({error: '', message: (error as Error).message});
+            }
+        });
+    }
+
 
 }
 
