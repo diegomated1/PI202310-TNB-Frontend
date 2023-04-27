@@ -2,21 +2,19 @@ import { useEffect, useState } from "react";
 import IHeroe from "../interfaces/IHeroe";
 import heroeApi from "../services/heroe.api";
 import Icons from "./Icons";
+import IProduct from "../interfaces/IProduct";
 
 type HeroProps = {
 
     heroe: IHeroe;
-
-    obtained?: string;
-    price?: number;
-    discount?: number;
+    product: IProduct;
 
     onClick1?: () => void;
     onClick2?: () => void;
     onClick3?: () => void;
 }
 
-export default function Hero({ heroe, price, discount, obtained, onClick1, onClick2, onClick3 }: HeroProps) {
+export default function Card({ heroe, product, onClick1, onClick2, onClick3 }: HeroProps) {
 
     const [image, setImage] = useState<File>();
 
@@ -25,13 +23,13 @@ export default function Hero({ heroe, price, discount, obtained, onClick1, onCli
             <figure className="relative h-[40%] w-full shadow-md">
                 <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${heroe._id}`} />
                 <div className="absolute top-0 right-0">
-                    {price && <div className="flex text-white"><h1>{price}</h1><Icons.currency /></div>}
+                    {product.price && <div className="flex text-white"><h1>{product.price}</h1><Icons.currency /></div>}
                 </div>
                 <div className="absolute top-[80%] left-0">
                     {(heroe && heroe.name && heroe.name in Icons) ? Icons[heroe.name]({}) : ""}
                 </div>
                 <div className="absolute top-[80%] right-0">
-                    {discount && <div className="flex text-white"><h1>{discount}</h1><Icons.discount /></div>}
+                    {product.discount && <div className="flex text-white"><h1>{product.discount}</h1><Icons.discount /></div>}
                 </div>
             </figure>
             <div className="h-[45%]  w-full pt-2 px-2">
@@ -68,7 +66,7 @@ export default function Hero({ heroe, price, discount, obtained, onClick1, onCli
                 </div>
             </div>
             <div className="h-[15%] w-full flex justify-evenly items-center">
-                {obtained && <div className="flex text-white"><Icons.wishlist /></div>}
+                {product.availability && <div className="flex text-white"><Icons.wishlist /></div>}
 
             </div>
         </div>

@@ -1,6 +1,6 @@
 export default interface IProduct{
     id_product?: string,
-    type:string,
+    type: string,
     price: number,
     discount: number,
     availability: number,

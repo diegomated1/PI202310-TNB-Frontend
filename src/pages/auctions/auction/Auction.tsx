@@ -91,9 +91,9 @@ export default function Auction(){
                 <div className="flex-1 flex justify-center items-center">
                     <div className="w-[250px] h-[500px]">
                         {card ? (
-                            <Card card={card} />
+                            <Card card={card} product={product} />
                         ) : hero ? (
-                            <Hero heroe={hero} />
+                            <Hero heroe={hero} product={product!} />
                         ) : ''}
                     </div>
                 </div>

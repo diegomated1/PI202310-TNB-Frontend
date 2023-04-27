@@ -75,9 +75,9 @@ export default function CreateAuction(){
                 <div className="flex-1 flex">
                     <div className="w-2/3 h-2/3">
                         {card?(
-                            <Card card={card}/>
+                            <Card card={card} product={product}/>
                         ) : hero ? (
-                            <Hero heroe={hero} />
+                            <Hero heroe={hero} product={product!} />
                         ) : ''}
                     </div>
                 </div>
