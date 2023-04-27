@@ -17,6 +17,7 @@ import CreateDeck from "./pages/create_deck/CreateDeck"
 import Mazo from "./pages/mazo_presentacion/mazo"
 import Wishlist from "./pages/wishlist/favorites"
 import ListTileMatch from "./pages/Lobbys/Lobbys"
+import ShoppingCart from "./pages/shoppingCart/shoppingCart"
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
         <Route path="/vitrina" element={<Vitrina/>}/>
         <Route path="/account" element={<Account/>}/>.
         <Route path="/wishlist" element={<Wishlist/>}/>
+        <Route path="/shoppingcart" element={<ShoppingCart/>}/>
       </Routes>
     </BrowserRouter>
   )
