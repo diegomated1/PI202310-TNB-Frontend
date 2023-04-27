@@ -105,8 +105,10 @@ export default function CardDetails() {
         <div className="flex flex-col w-screen h-screen">
             <AdminCardsNavBar />
             <div className="flex-1 w-full borderborder-gray-500 bg-gray-300 flex flex-col justify-center items-center p-5">
-                <div className="w-[80%] h-full grid grid-cols-2 lg:grid-cols-5">
+                <div className="w-full h-full grid grid-cols-2 lg:grid-cols-5">
+
                     <div className="col-span-2 p-5">
+
                         <div className="w-full h-full border border-gray-500 bg-white rounded-xl ">
                             {
                                 (product) ? (
@@ -123,11 +125,20 @@ export default function CardDetails() {
                     </div>
                     <div className="col-span-3 p-5">
                         <div className="border border-gray-500 bg-white flex flex-col rounded-lg">
+
                             <div className="p-5">
                                 <h2 className="text-3xl">
                                     <strong>
                                         {card ? card.name : hero?.name}
                                     </strong>
+                                    <div className="pt-2 pb-2 flex">
+                                        <Icons.star onClick={() => setValoracion(1)} />
+                                        <Icons.star onClick={() => setValoracion(2)} />
+                                        <Icons.star onClick={() => setValoracion(3)} />
+                                        <Icons.star onClick={() => setValoracion(4)} />
+                                        <Icons.star onClick={() => setValoracion(5)} />
+                                        <p className="text-2xl pl-2">{product?.overall_rating}</p>
+                                    </div>
                                 </h2>
                                 <h3 className="text-xl">Category: {card ? card.card_type : "hero"}</h3>
                             </div>
@@ -142,7 +153,7 @@ export default function CardDetails() {
                                 <span className="text-xl">
                                     {(product && product.discount > 0) ? (
                                         <strong >
-                                            Price: <strong className="text-red-500">${product?.price - ((product?.price * product?.discount)/ 100) }</strong>
+                                            Price: <strong className="text-red-500">${product?.price - ((product?.price * product?.discount) / 100)}</strong>
                                         </strong>
                                     ) : (
                                         <strong>
@@ -171,9 +182,9 @@ export default function CardDetails() {
 
                     </div>
                 </div>
-                <div className="w-[80%] h-full grid grid-cols-2 lg:grid-cols-5">
+                <div className="w-full h-full grid grid-cols-2 lg:grid-cols-5">
                     <div className="col-span-2 p-5">
-                        <div className="w-full h-full border bg-white rounded-lg">
+                        <div className="w-full h-[50%] border bg-white rounded-lg">
                             <div className="p-5">
                                 <h2 className="text-3xl text-center"><strong>Comentario</strong></h2>
                             </div>

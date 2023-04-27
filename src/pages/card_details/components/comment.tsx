@@ -26,9 +26,9 @@ export default function Comment(props:ICommentProps) {
         <div className=" border   border-gray-500  ">
             <div className="p-1 w-full flex">
                 <div className="w-[90%] p-1">
-                    <h2 className="text-2xl p-1"><strong>{userName}</strong></h2>
+                    <h2 className="text-2xl p-1"><strong>tttttttttttttttttttttttttt{}</strong></h2>
                 </div>
-                <div className=" flex text-right w-[10%] p-3">
+                <div className=" flex  text-right w-[10%] p-3">
                     <Icons.edit />
                     <Icons.trash />
                 </div>
