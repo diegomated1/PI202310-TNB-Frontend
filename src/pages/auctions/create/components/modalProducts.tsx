@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import Button from "../../../../components/Button";
 import Icons from "../../../../components/Icons";
+import Input from "../../../../components/Input";
 import cardApi from "../../../../services/card.api";
 import IInventory from "../../../../interfaces/IInventory";
 import inventoryApi from "../../../../services/inventory.api";
 import productsApi from "../../../../services/products.api";
 import ICard from "../../../../interfaces/ICard";
+import IHero from "../../../game/interfaces/IHero";
 import heroeApi from "../../../../services/heroe.api";
 import IHeroe from "../../../../interfaces/IHeroe";
 import Buttons from "../../../../components/Button";
@@ -15,7 +18,7 @@ interface ModalCards{
     /**
      * Variable for check if the modal is open or close
      */
-    setProduct: React.Dispatch<React.SetStateAction<IProduct | undefined>>
+    setProducts: React.Dispatch<React.SetStateAction<IProduct[]>>
     isOpen: boolean,
     /**
      * Function for change to close or open
@@ -27,9 +30,9 @@ interface ModalCards{
     onClose?: ()=>void,
 }
 
-export default function ModalCards({id_user, setProduct, isOpen, setIsOpen, onClose}:ModalCards){
+export default function ModalProducts({id_user, setProducts, isOpen, setIsOpen, onClose}:ModalCards){
 
-    const [inventory, setInventory] = useState<IInventory>();
+    const [_products, _setProducts] = useState<IProduct[]>([]);
 
     const handleClose = ()=>{
         setIsOpen(false);
@@ -38,11 +41,11 @@ export default function ModalCards({id_user, setProduct, isOpen, setIsOpen, onCl
 
     useEffect(()=>{
         if(id_user){
-            const handleGetInventory = async ()=>{
-                const inventory = await inventoryApi.getByUserId(id_user);
-                setInventory(inventory);
+            const handleGetProducts = async ()=>{
+                const products = await productsApi.getProducts();
+                _setProducts(products);
             }
-            handleGetInventory();
+            handleGetProducts();
         }
     }, [id_user]);
 
@@ -63,16 +66,14 @@ export default function ModalCards({id_user, setProduct, isOpen, setIsOpen, onCl
                     </span>
                 </div>
                 <div className="w-full max-h-[500px] overflow-y-auto">
-                    {(inventory) ? (
-                        inventory.product.map((product, i)=>(
-                            <Product 
-                                key={i}
-                                id_product={product.id_product}
-                                setProduct={setProduct}
-                                setIsOpen={setIsOpen}
-                            />
-                        ))
-                    ) : ''}
+                    {_products.map((product, i)=>(
+                        <Product 
+                            key={i}
+                            product={product}
+                            setProducts={setProducts}
+                            setIsOpen={setIsOpen}
+                        />
+                    ))}
                 </div>
             </div>
         </div>
@@ -80,21 +81,18 @@ export default function ModalCards({id_user, setProduct, isOpen, setIsOpen, onCl
 }
 
 interface IProductProps{
-    id_product: string
-    setProduct: React.Dispatch<React.SetStateAction<IProduct | undefined>>
+    product: IProduct
+    setProducts: React.Dispatch<React.SetStateAction<IProduct[]>>
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function Product({id_product, setProduct, setIsOpen}:IProductProps){
+function Product({product, setProducts, setIsOpen}:IProductProps){
 
-    const [_product, _setProduct] = useState<IProduct>();
     const [card, setCard] = useState<ICard>();
     const [hero, setHero] = useState<IHeroe>();
 
     useEffect(()=>{
         const handleGetProduct = async()=>{
-            const product = await productsApi.getProductById(id_product);
-            _setProduct(product);
             if(product.type=='card'){
                 const card = await cardApi.getById(product.id_product!);
                 setCard(card);
@@ -106,8 +104,8 @@ function Product({id_product, setProduct, setIsOpen}:IProductProps){
         handleGetProduct();
     }, []);
 
-    const handleSetProduct = ()=>{
-        setProduct(_product);
+    const handleAddProduct = ()=>{
+        setProducts(products=>[...products, product]);
         setIsOpen(false);
     }
 
@@ -116,10 +114,10 @@ function Product({id_product, setProduct, setIsOpen}:IProductProps){
             <div className="w-full h-full bg-green-200 flex">
                 <div className="w-36 h-full relative">
                     {(card) ? (
-                        <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/cards/${id_product}`} />
+                        <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/cards/${product.id_product}`} />
                     ) : (
                         (hero) ? (
-                            <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${id_product}`} />
+                            <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${product.id_product}`} />
                         ) : ''
                     )}
                 </div>
@@ -138,8 +136,8 @@ function Product({id_product, setProduct, setIsOpen}:IProductProps){
                     </div>
                     <div className="flex-1 flex justify-center items-center">
                         <div className="w-24 h-10">
-                            <Buttons.buttonYellow onClick={handleSetProduct}>
-                                Seleccionar
+                            <Buttons.buttonYellow onClick={handleAddProduct}>
+                                añadir
                             </Buttons.buttonYellow>
                         </div>
                     </div>

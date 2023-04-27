@@ -18,7 +18,7 @@ export default function Auction({auction}:AuctionProps){
     const [timeEnd, setTimeEnd] = useState<number>();
 
     useEffect(()=>{
-        var timeInit = new Date(auction.created);
+        var timeInit = new Date(auction.created!);
         timeInit.setHours(timeInit.getHours() + auction.time);
         const interval = setInterval(() => {
             setTimeEnd((timeEnd) => {
@@ -49,9 +49,9 @@ export default function Auction({auction}:AuctionProps){
                             <span><strong>{card ? card.name : ''}</strong></span>
                         </div>
                         <div className="flex flex-col">
-                            <span><strong>Postores:</strong> {auction.bids.length}</span>
-                            <span><strong>Créditos máximos ofrecidos:</strong> {auction.bids[auction.bids.length-1].coins}</span>
-                            <span><strong>Cartas maximas ofrecidas</strong> {auction.bids[auction.bids.length-1].cards.length}</span>
+                            <span><strong>Postores:</strong> {auction.bids!.length}</span>
+                            <span><strong>Créditos máximos ofrecidos:</strong> {auction.bids!.length>0 ? auction.bids![auction.bids!.length-1].coins : ''}</span>
+                            <span><strong>Cartas maximas ofrecidas</strong> {auction.bids!.length>0 ? auction.bids![auction.bids!.length-1].cards.length : ''}</span>
                         </div>
                     </div>
                     <div className="flex-1 bg-yellow-200 flex flex-col">

@@ -16,7 +16,7 @@ type HeroProps = {
     onClick3?: () => void;
 }
 
-export default function Card({ heroe, price, discount, obtained, onClick1, onClick2, onClick3 }: HeroProps) {
+export default function Hero({ heroe, price, discount, obtained, onClick1, onClick2, onClick3 }: HeroProps) {
 
     const [image, setImage] = useState<File>();
 

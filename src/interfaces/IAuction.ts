@@ -1,12 +1,12 @@
 import IBidder from "./IBids";
 
 export default interface IAuction{
-    _id: string,
+    _id?: string,
     id_user: string,
     id_card: string,
-    created: Date,
+    created?: Date,
     time: number, 
-    bids: IBidder[],
+    bids?: IBidder[],
     min_coins: number,
     insta_win: string[]
 }
