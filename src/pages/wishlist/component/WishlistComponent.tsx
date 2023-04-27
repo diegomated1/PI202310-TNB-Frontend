@@ -5,6 +5,7 @@ import ICard from "../../../interfaces/ICard";
 import cardsApi from "../../../services/card.api";
 import IHero from "../../../interfaces/IHeroe";
 import heroeApi from "../../../services/heroe.api";
+import Icons from "../../../components/Icons";
 
 type ListWishlistProps = {
   product?: IProduct;
@@ -16,51 +17,106 @@ export default function TileLobby({ product }: ListWishlistProps) {
 
   const [card, setCard] = useState<ICard>();
 
+  const [disabled, setDisabled] = useState<boolean>(false);
+
+  const handleSetAvaliability = async () => {
+
+  }
+
   const handleGetCard = async () => {
-    const data = await cardsApi.getById(product?.id_object!);
+    const data = await cardsApi.getById(product?.id_product!);
     setCard(data);
-  
-}
+  };
 
   const [hero, setHero] = useState<IHero>();
 
   const handleGetHero = async () => {
-    const data = await heroeApi.getById(product?.id_object!);
+    const data = await heroeApi.getById(product?.id_product!);
     setHero(data);
-  
-}
+  };
 
-useEffect(()=>{
-  if (product?.type_object == "hero") {
-    handleGetHero()
-  } else {
-    handleGetCard()
-  }
-}, []);
+  useEffect(() => {
+    if (product?.type == "hero") {
+      handleGetHero();
+    } else {
+      handleGetCard();
+    }
+    setDisabled(product!.availability === 0)
+  }, [product!.availability]);
 
-// cartas
+  // cartas
 
-// ilfr4nqjg
-// ilfr4bh8k
-// ilfr4p9r3
+  // ilfr4nqjg
+  // ilfr4bh8k
+  // ilfr4p9r3
 
-// heroes
+  // heroes
 
-// guererro tanque: ilfr4bh8k
-// guerrero armas: ilfr4jkmz
-
+  // guererro tanque: ilfr4bh8k
+  // guerrero armas: ilfr4jkmz
 
   //const onClick1: () => void;
 
-  if (product?.type_object == "hero") {
-    console.log("entro 7u7");
-    return (<div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
-      <h1>{hero?.description}</h1>
-    </div>)
+  if (product?.type == "hero") {
+    return (
+      <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
+        <div className="w-[50%] h-full flex items-center justify-evenly">
+          <figure className="h-full w-auto">
+            <img
+              className="object-contain h-[95%]"
+              src={
+                image
+                  ? URL.createObjectURL(image!)
+                  : `${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${
+                      product!.id_product
+                    }`
+              }
+            />
+          </figure>
+          <h1>{hero?.name}</h1>
+        </div>
+        <div className="w-[50%] h-full flex items-center justify-evenly">
+          <h1>{product.price}</h1>
+          {product.availability === 1 ? <Icons.checkGreen /> : <Icons.x />}
+          <div className="w-[30%]">
+          <Button.buttonYellow disabled={disabled}>Añadir</Button.buttonYellow>
+          </div>
+          <div className="">
+            <Icons.trash></Icons.trash>
+          </div>
+        </div>
+      </div>
+    );
   } else {
-    return (<div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
-      <h1>{card?.name}</h1>
-    </div>)
+    return (
+      <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
+        <div className="w-[50%] h-full flex items-center justify-evenly">
+          <figure className="h-full w-auto">
+            <img
+              className="object-contain h-[95%]"
+              src={
+                image
+                  ? URL.createObjectURL(image!)
+                  : `${import.meta.env.VITE_API_CARDS_URL}/images/cards/${
+                      product!.id_product
+                    }`
+              }
+            />
+          </figure>
+          <h1>{card?.name}</h1>
+        </div>
+        <div className="w-[50%] h-full flex items-center justify-evenly">
+          <h1>{product!.price}</h1>
+          {product!.availability === 1 ? <Icons.checkGreen /> : <Icons.x />}
+          <div className="w-[30%]">
+          <Button.buttonYellow disabled={disabled}>Añadir</Button.buttonYellow>
+          </div>
+          <div className="">
+            <Icons.trash></Icons.trash>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   // return (

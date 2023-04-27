@@ -17,6 +17,7 @@ import CreateDeck from "./pages/create_deck/CreateDeck"
 import Mazo from "./pages/mazo_presentacion/mazo"
 import Wishlist from "./pages/wishlist/whislist"
 import ListTileMatch from "./pages/Lobbys/Lobbys"
+import ShoppingCart from "./pages/shoppingCart/shoppingCart"
 import CreateAuction from "./pages/auctions/create/CreateAuction"
 import Auctions from "./pages/auctions/auctions/Auctions"
 import Auction from "./pages/auctions/auction/Auction"
@@ -48,6 +49,7 @@ function App() {
         <Route path="/vitrina" element={<Vitrina/>}/>
         <Route path="/account" element={<Account/>}/>.
         <Route path="/wishlist" element={<Wishlist/>}/>
+        <Route path="/shoppingcart" element={<ShoppingCart/>}/>
 
         <Route path="/auctions"  element={<Auctions/>} />
         <Route path="/auctions/:id_auction"  element={<Auction/>} />

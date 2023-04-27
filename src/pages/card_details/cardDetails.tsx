@@ -22,13 +22,15 @@ import commentsApi from "../../services/comments.api";
 export default function CardDetails() {
 
     const { id_product } = useParams();
-    const { user } = useAuth();
+
+    
+    
 
     const [product, setProduct] = useState<IProduct>();
     const [card, setCard] = useState<ICard>();
     const [hero, setHeroe] = useState<IHeroe>()
 
-    const [valoracion, setValoracion] = useState<number>();
+    const [valoracion, setValoracion] = useState<number>(0);
     const [comentario, setComentario] = useState('')
 
     const [cantidad, setCantidad] = useState(1);
@@ -46,15 +48,6 @@ export default function CardDetails() {
         }
     };
 
-    /*const handleSetComment = async (e: FormEvent) => {
-        try {
-            e.preventDefault();
-            var data = await productsApi.insert({})}, image!);
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-    }*/
 
     useEffect(() => {
         const handleGetCard = async (id_card: string) => {
@@ -87,8 +80,8 @@ export default function CardDetails() {
 
     const handleAddShoppingCart = async () => {
         try {
-            if (user && product) {
-                await cartApi.addToCart(user.id_user, id_product!, cantidad);
+            if ( product) {
+                await cartApi.addToCart("gfdgd", id_product!, cantidad);
                 alert("Producto añadido");
             } else {
                 await cartApi.addToCart("12345", id_product!, cantidad);
@@ -99,6 +92,18 @@ export default function CardDetails() {
 
         }
     }
+
+
+    const handleAddComment = async () => {
+        if ( product && valoracion > 0) {
+            const comment:IComments = {
+                comentario, fecha_comentario: '', id_comentario: 1, id_usuario: "ñ", images: [], Valoracion: valoracion
+            }
+          await commentsApi.insert("gfdgd", id_product!, comentario, valoracion);
+          setComments(comments=>[...comments, comment]);
+          alert("Comentario Añadido");
+        }
+      }
 
 
     return (
@@ -203,7 +208,7 @@ export default function CardDetails() {
                                 <div className="p-3">
                                     <textarea
                                         className="border border-black peer block min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                        placeholder="Your message" onChange={(e) => { setComentario(e.target.value) }}>
+                                        placeholder="Your message" value={comentario} onChange={(e) => { setComentario(e.target.value) }}>
                                     </textarea>
                                 </div>
                             </div>
@@ -212,7 +217,7 @@ export default function CardDetails() {
                                     <Icons.clip />
                                 </div>
                                 <div className="w-[90%] p-1">
-                                    <Button.buttonLarge >Add To Card</Button.buttonLarge>
+                                    <Button.buttonLarge onClick={handleAddComment}>Add To Card</Button.buttonLarge>
                                 </div>
                             </div>
                         </div>
