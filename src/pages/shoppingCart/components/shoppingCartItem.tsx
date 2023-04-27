@@ -68,7 +68,7 @@ export default function shoppingCartItem({ _id}: shoppingCartItemProps) {
                             <span>{card ? card.description : ''}</span>
                         </div>
                         <div className="mt-1 text-xs">
-                            <span>{product ? product.descuento: ''}%</span>
+                            <span>{product ? product.discount: ''}%</span>
                         </div>
                         <div className="mt-1 text-xs ">
                         <div className="flex items-center">
@@ -94,7 +94,7 @@ export default function shoppingCartItem({ _id}: shoppingCartItemProps) {
                                 <span className="block">Precio</span>
                             </div>
                             <div  className="absolute bottom-0 right-5 flex items-center mt-4">
-                                <span className="">{product ? product.precio : ''}</span>
+                                <span className="">{product ? product.price : ''}</span>
                             </div>
                         </div>
                     </div>

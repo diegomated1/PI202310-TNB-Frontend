@@ -17,13 +17,10 @@ import CreateDeck from "./pages/create_deck/CreateDeck"
 import Mazo from "./pages/mazo_presentacion/mazo"
 import Wishlist from "./pages/wishlist/whislist"
 import ListTileMatch from "./pages/Lobbys/Lobbys"
-<<<<<<< HEAD
 import ShoppingCart from "./pages/shoppingCart/shoppingCart"
-=======
 import CreateAuction from "./pages/auctions/create/CreateAuction"
 import Auctions from "./pages/auctions/auctions/Auctions"
 import Auction from "./pages/auctions/auction/Auction"
->>>>>>> 58a1e1ed61fcd85f8be04b01839e561eb5832d1e
 
 function App() {
   return (

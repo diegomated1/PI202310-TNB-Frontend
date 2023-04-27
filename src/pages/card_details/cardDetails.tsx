@@ -48,15 +48,6 @@ export default function CardDetails() {
         }
     };
 
-    /*const handleSetComment = async (e: FormEvent) => {
-        try {
-            e.preventDefault();
-            var data = await productsApi.insert({})}, image!);
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-    }*/
 
     useEffect(() => {
         const handleGetCard = async (id_card: string) => {
