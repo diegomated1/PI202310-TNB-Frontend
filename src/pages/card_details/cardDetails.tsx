@@ -189,7 +189,7 @@ export default function CardDetails() {
                 </div>
                 <div className="w-full h-full grid grid-cols-2 lg:grid-cols-5">
                     <div className="col-span-2 p-5">
-                        <div className="w-full h-[50%] border bg-white rounded-lg">
+                        <div className="w-full h-[100%] border bg-white rounded-lg">
                             <div className="p-5">
                                 <h2 className="text-3xl text-center"><strong>Comentario</strong></h2>
                             </div>
