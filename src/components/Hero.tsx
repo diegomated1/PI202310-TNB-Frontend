@@ -23,13 +23,13 @@ export default function Card({ heroe, product, onClick1, onClick2, onClick3 }: H
             <figure className="relative h-[40%] w-full shadow-md">
                 <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${heroe._id}`} />
                 <div className="absolute top-0 right-0">
-                    {product.price && <div className="flex text-white"><h1>{product.price}</h1><Icons.currency /></div>}
+                    {product?.price && <div className="flex text-white"><h1>{product?.price}</h1><Icons.currency /></div>}
                 </div>
                 <div className="absolute top-[80%] left-0">
                     {(heroe && heroe.name && heroe.name in Icons) ? Icons[heroe.name]({}) : ""}
                 </div>
                 <div className="absolute top-[80%] right-0">
-                    {product.discount && <div className="flex text-white"><h1>{product.discount}</h1><Icons.discount /></div>}
+                    {product?.discount && <div className="flex text-white"><h1>{product?.discount}</h1><Icons.discount /></div>}
                 </div>
             </figure>
             <div className="h-[45%]  w-full pt-2 px-2">
@@ -66,7 +66,7 @@ export default function Card({ heroe, product, onClick1, onClick2, onClick3 }: H
                 </div>
             </div>
             <div className="h-[15%] w-full flex justify-evenly items-center">
-                {product.availability && <div className="flex text-white"><Icons.wishlist /></div>}
+                {product?.availability && <div className="flex text-white"><Icons.wishlist /></div>}
 
             </div>
         </div>
