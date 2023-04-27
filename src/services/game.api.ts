@@ -1,7 +1,7 @@
 import axios from 'axios';
-import ILobby from '../interfaces/ILobby';
 import IGame from '../pages/game/interfaces/IGame';
-
+import IHero from '../pages/game/interfaces/IHero';
+import IPlayer from '../pages/game/interfaces/IPlayer';
 class GameApi{
 
     baseUrl: string
@@ -20,7 +20,18 @@ class GameApi{
         });
     }
 
-    getGameById(id_game:string, id_user:string): Promise<IGame> {
+    getGameById(id_game:string): Promise<{game:IGame}> {
+        return new Promise(async (res, rej) => {
+            try {
+                const { data } = await axios.get(`${this.baseUrl}/games/${id_game}`);
+                res(data.data);
+            } catch (error) {
+                rej(error);
+            }
+        });
+    }
+
+    getUserByGameId(id_game:string, id_user:string): Promise<{user:IPlayer,hero:IHero}> {
         return new Promise(async (res, rej) => {
             try {
                 const { data } = await axios.get(`${this.baseUrl}/games/${id_game}/users/${id_user}`);
@@ -31,11 +42,11 @@ class GameApi{
         });
     }
 
-    addUser(id_game:string, id_user:string, id_hero:string, cards:string[]){
+    addUser(id_game:string, id_user:string){
         return new Promise(async (res, rej)=>{
             try{
                 const { data } = await axios.post(`${this.baseUrl}/games/${id_game}/users`, {
-                    id_player: id_user, id_hero, cards
+                    id_player: id_user
                 });
                 res(data);
             } catch(error) {

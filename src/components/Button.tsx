@@ -25,7 +25,7 @@ const Buttons:IButton = {
         </button>
     ),
     "buttonYellow": (props)=>(
-        <button {...props} className="w-full h-ful p-2 rounded-md bg-buttonYellow hover:bg-amber-500" >
+        <button {...props} className="w-full h-full p-2 rounded-md bg-buttonYellow hover:bg-amber-500" >
             <strong>{props.children}</strong>
         </button>
     ),

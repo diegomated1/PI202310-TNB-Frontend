@@ -12,26 +12,41 @@ import Comment from "./components/comment";
 import ICard from "../../interfaces/ICard";
 import IProduct from "../../interfaces/IProduct";
 import ISetComment from "../../interfaces/ISetComment";
+import heroeApi from "../../services/heroe.api";
+import IHeroe from "../../interfaces/IHeroe";
+import Hero from "../../components/Hero";
+import cartApi from "../../services/cart.api";
+import useAuth from "../../hooks/useAuth";
+import commentsApi from "../../services/comments.api";
 
 export default function CardDetails() {
 
-    const id_card  = "ilfr4psm2";
-    const  id = "1";
+    const { id_product } = useParams();
 
-    const [card, setCard] = useState<ICard>();
+    
+    
+
     const [product, setProduct] = useState<IProduct>();
-    const [valoracion, setValoracion] = useState<number>();
+    const [card, setCard] = useState<ICard>();
+    const [hero, setHeroe] = useState<IHeroe>()
+
+    const [valoracion, setValoracion] = useState<number>(0);
     const [comentario, setComentario] = useState('')
 
-    const handleGetCard = async () => {
-        const data = await cardsApi.getById(id_card!);
-        setCard(data);
-    }
+    const [cantidad, setCantidad] = useState(1);
 
-    const handleGetProduct = async () => {
-        const data = await productsApi.getProductById(id_card!);
-        setProduct(data);
-    }
+    const [comments, setComments] = useState<IComments[]>([]);
+
+    const sum = () => {
+        setCantidad(cantidad + 1);
+    };
+
+    const res = () => {
+        if (cantidad > 1) {
+            setCantidad(
+                cantidad - 1);
+        }
+    };
 
     /*const handleSetComment = async (e: FormEvent) => {
         try {
@@ -43,89 +58,158 @@ export default function CardDetails() {
         }
     }*/
 
-    const [comments, setComments] = useState<IComments[]>([]);
-
-    const handleGetComments = async () => {
-        const data = await productsApi.getComments(id!);
-        setComments(data);
-    }
-
     useEffect(() => {
-        handleGetCard();
-        handleGetComments();
+        const handleGetCard = async (id_card: string) => {
+            const data = await cardsApi.getById(id_card);
+            setCard(data);
+        }
+        const handleGetHeroe = async (id_heroe: string) => {
+            const data = await heroeApi.getById(id_heroe);
+            setHeroe(data);
+        }
+        const handleGetComments = async (id_product: string) => {
+            const data = await commentsApi.get(id_product);
+            setComments(data);
+        }
+        const handleGetProduct = async () => {
+            if (id_product) {
+
+                const data = await productsApi.getProductById(id_product!);
+                if (data.type == 'card') {
+                    handleGetCard(data.id_product!);
+                } else {
+                    handleGetHeroe(data.id_product!);
+                }
+                setProduct(data);
+                handleGetComments(data.id_product!);
+            }
+        }
         handleGetProduct();
     }, []);
 
+    const handleAddShoppingCart = async () => {
+        try {
+            if ( product) {
+                await cartApi.addToCart("gfdgd", id_product!, cantidad);
+                alert("Producto añadido");
+            } else {
+                await cartApi.addToCart("12345", id_product!, cantidad);
+                alert("Producto añadido");
 
+            }
+        } catch (error) {
+
+        }
+    }
+
+
+    const handleAddComment = async () => {
+        if ( product && valoracion > 0) {
+            const comment:IComments = {
+                comentario, fecha_comentario: '', id_comentario: 1, id_usuario: "ñ", images: [], Valoracion: valoracion
+            }
+          await commentsApi.insert("gfdgd", id_product!, comentario, valoracion);
+          setComments(comments=>[...comments, comment]);
+          alert("Comentario Añadido");
+        }
+      }
 
 
     return (
         <div className="flex flex-col w-screen h-screen">
             <AdminCardsNavBar />
             <div className="flex-1 w-full borderborder-gray-500 bg-gray-300 flex flex-col justify-center items-center p-5">
-                <div className="w-[80%] h-full grid grid-cols-2 lg:grid-cols-5">
+                <div className="w-full h-full grid grid-cols-2 lg:grid-cols-5">
+
                     <div className="col-span-2 p-5">
+
                         <div className="w-full h-full border border-gray-500 bg-white rounded-xl ">
-                            <Card _id={card ? card._id : undefined } card_type={card?.card_type} description={card?.description} id_hero={card?.id_hero} name={card?.name} key={card
-                            ?._id} discount={product?.descuento} obtained={"y"} price={product?.precio}></Card>
+                            {
+                                (product) ? (
+                                    (card) ? (
+                                        <Card card={card} product={product} />
+                                    ) : (
+                                        (hero) ? (
+                                            <Hero heroe={hero} product={product} />
+                                        ) : ''
+                                    )
+                                ) : ''
+                            }
                         </div>
                     </div>
                     <div className="col-span-3 p-5">
                         <div className="border border-gray-500 bg-white flex flex-col rounded-lg">
+
                             <div className="p-5">
-                                <h2 className="text-3xl"><strong>{card?.name}</strong></h2>
-                                <h3 className="text-xl">Category: {card?.card_type}</h3>
+                                <h2 className="text-3xl">
+                                    <strong>
+                                        {card ? card.name : hero?.name}
+                                    </strong>
+                                    <div className="pt-2 pb-2 flex">
+                                        <Icons.star onClick={() => setValoracion(1)} />
+                                        <Icons.star onClick={() => setValoracion(2)} />
+                                        <Icons.star onClick={() => setValoracion(3)} />
+                                        <Icons.star onClick={() => setValoracion(4)} />
+                                        <Icons.star onClick={() => setValoracion(5)} />
+                                        <p className="text-2xl pl-2">{product?.overall_rating}</p>
+                                    </div>
+                                </h2>
+                                <h3 className="text-xl">Category: {card ? card.card_type : "hero"}</h3>
                             </div>
                             <hr />
                             <div className="p-5">
                                 <p >
-                                    {
-                                        card?.description
-                                    }
+                                    {card ? card.description : hero?.description}
                                 </p>
                             </div>
                             <hr />
                             <div className="p-5">
                                 <span className="text-xl">
-                                    <strong>
-                                        Price: ${product?.precio}
-                                    </strong>
+                                    {(product && product.discount > 0) ? (
+                                        <strong >
+                                            Price: <strong className="text-red-500">${product?.price - ((product?.price * product?.discount) / 100)}</strong>
+                                        </strong>
+                                    ) : (
+                                        <strong>
+                                            Price: ${product?.price}
+                                        </strong>
+                                    )}
                                 </span>
                             </div>
-                            <div className="p-5 w-full flex">
-                                <div className="w-[80%] p-1">
-                                    <Button text="Add To Card" type="buttonlarge"></Button>
+                            <div className="p-5 w-[100%] flex">
+                                <div className="w-[70%] p-1">
+                                    <Button.buttonLarge onClick={handleAddShoppingCart} >Add To Card</Button.buttonLarge>
                                 </div>
-                                <div className="flex-1 p-1">
-                                    <Button text="-" type="buttonlarge" />
+                                <div className="w-[10%] p-1">
+                                    <Button.buttonLarge onClick={res} > - </Button.buttonLarge>
                                 </div>
-                                <div className="flex-1 p-1">
+                                <div className="w-[10%] p-1">
                                     <div className="border border-separate rounded-lg w-full h-full flex justify-center items-center">
-                                        <span>0</span>
+                                        <span>{cantidad}</span>
                                     </div>
                                 </div>
-                                <div className="flex-1 p-1">
-                                    <Button text="+" type="buttonlarge" />
+                                <div className="w-[10%] p-1">
+                                    <Button.buttonLarge onClick={sum}> + </Button.buttonLarge>
                                 </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
-                <div className="w-[80%] h-full grid grid-cols-2 lg:grid-cols-5">
+                <div className="w-full h-full grid grid-cols-2 lg:grid-cols-5">
                     <div className="col-span-2 p-5">
-                        <div className="w-full h-full border bg-white rounded-lg">
+                        <div className="w-full h-[50%] border bg-white rounded-lg">
                             <div className="p-5">
                                 <h2 className="text-3xl text-center"><strong>Comentario</strong></h2>
                             </div>
                             <div className="p-3 ">
                                 <h3 className="text-xl">Ranking</h3>
                                 <div className="p-3 flex">
-                                    <Icons.star onClick={()=>setValoracion(1)}/>
-                                    <Icons.star onClick={()=>setValoracion(2)}/>
-                                    <Icons.star onClick={()=>setValoracion(3)}/>
-                                    <Icons.star onClick={()=>setValoracion(4)}/>
-                                    <Icons.star onClick={()=>setValoracion(5)}/>
+                                    <Icons.star onClick={() => setValoracion(1)} />
+                                    <Icons.star onClick={() => setValoracion(2)} />
+                                    <Icons.star onClick={() => setValoracion(3)} />
+                                    <Icons.star onClick={() => setValoracion(4)} />
+                                    <Icons.star onClick={() => setValoracion(5)} />
                                 </div>
                             </div>
                             <div className="p-3">
@@ -133,8 +217,8 @@ export default function CardDetails() {
                                 <div className="p-3">
                                     <textarea
                                         className="border border-black peer block min-h-[auto] w-full rounded bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                        placeholder="Your message" onChange={(e) => { setComentario(e.target.value) }}>
-                                        </textarea>
+                                        placeholder="Your message" value={comentario} onChange={(e) => { setComentario(e.target.value) }}>
+                                    </textarea>
                                 </div>
                             </div>
                             <div className="p-5 w-full flex">
@@ -142,7 +226,7 @@ export default function CardDetails() {
                                     <Icons.clip />
                                 </div>
                                 <div className="w-[90%] p-1">
-                                    <Button text="Add To Comment" type="buttonlarge" />
+                                    <Button.buttonLarge onClick={handleAddComment}>Add To Card</Button.buttonLarge>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +234,6 @@ export default function CardDetails() {
                     <div className="col-span-3 p-3">
                         <div className="w-full h-full border bg-white ">
                             {
-
                                 comments.map((comment, i) => (<Comment key={i} comment={comment} />))
                             }
                         </div>
@@ -161,5 +244,8 @@ export default function CardDetails() {
         </div>
     )
 }
+
+
+
 
 

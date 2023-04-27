@@ -15,9 +15,15 @@ import Account from "./pages/account/Account"
 import AdminHeroes from "./pages/admin_heroes/AdminHeroes"
 import CreateDeck from "./pages/create_deck/CreateDeck"
 import Mazo from "./pages/mazo_presentacion/mazo"
-import Wishlist from "./pages/wishlist/favorites"
+import Wishlist from "./pages/wishlist/whislist"
 import ListTileMatch from "./pages/Lobbys/Lobbys"
+<<<<<<< HEAD
 import ShoppingCart from "./pages/shoppingCart/shoppingCart"
+=======
+import CreateAuction from "./pages/auctions/create/CreateAuction"
+import Auctions from "./pages/auctions/auctions/Auctions"
+import Auction from "./pages/auctions/auction/Auction"
+>>>>>>> 58a1e1ed61fcd85f8be04b01839e561eb5832d1e
 
 function App() {
   return (
@@ -40,13 +46,18 @@ function App() {
         <Route path="/game/create/deck" element={<CreateDeck/>}/>
         <Route path="/game/lobby/create" element={<CreateGame/>}/>
         <Route path="/game/list" element={<ListTileMatch/>}/>
-        <Route path="/game/lobby/:id_match" element={<Lobby/>}/>
+        <Route path="/game/lobby/:id_lobby" element={<Lobby/>}/>
         
-        <Route path="/card/:id_card" element={<CardDetails/>}/>
+        <Route path="/card/:id_product" element={<CardDetails/>}/>
         <Route path="/vitrina" element={<Vitrina/>}/>
         <Route path="/account" element={<Account/>}/>.
         <Route path="/wishlist" element={<Wishlist/>}/>
         <Route path="/shoppingcart" element={<ShoppingCart/>}/>
+
+        <Route path="/auctions"  element={<Auctions/>} />
+        <Route path="/auctions/:id_auction"  element={<Auction/>} />
+        <Route path="/auctions/create"  element={<CreateAuction/>} />
+
       </Routes>
     </BrowserRouter>
   )
