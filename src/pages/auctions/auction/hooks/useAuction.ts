@@ -10,7 +10,7 @@ export default function useAuction(id_auction:string):
     [IAuction|null|undefined, (id_auction: string, coins: number, cards: string[])=>void, (id_auction: string)=>void]
 {
 
-    const socket = useSocket(import.meta.env.VITE_SERVER_AUCTION, {query: {id_auction}});
+    const socket = useSocket(import.meta.env.VITE_SERVER_AUCTION, {query: {id_auction}, path: '/auction'});
     const [auction, setAuction] = useState<IAuction|null|undefined>(); 
     const {user} = useAuth();
 
@@ -28,7 +28,7 @@ export default function useAuction(id_auction:string):
 
             function onCreateBidd(_id_auction:string, bid:IBids){
                 if(_id_auction==id_auction){
-                    setAuction(auction=>({...auction!, bids: [...auction!.bids, bid]}));
+                    setAuction(auction=>({...auction!, bids: [...auction!.bids!, bid]}));
                 }
             }
 

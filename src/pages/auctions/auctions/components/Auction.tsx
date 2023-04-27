@@ -5,6 +5,10 @@ import ICard from "../../../../interfaces/ICard";
 import { format } from 'date-format-parse';
 import Buttons from "../../../../components/Button";
 import { useNavigate } from "react-router-dom";
+import IProduct from "../../../../interfaces/IProduct";
+import productsApi from "../../../../services/products.api";
+import IHeroe from "../../../../interfaces/IHeroe";
+import heroeApi from "../../../../services/heroe.api";
 
 interface AuctionProps{
     auction: IAuction
@@ -13,7 +17,6 @@ interface AuctionProps{
 export default function Auction({auction}:AuctionProps){
 
     const navigate = useNavigate();
-    const [card, setCard] = useState<ICard|undefined>();
 
     const [timeEnd, setTimeEnd] = useState<number>();
 
@@ -29,19 +32,38 @@ export default function Auction({auction}:AuctionProps){
         return () => clearInterval(interval);
     }, []);
 
+    const [product, setProduct] = useState<IProduct>();
+    const [card, setCard] = useState<ICard>();
+    const [hero, setHero] = useState<IHeroe>();
+
     useEffect(()=>{
-        const handleGetCard = async (id_card:string)=>{
-            const card = await cardApi.getById(id_card);
-            setCard(card);
+        const handleGetProduct = async()=>{
+            const product = await productsApi.getProductById(auction.id_card);
+            if(product.type=='card'){
+                const card = await cardApi.getById(product.id_product!);
+                setCard(card);
+            }else{
+                const hero = await heroeApi.getById(product.id_product!);
+                setHero(hero);
+            }
+            setProduct(product);
         }
-        handleGetCard(auction.id_card);
+        handleGetProduct();
     }, []);
 
     return(
         <div className="w-full h-48 bg-red-200 flex justify-center items-center">
             <div className="w-[85%] h-40 bg-blue-100 flex">
                 <div className="w-40 h-full bg-gray-200">
-                    <img className="max-h-full max-w-full" src='https://pm1.narvii.com/8223/0003e3a4972784ca4038d475d3daf8404f073af0r1-1045-1465v2_hq.jpg' alt="" />
+                    {(product) ? (
+                        (card) ? (
+                            <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/cards/${product.id_product}`} />
+                        ) : (
+                            (hero) ? (
+                                <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${product.id_product}`} />
+                            ) : ''
+                        )
+                    ):''}
                 </div>
                 <div className="flex-1 bg-blue-100 flex">
                     <div className="flex-1 bg-green-200 flex flex-col pt-4 pl-4">

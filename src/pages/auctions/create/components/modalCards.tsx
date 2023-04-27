@@ -62,7 +62,7 @@ export default function ModalCards({id_user, setProduct, isOpen, setIsOpen, onCl
                         {`${new Date().getUTCMonth() + 1}/${new Date().getUTCDate()}/${new Date().getUTCFullYear()}`}
                     </span>
                 </div>
-                <div className="w-full max-h-[500px] overflow-y-auto">
+                <div className="w-full max-h-[500px] overflow-y-scroll">
                     {(inventory) ? (
                         inventory.product.map((product, i)=>(
                             <Product 
