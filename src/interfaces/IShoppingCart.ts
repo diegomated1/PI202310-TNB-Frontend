@@ -1,5 +1,5 @@
 
-interface IShoppingCart{
+export default interface IShoppingCart{
     _id: string,
     id_user: string,
     product: {
