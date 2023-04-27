@@ -27,7 +27,7 @@ export default function Wishlist() {
         type: "card",
         price: 20,
         discount: 0.1,
-        availability: 10,
+        availability: 0,
         amount: 100,
         overall_rating: 4.5,
         amount_people_rate: 4.5
@@ -37,7 +37,7 @@ export default function Wishlist() {
         type: "hero",
         price: 15,
         discount: 0.2,
-        availability: 5,
+        availability: 0,
         amount: 50,
         overall_rating: 3.8,
         amount_people_rate: 4.5
@@ -47,7 +47,7 @@ export default function Wishlist() {
         type: "card",
         price: 25,
         discount: 0.15,
-        availability: 20,
+        availability: 1,
         amount: 200,
         overall_rating: 4.2,
         amount_people_rate: 4.5

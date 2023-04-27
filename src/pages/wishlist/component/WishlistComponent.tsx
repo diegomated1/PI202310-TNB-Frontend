@@ -5,6 +5,7 @@ import ICard from "../../../interfaces/ICard";
 import cardsApi from "../../../services/card.api";
 import IHero from "../../../interfaces/IHeroe";
 import heroeApi from "../../../services/heroe.api";
+import Icons from "../../../components/Icons";
 
 type ListWishlistProps = {
   product?: IProduct;
@@ -15,6 +16,12 @@ export default function TileLobby({ product }: ListWishlistProps) {
   const [image, setImage] = useState<File>();
 
   const [card, setCard] = useState<ICard>();
+
+  const [disabled, setDisabled] = useState<boolean>(false);
+
+  const handleSetAvaliability = async () => {
+
+  }
 
   const handleGetCard = async () => {
     const data = await cardsApi.getById(product?.id_product!);
@@ -34,7 +41,8 @@ export default function TileLobby({ product }: ListWishlistProps) {
     } else {
       handleGetCard();
     }
-  }, []);
+    setDisabled(product!.availability === 0)
+  }, [product!.availability]);
 
   // cartas
 
@@ -52,11 +60,10 @@ export default function TileLobby({ product }: ListWishlistProps) {
   if (product?.type == "hero") {
     return (
       <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
-        <h1>{hero?.name}</h1>
-        <div className="w-[50%] h-full">
-          <figure className="h-full w-full shadow-md">
+        <div className="w-[50%] h-full flex items-center justify-evenly">
+          <figure className="h-full w-auto">
             <img
-              className="object-cover "
+              className="object-contain h-[95%]"
               src={
                 image
                   ? URL.createObjectURL(image!)
@@ -66,14 +73,48 @@ export default function TileLobby({ product }: ListWishlistProps) {
               }
             />
           </figure>
+          <h1>{hero?.name}</h1>
         </div>
-        <div className="w-[50%] h-full"></div>
+        <div className="w-[50%] h-full flex items-center justify-evenly">
+          <h1>{product.price}</h1>
+          {product.availability === 1 ? <Icons.checkGreen /> : <Icons.x />}
+          <div className="w-[30%]">
+          <Button.buttonYellow disabled={disabled}>Añadir</Button.buttonYellow>
+          </div>
+          <div className="">
+            <Icons.trash></Icons.trash>
+          </div>
+        </div>
       </div>
     );
   } else {
     return (
       <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
-        <h1>{card?.name}</h1>
+        <div className="w-[50%] h-full flex items-center justify-evenly">
+          <figure className="h-full w-auto">
+            <img
+              className="object-contain h-[95%]"
+              src={
+                image
+                  ? URL.createObjectURL(image!)
+                  : `${import.meta.env.VITE_API_CARDS_URL}/images/cards/${
+                      product!.id_product
+                    }`
+              }
+            />
+          </figure>
+          <h1>{card?.name}</h1>
+        </div>
+        <div className="w-[50%] h-full flex items-center justify-evenly">
+          <h1>{product!.price}</h1>
+          {product!.availability === 1 ? <Icons.checkGreen /> : <Icons.x />}
+          <div className="w-[30%]">
+          <Button.buttonYellow disabled={disabled}>Añadir</Button.buttonYellow>
+          </div>
+          <div className="">
+            <Icons.trash></Icons.trash>
+          </div>
+        </div>
       </div>
     );
   }
