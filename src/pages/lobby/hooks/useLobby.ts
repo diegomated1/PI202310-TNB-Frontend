@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import Ilobby, { IPLayer } from "../../../interfaces/ILobby";
+import Ilobby from "../../../interfaces/ILobby";
 import useAuth from "../../../hooks/useAuth";
 import useSocket from "../../../hooks/useSocket";
 import IUser from "../../../interfaces/IUser";
 import lobbyApi from "../../../services/lobby.api";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Custom hook for managing lobby.
@@ -15,6 +16,7 @@ import lobbyApi from "../../../services/lobby.api";
  */
 export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefined, ()=>void, (idGame:string)=>void]{
 
+    const navigate = useNavigate();
     // socket that allow to connect server 'game_create'
     const socket = useSocket(import.meta.env.VITE_SOCKET_LOBBY, {path: '/lobby', query: {id_lobby}});
 
@@ -29,7 +31,7 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
         if(user){
             const handleGetLobby = async ()=>{
                 const lobby = await lobbyApi.getById(id_lobby);
-                const _user = lobby.players.find(player=>player.id_user==user.id_user);
+                const _user = lobby.players.find(player=>player==user.id_user);
                 if(_user){
                     setLobby(lobby);
                     setIsOwner(user.id_user==lobby.id_owner);
@@ -48,7 +50,7 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
              * Function to get players when a new player is joining 
              * @param {IPLayer} player player object (id_player, id_hero, id_deck)
              */
-            function lobbyUserJoin(player:IPLayer){
+            function lobbyUserJoin(player:string){
                 setLobby((lobby)=>({...lobby!, players: [...lobby!.players, player]}));
             }
 
@@ -57,19 +59,29 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
              * @param {string} id_player the id of the player who leave the lobby
              */
             function lobbyUserLeave(id_player:string){
-                setLobby((lobby)=>({...lobby!, players: lobby!.players.filter(ply=>ply.id_user!=id_player)}));
+                console.log(id_player);
+                setLobby((lobby)=>({...lobby!, players: lobby!.players.filter(ply=>ply!=id_player)}));
+                if(id_player==user?.id_user){
+                    navigate('/game/list');
+                }
+            }
+
+            function onStart(id_game:string){
+                navigate(`/game/?g=${id_game}`);
             }
 
             socket.emit('lobby:room:join', user.id_user);
-
+            
             // Events that this custom hook listens to
             socket.on('lobby:user:join', lobbyUserJoin);
             socket.on('lobby:user:leave', lobbyUserLeave);
+            socket.on('lobby:start', onStart);
 
             // Clean up function to remove the event listener when the component unmounts.
             return () => {
                 socket.off('lobby:user:join', lobbyUserJoin);
                 socket.off('lobby:user:leave', lobbyUserLeave);
+                socket.off('lobby:start', onStart);
             }
         }
     }, [lobby, socket, user]);
@@ -86,9 +98,10 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
     /**
      * Function to start round
      */
-    function start(idGame:string){
+    function start(id_game:string){
         if(socket && user && isOwner && id_lobby){
-            socket.emit('lobby:start', id_lobby, idGame);
+            console.log("llmando");
+            socket.emit('lobby:start', id_lobby, id_game);
         }
     }
 

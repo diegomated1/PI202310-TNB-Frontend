@@ -14,6 +14,7 @@ import useAuth from "../../hooks/useAuth";
 import IUser from "../../interfaces/IUser";
 import userApi from "../../services/user.api";
 import CardsEquiped from "./components/modals/cardsEquiped";
+import IPlayer from "./interfaces/IPlayer";
 
 
 export default function Game(){
@@ -24,19 +25,33 @@ export default function Game(){
     const {user} = useAuth();
     const {game, players, heroes, actions} = useGame(searchParams.get('g'), user);
 
+    const [player, setPlayer] = useState<IPlayer>();
     const [hero, setHero] = useState<IHero>();
     const [userTurn, setUserTurn] = useState<IUser>();
 
     const [modalCardsEquiped, setModalCardsEquiped] = useState<boolean>(false);
     const [modalInfo, setModalInfo] = useState<{hero_name:string,cards:string[]}>({hero_name:'', cards: []});
 
+    const [canChangeCard, setCanChangeCard] = useState(false);
+    const [canUseCard, setCanUseCard] = useState(false);
+
+    useEffect(()=>{
+        if(user && players[user.id_user]){
+            setPlayer(players[user.id_user]);
+        }
+    }, [user, players]);
 
     // Get user hero
     useEffect(()=>{
-        if(user && heroes[players[user.id_user].id_hero]){
-            setHero(heroes[players[user.id_user].id_hero]);
+        if(player){
+            setHero(heroes[player.id_hero]);
+
+            const canUse = player.upgrades>0;
+            const canChange = player.changes>0;
+            setCanUseCard(canUse);
+            setCanChangeCard(canUse?false:canChange);
         }
-    }, [heroes]);
+    }, [player]);
 
     // Change turn info 
     useEffect(()=>{
@@ -67,18 +82,6 @@ export default function Game(){
         });
         setModalCardsEquiped(true);
     }
-
-    const [canChangeCard, setCanChangeCard] = useState(false);
-    const [canUseCard, setCanUseCard] = useState(false);
-
-    useEffect(()=>{
-        if(user && players[user.id_user]){
-            const canUse = players[user.id_user].upgrades>0;
-            const canChange = players[user.id_user].changes>0;
-            setCanUseCard(canUse);
-            setCanChangeCard(canUse?false:canChange);
-        }
-    }, [players, user]);
 
     const handleChange = ()=>{
         setCanChangeCard(est=>!est);
@@ -122,21 +125,23 @@ export default function Game(){
             <div className="flex-[3] flex flex-col relative">
                 <div className="flex-1 flex items-center">
                     <div className="flex-1 flex justify-evenly">
-                        {Object.values(heroes).filter(hero=>hero._id!=players[user?.id_user!].id_hero).map((_hero, i)=>(
-                            <Hero 
-                                key={i} 
-                                hero={_hero}
-                                canSelect={(userTurn?.id_user==user?.id_user && hero?.power!>0)?true:false}
-                                onSelect={handleAttack}
-                                openModal={handleOpenModal}
-                            />
-                        ))}
+                        {(hero) ? (
+                            Object.values(heroes).filter(hero=>hero._id!=players[user?.id_user!].id_hero).map((_hero, i)=>(
+                                <Hero 
+                                    key={i} 
+                                    hero={_hero}
+                                    canSelect={(userTurn?.id_user==user?.id_user && hero?.power!>0)?true:false}
+                                    onSelect={handleAttack}
+                                    openModal={handleOpenModal}
+                                />
+                            ))
+                        ) : ''}
                     </div>
                 </div>
                 <div className="flex-1 flex items-center">
                     <div className="flex-1 flex justify-evenly">
                         <Deck cards_in_deck={(user&&players[user.id_user])?players[user.id_user].all_cards.length:0}/>
-                        {(user && hero) ? (
+                        {(hero) ? (
                             <Hero hero={hero} 
                                 canSelect={false}
                                 openModal={handleOpenModal}
@@ -144,8 +149,8 @@ export default function Game(){
                         ) : (
                             ''
                         )}
-                        {(user && players[user.id_user]) ? (
-                            players[user.id_user].hand_cards.map((card,i)=>(
+                        {(hero) ? (
+                            players[user!.id_user].hand_cards.map((card,i)=>(
                                 <Card 
                                     key={i} 
                                     id_card={card} 

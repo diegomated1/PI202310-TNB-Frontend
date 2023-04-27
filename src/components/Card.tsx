@@ -38,7 +38,7 @@ export default function Card({card, product, onClick1, onClick2, onClick3 }: Car
                     {Icons[card.card_type!]({})}
                 </div>
                 <div className="absolute top-0 right-0">
-                    {product ? product.price && <div className="flex text-white"><h1>{product.price}</h1><Icons.currency/></div> : ""}
+                    {product ? product.price && <div className="flex text-white"><h1>{product?.price - ((product?.price * product?.discount)/ 100)}</h1><Icons.currency/></div> : ""}
                 </div>
                 <div className="absolute top-[80%] left-0">
                     {(heroe && heroe.name && heroe.name in Icons) ? Icons[heroe.name]({}) : ""}

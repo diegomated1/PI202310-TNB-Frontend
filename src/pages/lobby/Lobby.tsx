@@ -15,14 +15,13 @@ export default function Lobby(){
     const {id_lobby} = useParams();
     const [isOwner, lobby, leave, start] = useLobby(id_lobby!);
 
-    const [startMessage, setStartMessage] = useState<string>();
+    const [startMessage, setStartMessage] = useState<string>('');
 
     /**
      * Function for leaving the lobby
      */
     const handleLeave = ()=>{
         leave();
-        navigate('/game/list');
     }
 
     /**
@@ -33,12 +32,11 @@ export default function Lobby(){
             setStartMessage("Iniciando partida...");
             try{
                 const game = await gameApi.create(lobby.players, lobby.ias, lobby.min_bet);
-                console.log(game);
                 if(game){
                     for(let i=0;i<lobby.players.length;i++){
-                        const {id_user, id_hero, id_deck} = lobby.players[i];
-                        await gameApi.addUser(game.id_game, id_user, id_hero, id_deck);
+                        await gameApi.addUser(game.id_game, lobby.players[i]);
                     }
+                    start(game.id_game);
                 }
             }catch(error){
                 console.log(error);
@@ -78,32 +76,29 @@ export default function Lobby(){
                         {(lobby) ? (
                             <div className="flex-[3] grid grid-cols-4">
                                 {lobby.players.map((player,i)=>(
-                                    <Player key={i} id_user={player.id_user} />
+                                    <Player key={i} id_user={player}/>
                                 ))}
                                 {[...Array(lobby.max_number_players-(lobby.players.length+lobby.ias))].map((x,i)=>(
                                     <WaitingPlayer key={i}/>
-                                ))}
-                                {[...Array(lobby.ias)].map((x,i)=>(
-                                    <Player key={i}/>
                                 ))}
                             </div>
                         ) : (
                             ''
                         )}
                         <div className="flex-1 flex justify-end items-center pr-5">
-                            <div className="w-36 h-12">
+                            <div className="w-40 h-14">
                                 {
-                                    (isOwner && lobby && lobby.max_number_players==lobby.players.length) ? (
+                                    (isOwner && lobby) ? (
                                         <Button.buttonYellow 
                                             onClick={handleStart}
                                         >
-                                            Iniciar partida
+                                            {(lobby.max_number_players==lobby.players.length) ? (
+                                                'Iniciar Partida'
+                                            ) :(
+                                                `Iniciar Partida con ${lobby.players.length} jugadores`
+                                            )}
                                         </Button.buttonYellow>
-                                    ) : (
-                                        <Button.default disabled={true} >
-                                            Iniciar partida
-                                        </Button.default>
-                                    )
+                                    ) : ''
                                 }
                                 {(startMessage) ? (
                                     <span className="w-full flex justify-center">{startMessage}</span>

@@ -12,12 +12,13 @@ export default function Comment(props:ICommentProps) {
     
     const [userName, setUserName] = useState("");
 
-    const handleGetCard = async () => {
-        const data = await userApi.getById(props.comment.id_usuario);
-        setUserName(data.username);
-    }
+    
 
     useEffect(() => {
+        const handleGetCard = async () => {
+            const data = await userApi.getById(props.comment.id_usuario);
+            setUserName(data.username);
+        }
         handleGetCard();
     }, []);
 
@@ -25,10 +26,11 @@ export default function Comment(props:ICommentProps) {
         <div className=" border   border-gray-500  ">
             <div className="p-1 w-full flex">
                 <div className="w-[90%] p-1">
-                    <h2 className="text-2xl p-1"><strong>{userName}</strong></h2>
+                    <h2 className="text-2xl p-1"><strong>Molano GOD{userName}</strong></h2>
                 </div>
-                <div className=" flex text-right w-[10%] p-3">
-                    <Icons.edit />
+                <div className=" flex  text-right w-[10%] p-3">
+                    <Icons.edit 
+                    />
                     <Icons.trash />
                 </div>
             </div>
@@ -49,4 +51,13 @@ export default function Comment(props:ICommentProps) {
         </div>
     )
 }
+
+function Images(id_image:string){
+    return(
+        <div>
+            <img src="" alt="" />
+        </div>
+    )
+}
+
 
