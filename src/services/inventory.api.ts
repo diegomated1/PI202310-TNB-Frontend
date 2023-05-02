@@ -1,7 +1,6 @@
 import axios from 'axios';
 import IUser from '../interfaces/IUser';
-import IDeck from '../interfaces/IDeck';
-import IInventory from '../interfaces/IInventory';
+import { IInventory } from '../interfaces/IInventory';
 
 
 interface errorResponse{
@@ -15,12 +14,12 @@ class InventoryApi{
         this.baseUrl = import.meta.env.VITE_API_INVENTORY_URL;
     }
 
-   
-
-    getByUserId(id_user:string):Promise<IInventory>{
+    getDeck(id_user:string):
+        Promise<{id_product:string,quantity:number,type:string}[]>
+    {
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.get(`${this.baseUrl}/users/${id_user}/inventory`);
+                const {data} = await axios.get(`${this.baseUrl}/deck/${id_user}`);
                 res(data.data);
             }catch(error){
                 console.log(error);
@@ -29,12 +28,14 @@ class InventoryApi{
         });
     }
 
-    insertInventoryById(id_user:string, id_product:string, quantity:number):Promise<IInventory>{
+    createDeck(id_user:string, products:{
+        id_product: string
+        quantity: number
+        type: string
+    }){
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.post(`${this.baseUrl}/users/${id_user}/inventory`,{
-                    id_product: id_product, quantity: quantity,
-                });
+                const {data} = await axios.post(`${this.baseUrl}/deck/${id_user}`, {products});
                 res(data.data);
             }catch(error){
                 console.log(error);
@@ -43,6 +44,43 @@ class InventoryApi{
         });
     }
 
+    getInventory(id_user:string):
+        Promise<{id_product:string,quantity:number}[]>
+    {
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.get(`${this.baseUrl}/inventory/${id_user}`);
+                res(data.data);
+            }catch(error){
+                console.log(error);
+                rej(error);
+            }
+        });
+    }
+
+    addProductToInventory(id_user:string, products:{id_product:string, quantity:number}[]){
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.post(`${this.baseUrl}/inventory/${id_user}`,{products});
+                res(data.data);
+            }catch(error){
+                console.log(error);
+                rej(error);
+            }
+        });
+    }
+
+    delProductToInventory(id_user:string, id_product:string){
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.post(`${this.baseUrl}/inventory/${id_user}/products/${id_product}`);
+                res(data.data);
+            }catch(error){
+                console.log(error);
+                rej(error);
+            }
+        });
+    }
     
 
 }

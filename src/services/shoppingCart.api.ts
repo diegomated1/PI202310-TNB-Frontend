@@ -8,15 +8,13 @@ class ShoppingCartApi{
 
     baseUrl: string
     constructor(){
-        this.baseUrl = import.meta.env.VITE_API_USERS_URL;
+        this.baseUrl = import.meta.env.VITE_API_CART_URL;
     }
 
-    delete(id_user:string, id_producto:string):Promise<errorResponse>{
+    getCart(id_user:string):Promise<errorResponse>{
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.post(`${this.baseUrl}/auth/login`, {id_user,id_producto}, {
-                    withCredentials: true,
-                });
+                const {data} = await axios.post(`${this.baseUrl}/cart/${id_user}`);
                 res(data)
             }catch(error){
                 console.log(error);
@@ -25,12 +23,10 @@ class ShoppingCartApi{
         });
     }
 
-    setQuantityShoppingCart(id_user:string, id_producto:string):Promise<errorResponse>{
+    setQuantityShoppingCart(id_user:string, id_product:string, quantity:number):Promise<errorResponse>{
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.put(`${this.baseUrl}/auth/login`, {id_user,id_producto}, {
-                    withCredentials: true,
-                });
+                const {data} = await axios.put(`${this.baseUrl}/cart/${id_user}`, {id_product, quantity});
                 res(data)
             }catch(error){
                 console.log(error);
@@ -39,16 +35,68 @@ class ShoppingCartApi{
         });
     }
 
-    getOrderById(id_user:string):Promise<errorResponse>{
+    delete(id_user:string, id_product:string):Promise<errorResponse>{
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.get(`${this.baseUrl}/auth/login?id_user=${id_user}`, {
-                    withCredentials: true,
-                });
+                const {data} = await axios.delete(`${this.baseUrl}/cart/${id_user}/products/${id_product}`);
                 res(data)
             }catch(error){
                 console.log(error);
                 res({error: '', message: (error as Error).message});
+            }
+        });
+    }
+
+    getOrders(id_user:string):
+        Promise<{id_order:string,quantity:number,gross_price:number,total_price:number}>
+    {
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.get(`${this.baseUrl}/order/${id_user}`);
+                res(data)
+            }catch(error){
+                rej(error);
+            }
+        });
+    }
+
+    getOrderById(id_user:string, id_order:string):
+        Promise<{id_product:string, quantity:number, unit_price:number, discount:number}[]>
+    {
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.get(`${this.baseUrl}/order/${id_user}/${id_order}`);
+                res(data)
+            }catch(error){
+                rej(error);
+            }
+        });
+    }
+
+    createOrder(id_user:string,products:{id_product: string, quantity: number}[]):
+        Promise<{id_order:string,quantity:number,gross_price:number,total_price:number}>
+    {
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.post(`${this.baseUrl}/order/${id_user}`,{
+                    products
+                });
+                res(data)
+            }catch(error){
+                rej(error);
+            }
+        });
+    }
+
+    createOrderFromCart(id_user:string):
+        Promise<{id_order:string,quantity:number,gross_price:number,total_price:number}>
+    {
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.post(`${this.baseUrl}/order/${id_user}/cart`);
+                res(data)
+            }catch(error){
+                rej(error);
             }
         });
     }

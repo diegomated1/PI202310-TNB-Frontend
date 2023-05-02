@@ -3,7 +3,7 @@ import Button from "../../../components/Button";
 import IProduct from "../../../interfaces/IProduct";
 import ICard from "../../../interfaces/ICard";
 import cardsApi from "../../../services/card.api";
-import IHero from "../../../interfaces/IHeroe";
+import IHero from "../../../interfaces/IHero";
 import heroeApi from "../../../services/heroe.api";
 import Icons from "../../../components/Icons";
 import WishlistApi from "../../../services/Wishlist.api";

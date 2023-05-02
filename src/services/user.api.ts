@@ -13,7 +13,7 @@ class UserApi{
         this.baseUrl = import.meta.env.VITE_API_USERS_URL;
     }
 
-    auth(){
+    auth():Promise<IUser>{
         return new Promise(async(res, rej)=>{
             try{
                 const {data} = await axios.post(`${this.baseUrl}/auth`, {}, {

@@ -12,7 +12,7 @@ import IUser from "../../../interfaces/IUser";
 import userApi from "../../../services/user.api";
 import ModalCreateBid from "./components/ModalCreateBid";
 import Card from "../../../components/Card";
-import IHeroe from "../../../interfaces/IHeroe";
+import IHeroe from "../../../interfaces/IHero";
 import IProduct from "../../../interfaces/IProduct";
 import heroeApi from "../../../services/heroe.api";
 import productsApi from "../../../services/products.api";

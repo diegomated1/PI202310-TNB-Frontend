@@ -5,7 +5,7 @@ import cardApi from "../../services/card.api";
 import ICard from "../../interfaces/ICard";
 import Pager from "../../components/Pager";
 import Hero from "../../components/Hero";
-import IHeroe from "../../interfaces/IHeroe";
+import IHeroe from "../../interfaces/IHero";
 import heroeApi from "../../services/heroe.api";
 
 export default function AdminHeroes() {

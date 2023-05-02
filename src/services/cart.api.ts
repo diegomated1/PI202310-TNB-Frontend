@@ -1,5 +1,5 @@
 import axios from 'axios';
-import IShoppingCart from '../interfaces/IShoppingCart';
+import IShoppingCart from '../interfaces/ICart';
 
 class CartApi {
 

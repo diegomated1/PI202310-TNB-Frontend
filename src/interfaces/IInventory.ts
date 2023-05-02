@@ -1,8 +1,10 @@
-export default interface IInventory{
-    _id: string
+export interface IInventory{
+	id_inventory?: number
     id_user: string
-    product: {
-        id_product: string
-        quantity: number
-    }[]
+    coins: number
+}
+
+export interface IInventoryProducts{
+    id_product: string
+    quantity: number
 }

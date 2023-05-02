@@ -12,10 +12,10 @@ class ProductsApi {
         this.baseUrl = import.meta.env.VITE_API_PRODUCTS_URL;
     }
 
-    getProducts(): Promise<IProduct[]>{
+    getProducts(page: number): Promise<IProduct[]>{
         return new Promise(async (res, rej) => {
             try {
-                const { data } = await axios.get(`${this.baseUrl}`);
+                const { data } = await axios.get(`${this.baseUrl}/?page=${page}`);
                 res(data.data);
             } catch (error) {
                 rej(error);
@@ -23,11 +23,28 @@ class ProductsApi {
         });
     }
 
-    getProductById(id_carta: string): Promise<IProduct> {
+    getProductById(id_product: string): Promise<IProduct> {
         return new Promise(async (res, rej) => {
             try {
-                const { data } = await axios.get(`${this.baseUrl}/${id_carta}`);
+                const { data } = await axios.get(`${this.baseUrl}/${id_product}`);
                 res(data.data);
+            } catch (error) {
+                rej(error);
+            }
+        });
+    }
+
+    editProduct(id_product: string, attr:{stock?:number,rating?:number,price?:number,discount?:number,availability?:number}){
+        return new Promise(async (res, rej) => {
+            try {
+                await axios.put(`${this.baseUrl}/${id_product}`, {...attr});
+                if(attr.stock){
+                    await axios.put(`${this.baseUrl}/${id_product}/stock`,{stock:attr.stock});
+                }
+                if(attr.rating){
+                    await axios.put(`${this.baseUrl}/${id_product}/rating`,{rating:attr.rating});
+                }
+                res(true);
             } catch (error) {
                 rej(error);
             }

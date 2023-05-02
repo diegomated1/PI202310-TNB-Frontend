@@ -13,7 +13,7 @@ import ICard from "../../interfaces/ICard";
 import IProduct from "../../interfaces/IProduct";
 import ISetComment from "../../interfaces/ISetComment";
 import heroeApi from "../../services/heroe.api";
-import IHeroe from "../../interfaces/IHeroe";
+import IHeroe from "../../interfaces/IHero";
 import Hero from "../../components/Hero";
 import cartApi from "../../services/cart.api";
 import useAuth from "../../hooks/useAuth";

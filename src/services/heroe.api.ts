@@ -1,5 +1,5 @@
 import axios from 'axios';
-import IHeroe from '../interfaces/IHeroe';
+import IHeroe from '../interfaces/IHero';
 
 class HeroesApi{
 

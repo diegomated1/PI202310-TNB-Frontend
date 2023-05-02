@@ -3,7 +3,7 @@ import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
 import Input from "../../components/Input"
 import cardApi from "../../services/card.api";
-import IHeroe from "../../interfaces/IHeroe";
+import IHeroe from "../../interfaces/IHero";
 import heroeApi from "../../services/heroe.api";
 import ModalReports from "../../components/modals/Reports";
 

@@ -1,12 +1,10 @@
-import ICard from "./ICard";
-import IHeroe from "./IHeroe";
-
-export default interface IDeck{
-    id_user:String,
-    hero: IHeroe,
-    armors: {[key:string]: ICard},
-    weapon: {[key:string]: ICard},
-    items: {[key:string]: ICard},
-    epics: {[key:string]: ICard}
+export interface IDeck{
+	id_deck?: number
+    id_user: string
 }
 
+export interface IDeckProducts{
+    id_product: string
+    quantity: number
+    type: string
+}

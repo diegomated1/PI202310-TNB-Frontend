@@ -3,7 +3,7 @@ import IUser from "../../../interfaces/IUser";
 import userApi from "../../../services/user.api";
 import inventoryApi from "../../../services/inventory.api";
 import heroeApi from "../../../services/heroe.api";
-import IHeroe from "../../../interfaces/IHeroe";
+import IHeroe from "../../../interfaces/IHero";
 
 interface IPlayerProps{
     id_user: string

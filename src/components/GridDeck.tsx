@@ -1,6 +1,6 @@
 import { useState, FormEvent, useEffect } from "react";
 import ICard from "../interfaces/ICard";
-import IHeroe from "../interfaces/IHeroe";
+import IHeroe from "../interfaces/IHero";
 import Hero from "./Hero";
 import cardApi from "../services/card.api";
 import Card from "./Card";

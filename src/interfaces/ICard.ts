@@ -4,5 +4,5 @@ export default interface ICard{
     description: string,
     id_hero: string,
     card_type: string,
-    effects: string[]
+    effects: [string]
 }
