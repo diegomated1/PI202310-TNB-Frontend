@@ -41,11 +41,12 @@ class UserApi{
         });
     }
 
-    register( email:string, username:string, password:string ):Promise<errorResponse>{
+    register( email:string, name:string, second_name:string, username:string, password:string ):Promise<errorResponse>{
         return new Promise(async(res, rej)=>{
             try{
                 const {data} = await axios.post(`${this.baseUrl}/auth/register`, {
                     email,
+                    name, second_name,
                     username,
                     password
                 }, {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import IUser from '../interfaces/IUser';
-import { IInventory } from '../interfaces/IInventory';
+import IInventory from '../interfaces/IInventory';
 
 
 interface errorResponse{
@@ -44,9 +44,7 @@ class InventoryApi{
         });
     }
 
-    getInventory(id_user:string):
-        Promise<{id_product:string,quantity:number}[]>
-    {
+    getInventory(id_user:string):Promise<IInventory>{
         return new Promise(async(res, rej)=>{
             try{
                 const {data} = await axios.get(`${this.baseUrl}/inventory/${id_user}`);

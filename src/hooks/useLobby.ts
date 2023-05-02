@@ -15,7 +15,7 @@ export default function useLobby(getlobbies:boolean=true){
     const socket = useSocket(import.meta.env.VITE_SOCKET_LOBBY, {path: '/lobby'});
     const [lobbies, setLobbies] = useState<ILobby[]>([]);
     const [lobby, setLobby] = useState<ILobby>();
-    const {user} = useAuth();
+    const user = useAuth();
 
     /**
      * useEffect for fetch all lobbies

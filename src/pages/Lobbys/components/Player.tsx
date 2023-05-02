@@ -16,9 +16,9 @@ export default function Player({id_user}:IPlayerProps){
         const handleGetUserInfo = async ()=>{
             if(id_user){
                 const user = await userApi.getById(id_user);
-                const deck = await inventoryApi.getByUserId(id_user);
+                const deck = await inventoryApi.getInventory(id_user);
                 setUser(user);
-                setIdHero(deck.id_user);
+                //setIdHero(deck.id_user);
             }
         }
         handleGetUserInfo();

@@ -22,22 +22,7 @@ export default function Hero({id_user, hero, canSelect, onSelect, openModal}:Her
     useEffect(()=>{
         const handleGetHero = async()=>{
             const _hero = await heroeApi.getById(hero.id_hero);
-            setBaseStats({
-                _id: hero._id,
-                atq: {
-                    base: _hero.attack_basic,
-                    range: _hero.attack_range
-                },
-                def: _hero.defense,
-                dmg: {
-                    base: 1,
-                    range: _hero.damage_range
-                },
-                life: _hero.health,
-                last_dmg: 0,
-                name: _hero.name,
-                power: _hero.power, id_hero: hero.id_hero, id_user: hero.id_user, type: hero.type
-            });
+            //setBaseStats(_hero);
         }
         handleGetHero();
     }, []);

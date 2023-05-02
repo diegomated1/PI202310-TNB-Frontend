@@ -7,12 +7,13 @@ import cardApi from "../../services/card.api";
 import { StringDecoder } from "string_decoder";
 import IProduct from "../../interfaces/IProduct";
 import WishlistComponent from "./component/WishlistComponent";
-import WishlistApi from "../../services/Wishlist.api";
+import WishlistApi from "../../services/cart.api";
 import productsApi from "../../services/products.api";
 import useAuth from "../../hooks/useAuth";
 import cartApi from "../../services/cart.api";
 
 export default function Wishlist() {
+  /*
   const [wishlist, setWishlist] = useState<string[]>([]);
 
   const {user} = useAuth();
@@ -20,7 +21,7 @@ export default function Wishlist() {
   useEffect(() => {
     if(!user){
       const handleGetWishList = async () =>{
-        const wishlist = await WishlistApi.whislistGetById('1');
+        const wishlist = await WishlistApi.getWishList('1', 0);
         setWishlist(wishlist);
       }
       handleGetWishList();
@@ -59,17 +60,14 @@ export default function Wishlist() {
       amount_people_rate: 4.5,
     },
   ];
+  */
 
   return (
     <div className="w-screen h-full flex flex-col">
       <AdminCardsNavBar></AdminCardsNavBar>
       <h1 className="text-6xl pt-8 pl-6">Lista de deseos</h1>
       <div className="w-screen h-full flex">
-        <div className="flex-[3] p-4 w-full">
-          {wishlist.map((index, i) => (
-            <WishlistComponent id_product={index} key={i}/>
-          ))}
-        </div>
+        
       </div>
     </div>
   );

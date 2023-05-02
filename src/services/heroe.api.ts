@@ -1,5 +1,6 @@
 import axios from 'axios';
 import IHeroe from '../interfaces/IHero';
+import IHero from '../interfaces/IHero';
 
 class HeroesApi{
 
@@ -11,6 +12,7 @@ class HeroesApi{
     insert(heroe:IHeroe, image:File){
         return new Promise(async(res, rej)=>{
             try{
+                /*
                 const formData = new FormData();
                 formData.append('card_image', image);
                 formData.append('name', heroe.name);
@@ -22,7 +24,8 @@ class HeroesApi{
                 formData.append('attack_range', heroe.attack_range.toString());
                 formData.append('damage_range', heroe.damage_range.toString());
                 const {data} = await axios.post(`${this.baseUrl}/heroes`, formData);
-                res(data.data);
+                */
+                res("data.data");
             }catch(error){
                 rej(error);
             }
@@ -40,7 +43,7 @@ class HeroesApi{
         });
     }
 
-    getById(_id: string): Promise<IHeroe> {
+    getById(_id: string): Promise<IHero> {
         return new Promise(async (res, rej) => {
             try {
                 const { data } = await axios.get(`${this.baseUrl}/heroes/${_id}`);

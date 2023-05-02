@@ -6,8 +6,8 @@ import cardsApi from "../../../services/card.api";
 import IHero from "../../../interfaces/IHero";
 import heroeApi from "../../../services/heroe.api";
 import Icons from "../../../components/Icons";
-import WishlistApi from "../../../services/Wishlist.api";
 import productsApi from "../../../services/products.api";
+import inventoryApi from "../../../services/inventory.api";
 
 type ListWishlistProps = {
   id_product: string;
@@ -42,8 +42,8 @@ export default function TileWishlist({ id_product }: ListWishlistProps) {
 
   const handleRemoveFromWishlist = async () => {
     try {
-      const response = await WishlistApi.deleteWhislist('id-user', product?.id_product!);
-      console.log(response);
+      //const response = await inventoryApi.deleteWhislist('id-user', product?.id_product!);
+      //console.log(response);
     } catch (error) {
       console.error(error);
     }
