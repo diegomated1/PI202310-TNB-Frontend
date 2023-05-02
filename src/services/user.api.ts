@@ -62,7 +62,18 @@ class UserApi{
     getById(id_user:string):Promise<IUser>{
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.get(`${this.baseUrl}/user/${id_user}`);
+                const {data} = await axios.get(`${this.baseUrl}/${id_user}`);
+                res(data.data)
+            }catch(error){
+                rej(error);
+            }
+        });
+    }
+
+    modify(id_user:string, attr:{name?:string,secondName?:string,email?:string,username?:string, password?:string}):Promise<IUser>{
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.put(`${this.baseUrl}/${id_user}`,{...attr});
                 res(data.data)
             }catch(error){
                 rej(error);

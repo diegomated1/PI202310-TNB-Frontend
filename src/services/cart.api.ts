@@ -1,4 +1,5 @@
 import axios from 'axios';
+import IOrder from '../interfaces/IOrder';
 
 interface errorResponse{
     error:string;
@@ -48,12 +49,12 @@ class ShoppingCartApi{
     }
 
     getOrders(id_user:string):
-        Promise<{id_order:string,quantity:number,gross_price:number,total_price:number}>
+        Promise<IOrder[]>
     {
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.get(`${this.baseUrl}/order/${id_user}`);
-                res(data)
+                const {data} = await axios.get(`${this.baseUrl}/order/${id_user}/orders`);
+                res(data.data)
             }catch(error){
                 rej(error);
             }

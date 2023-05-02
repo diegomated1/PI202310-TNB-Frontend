@@ -20,6 +20,7 @@ import ShoppingCart from "./pages/shoppingCart/shoppingCart"
 import CreateAuction from "./pages/auctions/create/CreateAuction"
 import Auctions from "./pages/auctions/auctions/Auctions"
 import Auction from "./pages/auctions/auction/Auction"
+import Account from "./pages/account/account"
 
 function App() {
   return (
@@ -52,6 +53,8 @@ function App() {
         <Route path="/auctions"  element={<Auctions/>} />
         <Route path="/auctions/:id_auction"  element={<Auction/>} />
         <Route path="/auctions/create"  element={<CreateAuction/>} />
+
+        <Route path="/account" element={<Account/>} />
 
       </Routes>
     </BrowserRouter>

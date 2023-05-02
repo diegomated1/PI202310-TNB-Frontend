@@ -17,7 +17,7 @@ export default function Input(props: InputProps) {
         <div className="w-full h-full shadow-md relative bg-transparent">
             <input className="w-full focus:outline-double h-full rounded-md p-2 shadow-xl border border-gray-100"
                 {...props} 
-            required/>
+            />
             {(props.icon && props.onClickIcon) ? <props.icon onClick={props.onClickIcon}/> : ''}
         </div>
     )
