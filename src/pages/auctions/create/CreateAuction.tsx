@@ -6,7 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 import ModalCards from "./components/modalCards";
 import IProduct from "../../../interfaces/IProduct";
 import ICard from "../../../interfaces/ICard";
-import IHeroe from "../../../interfaces/IHeroe";
+import IHeroe from "../../../interfaces/IHero";
 import cardApi from "../../../services/card.api";
 import heroeApi from "../../../services/heroe.api";
 import Buttons from "../../../components/Button";
@@ -25,7 +25,7 @@ export default function CreateAuction() {
     const [products, setProducts] = useState<IProduct[]>([]);
     const [minBidd, setMinBidd] = useState(0);
 
-    const [user, setUser] = useState<IUser>({ email: 'diego@diego.com', id_user: 'lgpc2s8r', username: 'diego', password: '123' });
+    const user = useAuth();
 
     const [modalOpen, setModalOpen] = useState(false);
     const [product, setProduct] = useState<IProduct>();

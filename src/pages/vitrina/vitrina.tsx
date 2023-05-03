@@ -65,8 +65,7 @@ export default function Vitrina() {
 
                             <div className="max-w-[13rem] max-h-[18rem]" key={i}>
                                 <Card
-                                    name={card.name}
-                                    description={card.description}
+                                    card={card}
                                     // onClick2={() => {
                                     //     handleeventFavorites(card._id!)
                                     // }}

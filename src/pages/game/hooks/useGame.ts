@@ -61,7 +61,7 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
             }
 
             function gameStart(game:IGame){
-                setGame(game);
+                setGame({...game});
             }
 
             function onAttack(result:IResult){
@@ -77,6 +77,7 @@ export default function userGame(id_game:string|null, user:IUser|null|undefined)
             function onPass(turn:string, round?:number){
                 if(round){
                     setGame(game=>({...game!, turn, current_round: round}));
+                    console.log("aaa");
                     socket?.emit('game:newRound', id_game, user?.id_user);
                 }else{
                     setGame(game=>({...game!, turn}));

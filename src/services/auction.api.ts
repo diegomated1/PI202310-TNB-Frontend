@@ -5,7 +5,7 @@ class AuctionsApi {
 
     baseUrl: string
     constructor() {
-        this.baseUrl = import.meta.env.VITE_SERVER_AUCTION;
+        this.baseUrl = import.meta.env.VITE_API_AUCTION_URL;
     }
 
     getById(id_card: string): Promise<IAuction|null> {

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import Icons from "../../../../components/Icons";
 import cardApi from "../../../../services/card.api";
-import IInventory from "../../../../interfaces/IInventory";
 import inventoryApi from "../../../../services/inventory.api";
 import productsApi from "../../../../services/products.api";
 import ICard from "../../../../interfaces/ICard";
 import heroeApi from "../../../../services/heroe.api";
-import IHeroe from "../../../../interfaces/IHeroe";
+import IHeroe from "../../../../interfaces/IHero";
 import Buttons from "../../../../components/Button";
 import IProduct from "../../../../interfaces/IProduct";
+import IInventory from "../../../../interfaces/IInventory";
 
 interface ModalCards{
     id_user?: string
@@ -39,7 +39,7 @@ export default function ModalCards({id_user, setProduct, isOpen, setIsOpen, onCl
     useEffect(()=>{
         if(id_user){
             const handleGetInventory = async ()=>{
-                const inventory = await inventoryApi.getByUserId(id_user);
+                const inventory = await inventoryApi.getInventory(id_user);
                 setInventory(inventory);
             }
             handleGetInventory();
@@ -64,7 +64,7 @@ export default function ModalCards({id_user, setProduct, isOpen, setIsOpen, onCl
                 </div>
                 <div className="w-full max-h-[500px] overflow-y-scroll">
                     {(inventory) ? (
-                        inventory.product.map((product, i)=>(
+                        inventory.inventory.map((product, i)=>(
                             <Product 
                                 key={i}
                                 id_product={product.id_product}

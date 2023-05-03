@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Icons from "../../../components/Icons";
 import IHero from "../interfaces/IHero";
+import heroeApi from "../../../services/heroe.api";
 
 
 interface HeroProps{
@@ -13,19 +14,30 @@ interface HeroProps{
 
 export default function Hero({id_user, hero, canSelect, onSelect, openModal}:HeroProps){
     
-    const [baseStats, setBaseStats] = useState<IHero>(hero);
+    const [baseStats, setBaseStats] = useState<IHero>();
     const [stats, setStats] = useState<IHero>(hero);
 
     const [lifePer, setLifePer] = useState(100);
+
+    useEffect(()=>{
+        const handleGetHero = async()=>{
+            const _hero = await heroeApi.getById(hero.id_hero);
+            //setBaseStats(_hero);
+        }
+        handleGetHero();
+    }, []);
 
     useEffect(()=>{
         setStats(hero);
     }, [hero]);
 
     useEffect(()=>{
-        const _life = ((stats.life*100)/baseStats.life).toPrecision(4);
-        setLifePer(parseFloat(_life));
-    }, [stats.life]);
+        if(baseStats){
+            const _life = ((stats.life*100)/baseStats.life).toPrecision(4);
+            console.log(stats);
+            setLifePer(parseFloat(_life));
+        }
+    }, [baseStats, stats.life]);
 
     const handleOpenModal = ()=>{
         openModal(hero.id_user, hero._id);

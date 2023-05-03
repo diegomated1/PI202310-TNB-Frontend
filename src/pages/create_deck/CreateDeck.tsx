@@ -5,7 +5,7 @@ import Icons from "../../components/Icons";
 import NavBar from "../../components/NavBar";
 import Pager from "../../components/Pager";
 import ICard from "../../interfaces/ICard";
-import IHeroe from "../../interfaces/IHeroe";
+import IHeroe from "../../interfaces/IHero";
 import cardApi from "../../services/card.api";
 import heroeApi from "../../services/heroe.api";
 

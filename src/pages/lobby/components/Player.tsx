@@ -3,7 +3,7 @@ import IUser from "../../../interfaces/IUser";
 import userApi from "../../../services/user.api";
 import inventoryApi from "../../../services/inventory.api";
 import heroeApi from "../../../services/heroe.api";
-import IHeroe from "../../../interfaces/IHeroe";
+import IHeroe from "../../../interfaces/IHero";
 
 interface IPlayerProps{
     id_user: string
@@ -18,9 +18,9 @@ export default function Player({id_user}:IPlayerProps){
         const handleGetUserInfo = async ()=>{
             if(id_user){
                 const user = await userApi.getById(id_user);
-                const deck = await inventoryApi.getById(id_user);
+                const deck = await inventoryApi.getInventory(id_user);
                 setUser(user);
-                setIdHero(deck.hero);
+                //setIdHero(deck.inventory);
             }
         }
         handleGetUserInfo();

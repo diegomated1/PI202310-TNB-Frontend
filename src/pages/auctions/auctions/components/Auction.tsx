@@ -7,7 +7,7 @@ import Buttons from "../../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import IProduct from "../../../../interfaces/IProduct";
 import productsApi from "../../../../services/products.api";
-import IHeroe from "../../../../interfaces/IHeroe";
+import IHeroe from "../../../../interfaces/IHero";
 import heroeApi from "../../../../services/heroe.api";
 
 interface AuctionProps{

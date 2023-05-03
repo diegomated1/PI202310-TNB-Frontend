@@ -3,46 +3,51 @@ import Button from "../../../components/Button";
 import IProduct from "../../../interfaces/IProduct";
 import ICard from "../../../interfaces/ICard";
 import cardsApi from "../../../services/card.api";
-import IHero from "../../../interfaces/IHeroe";
+import IHero from "../../../interfaces/IHero";
 import heroeApi from "../../../services/heroe.api";
 import Icons from "../../../components/Icons";
+import productsApi from "../../../services/products.api";
+import inventoryApi from "../../../services/inventory.api";
 
 type ListWishlistProps = {
-  product?: IProduct;
+  id_product: string;
   onClick1?: () => void;
 };
 
-export default function TileLobby({ product }: ListWishlistProps) {
+export default function TileWishlist({ id_product }: ListWishlistProps) {
   const [image, setImage] = useState<File>();
-
-  const [card, setCard] = useState<ICard>();
 
   const [disabled, setDisabled] = useState<boolean>(false);
 
-  const handleSetAvaliability = async () => {
-
-  }
-
-  const handleGetCard = async () => {
-    const data = await cardsApi.getById(product?.id_product!);
-    setCard(data);
-  };
-
+  const [product, setProduct] = useState<IProduct>();
+  const [card, setCard] = useState<ICard>();
   const [hero, setHero] = useState<IHero>();
 
-  const handleGetHero = async () => {
-    const data = await heroeApi.getById(product?.id_product!);
-    setHero(data);
-  };
 
   useEffect(() => {
-    if (product?.type == "hero") {
-      handleGetHero();
-    } else {
-      handleGetCard();
+    const handleGetProduct = async ()=>{
+      const _product = await productsApi.getProductById(id_product);
+      if(_product.type=='card'){
+        const _card = await cardsApi.getById(_product.id_product!);
+        setCard(_card);
+      }else{
+        const _hero = await heroeApi.getById(_product.id_product!);
+        setHero(_hero);
+      }
+      setProduct(_product);
+      setDisabled(_product?.availability === 0);
     }
-    setDisabled(product!.availability === 0)
-  }, [product!.availability]);
+    handleGetProduct();
+  }, []);
+
+  const handleRemoveFromWishlist = async () => {
+    try {
+      //const response = await inventoryApi.deleteWhislist('id-user', product?.id_product!);
+      //console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // cartas
 
@@ -61,14 +66,14 @@ export default function TileLobby({ product }: ListWishlistProps) {
     return (
       <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
         <div className="w-[50%] h-full flex items-center justify-evenly">
-          <figure className="h-full w-auto">
+          <figure className="h-full w-[20%]">
             <img
-              className="object-contain h-[95%]"
+              className="object-contain h-[30%] w-28"
               src={
                 image
                   ? URL.createObjectURL(image!)
                   : `${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${
-                      product!.id_product
+                      product?.id_product
                     }`
               }
             />
@@ -82,7 +87,7 @@ export default function TileLobby({ product }: ListWishlistProps) {
           <Button.buttonYellow disabled={disabled}>Añadir</Button.buttonYellow>
           </div>
           <div className="">
-            <Icons.trash></Icons.trash>
+            <Icons.trash onClick={handleRemoveFromWishlist}></Icons.trash>
           </div>
         </div>
       </div>
@@ -92,27 +97,28 @@ export default function TileLobby({ product }: ListWishlistProps) {
       <div className="w-full h-32 flex p-3 border-b border-gray-800 border-opacity-50">
         <div className="w-[50%] h-full flex items-center justify-evenly">
           <figure className="h-full w-auto">
-            <img
-              className="object-contain h-[95%]"
-              src={
-                image
-                  ? URL.createObjectURL(image!)
-                  : `${import.meta.env.VITE_API_CARDS_URL}/images/cards/${
-                      product!.id_product
-                    }`
-              }
-            />
+            {card?(
+              <img
+                className="object-contain h-[95%] w-28"
+                src={`${import.meta.env.VITE_API_CARDS_URL}/images/cards/${card._id}`}
+              />
+            ) : hero ? (
+              <img
+                className="object-contain h-[95%] w-28"
+                src={`${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${hero._id}`}
+              />
+            ) : ''}
           </figure>
           <h1>{card?.name}</h1>
         </div>
         <div className="w-[50%] h-full flex items-center justify-evenly">
-          <h1>{product!.price}</h1>
-          {product!.availability === 1 ? <Icons.checkGreen /> : <Icons.x />}
+          <h1>{product?.price}</h1>
+          {product?.availability === 1 ? <Icons.checkGreen /> : <Icons.x />}
           <div className="w-[30%]">
           <Button.buttonYellow disabled={disabled}>Añadir</Button.buttonYellow>
           </div>
           <div className="">
-            <Icons.trash></Icons.trash>
+            <Icons.trash onClick={handleRemoveFromWishlist}></Icons.trash>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ import ICard from "../../interfaces/ICard";
 import IProduct from "../../interfaces/IProduct";
 import ISetComment from "../../interfaces/ISetComment";
 import heroeApi from "../../services/heroe.api";
-import IHeroe from "../../interfaces/IHeroe";
+import IHeroe from "../../interfaces/IHero";
 import Hero from "../../components/Hero";
 import cartApi from "../../services/cart.api";
 import useAuth from "../../hooks/useAuth";
@@ -81,10 +81,10 @@ export default function CardDetails() {
     const handleAddShoppingCart = async () => {
         try {
             if ( product) {
-                await cartApi.addToCart("gfdgd", id_product!, cantidad);
+                //await cartApi.addToCart("gfdgd", id_product!, cantidad);
                 alert("Producto añadido");
             } else {
-                await cartApi.addToCart("12345", id_product!, cantidad);
+                //await cartApi.addToCart("12345", id_product!, cantidad);
                 alert("Producto añadido");
 
             }
@@ -142,7 +142,7 @@ export default function CardDetails() {
                                         <Icons.star onClick={() => setValoracion(3)} />
                                         <Icons.star onClick={() => setValoracion(4)} />
                                         <Icons.star onClick={() => setValoracion(5)} />
-                                        <p className="text-2xl pl-2">{product?.overall_rating}</p>
+                                        <p className="text-2xl pl-2">{product?.acu_ratings!/product?.cont_ratings!}</p>
                                     </div>
                                 </h2>
                                 <h3 className="text-xl">Category: {card ? card.card_type : "hero"}</h3>

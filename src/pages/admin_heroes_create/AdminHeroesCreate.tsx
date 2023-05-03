@@ -19,7 +19,7 @@ export default function AdminHeroesCreate() {
 
     const handleCreateHeroe = async () => {
         try {
-            var data = await heroesApi.insert({name, description, power:1, health:parseInt(health), defense:parseInt(defense), attack_basic:parseInt(attack_basic), attack_range:parseInt(attack_range), damage_range:parseInt(damage_range)}, image!);
+            //var data = await heroesApi.insert({name, description, power:1, health:parseInt(health), defense:parseInt(defense), attack_basic:parseInt(attack_basic), attack_range:parseInt(attack_range), damage_range:parseInt(damage_range)}, image!);
             alert("Carta creada con exito");
             window.location.reload();
         } catch (error) {

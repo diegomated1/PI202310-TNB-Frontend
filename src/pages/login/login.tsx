@@ -4,22 +4,12 @@ import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
 import Input from "../../components/Input"
 import userApi from "../../services/user.api";
-import Pager from "../../components/Pager";
 import Icons from "../../components/Icons";
 
 export default function Login() {
     const navigate = useNavigate()
 
     const [typeInput, setType] = useState<string>("password");
-
-    const showPassword =()=>{
-        if(typeInput == "password"){
-            setType("text")
-        }else{
-            setType("password")
-        }
-        
-    }
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -36,7 +26,14 @@ export default function Login() {
         }
     }   
 
-    //bg-gradient-to-b from-gradientFrom to-gradientTo
+    const showPassword =()=>{
+        if(typeInput == "password"){
+            setType("text")
+        }else{
+            setType("password")
+        }
+        
+    }
 
     return (
         <div className="h-screen">

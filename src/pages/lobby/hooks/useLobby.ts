@@ -23,7 +23,7 @@ export default function useLobby(id_lobby:string):[boolean, Ilobby|null|undefine
     // state for almacening lobby info (players, ias, bet, etc.)
     const [lobby, setLobby] = useState<Ilobby|null|undefined>(undefined);
 
-    const {user} = useAuth();
+    const user = useAuth();
 
     const [isOwner, setIsOwner] = useState(false);
 

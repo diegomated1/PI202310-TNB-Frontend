@@ -5,7 +5,7 @@ import cardApi from "../../services/card.api";
 import ICard from "../../interfaces/ICard";
 import Pager from "../../components/Pager";
 import Hero from "../../components/Hero";
-import IHeroe from "../../interfaces/IHeroe";
+import IHeroe from "../../interfaces/IHero";
 import heroeApi from "../../services/heroe.api";
 
 export default function AdminHeroes() {
@@ -35,7 +35,7 @@ export default function AdminHeroes() {
                 <div className="flex-[4] flex-col">
                     <div className="h-full grid grid-cols-3 grid-rows-2 gap-3 p-2">
                         {parcialHeroes.map((hero, id) => (
-                            <Hero key={hero._id} heroe={hero} discount={10} price={20}></Hero>
+                            <Hero key={hero._id} heroe={hero}></Hero>
                         ))}
                     </div>
                 </div>
