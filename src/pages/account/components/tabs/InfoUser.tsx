@@ -32,32 +32,32 @@ export default function InfoUser({user}:{user?:IUser|null}){
 
     return(
         <div className="w-full h-full">
-            <form onSubmit={handleEditProfile} className="w-full h-full grid grid-cols-2">
-                <div className="w-40 h-10 justify-center flex flex-col mt-5">
+            <form onSubmit={handleEditProfile} className="w-full h-full p-5 grid grid-cols-2">
+                <div className="w-60 h-10 justify-center flex flex-col mt-10 mb-5">
                     <p className="mb-1">Nombres:</p>
                     <Input placeholder="Nombres" onChange={(e)=>{setName(e.target.value)}} required defaultValue={name}/>
                 </div>
-                <div className="w-40 h-10 justify-center flex flex-col mt-5">
+                <div className="w-60 h-10 justify-center flex flex-col mt-10 mb-5">
                     <p className="mb-1">Apellidos:</p>
                     <Input placeholder="Apellidos" onChange={(e)=>{setSecondName(e.target.value)}} required defaultValue={secondName}/>
                 </div>
-                <div className="w-40 h-10 justify-center flex flex-col mt-5">
+                <div className="w-60 h-10 justify-center flex flex-col mt-10 mb-5">
                     <p className="mb-1">Username:</p>
                     <Input placeholder="Username" onChange={(e)=>{setUsername(e.target.value)}} required defaultValue={username}/>
                 </div>
-                <div className="w-40 h-10 justify-center flex flex-col mt-5">
+                <div className="w-60 h-10 justify-center flex flex-col mt-10 mb-5">
                     <p className="mb-1">Email:</p>
                     <Input placeholder="Email" onChange={(e)=>{setEmail(e.target.value)}} required defaultValue={email}/>
                 </div>
-                <div className="w-40 h-10 justify-center flex flex-col mt-5">
+                <div className="w-60 h-10 justify-center flex flex-col mt-10 mb-5">
                     <p className="mb-1">Contraseña:</p>
                     <Input placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}} />
                 </div>
-                <div className="w-40 h-10 justify-center flex flex-col mt-5">
+                <div className="w-60 h-10 justify-center flex flex-col mt-10 mb-5">
                     <p className="mb-1">Confirmar Contraseña:</p>
                     <Input placeholder="Password" onChange={(e)=>{setConfirmPassword(e.target.value)}} />
                 </div>
-                <div className="w-52 h-10">
+                <div className="w-60 h-10 justify-center flex flex-col mt-10 mb-5">
                     <Buttons.buttonYellow type="submit">
                         Editar
                     </Buttons.buttonYellow>

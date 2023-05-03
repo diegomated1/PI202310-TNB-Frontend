@@ -7,7 +7,7 @@ interface IButtonOptionProps extends ButtonHTMLAttributes<HTMLButtonElement>{
 
 export default function ButtonOption(props:IButtonOptionProps){
     return(
-        <div className="mt-1 w-full h-12">
+        <div className="mt-2 w-full h-12">
             {(props.isSelected) ? (
                 <Buttons.buttonYellow {...props}>
                     {props.children}
