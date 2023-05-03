@@ -20,7 +20,7 @@ export interface IButton {
 
 const Buttons:IButton = {
     "navbar": (props)=>(
-        <button {...props} className="text-white w-full p-3 mb-2 mt-2 h-auto rounded-lg border-2 border-white justify-center items-center  " >
+        <button {...props} className="text-white w-30 p-3 mb-2 mt-2 h-auto rounded-lg border-2 border-white justify-center items-center  " >
             <strong className="text-current" >{props.children}</strong>
         </button>
     ),
