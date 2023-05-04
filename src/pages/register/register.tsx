@@ -37,10 +37,10 @@ export default function Register() {
     }
 
     return (
-        <div className="w-screen h-screen flex">
+        <div className="w-screen h-screen">
             <AdminCardsNavBar />
-            <div className="flex-1">
-                <figure className="w-full h-full relative">
+            <div className="h-[calc(100%-50px)]">
+                <figure className="h-full relative">
                     <img className="h-full w-full object-fit m-0" src="https://support-leagueoflegends.riotgames.com/hc/article_attachments/4826003140499/battle-cat-jinx-prestige.png" alt="imagen de fondo" />
                 </figure>
                 <div className="rounded-md w-[380px] h-[630px] bg-smallgray absolute top-[calc(18%)] left-[calc(5%)] flex flex-col p-2 bg-opacity-70 justify-center">

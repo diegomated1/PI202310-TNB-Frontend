@@ -6,7 +6,7 @@ import ICard from "../../interfaces/ICard";
 import Pager from "../../components/Pager";
 import Hero from "../../components/Hero";
 import IHeroe from "../../interfaces/IHero";
-import heroeApi from "../../services/heroe.api";
+import heroeApi from "../../services/hero.api";
 
 export default function AdminHeroes() {
 

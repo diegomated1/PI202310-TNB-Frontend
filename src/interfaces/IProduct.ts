@@ -1,4 +1,4 @@
-export default interface IProducts{
+export default interface IProduct{
     id_product?: string,
     type:string,
     price: number,

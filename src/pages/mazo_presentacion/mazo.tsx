@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar'
 import ICard from '../../interfaces/ICard'
 import IHeroe from '../../interfaces/IHero';
 import cardApi from '../../services/card.api';
-import heroeApi from '../../services/heroe.api';
+import heroeApi from '../../services/hero.api';
 
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Icons from "../../../components/Icons";
 import IHero from "../interfaces/IHero";
-import heroeApi from "../../../services/heroe.api";
+import heroeApi from "../../../services/hero.api";
 
 
 interface HeroProps{

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import DeckProgress from "../../components/DeckProgress";
-import GridDeck from "../../components/GridDeck";
+import GridDeck from "../../components/GridProducts";
 import Icons from "../../components/Icons";
 import NavBar from "../../components/NavBar";
 import Pager from "../../components/Pager";
 import ICard from "../../interfaces/ICard";
 import IHeroe from "../../interfaces/IHero";
 import cardApi from "../../services/card.api";
-import heroeApi from "../../services/heroe.api";
+import heroeApi from "../../services/hero.api";
 
 
 export default function CreateDeck() {
@@ -100,10 +100,7 @@ export default function CreateDeck() {
           </div>
         </div>
         <div className="flex-[4]">
-          <GridDeck
-            type={currentPage==1?0:1}
-            parcialCards={currentPage==1?parcialHeroes:parcialCards}
-           ></GridDeck>
+          
         </div>
       </div>
     </div>

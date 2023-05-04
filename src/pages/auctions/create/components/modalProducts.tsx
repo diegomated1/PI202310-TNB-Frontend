@@ -8,7 +8,7 @@ import inventoryApi from "../../../../services/inventory.api";
 import productsApi from "../../../../services/products.api";
 import ICard from "../../../../interfaces/ICard";
 import IHero from "../../../game/interfaces/IHero";
-import heroeApi from "../../../../services/heroe.api";
+import heroeApi from "../../../../services/hero.api";
 import IHeroe from "../../../../interfaces/IHero";
 import Buttons from "../../../../components/Button";
 import IProduct from "../../../../interfaces/IProduct";

@@ -4,22 +4,21 @@ import AdminCardsNavBar from "../../components/NavBar"
 import Pager from "../../components/Pager"
 import ICard from "../../interfaces/ICard"
 import cardApi from "../../services/card.api"
-import { StringDecoder } from "string_decoder"
+import IProduct from "../../interfaces/IProduct"
+import productsApi from "../../services/products.api"
+import GridProducts from "../../components/GridProducts"
 
 export default function Vitrina() {
 
+    const [products, setProducts] = useState<IProduct[]>([]);
 
-    //getcartas
-    const [Cards, setCards] = useState<ICard[]>([])
     useEffect(() => {
-        async function handleeventCards() {
-            const Cards = await cardApi.getAll();
-            setCards(Cards)
+        const handleGetProducts = async () => {
+            const products = await productsApi.getProducts(1);
+            setProducts(products)
         }
-        handleeventCards();
-    }, [])
-
-  
+        handleGetProducts();
+    }, [])  
 
     return (
         <div className="container min-w-screen h-screen">
@@ -60,19 +59,7 @@ export default function Vitrina() {
 
                 {/* grid-cartas. */}
                 <div className="container mx-auto p-0 px-32 w-full h-[calc(100%-50px)] ">
-                    <div className='grid lg: grid-cols-3 ml-0 gap-3'>
-                        {Cards.map((card, i) => (
-
-                            <div className="max-w-[13rem] max-h-[18rem]" key={i}>
-                                <Card
-                                    card={card}
-                                    // onClick2={() => {
-                                    //     handleeventFavorites(card._id!)
-                                    // }}
-                                />
-                            </div>
-                        ))}
-                    </div>
+                    <GridProducts products={products} />
                 </div>
             </div>
 

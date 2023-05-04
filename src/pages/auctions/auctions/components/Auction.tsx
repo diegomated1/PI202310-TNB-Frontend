@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import IProduct from "../../../../interfaces/IProduct";
 import productsApi from "../../../../services/products.api";
 import IHeroe from "../../../../interfaces/IHero";
-import heroeApi from "../../../../services/heroe.api";
+import heroeApi from "../../../../services/hero.api";
 
 interface AuctionProps{
     auction: IAuction

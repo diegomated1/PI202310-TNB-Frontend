@@ -4,7 +4,7 @@ import IProduct from "../../../interfaces/IProduct";
 import ICard from "../../../interfaces/ICard";
 import cardsApi from "../../../services/card.api";
 import IHero from "../../../interfaces/IHero";
-import heroeApi from "../../../services/heroe.api";
+import heroeApi from "../../../services/hero.api";
 import Icons from "../../../components/Icons";
 import productsApi from "../../../services/products.api";
 import inventoryApi from "../../../services/inventory.api";

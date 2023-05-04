@@ -14,7 +14,7 @@ import ModalCreateBid from "./components/ModalCreateBid";
 import Card from "../../../components/Card";
 import IHeroe from "../../../interfaces/IHero";
 import IProduct from "../../../interfaces/IProduct";
-import heroeApi from "../../../services/heroe.api";
+import heroeApi from "../../../services/hero.api";
 import productsApi from "../../../services/products.api";
 import Hero from "../../../components/Hero";
 

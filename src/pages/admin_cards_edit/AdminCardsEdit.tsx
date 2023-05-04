@@ -6,7 +6,7 @@ import cardApi from "../../services/card.api";
 import IHeroe from "../../interfaces/IHero";
 
 import ICard from "../../interfaces/ICard";
-import heroeApi from "../../services/heroe.api";
+import heroeApi from "../../services/hero.api";
 import ModalReports from "../../components/modals/Reports";
 
 export default function EditCards() {
@@ -93,7 +93,7 @@ export default function EditCards() {
     }, []);
 
     return (
-        <div className="w-screen h-screen flex flex-wrap flex-col">
+        <div className="w-screen h-screen">
             <AdminCardsNavBar />
             <div className="w-full h-[calc(100%-50px)] bg-gray-300 flex justify-center items-center">
                 <div className="w-full h-full bg-gray-300">

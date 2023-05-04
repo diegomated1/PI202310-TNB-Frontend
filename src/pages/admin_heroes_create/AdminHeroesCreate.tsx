@@ -1,7 +1,7 @@
 import AdminCardsNavBar from "../../components/NavBar"
 import Button from "../../components/Button"
 import Input from "../../components/Input"
-import heroesApi from "../../services/heroe.api";
+import heroesApi from "../../services/hero.api";
 import { useState, FormEvent } from "react";
 import ModalReports from "../../components/modals/Reports";
 
@@ -37,7 +37,7 @@ export default function AdminHeroesCreate() {
     }
 
     return (
-        <div className="w-screen h-screen flex flex-wrap flex-col">
+        <div className="w-screen h-screen">
             <AdminCardsNavBar />
             <div className="w-full h-[calc(100%-50px)] bg-gray-300 flex justify-center items-center">
                 <div className="w-full h-full bg-gray-300">
