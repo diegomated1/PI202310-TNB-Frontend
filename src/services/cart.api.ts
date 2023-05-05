@@ -1,5 +1,6 @@
 import axios from 'axios';
 import IOrder from '../interfaces/IOrder';
+import ICart, { ICartProduct } from '../interfaces/ICart';
 
 interface errorResponse{
     error:string;
@@ -12,14 +13,13 @@ class ShoppingCartApi{
         this.baseUrl = import.meta.env.VITE_API_CART_URL;
     }
 
-    getCart(id_user:string):Promise<errorResponse>{
+    getCart(id_user:string):Promise<ICartProduct[]>{
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.post(`${this.baseUrl}/cart/${id_user}`);
-                res(data)
+                const {data} = await axios.get(`${this.baseUrl}/cart/${id_user}`);
+                res(data.data)
             }catch(error){
-                console.log(error);
-                res({error: '', message: (error as Error).message});
+                rej(error);
             }
         });
     }

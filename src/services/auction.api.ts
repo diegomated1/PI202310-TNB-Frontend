@@ -11,7 +11,7 @@ class AuctionsApi {
     getById(id_card: string): Promise<IAuction|null> {
         return new Promise(async (res, rej) => {
             try {
-                const { data } = await axios.get(`${this.baseUrl}/auctions/${id_card}`);
+                const { data } = await axios.get(`${this.baseUrl}/${id_card}`);
                 res(data.data);
             } catch (error) {
                 res(null);
@@ -22,7 +22,7 @@ class AuctionsApi {
     getAll(): Promise<IAuction[]> {
         return new Promise(async (res, rej) => {
             try {
-                const { data } = await axios.get(`${this.baseUrl}/auctions`);
+                const { data } = await axios.get(`${this.baseUrl}`);
                 res(data.data);
             } catch (error) {
                 rej(error);

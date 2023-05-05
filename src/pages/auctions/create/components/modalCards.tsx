@@ -116,10 +116,10 @@ function Product({id_product, setProduct, setIsOpen}:IProductProps){
             <div className="w-full h-full bg-green-200 flex">
                 <div className="w-36 h-full relative">
                     {(card) ? (
-                        <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/cards/${id_product}`} />
+                        <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/${id_product}`} />
                     ) : (
                         (hero) ? (
-                            <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${id_product}`} />
+                            <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/${id_product}`} />
                         ) : ''
                     )}
                 </div>

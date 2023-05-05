@@ -57,10 +57,10 @@ export default function Auction({auction}:AuctionProps){
                 <div className="w-40 h-full p-2 ">
                     {(product) ? (
                         (card) ? (
-                            <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/cards/${product.id_product}`} />
+                            <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/${product.id_product}`} />
                         ) : (
                             (hero) ? (
-                                <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${product.id_product}`} />
+                                <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/${product.id_product}`} />
                             ) : ''
                         )
                     ):''}

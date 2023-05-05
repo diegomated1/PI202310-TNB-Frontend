@@ -7,7 +7,7 @@ type useCreateAuctionType = () => [IAuction|undefined, (auction: IAuction) => vo
 
 const useCreateAuction:useCreateAuctionType = ()=>{
 
-    const socket = useSocket(import.meta.env.VITE_SOCKET_AUCTION, {path: '/auction'});
+    const socket = useSocket(import.meta.env.VITE_SOCKET_AUCTION_URL, {path: '/auction'});
     const user = useAuth();
     const [auction, setAuction] = useState<IAuction>(); 
 

@@ -95,7 +95,7 @@ export default function Auction() {
                             {card ? (
                                 <Card card={card} product={product} />
                             ) : hero ? (
-                                <Hero heroe={hero} product={product!} />
+                                <Hero hero={hero} product={product!} />
                             ) : ''}
                         </div>
                     </div>

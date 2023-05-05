@@ -3,9 +3,10 @@ import Button from "./Button"
 import Dropdown from "./dropdown";
 import Wishlist from "../pages/wishlist/whislist"; 
 import { Link } from "react-router-dom";
+import Buttons from "./Button";
+
 export default function AdminCardsNavBar() {
-    const handleClick1 = () => console.log("Click 1");
-    const handleClick2 = () => console.log("Click 2");
+    
     const optionsCard = [
         {
             text: "Activar tiempo de juego",
@@ -20,6 +21,8 @@ export default function AdminCardsNavBar() {
             }
         }
     ]
+
+
     return (
         <div className="w-screen h-[70px] bg-black grid grid-cols-2 px-8 shadow-xl">
             <div className="col-span-1 flex items-center justify- text-yellow-300 text-xl font-semibold italic">
@@ -37,13 +40,16 @@ export default function AdminCardsNavBar() {
 type NavBarBtnProps = {
     text?: string;
     icon?: string;
+    onClick?: ()=>{}
 }
-const NavBarBtn = ({ text, icon }: NavBarBtnProps) => {
+const NavBarBtn = ({ text, icon, onClick }: NavBarBtnProps) => {
     return (
         <div className="flex justify-center items-center">
-            <span>
-                {text && text}
-                {icon && Icons[icon!]({})}
-            </span>
+            <Buttons.navbar onClick={onClick}>
+                <span>
+                    {text && text}
+                    {icon && Icons[icon!]({})}
+                </span>
+            </Buttons.navbar>
         </div>)
 }

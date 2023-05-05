@@ -7,6 +7,7 @@ import cardApi from "../../services/card.api"
 import IProduct from "../../interfaces/IProduct"
 import productsApi from "../../services/products.api"
 import GridProducts from "../../components/GridProducts"
+import ModalCart from "../../components/modals/ModalCart"
 
 export default function Vitrina() {
 
@@ -58,7 +59,7 @@ export default function Vitrina() {
                 </div>
 
                 {/* grid-cartas. */}
-                <div className="container mx-auto p-0 px-32 w-full h-[calc(100%-50px)] ">
+                <div className="">
                     <GridProducts products={products} />
                 </div>
             </div>
@@ -68,59 +69,7 @@ export default function Vitrina() {
             <div className="max-w-[50%] ml-[25%] mt-2">
                 {/* <Pager/> */}
             </div>
-
-            {/* carritoflotante */}
-            <div className="container-cart-cards  max-w-[19rem] min-h-[20rem] border-2 mt-4 hidden ">
-                {/* cartaflotante */}
-                <div className="row-cards flex ml-3 mt-2">
-                    <div className="flex max-w-[10rem]">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.MUq3awEA1KEnMlL9U-C_JwHaEK%26pid%3DApi&f=1&ipt=b64ce7b8fd13508ca19f449c37c528d0533744a65960b4d4ff6e0f20ca61e97e&ipo=images" className="w-full h-20" alt="" />
-                    </div>
-                    <div className="flex-none  min-w-[9rem] ml-5">
-                        <p className="">titulo</p>
-                        <span className="">x1</span>
-                        <span className="float-none">$10.000</span>
-                    </div>
-
-                </div>
-                {/* carta repetitiva-borrar */}
-                <div className="row-cards flex ml-3 mt-2">
-                    <div className="flex max-w-[10rem]">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.MUq3awEA1KEnMlL9U-C_JwHaEK%26pid%3DApi&f=1&ipt=b64ce7b8fd13508ca19f449c37c528d0533744a65960b4d4ff6e0f20ca61e97e&ipo=images" className="w-full h-20" alt="" />
-                    </div>
-                    <div className="flex-none  min-w-[9rem] ml-5">
-                        <p className="">titulo</p>
-                        <span className="">x1</span>
-                        <span className="float-none">$10.000</span>
-                    </div>
-
-                </div>
-
-
-                <div className="ml-3 mt-2 flex">
-                    <ul>
-                        <li>
-                            Total bruto
-                        </li>
-                        <li>
-                            Impuestos
-                        </li>
-                    </ul>
-                </div>
-                {/* totales */}
-                <div className="flex max-w-full ml-3">
-                    <div className="flex-none w-[147px]">
-                        <span>Total</span>
-                    </div>
-                    <div className="flex-none">
-                        <span>$100.000</span>
-                    </div>
-                </div>
-            </div>
-
         </div >
     )
-
-
 }
 

@@ -42,7 +42,7 @@ export default function ModalProducts({id_user, setProducts, isOpen, setIsOpen, 
     useEffect(()=>{
         if(id_user){
             const handleGetProducts = async ()=>{
-                const products = await productsApi.getProducts();
+                const products = await productsApi.getProducts(1);
                 _setProducts(products);
             }
             handleGetProducts();
@@ -114,10 +114,10 @@ function Product({product, setProducts, setIsOpen}:IProductProps){
             <div className="w-full h-full bg-green-200 flex">
                 <div className="w-36 h-full relative">
                     {(card) ? (
-                        <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/cards/${product.id_product}`} />
+                        <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/${product.id_product}`} />
                     ) : (
                         (hero) ? (
-                            <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${product.id_product}`} />
+                            <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/${product.id_product}`} />
                         ) : ''
                     )}
                 </div>

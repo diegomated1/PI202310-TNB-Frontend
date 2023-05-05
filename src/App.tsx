@@ -21,43 +21,56 @@ import CreateAuction from "./pages/auctions/create/CreateAuction"
 import Auctions from "./pages/auctions/auctions/Auctions"
 import Auction from "./pages/auctions/auction/Auction"
 import Account from "./pages/account/account"
+import ModalCart from "./components/modals/ModalCart"
+import { useState } from "react"
+import useCart from "./hooks/useCart"
+import CartProvider from "./context/cart.context"
 
 function App() {
+
+  const [cartOpen, setCartOpen] = useState(true);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
+    <CartProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
 
-        <Route path="/" element={<div>Sample</div>}/>
-        <Route path="/admin/cards" element={<AdminCards/>}/>
-        <Route path="/admin/cards/create" element={<AdminCardsCreate/>}/>
-        <Route path="/admin/cards/:id_card" element={<AdminCardsEdit/>}/>
+          <Route path="/" element={<div>Sample</div>}/>
+          <Route path="/admin/cards" element={<AdminCards/>}/>
+          <Route path="/admin/cards/create" element={<AdminCardsCreate/>}/>
+          <Route path="/admin/cards/:id_card" element={<AdminCardsEdit/>}/>
 
-        <Route path="/admin/heroes" element={<AdminHeroes/>}/>
-        <Route path="/admin/heroes/create" element={<AdminHeroesCreate/>}/>
-        <Route path="/admin/heroes/:id_hero" element={<div>Hero edit</div>}/>
+          <Route path="/admin/heroes" element={<AdminHeroes/>}/>
+          <Route path="/admin/heroes/create" element={<AdminHeroesCreate/>}/>
+          <Route path="/admin/heroes/:id_hero" element={<div>Hero edit</div>}/>
 
-        <Route path="/game" element={<Game/>}/>
-        <Route path="/game/deck" element={<Mazo/>}/>
-        <Route path="/game/create/deck" element={<CreateDeck/>}/>
-        <Route path="/game/lobby/create" element={<CreateGame/>}/>
-        <Route path="/game/list" element={<ListTileMatch/>}/>
-        <Route path="/game/lobby/:id_lobby" element={<Lobby/>}/>
-        
-        <Route path="/card/:id_product" element={<CardDetails/>}/>
-        <Route path="/vitrina" element={<Vitrina/>}/>
-        <Route path="/wishlist" element={<Wishlist/>}/>
-        <Route path="/shoppingcart" element={<ShoppingCart/>}/>
+          <Route path="/game" element={<Game/>}/>
+          <Route path="/game/deck" element={<Mazo/>}/>
+          <Route path="/game/create/deck" element={<CreateDeck/>}/>
+          <Route path="/game/lobby/create" element={<CreateGame/>}/>
+          <Route path="/game/list" element={<ListTileMatch/>}/>
+          <Route path="/game/lobby/:id_lobby" element={<Lobby/>}/>
+          
+          <Route path="/card/:id_product" element={<CardDetails/>}/>
+          <Route path="/vitrina" element={<Vitrina/>}/>
+          <Route path="/wishlist" element={<Wishlist/>}/>
+          <Route path="/shoppingcart" element={<ShoppingCart/>}/>
 
-        <Route path="/auctions"  element={<Auctions/>} />
-        <Route path="/auctions/:id_auction"  element={<Auction/>} />
-        <Route path="/auctions/create"  element={<CreateAuction/>} />
+          <Route path="/auctions"  element={<Auctions/>} />
+          <Route path="/auctions/:id_auction"  element={<Auction/>} />
+          <Route path="/auctions/create"  element={<CreateAuction/>} />
 
-        <Route path="/account" element={<Account/>} />
+          <Route path="/account" element={<Account/>} />
 
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+        <ModalCart 
+          isOpen={cartOpen}
+          setIsOpen={setCartOpen}
+        />
+      </BrowserRouter>
+    </CartProvider>
   )
 }
 

@@ -34,7 +34,7 @@ export default function Card({card, product, onClick1, onClick2, onClick3 }: Car
     return (
         <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md border-solid border-red-500 border-2 hover:scale-[106%]">
             <figure className="relative h-[40%] w-full shadow-md">
-                <img className="object-cover " src={`${import.meta.env.VITE_API_CARDS_URL}/images/${card?._id}`} />
+                <img className="object-cover " src={`${(card) ? `${import.meta.env.VITE_API_CARDS_URL}/images/${card?._id}`:''}`} />
                 <div className="absolute top-0 left-0">
                     { (card && card.card_type in Icons) ? Icons[card.card_type]({}) : ''}
                 </div>

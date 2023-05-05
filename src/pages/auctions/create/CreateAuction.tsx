@@ -79,7 +79,7 @@ export default function CreateAuction() {
                             {card ? (
                                 <Card card={card} product={product} />
                             ) : hero ? (
-                                <Hero heroe={hero} product={product!} />
+                                <Hero hero={hero} product={product!} />
                             ) : ''}
                         </div>
                     </div>
@@ -226,10 +226,10 @@ function Product({ product }: IProductProps) {
         <div className="w-36 h-36 bg-green-600">
             <div className="w-36 h-full relative">
                 {(card) ? (
-                    <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/cards/${product.id_product}`} />
+                    <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/${product.id_product}`} />
                 ) : (
                     (hero) ? (
-                        <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/heroes/${product.id_product}`} />
+                        <img className="w-full h-full object-contain" src={`${import.meta.env.VITE_API_CARDS_URL}/images/${product.id_product}`} />
                     ) : ''
                 )}
             </div>

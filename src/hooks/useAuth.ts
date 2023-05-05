@@ -7,12 +7,11 @@ export default function useAuth(){
 
     const auth = async ()=>{
         try{
-            const user = await userApi.auth();
-            setUser(user as IUser);
-        }catch(error){
+            //const user = await userApi.auth();
             const user = await userApi.getById("ilh2udb51");
-            console.log(user);
             setUser(user);
+        }catch(error){
+            console.log(error);
         }
     }
 
