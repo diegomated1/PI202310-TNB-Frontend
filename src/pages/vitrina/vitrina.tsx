@@ -8,25 +8,44 @@ import IProduct from "../../interfaces/IProduct"
 import productsApi from "../../services/products.api"
 import GridProducts from "../../components/GridProducts"
 import ModalCart from "../../components/modals/ModalCart"
+import Paginator from "./components/paginator"
+import { useSearchParams } from "react-router-dom"
 
 export default function Vitrina() {
 
     const [products, setProducts] = useState<IProduct[]>([]);
+    const [pages, setPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [params, setParams] = useSearchParams();
+    
+    useEffect(()=>{
+        const page = params.get('pages');
+        if(page){
+            setCurrentPage(parseInt(page))
+        }
+    }, [params]);
+
+    const handleGetProducts = async (page:number) => {
+        const products = await productsApi.getProducts(page);
+        setProducts(products.products);
+        setPages(products.pages);
+        setCurrentPage(page);
+        params.set('page', page.toString());
+        setParams(params);
+    }
 
     useEffect(() => {
-        const handleGetProducts = async () => {
-            const products = await productsApi.getProducts(1);
-            setProducts(products)
-        }
-        handleGetProducts();
+        const page = params.get('page');
+        const currentPage = parseInt(page||'1');
+        handleGetProducts(currentPage);
     }, [])  
 
     return (
-        <div className="container min-w-screen h-screen">
+        <div className="w-screen h-screen flex flex-col">
             <AdminCardsNavBar />
-            <div className="flex h-full mt-12">
+            <div className="flex flex-1 h-full p-8">
                 {/* filtro */}
-                <div className="h-2/3 w-52 justify-center items-center  bg-slate-400 rounded-md ml-3">
+                <div className="flex-1 justify-center items-center  bg-slate-400 rounded-md ml-3">
                     <div>
                         <div className="mt-4 bg-slate-50 rounded-md m-2">
                             <h4 className="text-center px-4">Precio Carta</h4>
@@ -58,16 +77,20 @@ export default function Vitrina() {
                     </ul>
                 </div>
 
-                {/* grid-cartas. */}
-                <div className="">
-                    <GridProducts products={products} />
+                
+                <div className="flex-[2] bg-red-200 flex flex-col">
+                    {/* <GridProducts products={products} /> */}
+                    <div className="flex-1 p-10">
+                        <GridProducts products={products} />
+                    </div>
+                    <div className="w-full h-14 flex flex-row-reverse">
+                        <Paginator 
+                            pages={pages} 
+                            currentPage={currentPage}
+                            changePage={handleGetProducts}
+                        />
+                    </div>
                 </div>
-            </div>
-
-
-            {/* paginador */}
-            <div className="max-w-[50%] ml-[25%] mt-2">
-                {/* <Pager/> */}
             </div>
         </div >
     )

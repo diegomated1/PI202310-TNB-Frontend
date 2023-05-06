@@ -12,7 +12,7 @@ class ProductsApi {
         this.baseUrl = import.meta.env.VITE_API_PRODUCTS_URL;
     }
 
-    getProducts(page: number): Promise<IProduct[]>{
+    getProducts(page: number): Promise<{pages: number, products: IProduct[]}>{
         return new Promise(async (res, rej) => {
             try {
                 const { data } = await axios.get(`${this.baseUrl}/?page=${page}`);

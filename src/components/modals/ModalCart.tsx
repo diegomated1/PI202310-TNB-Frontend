@@ -11,14 +11,6 @@ import Buttons from "../Button";
 
 interface ModalReports{
     /**
-     * Variable for check if the modal is open or close
-     */
-    isOpen: boolean,
-    /**
-     * Function for change to close or open
-     */
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    /**
      * Function that is executed when accepted  
      */
     onAccept?: ()=>void,
@@ -28,27 +20,24 @@ interface ModalReports{
     onClose?: ()=>void,
 }
 
-export default function ModalCart({isOpen, setIsOpen, onAccept, onClose}:ModalReports){
+export default function ModalCart({onAccept, onClose}:ModalReports){
 
-    const [post, setPost] = useState('');
-    const [description, setDescription] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
 
     const cart = useContext(cartContext);
 
     const handleClose = ()=>{
-        setIsOpen(false);
+        cart?.setIsOpen(false);
         if(onClose) onClose();
     }
 
     const handleAccept = async ()=>{
-        setIsOpen(false);
-        await cardApi.addReport(post, description);
+        cart?.setIsOpen(false);
         if(onAccept) onAccept();
     }
 
     return (
-        <div className={`absolute top-20 right-3 w-[400px] h-[500px] bg-white rounded-lg shadow-lg p-4 flex flex-col ${isOpen ? '' : 'hidden'}`}>
+        <div className={`absolute top-20 right-3 w-[400px] h-[500px] bg-white rounded-lg shadow-lg p-4 flex flex-col ${cart?.isOpen ? '' : 'hidden'}`}>
             <button onClick={handleClose}
                 className="absolute top-1 right-1 w-8 h-8 border border-gray-200 bg-gray-300 hover:bg-gray-200 flex justify-center items-center">
                 <Icons.x/>

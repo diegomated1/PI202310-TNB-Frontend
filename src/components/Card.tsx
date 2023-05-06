@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ICard from "../interfaces/ICard";
 import IHero from "../interfaces/IHero";
 import heroApi from "../services/hero.api";
@@ -17,8 +17,15 @@ type CardProps = {
 
 export default function Card({card, product, onClick1, onClick2, onClick3 }: CardProps) {
 
+    const cardRef = useRef<HTMLDivElement>(null);
     const [hero, setHero] = useState<IHero>();
     const [heroname, setHeroname] = useState('');
+
+    useEffect(()=>{
+        if(cardRef.current){
+            cardRef.current.style.width = `${cardRef.current.offsetHeight*(4/5)}px`;
+        }
+    }, [cardRef])
 
     useEffect(() => {
         if(card){
@@ -32,7 +39,7 @@ export default function Card({card, product, onClick1, onClick2, onClick3 }: Car
     }, [card]);
 
     return (
-        <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md border-solid border-red-500 border-2 hover:scale-[106%]">
+        <div ref={cardRef} className="h-full justify-self-center bg-bg-card rounded-md border-solid border-red-500 border-2 hover:scale-[106%]">
             <figure className="relative h-[40%] w-full shadow-md">
                 <img className="object-cover " src={`${(card) ? `${import.meta.env.VITE_API_CARDS_URL}/images/${card?._id}`:''}`} />
                 <div className="absolute top-0 left-0">

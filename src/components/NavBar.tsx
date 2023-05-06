@@ -4,9 +4,13 @@ import Dropdown from "./dropdown";
 import Wishlist from "../pages/wishlist/whislist"; 
 import { Link } from "react-router-dom";
 import Buttons from "./Button";
+import { useContext } from "react";
+import { cartContext } from "../context/cart.context";
 
 export default function AdminCardsNavBar() {
     
+    const cart = useContext(cartContext);
+
     const optionsCard = [
         {
             text: "Activar tiempo de juego",
@@ -30,7 +34,7 @@ export default function AdminCardsNavBar() {
             </div>
             <div className="col-span-1 flex grid-cols-3 h-full text-white justify-end items-center gap-8">
 
-                <NavBarBtn icon="shoppingCart" />
+                <NavBarBtn icon="shoppingCart" onClick={()=>{cart?.setIsOpen((b)=>!b)}} />
                 <NavBarBtn icon="favorites" />
                 <Dropdown options={optionsCard} icon={Icons.profile} clickeable={true}/>
                 <Button.navbar>Battle</Button.navbar>
@@ -40,7 +44,7 @@ export default function AdminCardsNavBar() {
 type NavBarBtnProps = {
     text?: string;
     icon?: string;
-    onClick?: ()=>{}
+    onClick?: ()=>void
 }
 const NavBarBtn = ({ text, icon, onClick }: NavBarBtnProps) => {
     return (

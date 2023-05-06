@@ -22,13 +22,11 @@ import Auctions from "./pages/auctions/auctions/Auctions"
 import Auction from "./pages/auctions/auction/Auction"
 import Account from "./pages/account/account"
 import ModalCart from "./components/modals/ModalCart"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import useCart from "./hooks/useCart"
-import CartProvider from "./context/cart.context"
+import CartProvider, { cartContext } from "./context/cart.context"
 
 function App() {
-
-  const [cartOpen, setCartOpen] = useState(true);
 
   return (
     <CartProvider>
@@ -65,10 +63,7 @@ function App() {
           <Route path="/account" element={<Account/>} />
 
         </Routes>
-        <ModalCart 
-          isOpen={cartOpen}
-          setIsOpen={setCartOpen}
-        />
+        <ModalCart/>
       </BrowserRouter>
     </CartProvider>
   )

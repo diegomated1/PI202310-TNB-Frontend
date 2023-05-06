@@ -14,17 +14,14 @@ type GridProps = {
 export default function GridProducts({products}: GridProps) {
 
   return (
-
-    <div className="h-full">
-      <div className="h-full grid grid-cols-3 grid-rows-2 gap-3 p-2">
-        {
-          (products) ? (
-            products.map((product, i) => (
-              <Product key={i} product={product}/>
-            ))
-          ) : ''
-        }
-      </div>
+    <div className="h-full w-full grid grid-cols-3 grid-rows-2 gap-2 p-2">
+      {
+        (products) ? (
+          products.map((product, i) => (
+            <Product key={i} product={product}/>
+          ))
+        ) : ''
+      }
     </div>
   )
 }
@@ -45,7 +42,7 @@ function Product({product}:{product:IProduct}){
       }
     }
     handleGetCard();
-  }, []);
+  }, [product]);
 
   return(
     (product.type=='card') ? (

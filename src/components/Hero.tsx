@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icons from "./Icons";
 import IProduct from "../interfaces/IProduct";
 import IHero from "../interfaces/IHero";
@@ -14,13 +14,19 @@ type HeroProps = {
 }
 
 export default function Hero({ hero, product, onClick1, onClick2, onClick3 }: HeroProps) {
+    
+    const cardRef = useRef<HTMLDivElement>(null);
 
-    const [image, setImage] = useState<File>();
+    useEffect(()=>{
+        if(cardRef.current){
+            cardRef.current.style.width = `${cardRef.current.offsetHeight*(4/5)}px`;
+        }
+    }, [cardRef])
 
     return (
-        <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md border-solid border-red-500 border-2 hover:scale-[106%]">
+        <div ref={cardRef} className="h-full justify-self-center bg-bg-card rounded-md border-solid border-red-500 border-2 hover:scale-[106%]">
             <figure className="relative h-[40%] w-full shadow-md">
-                <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `${import.meta.env.VITE_API_CARDS_URL}/images/heros/${hero?._id}`} />
+                <img className="object-scale-down max-h-full" src={`${import.meta.env.VITE_API_CARDS_URL}/images/${hero?._id}`} />
                 <div className="absolute top-0 right-0">
                     {product?.price && <div className="flex text-white"><h1>{product?.price}</h1><Icons.currency /></div>}
                 </div>
@@ -36,7 +42,7 @@ export default function Hero({ hero, product, onClick1, onClick2, onClick3 }: He
                     <h1 className="font-bold text-xl border-b-2 border-red-500">{hero?.name}</h1>
                     <div className="flex justify-center">
                         <Icons.favoritesRed></Icons.favoritesRed>
-                        <h1 className="font-bold text-xl">{hero?.life}</h1>
+                        <h1 className="font-bold text-base">{hero?.life}</h1>
                     </div>
                     <div className="flex justify-evenly">
                         <div className="flex-col">
