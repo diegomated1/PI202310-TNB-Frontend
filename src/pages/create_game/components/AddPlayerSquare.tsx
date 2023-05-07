@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Buttons from "../../../components/Button";
 
 interface IAddPlayersSquareProps{
     isUser?: boolean,
@@ -27,9 +28,11 @@ export default function AddPlayerSquare({isUser = false, setIas}:IAddPlayersSqua
                     )}
                     { (!isUser) ? (
                         <div className="w-full flex justify-center">
-                            <button onClick={handleSetIsIA} className="absolute w-12 h-8 bg-slate-400 bottom-0 flex justify-center items-center">
-                                {isIA ? 'IA' : 'User'}
-                            </button>
+                            <div className="absolute w-14 h-10 bottom-0">
+                                <Buttons.buttonYellow onClick={handleSetIsIA}>
+                                    {isIA ? 'IA' : 'User'}
+                                </Buttons.buttonYellow>
+                            </div>
                         </div>
                     ) : ''}
                 </div>

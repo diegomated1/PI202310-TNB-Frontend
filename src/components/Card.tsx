@@ -1,94 +1,69 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import ICard from "../interfaces/ICard";
+import IHero from "../interfaces/IHero";
+import heroApi from "../services/hero.api";
 import Icons from "./Icons";
+import IProduct from "../interfaces/IProduct";
 
 type CardProps = {
-    _id?: string;
-    name?: string;
-    description?: string;
-    id_hero?: string;
-    card_type?: string;
 
-    obtained?: string;
-    price?: number;
-    discount?: number;
-
+    card?:ICard;
+    product?: IProduct;  
 
     onClick1?: () => void;
     onClick2?: () => void;
     onClick3?: () => void;
 }
 
-export default function Card({ _id, name, description, id_hero, card_type, price, discount, obtained, onClick1, onClick2, onClick3 }: CardProps) {
+export default function Card({card, product, onClick1, onClick2, onClick3 }: CardProps) {
 
-    const [image, setImage] = useState<File>();
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [hero, setHero] = useState<IHero>();
+    const [heroname, setHeroname] = useState('');
 
-    let iconId_hero: string;
+    useEffect(()=>{
+        if(cardRef.current){
+            cardRef.current.style.width = `${cardRef.current.offsetHeight*(4/5)}px`;
+        }
+    }, [cardRef])
 
-    //aca agregar una tabla de seleccion de tipo de heroe, despues hacer un get de ese tipo/nombre
-    //busca el icono directamente con el nombre de la tabla :C
-
-    switch (id_hero) {
-        case ("a74lffy4cu5"): {
-            iconId_hero = "armas"
-            break
+    useEffect(() => {
+        if(card){
+            const handleGetHero = async (id: string) => {
+                var hero = await heroApi.getById(id)
+                setHeroname(hero.name.toLocaleLowerCase().replace(' ', ''));
+                setHero(hero)
+            }
+            handleGetHero(card.id_hero);
         }
-        case ("a74lffy4zm8"): {
-            iconId_hero = "tank"
-            break
-        }
-        case ("a74lffy5xhm"): {
-            iconId_hero = "fire"
-            break
-        }
-        case ("a74lffy4cu5"): {
-            iconId_hero = "frost"
-            break
-        }
-        case ("a74lffy4zm8"): {
-            iconId_hero = "veneno"
-            break
-        }
-        case ("a74lffy5xhm"): {
-            iconId_hero = "machete"
-            break
-        }
-        default: {
-            iconId_hero = "arma"
-        }
-    }
+    }, [card]);
 
     return (
-        <div className="justify-self-center h-full aspect-[4/5] bg-bg-card rounded-md overflow-hidden border-solid border-red-500 border-2">
-            <figure className="relative h-[40%] w-full overflow-hidden shadow-md">
-                <img className="object-cover " src={(image) ? URL.createObjectURL(image!) : `${import.meta.env.VITE_API_CARDS_URL}/images/cards/${_id}`} />
+        <div ref={cardRef} className="h-full justify-self-center bg-bg-card rounded-md border-solid border-red-500 border-2 hover:scale-[106%]">
+            <figure className="relative h-[40%] w-full shadow-md">
+                <img className="object-cover " src={`${(card) ? `${import.meta.env.VITE_API_CARDS_URL}/images/${card?._id}`:''}`} />
                 <div className="absolute top-0 left-0">
-                    {Icons[iconId_hero!]({})}
+                    { (card && card.card_type in Icons) ? Icons[card.card_type]({}) : ''}
                 </div>
                 <div className="absolute top-0 right-0">
-                    {/* aca deben poner las cosas que quieren que se carguen con el precio*/}
-                    {price && <div className="flex text-white"><h1>{price}</h1><Icons.currency/>
-                    </div>}
+                    {product ? product.price && <div className="flex text-white"><h1>{product?.price - ((product?.price * product?.discount)/ 100)}</h1><Icons.currency/></div> : ""}
                 </div>
                 <div className="absolute top-[80%] left-0">
-                    {Icons[card_type!]({})}
+                    {(heroname in Icons) ? Icons[heroname]({}) : ""}
                 </div>
                 <div className="absolute top-[80%] right-0">
-                    {/* aca deben poner las cosas que quieren que se carguen con el descuento*/}
-                    {discount && <div className="flex text-white"><h1>{discount}</h1><Icons.discount/></div>}
+                    {product ? product.discount && <div className="flex text-white"><h1>{product.discount}</h1><Icons.discount/></div> : ""}
                 </div>
             </figure>
-            <div className="h-[50%]  w-full pt-2 px-2">
+            <div className="h-[45%]  w-full pt-2 px-2">
                 <div className="flex flex-col justify-evenly h-full bg-teal-900 px-2 rounded-md overflow-hidden border-2 border-red-500 shadow-xl text-lime-700">
-                    <h1 className="font-bold text-xl border-b-2 border-red-500">{name}</h1>
-                    <h1 className="text-sm font-semibold italic">{description}</h1>
+                    <h1 className="font-bold text-xl border-b-2 border-red-500">{card?.name}</h1>
+                    <h1 className="text-sm font-semibold italic">{card?.description}</h1>
                 </div>
             </div>
-            <div className="h-[10%] w-full flex justify-evenly items-center">
-                {obtained && <div className="flex text-white"><Icons.wishlist/></div>}
-                <Icons.armas/>
-                <Icons.armas/>
-                <Icons.armas/>
+            <div className="h-[15%] w-full flex justify-evenly items-center">
+                {product ? product.availability && <div className="flex text-white"><Icons.wishlist/></div> : ""}
             </div>
         </div>
     )
-}
+}   

@@ -11,6 +11,23 @@ export default function Register() {
 
     const [typeInput, setType] = useState<string>("password");
 
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [secondName, setSecondName] = useState<string>("");
+    const [username, setUsername] = useState<string>("");
+    const [alertRegister, setAlert] = useState<string>("");
+
+    const handleRegister = async(e: React.FormEvent<HTMLFormElement>) =>{
+        e.preventDefault()
+        var data = await userApi.register(email, name, secondName, username,password);
+        if(data.error == "0"){
+            navigate("/admin/cards")
+        }else{
+            setAlert(data.message)
+        }
+    }   
+
     const showPassword =()=>{
         if(typeInput == "password"){
             setType("text")
@@ -19,53 +36,46 @@ export default function Register() {
         }
     }
 
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [username, setUsername] = useState<string>("");
-    const [alertRegister, setAlert] = useState<string>("");
-
-    const handleRegister = async(e: React.FormEvent<HTMLFormElement>) =>{
-        e.preventDefault()
-        var data = await userApi.register(email,username,password);
-        if(data.error == "0"){
-            navigate("/admin/cards")
-        }else{
-            setAlert(data.message)
-        }
-    }   
-
-    //bg-gradient-to-b from-gradientFrom to-gradientTo
-
     return (
-        <div className="h-screen">
+        <div className="w-screen h-screen">
             <AdminCardsNavBar />
             <div className="h-[calc(100%-50px)]">
                 <figure className="h-full relative">
                     <img className="h-full w-full object-fit m-0" src="https://support-leagueoflegends.riotgames.com/hc/article_attachments/4826003140499/battle-cat-jinx-prestige.png" alt="imagen de fondo" />
                 </figure>
-                <div className="rounded-md w-[380px] h-[530px] bg-smallgray absolute top-[calc(18%)] left-[calc(5%)] flex-col p-2 bg-opacity-70">
+                <div className="rounded-md w-[380px] h-[630px] bg-smallgray absolute top-[calc(18%)] left-[calc(5%)] flex flex-col p-2 bg-opacity-70 justify-center">
                     <form className="flex-col flex justify-center items-center" onSubmit={handleRegister} >
-                        <h1 className="font-extrabold text-4xl text-center text-yellow-300 mt-12 italic" >
+                        <h1 className="font-extrabold text-4xl text-center text-yellow-300 mt-5 italic" >
                             NEXUS BATTLE
                         </h1>
-                        <h2 className="flex justify-center text-2xl font-semibold mt-10">
+                        <h2 className="flex justify-center text-2xl font-semibold mt-5">
                             Registrate
                         </h2>
-                        <div className="w-[80%] justify-center flex flex-col mt-5">
+                        <div className="w-[80%] justify-center flex mt-1">
+                            <div className="w-[80%] justify-center flex flex-col mt-5">
+                                <p className="mb-2">Nombres:</p>
+                                <Input placeholder="Nombres" onChange={(e)=>{setName(e.target.value)}}/>
+                            </div>
+                            <div className="w-[80%] justify-center flex flex-col mt-5">
+                                <p className="mb-2">Apellidos:</p>
+                                <Input placeholder="Apellidos" onChange={(e)=>{setSecondName(e.target.value)}}/>
+                            </div>
+                        </div>
+                        <div className="w-[80%] justify-center flex flex-col mt-1">
                             <p className="mb-2">Username:</p>
-                            <Input placeholder="Username" type="text" onChange={(e)=>{setUsername(e.target.value)}}/>
+                            <Input placeholder="Username" onChange={(e)=>{setUsername(e.target.value)}}/>
                         </div>
-                        <div className="w-[80%] justify-center flex flex-col mt-3">
+                        <div className="w-[80%] justify-center flex flex-col mt-1">
                             <p className="mb-2">Correo Electronico:</p>
-                            <Input placeholder="Correo Electronico" type="email" onChange={(e)=>{setEmail(e.target.value)}}/>
+                            <Input placeholder="Correo Electronico"  onChange={(e)=>{setEmail(e.target.value)}}/>
                         </div>
-                        <div className="w-[80%] justify-center flex flex-col mt-3">
+                        <div className="w-[80%] justify-center flex flex-col mt-1">
                             <p className="mb-2">Contraseña:</p>
-                            <Input placeholder="Contraseña" type={typeInput} icon={Icons.eye} onClickIcon={showPassword} onChange={(e)=>{setPassword(e.target.value)}}/>
+                            <Input type={typeInput} placeholder="Contraseña" onClickIcon={showPassword} onChange={(e)=>{setPassword(e.target.value)}} icon={Icons.eye}/>
                         </div>
                         <p className="mt-4">{alertRegister}</p>
                         <div className="mt-3 font-light">
-                            <Button text="Registrarse" type="buttonPurple"/>
+                            <Button.buttonPurple>Registrarse</Button.buttonPurple>
                         </div>
                         <div className="text-sm text-zinc-700 mt-3">
                             <p>

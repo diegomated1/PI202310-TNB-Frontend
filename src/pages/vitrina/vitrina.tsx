@@ -1,16 +1,51 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Card from "../../components/Card"
 import AdminCardsNavBar from "../../components/NavBar"
 import Pager from "../../components/Pager"
+import ICard from "../../interfaces/ICard"
+import cardApi from "../../services/card.api"
+import IProduct from "../../interfaces/IProduct"
+import productsApi from "../../services/products.api"
+import GridProducts from "../../components/GridProducts"
+import ModalCart from "../../components/modals/ModalCart"
+import Paginator from "./components/paginator"
+import { useSearchParams } from "react-router-dom"
 
 export default function Vitrina() {
-    return (
-        <div className="container min-w-[1366px] ">
 
+    const [products, setProducts] = useState<IProduct[]>([]);
+    const [pages, setPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [params, setParams] = useSearchParams();
+    
+    useEffect(()=>{
+        const page = params.get('pages');
+        if(page){
+            setCurrentPage(parseInt(page))
+        }
+    }, [params]);
+
+    const handleGetProducts = async (page:number) => {
+        const products = await productsApi.getProducts(page);
+        setProducts(products.products);
+        setPages(products.pages);
+        setCurrentPage(page);
+        params.set('page', page.toString());
+        setParams(params);
+    }
+
+    useEffect(() => {
+        const page = params.get('page');
+        const currentPage = parseInt(page||'1');
+        handleGetProducts(currentPage);
+    }, [])  
+
+    return (
+        <div className="w-screen h-screen flex flex-col">
             <AdminCardsNavBar />
-            <div className="flex h-full mt-12">
+            <div className="flex flex-1 h-full p-8">
                 {/* filtro */}
-                <div className="h-2/3 w-52 justify-center items-center  bg-slate-400 rounded-md ml-3">
+                <div className="flex-1 justify-center items-center  bg-slate-400 rounded-md ml-3">
                     <div>
                         <div className="mt-4 bg-slate-50 rounded-md m-2">
                             <h4 className="text-center px-4">Precio Carta</h4>
@@ -41,87 +76,22 @@ export default function Vitrina() {
                         </li>
                     </ul>
                 </div>
-                {/* grid-cartas. */}
-                <div className="container mx-auto p-0 px-32 w-full h-[calc(100%-50px)]">
-                    <div className='grid lg: grid-cols-3 ml-0'>
-                        <div className="max-w-[13rem] max-h-[18rem]">
-                            <Card />
-                        </div>
-                        <div className="max-w-[13rem] max-h-[18rem]" >
-                            <Card />
-                        </div>
-                        <div className="max-w-[13rem] max-h-[18rem]">
-                            <Card />
-                        </div>
 
+                
+                <div className="flex-[2] bg-red-200 flex flex-col">
+                    {/* <GridProducts products={products} /> */}
+                    <div className="flex-1 p-10">
+                        <GridProducts products={products} />
                     </div>
-                    <div className='grid lg: grid-cols-3 mt-3 ml-0'>
-                        <div className="max-w-[13rem] max-h-[19rem]">
-                            <Card />
-                        </div>
-                        <div className="max-w-[13rem] max-h-[19rem]" >
-                            <Card />
-                        </div>
-                        <div className="max-w-[13rem] max-h-[19rem]">
-                            <Card />
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            {/* paginador */}
-            <div className="max-w-[50%] ml-[25%] mt-2">
-                {/* <Pager/> */}
-            </div>
-            {/* carritoflotante */}
-            <div className="container-cart-cards  max-w-[19rem] min-h-[20rem] border-2 mt-4 hidden ">
-                {/* cartaflotante */}
-                <div className="row-cards flex ml-3 mt-2">
-                    <div className="flex max-w-[10rem]">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.MUq3awEA1KEnMlL9U-C_JwHaEK%26pid%3DApi&f=1&ipt=b64ce7b8fd13508ca19f449c37c528d0533744a65960b4d4ff6e0f20ca61e97e&ipo=images" className="w-full h-20" alt="" />
-                    </div>
-                    <div className="flex-none  min-w-[9rem] ml-5">
-                        <p className="">titulo</p>
-                        <span className="">x1</span>
-                        <span className="float-none">$10.000</span>
-                    </div>
-
-                </div>
-                {/* carta repetitiva-borrar */}
-                <div className="row-cards flex ml-3 mt-2">
-                    <div className="flex max-w-[10rem]">
-                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.MUq3awEA1KEnMlL9U-C_JwHaEK%26pid%3DApi&f=1&ipt=b64ce7b8fd13508ca19f449c37c528d0533744a65960b4d4ff6e0f20ca61e97e&ipo=images" className="w-full h-20" alt="" />
-                    </div>
-                    <div className="flex-none  min-w-[9rem] ml-5">
-                        <p className="">titulo</p>
-                        <span className="">x1</span>
-                        <span className="float-none">$10.000</span>
-                    </div>
-
-                </div>
-
-
-                <div className="ml-3 mt-2 flex">
-                    <ul>
-                        <li>
-                            Total bruto
-                        </li>
-                        <li>
-                            Impuestos
-                        </li>
-                    </ul>
-                </div>
-                {/* totales */}
-                <div className="flex max-w-full ml-3">
-                    <div className="flex-none w-[147px]">
-                        <span>Total</span>
-                    </div>
-                    <div className="flex-none">
-                        <span>$100.000</span>
+                    <div className="w-full h-14 flex flex-row-reverse">
+                        <Paginator 
+                            pages={pages} 
+                            currentPage={currentPage}
+                            changePage={handleGetProducts}
+                        />
                     </div>
                 </div>
             </div>
-
         </div >
     )
 }

@@ -11,10 +11,9 @@ class UserApi{
     baseUrl: string
     constructor(){
         this.baseUrl = import.meta.env.VITE_API_USERS_URL;
-        console.log(this.baseUrl);
     }
 
-    auth(){
+    auth():Promise<IUser>{
         return new Promise(async(res, rej)=>{
             try{
                 const {data} = await axios.post(`${this.baseUrl}/auth`, {}, {
@@ -22,6 +21,7 @@ class UserApi{
                 });
                 res(data.data);
             }catch(error){
+                console.log(error);
                 rej(error);
             }
         });
@@ -41,11 +41,12 @@ class UserApi{
         });
     }
 
-    register( email:string, username:string, password:string ):Promise<errorResponse>{
+    register( email:string, name:string, second_name:string, username:string, password:string ):Promise<errorResponse>{
         return new Promise(async(res, rej)=>{
             try{
                 const {data} = await axios.post(`${this.baseUrl}/auth/register`, {
                     email,
+                    name, second_name,
                     username,
                     password
                 }, {
@@ -61,7 +62,18 @@ class UserApi{
     getById(id_user:string):Promise<IUser>{
         return new Promise(async(res, rej)=>{
             try{
-                const {data} = await axios.get(`${this.baseUrl}/user/${id_user}`);
+                const {data} = await axios.get(`${this.baseUrl}/${id_user}`);
+                res(data.data)
+            }catch(error){
+                rej(error);
+            }
+        });
+    }
+
+    modify(id_user:string, attr:{name?:string,secondName?:string,email?:string,username?:string, password?:string}):Promise<IUser>{
+        return new Promise(async(res, rej)=>{
+            try{
+                const {data} = await axios.put(`${this.baseUrl}/${id_user}`,{...attr});
                 res(data.data)
             }catch(error){
                 rej(error);

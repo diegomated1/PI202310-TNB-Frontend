@@ -28,7 +28,6 @@ export default function Pager({cardsArray, setParcialCards}: PagerProps) {
     const indexOfFirstObject = indexOfLastObject - objectsPerPage;
     
     const currentObjects = cardsArray.slice(indexOfFirstObject, indexOfLastObject);
-    console.log(currentObjects);
     setParcialCards(currentObjects);
   }, [currentPage]);
 

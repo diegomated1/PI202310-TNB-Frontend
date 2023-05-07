@@ -1,8 +1,13 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
+        jose: [
+          '"Josefin Sans"',
+          ...defaultTheme.fontFamily.sans,
+        ]
       },
       colors: {
         'smallgray': '#d9d9d9',
@@ -20,6 +25,5 @@ module.exports = {
         '4/5': '4/5',
       },
     }
-  },
-  plugins:[],
+  }
 };
