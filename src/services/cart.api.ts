@@ -102,11 +102,11 @@ class ShoppingCartApi{
         });
     }
 
-    getWishList(id_user:string, page:number){
+    getWishList(id_user:string, page:number):Promise<{products: string[], pages: number}>{
         return new Promise(async(res, rej)=>{
             try{
                 const {data} = await axios.get(`${this.baseUrl}/wishlist/${id_user}?page=${page}`);
-                res(data)
+                res(data.data)
             }catch(error){
                 rej(error);
             }

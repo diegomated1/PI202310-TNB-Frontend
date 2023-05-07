@@ -23,9 +23,15 @@ export default function useCart():[ICartProduct[], (id_product: string, quantity
     const addToCart = async (id_product:string, quantity:number) =>{
         if(user){
             await cartApi.setQuantityShoppingCart(user.id_user, id_product, quantity);
-            setCart((cart)=>[
-                ...cart, {id_product, quantity}
-            ]);
+            setCart((cart)=>{
+                const idx = cart.findIndex(p=>p.id_product==id_product);
+                if(idx==-1){
+                    return [...cart, {id_product, quantity}]
+                }else{
+                    cart[idx].quantity += quantity
+                    return [...cart]
+                }
+            });
         }
     }
 

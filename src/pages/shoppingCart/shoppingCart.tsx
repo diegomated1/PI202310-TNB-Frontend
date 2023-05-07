@@ -1,22 +1,31 @@
-import React from "react"
+import React, { useContext, useState } from "react"
 import Card from "../../components/Card"
 import AdminCardsNavBar from "../../components/NavBar"
 import { ADDRCONFIG } from "dns"
 import ShoppingCartItem from "./components/shoppingCartItem"
+import { cartContext } from "../../context/cart.context"
 
 export default function shoppingCart() {
 
-    
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    const cart = useContext(cartContext);
 
     return (
         <div className="w-screen h-screen">
             <AdminCardsNavBar />
             <div className="grid grid-cols-2 w-full gap-4 mt-2 ml-10 ">
                 <div className="">
-                    <ShoppingCartItem _id=""/>
-                    <ShoppingCartItem _id=""/>
-                    <ShoppingCartItem _id=""/>
-                    <ShoppingCartItem _id=""/>
+                {(cart) ? (
+                        cart.cart.map((product, i)=>(
+                            <li key={i}>
+                                <ShoppingCartItem 
+                                    product={product}
+                                    setTotalPrice={setTotalPrice}
+                                />
+                            </li>
+                        ))
+                    ) : ''}
                 </div>
                 <div className="mt-2 justify-center mr-1 w-[80%] ml-4 fixed-">
                     <span className="ml-[40%] font-bold text-M" >Resumen del pedido</span>
@@ -53,7 +62,7 @@ export default function shoppingCart() {
                                 <span>Total</span>
                             </div>
                             <div className="flex-none">
-                                <span>$10.000</span>
+                                <span>$ {totalPrice}</span>
                             </div>
                         </div>
                         <div className="x-[5px]">

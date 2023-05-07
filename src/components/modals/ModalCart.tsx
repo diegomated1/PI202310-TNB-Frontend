@@ -20,7 +20,7 @@ interface ModalReports{
     onClose?: ()=>void,
 }
 
-export default function ModalCart({onAccept, onClose}:ModalReports){
+export default function ModalCart({onClose}:ModalReports){
 
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -29,11 +29,6 @@ export default function ModalCart({onAccept, onClose}:ModalReports){
     const handleClose = ()=>{
         cart?.setIsOpen(false);
         if(onClose) onClose();
-    }
-
-    const handleAccept = async ()=>{
-        cart?.setIsOpen(false);
-        if(onAccept) onAccept();
     }
 
     return (
@@ -51,6 +46,7 @@ export default function ModalCart({onAccept, onClose}:ModalReports){
                                 <ModalCartProduct 
                                     product={product}
                                     setTotalPrice={setTotalPrice}
+                                    setQuantity={cart.addToCart}
                                 />
                             </li>
                         ))
@@ -67,9 +63,10 @@ export default function ModalCart({onAccept, onClose}:ModalReports){
 interface IModalCartProduct{
     product: ICartProduct
     setTotalPrice: React.Dispatch<React.SetStateAction<number>>
+    setQuantity: (id_product: string, quantity: number) => Promise<void>
 }
 
-function ModalCartProduct({product, setTotalPrice}:IModalCartProduct){
+function ModalCartProduct({product, setTotalPrice, setQuantity}:IModalCartProduct){
 
     const [_product, card, hero] = useGetProduct(product.id_product);
     const [calc, setCalc] = useState(false);
@@ -86,11 +83,11 @@ function ModalCartProduct({product, setTotalPrice}:IModalCartProduct){
     }
 
     const onAdd = ()=>{
-        console.log(product.id_product);
+        setQuantity(product.id_product, 1);
     }
 
     const onDelete = ()=>{
-        console.log(product.id_product);
+        setQuantity(product.id_product, -1);
     }
 
     return(
@@ -103,13 +100,13 @@ function ModalCartProduct({product, setTotalPrice}:IModalCartProduct){
                     <div className="flex-1 flex justify-center items-center">{card?card.name:hero?.name}</div>
                     <div className="flex-1 flex justify-center items-center">
                         <div className="w-10 h-10">
-                            <Buttons.buttonYellow>
+                            <Buttons.buttonYellow onClick={onDelete}>
                                 -
                             </Buttons.buttonYellow>
                         </div>  
                         <span className="mx-2">{product.quantity}</span>
                         <div className="w-10 h-10">
-                            <Buttons.buttonYellow>
+                            <Buttons.buttonYellow onClick={onAdd}>
                                 +
                             </Buttons.buttonYellow>
                         </div>
