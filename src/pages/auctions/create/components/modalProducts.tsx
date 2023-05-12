@@ -43,7 +43,7 @@ export default function ModalProducts({id_user, setProducts, isOpen, setIsOpen, 
         if(id_user){
             const handleGetProducts = async ()=>{
                 const products = await productsApi.getProducts(1);
-                _setProducts(products);
+                _setProducts(products.products);
             }
             handleGetProducts();
         }

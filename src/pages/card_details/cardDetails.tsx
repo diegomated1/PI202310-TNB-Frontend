@@ -121,7 +121,7 @@ export default function CardDetails() {
                                         <Card card={card} product={product} />
                                     ) : (
                                         (hero) ? (
-                                            <Hero heroe={hero} product={product} />
+                                            <Hero hero={hero} product={product} />
                                         ) : ''
                                     )
                                 ) : ''

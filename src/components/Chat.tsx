@@ -8,7 +8,7 @@ import Buttons from './Button';
 function Chat({id_room}:{id_room?:string}) {
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [message, setMessage] = useState('');
-  const {user} = useAuth();
+  const user = useAuth();
   const [sendMessage] = useChat(setMessages, user, id_room);
 
   const handleSendMessage:FormEventHandler<HTMLFormElement> = (e)=>{

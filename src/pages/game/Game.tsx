@@ -22,7 +22,7 @@ export default function Game(){
     const [searchParams] = useSearchParams();
     const [tab, setTab] = useState(0);
 
-    const {user} = useAuth();
+    const user = useAuth();
     const {game, players, heroes, actions} = useGame(searchParams.get('g'), user);
 
     const [player, setPlayer] = useState<IPlayer>();
