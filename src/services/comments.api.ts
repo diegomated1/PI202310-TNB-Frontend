@@ -15,7 +15,7 @@ class CommentApi {
                 const { data } = await axios.get(`${this.baseUrl}/product/${id_producto}/comments`);
                 res(data.comments);
             } catch (error) {
-                rej(error);
+                res([]);
             }
         });
     }
@@ -28,9 +28,10 @@ class CommentApi {
                 formData.append('comentario', comment);
                 formData.append('valoracion', valoration.toString());
 
-                const { data } = await axios.post(`${this.baseUrl}/product/${id_product}/comments`, formData);
+                const { data } = await axios.post(`${this.baseUrl}/product/${id_product}`, formData);
                 res(data.data);
             } catch (error) {
+                console.log(error);
                 rej(error);
             }
         });

@@ -23,9 +23,7 @@ export default function CardDetails() {
 
     const { id_product } = useParams();
 
-    
-    
-
+    const user = useAuth();
     const [product, setProduct] = useState<IProduct>();
     const [card, setCard] = useState<ICard>();
     const [hero, setHeroe] = useState<IHeroe>()
@@ -95,13 +93,13 @@ export default function CardDetails() {
 
 
     const handleAddComment = async () => {
-        if ( product && valoracion > 0) {
+        if ( product && user) {
             const comment:IComments = {
-                comentario, fecha_comentario: '', id_comentario: 1, id_usuario: "ñ", images: [], Valoracion: valoracion
+                comentario, fecha_comentario: '', id_comentario: 1, id_usuario: user.id_user, images: [], Valoracion: valoracion
             }
-          await commentsApi.insert("gfdgd", id_product!, comentario, valoracion);
-          setComments(comments=>[...comments, comment]);
-          alert("Comentario Añadido");
+            //await commentsApi.insert(user.id_user, id_product!, comentario, valoracion);
+            setComments(comments=>[...comments, comment]);
+            alert("Comentario Añadido");
         }
       }
 
@@ -217,7 +215,7 @@ export default function CardDetails() {
                                     <Icons.clip />
                                 </div>
                                 <div className="w-[90%] p-1">
-                                    <Button.buttonLarge onClick={handleAddComment}>Add To Card</Button.buttonLarge>
+                                    <Button.buttonLarge onClick={handleAddComment}>Add comment</Button.buttonLarge>
                                 </div>
                             </div>
                         </div>

@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
  */
 export default function useLobby(getlobbies:boolean=true){
     const navigate = useNavigate();
-    const socket = useSocket(import.meta.env.VITE_SOCKET_LOBBY, {path: '/lobby'});
+    const socket = useSocket(import.meta.env.VITE_SOCKET_LOBBY_URL, {path: '/lobby/'});
     const [lobbies, setLobbies] = useState<ILobby[]>([]);
     const [lobby, setLobby] = useState<ILobby>();
     const user = useAuth();
@@ -81,7 +81,9 @@ export default function useLobby(getlobbies:boolean=true){
      * @param bet min bet
      */
     const createLobby = (ias:number, max_number_players:number, bet:number) => {
+        console.log("a");
         if(socket && user){
+            console.log("b");
             socket.emit('lobby:create', user.id_user, ias, max_number_players, bet);
         }
     }

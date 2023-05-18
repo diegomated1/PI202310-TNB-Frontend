@@ -6,7 +6,7 @@ import IUser from "../interfaces/IUser";
 
 
 export default function useMessages(setMessages:React.Dispatch<React.SetStateAction<IMessage[]>>, user:IUser|null, id_room?:string){
-    const socket = useSocket(import.meta.env.VITE_SOCKET_CHAT, {query: {id_chat: id_room}, path: '/chat'});
+    const socket = useSocket(import.meta.env.VITE_SOCKET_CHAT_URL, {query: {id_chat: id_room}, path: '/chat/'});
     
     useEffect(()=>{
         if(socket){
@@ -27,7 +27,6 @@ export default function useMessages(setMessages:React.Dispatch<React.SetStateAct
 
     const sendMessage = (message:string) => {
         if(socket && user){
-            
             const newMsg:IMessage = {
                 id_user: user.id_user,
                 username: user.username,

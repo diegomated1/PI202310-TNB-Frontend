@@ -38,7 +38,7 @@ export default function ModalCart({onClose}:ModalReports){
                 <Icons.x/>
             </button>
             <div><span className="text-xl"><strong>Carrito de compras</strong></span></div>
-            <div className="flex-1 p-2">
+            <div className="flex-1 p-2 overflow-y-auto">
                 <ul>
                     {(cart) ? (
                         cart.cart.map((product, i)=>(

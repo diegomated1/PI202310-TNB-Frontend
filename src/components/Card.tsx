@@ -1,25 +1,41 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import ICard from "../interfaces/ICard";
 import IHero from "../interfaces/IHero";
 import heroApi from "../services/hero.api";
 import Icons from "./Icons";
 import IProduct from "../interfaces/IProduct";
+import { useNavigate } from "react-router-dom";
+import inventoryApi from "../services/inventory.api";
+import cartApi from "../services/cart.api";
+import useAuth from "../hooks/useAuth";
+import { cartContext } from "../context/cart.context";
 
 type CardProps = {
 
     card?:ICard;
     product?: IProduct;  
-
-    onClick1?: () => void;
-    onClick2?: () => void;
-    onClick3?: () => void;
 }
 
-export default function Card({card, product, onClick1, onClick2, onClick3 }: CardProps) {
+export default function Card({card, product}: CardProps) {
 
+    const user = useAuth();
+    const navigate = useNavigate();
     const cardRef = useRef<HTMLDivElement>(null);
     const [hero, setHero] = useState<IHero>();
     const [heroname, setHeroname] = useState('');
+    const [isFavorite, setIsFavorite] = useState(false);
+    const cart = useContext(cartContext);
+
+    useEffect(()=>{
+        if(user){
+            const handleGetIsFavorite = async () => {
+                const m = await cartApi.checkWishListProduct(user.id_user, card?._id!);
+                setIsFavorite(m);   
+            }
+            handleGetIsFavorite();
+        }
+        
+    }, [user]);
 
     useEffect(()=>{
         if(cardRef.current){
@@ -38,9 +54,24 @@ export default function Card({card, product, onClick1, onClick2, onClick3 }: Car
         }
     }, [card]);
 
+    const handleAddWish = async ()=>{
+        if(user){
+            await cartApi.setProductWishlist(user.id_user, card?._id!);
+            setIsFavorite(f=>!f);
+        }
+    }
+
+    const handleAddToCart = async ()=>{
+        if(user && cart){
+            await cartApi.setQuantityShoppingCart(user.id_user, card?._id!, 1);
+            cart.addToCart(card?._id!, 1);
+            alert(`+1 ${card?.name} añadido al carrito`);
+        }
+    }
+
     return (
         <div ref={cardRef} className="h-full justify-self-center bg-bg-card rounded-md border-solid border-red-500 border-2 hover:scale-[106%]">
-            <figure className="relative h-[40%] w-full shadow-md">
+            <figure onClick={()=>{navigate(`/card/${card?._id}`)}}  className="relative h-[40%] w-full shadow-md">
                 <img className="object-cover " src={`${(card) ? `${import.meta.env.VITE_API_CARDS_URL}/images/${card?._id}`:''}`} />
                 <div className="absolute top-0 left-0">
                     { (card && card.card_type in Icons) ? Icons[card.card_type]({}) : ''}
@@ -62,7 +93,13 @@ export default function Card({card, product, onClick1, onClick2, onClick3 }: Car
                 </div>
             </div>
             <div className="h-[15%] w-full flex justify-evenly items-center">
-                {product ? product.availability && <div className="flex text-white"><Icons.wishlist/></div> : ""}
+                {<div className="flex-1 flex text-white justify-evenly items-center">
+                    {isFavorite ? 
+                    <Icons.favorites onClick={handleAddWish} /> : 
+                    <Icons.favoritesRed onClick={handleAddWish} /> 
+                    }
+                    <Icons.shoppingCart onClick={handleAddToCart}/>
+                </div>}
             </div>
         </div>
     )

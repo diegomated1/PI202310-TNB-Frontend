@@ -113,11 +113,11 @@ class ShoppingCartApi{
         });
     }
 
-    checkWishListProduct(id_user:string,id_product:string){
+    checkWishListProduct(id_user:string,id_product:string):Promise<boolean>{
         return new Promise(async(res, rej)=>{
             try{
                 const {data} = await axios.get(`${this.baseUrl}/wishlist/${id_user}/products/${id_product}`);
-                res(data)
+                res(data.data as boolean)
             }catch(error){
                 rej(error);
             }
