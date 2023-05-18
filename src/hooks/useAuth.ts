@@ -8,7 +8,8 @@ export default function useAuth(){
     const auth = async ()=>{
         try{
             //const user = await userApi.auth();
-            const user = await userApi.getById("ilh2udb51");
+            const a = localStorage.getItem('id_user');
+            const user = await userApi.getById(a||'');
             setUser(user);
         }catch(error){
             console.log(error);
