@@ -35,7 +35,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
 
-          <Route path="/" element={<div>Sample</div>}/>
+          <Route path="/" element={<Vitrina/>}/>
           <Route path="/admin/cards" element={<AdminCards/>}/>
           <Route path="/admin/cards/create" element={<AdminCardsCreate/>}/>
           <Route path="/admin/cards/:id_card" element={<AdminCardsEdit/>}/>

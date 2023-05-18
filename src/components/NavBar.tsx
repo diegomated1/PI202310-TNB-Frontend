@@ -36,7 +36,7 @@ export default function AdminCardsNavBar() {
                 <NavBarBtn icon="shoppingCart" onClick={()=>{cart?.setIsOpen((b)=>!b)}} />
                 <NavBarBtn icon="favorites" onClick={()=>{navigate('/wishlist')}}/>
                 <Dropdown options={optionsCard} icon={Icons.profile} clickeable={true}/>
-                <Button.navbar>Battle</Button.navbar>
+                <Button.navbar onClick={()=>{navigate('/game/lobby/create')}}>Battle</Button.navbar>
             </div>
         </div>)
 }

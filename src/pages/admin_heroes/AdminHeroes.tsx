@@ -30,7 +30,7 @@ export default function AdminHeroes() {
             <NavBar></NavBar>
             <div className="flex flex-1 overflow-hidden">
                 <div className="flex-1 items-center flex flex-col">
-                    
+                    <Pager setParcialCards={setParcialHeroes} cardsArray={heroes}></Pager>
                 </div>
                 <div className="flex-[4] flex-col">
                     <div className="h-full grid grid-cols-3 grid-rows-2 gap-3 p-2">

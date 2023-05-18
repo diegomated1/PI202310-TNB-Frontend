@@ -27,6 +27,7 @@ export default function AdminCards() {
             <div className="flex flex-1 overflow-hidden">
                 <div className="flex-1 items-center flex flex-col">
                     <Pager setParcialCards={setParcialCards} cardsArray={cards}></Pager>
+                    {/*agregar boton*/}
                 </div>
                 <div className="flex-[4] flex-col">
                     <div className="h-full grid grid-cols-3 grid-rows-2 gap-3 p-2">
