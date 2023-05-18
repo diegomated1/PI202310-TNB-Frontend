@@ -14,6 +14,10 @@ export default function AdminCardsNavBar() {
 
     const optionsCard = [
         {
+            text: "Login",
+            onClick: () => {navigate('/login')}
+        },
+        {
             text: "Activar tiempo de juego",
             onClick: () => {
                 console.log("Haz clic en la opción 1");
@@ -32,11 +36,10 @@ export default function AdminCardsNavBar() {
                 <span>NEXUS BATTLE</span>
             </div>
             <div className="col-span-1 flex grid-cols-3 h-full text-white justify-end items-center gap-8">
-
                 <NavBarBtn icon="shoppingCart" onClick={()=>{cart?.setIsOpen((b)=>!b)}} />
                 <NavBarBtn icon="favorites" onClick={()=>{navigate('/wishlist')}}/>
                 <Dropdown options={optionsCard} icon={Icons.profile} clickeable={true}/>
-                <Button.navbar onClick={()=>{navigate('/game/lobby/create')}}>Battle</Button.navbar>
+                <Button.navbar onClick={()=>{navigate('/partida')}}>Battle</Button.navbar>
             </div>
         </div>)
 }

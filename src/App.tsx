@@ -25,6 +25,7 @@ import ModalCart from "./components/modals/ModalCart"
 import { useContext, useState } from "react"
 import useCart from "./hooks/useCart"
 import CartProvider, { cartContext } from "./context/cart.context"
+import Partida from "./pages/partida/Partida"
 
 function App() {
 
@@ -44,6 +45,8 @@ function App() {
           <Route path="/admin/heroes/create" element={<AdminHeroesCreate/>}/>
           <Route path="/admin/heroes/:id_hero" element={<div>Hero edit</div>}/>
 
+          
+          <Route path="/partida" element={<Partida/>}/>
           <Route path="/game" element={<Game/>}/>
           <Route path="/game/deck" element={<Mazo/>}/>
           <Route path="/game/create/deck" element={<CreateDeck/>}/>
